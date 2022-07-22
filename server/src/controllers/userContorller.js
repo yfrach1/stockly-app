@@ -6,7 +6,8 @@ async function createUser(req, res) {
 }
 
 async function getUser(req, res) {
-   // her will be getUser
+   await userService.getUser(req.params.id);
+   res.status(200).json(req.body);
 }
 
 module.exports = {
