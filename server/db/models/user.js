@@ -8,16 +8,30 @@ module.exports = (sequelize, DataTypes) => {
        * The `models/index` file will call this method automatically.
        */
       static associate(models) {
-         // define association here
+         User.hasOne(models.Portfolio, { foreignKey: "user_id" });
       }
    }
    User.init(
       {
+         // Check with mentors if this is the right way of validations:
+         user_id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER,
+         },
          email: DataTypes.STRING,
-         hashPassword: DataTypes.STRING,
+         password: DataTypes.STRING,
          name: DataTypes.STRING,
-         lastName: DataTypes.STRING,
-         // should we add      updatedAt/createdAt and validations here?
+         last_name: DataTypes.STRING,
+         createdAt: {
+            allowNull: false,
+            type: DataTypes.DATE,
+         },
+         updatedAt: {
+            allowNull: false,
+            type: DataTypes.DATE,
+         },
       },
       {
          sequelize,
