@@ -1,1 +1,1 @@
-const { Portfolio } = require("../../storage/models/portfolio");
+const { Portfolio } = require("../../storage/models");

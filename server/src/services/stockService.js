@@ -1,1 +1,1 @@
-const { Stock } = require("../../storage/models/stock");
+const { Stock } = require("../../storage/models");
