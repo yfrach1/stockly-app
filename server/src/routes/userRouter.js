@@ -1,10 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const userSerivce = require('../services/userSerivce');
+const express = require("express");
+const userRouter = express.Router();
+const { createUser, getUser } = require("../controllers/userContorller");
 
-router.post('/user', async (req, res) => {
-    const item = await userSerivce.handleUser(req.body.item);
-    res.status(201).json(item);
-})
+userRouter.post("/", createUser);
+userRouter.get("/:id", getUser);
 
-module.exports = router
+module.exports = userRouter;
