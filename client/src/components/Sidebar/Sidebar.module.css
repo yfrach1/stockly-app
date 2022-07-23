@@ -1,0 +1,20 @@
+.sidebar-container {
+   height: 100%;
+   width: 15em;
+   position: absolute;
+   left: 0;
+   top: 0;
+   background-color: rgb(235, 235, 235);
+}
+
+.sidebar-logo {
+   width: 14em;
+   height: auto;
+}
+
+.user-greeting {
+   font-family: helvetica, Arial;
+   color: rgb(49, 49, 49);
+   font-size: 1em;
+   margin: -1.5em 0 3em 1.3em;
+}
