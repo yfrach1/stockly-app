@@ -1,15 +1,21 @@
-// import styles from "./App.module.css";
-import Sidebar from "./components/Sidebar/Sidebar";
+//import styles from "./App.module.css";
+//import NavigationBar from "./components/NavigationBar/NavigationBar";
+//import TodoSwitch from "./navigation/TodoSwitch";
 import React from "react";
-import Routes from "./pages/_routes";
-
+import HomePage from "./components/guest/MainPage/Main";
+import GuestSwitch from "./navigation/GuestSwitch";
+import styles from "./App.module.css";
 function App() {
-   return (
-      <div>
-         <Routes />
-         <Sidebar />
-      </div>
-   );
+  return (
+    <div>
+      {/* landingPage */}
+      <GuestSwitch />
+    </div>
+
+    // <ChakraProvider>
+    //   <Login />
+    // </ChakraProvider>
+  );
 }
 
 export default App;

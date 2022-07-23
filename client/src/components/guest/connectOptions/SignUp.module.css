@@ -1,0 +1,39 @@
+.formContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid red; */
+}
+
+.displayNameInput {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border: 2px solid red; */
+}
+
+#input {
+  outline: none;
+  border: none;
+  font-size: 16px;
+  padding: 12px 0;
+  padding-left: 5px;
+  width: 48%;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.SignUpButton {
+  outline: none;
+  border: none;
+  padding: 15px 0;
+  width: 100%;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  background-color: rgb(10, 127, 217);
+}

@@ -1,8 +1,8 @@
 export const ClientRoute = {
-  Todo: {
-    main: "/main",
-    aboutUs: "/aboutUs",
-    statistics: "/statistics",
+  Guest: {
+    home: "/home",
+    aboutUs: "/about",
+    conatact: "/conatact",
   },
 };
 
