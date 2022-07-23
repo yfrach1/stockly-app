@@ -2,13 +2,18 @@
 //import NavigationBar from "./components/NavigationBar/NavigationBar";
 //import TodoSwitch from "./navigation/TodoSwitch";
 import React from "react";
-import Login from "./components/login/Login";
-import { ChakraProvider } from "@chakra-ui/react";
+import HomePage from "./components/homePage/HomePage";
+import styles from "./App.module.css";
 function App() {
   return (
-    <ChakraProvider>
-      <Login />
-    </ChakraProvider>
+    <div>
+      {/* landingPage */}
+      <HomePage />
+    </div>
+
+    // <ChakraProvider>
+    //   <Login />
+    // </ChakraProvider>
   );
 }
 
