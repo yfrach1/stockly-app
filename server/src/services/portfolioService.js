@@ -10,14 +10,7 @@ class PortfolioManager {
 
 module.exports = new PortfolioManager();
 
-// Lior's note:
-// Use this to code anywhere you want to create portfolios: (checked and works)
-//
-// const portfolioDB = require("./src/services/portfolioService");
-
 // const portfolioMock = {
 //    user_id: "1",
 //    name: "my stocks",
 // };
-// const response = portfolioDB.createPortfolio(portfolioMock);
-// console.log(response);
