@@ -2,7 +2,7 @@ export const ClientRoute = {
   Guest: {
     home: "/home",
     aboutUs: "/about",
-    conatact: "/conatact",
+    contact: "/contact",
   },
 };
 

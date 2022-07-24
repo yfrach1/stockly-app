@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import PorfolioPage from "../components/user/sideBar/portfolio/PortfolioPage";
-import CryptoPage from "../components/user/sideBar/crypto/CryptoPage";
+import PorfolioPage from "../components/user/portfolio/PortfolioPage";
+import CryptoPage from "../components/user/crypto/CryptoPage";
 
 const Routes = () => {
   return (
