@@ -1,22 +1,23 @@
 const { User, Portfolio, Stock } = require("../../storage/models");
 
 class UserManager {
-   async createUser(user) {
-      const response = await User.create(user);
+  async createUser(user) {
+    console.log("user: ", user);
+    const response = await User.create(user);
 
-      return response;
-   }
+    return response;
+  }
 
-   async getUser(userId) {
-      // will get all portfolios and stocks
-      const response = await User.findByPk(userId, {
-         include: { model: Portfolio, include: Stock },
-      });
-      // console.log(response);
-      console.log(response.dataValues.Portfolio.Stocks);
+  async getUser(userId) {
+    // will get all portfolios and stocks
+    const response = await User.findByPk(userId, {
+      include: { model: Portfolio, include: Stock },
+    });
+    // console.log(response);
+    console.log(response.dataValues.Portfolio.Stocks);
 
-      return response;
-   }
+    return response;
+  }
 }
 
 module.exports = new UserManager();

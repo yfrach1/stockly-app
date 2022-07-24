@@ -1,3 +1,7 @@
-const ACTIONS = {};
+const ACTIONS = {
+  SHOW_SIGN_IN: "SHOW_SIGN_IN",
+  SHOW_SIGN_UP: "SHOW_SIGN_UP",
+  HIDE_CONNECT_OPTIOS: "HIDE_CONNECT_OPTIOS",
+};
 
 export default ACTIONS;

@@ -1,17 +1,17 @@
 import React from "react";
-import { useState } from "react";
-import ConnectOptionDisplay from "../connectOptions/ConnectOptionDisplay";
+import ConnectOptionDisplayConnector from "../connectOptions/ConnectOptionDisplay-connector";
 import styles from "./Home.module.css";
-const Home = (props) => {
-  const [showConnectOptions, setShowConnectOptions] = useState(props.ggg);
+import PropTypes from "prop-types";
+
+const Home = ({
+  showConnectOptions,
+  setShowSignInAction,
+  setShowSignUpAction,
+}) => {
   return (
     <React.Fragment>
       {showConnectOptions ? (
-        showConnectOptions === "sign in" ? (
-          <ConnectOptionDisplay showSignIn={true} />
-        ) : (
-          <ConnectOptionDisplay showSignUp={true} />
-        )
+        <ConnectOptionDisplayConnector />
       ) : (
         <React.Fragment>
           <div className={styles.title}>
@@ -27,14 +27,14 @@ const Home = (props) => {
             <div
               className={styles.signInButton}
               id={styles.option}
-              onClick={() => setShowConnectOptions("sign in")}
+              onClick={() => setShowSignInAction()}
             >
               SIGN IN
             </div>
             <div
               className={styles.registerButton}
               id={styles.option}
-              onClick={() => setShowConnectOptions("sign up")}
+              onClick={() => setShowSignUpAction()}
             >
               REGISTER
             </div>
@@ -43,6 +43,18 @@ const Home = (props) => {
       )}
     </React.Fragment>
   );
+};
+
+Home.propTypes = {
+  showConnectOptions: PropTypes.bool,
+  setShowSignInAction: PropTypes.func,
+  setShowSignUpAction: PropTypes.func,
+};
+
+Home.defaultProps = {
+  showConnectOptions: false,
+  setShowSignInAction: () => {},
+  setShowSignUpAction: () => {},
 };
 
 export default Home;

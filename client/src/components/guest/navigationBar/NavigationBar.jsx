@@ -1,9 +1,15 @@
 import styles from "./NavigationBar.module.css";
 import LogoIcon from "../../../assets/images/app_logo.svg";
 import mainView from "../../../app/constant/MainView";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function NavigationBar({ setComponentToView }) {
+import { Link } from "react-router-dom"; // check if to use it or div
+
+function NavigationBar({
+  setComponentToView,
+  setHideConnectOptionsAction,
+  setShowSignUpAction,
+}) {
   return (
     <div className={styles.navigationBarPosition}>
       <div>
@@ -12,7 +18,10 @@ function NavigationBar({ setComponentToView }) {
       <div className={styles.navagationBarLinks}>
         <div
           id={styles.option}
-          onClick={() => setComponentToView(mainView.HOME)}
+          onClick={() => {
+            setHideConnectOptionsAction();
+            setComponentToView(mainView.HOME);
+          }}
         >
           Home
         </div>
@@ -30,7 +39,10 @@ function NavigationBar({ setComponentToView }) {
         </div>
         <div
           className={styles.signUpButton}
-          onClick={() => setComponentToView(mainView.SIGN_UP)}
+          onClick={() => {
+            setShowSignUpAction();
+            setComponentToView(mainView.SIGN_UP);
+          }}
         >
           SignUp
         </div>
@@ -38,5 +50,17 @@ function NavigationBar({ setComponentToView }) {
     </div>
   );
 }
+
+NavigationBar.propTypes = {
+  //setComponentToView: PropTypes.object, // check about it
+  setHideConnectOptionsAction: PropTypes.func,
+  setShowSignUpAction: PropTypes.func,
+};
+
+NavigationBar.defaultProps = {
+  // showConnectOptions: null,
+  setHideConnectOptionsAction: () => {},
+  setShowSignUpAction: () => {},
+};
 
 export default NavigationBar;
