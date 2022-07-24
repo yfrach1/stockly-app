@@ -7,12 +7,14 @@ async function createUser(req, res) {
       : res.status(400).json({ error: "User already exist" });
 }
 
-async function getUser(req, res) {
-   await userService.getUser(req.params.id);
-   res.status(200).json(req.body);
+async function loginUser(req, res) {
+   const userData = await userService.loginUser(req.body);
+   userData
+      ? res.status(200).json(userData)
+      : res.status(400).json({ error: "Username or password is wrong" });
 }
 
 module.exports = {
    createUser,
-   getUser,
+   loginUser,
 };
