@@ -3,20 +3,34 @@ import actionTypes from "../actions/constants";
 const initialState = {
   showSignUp: false,
   showSignIn: false,
+  showConnectOptions: false,
 };
 
 const guestViewReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SET_SHOW_SIGN_IN: {
+    case actionTypes.SHOW_SIGN_IN: {
       return {
         ...state,
+        showSignUp: false,
         showSignIn: true,
+        showConnectOptions: true,
       };
     }
-    case actionTypes.SET_SHOW_SIGN_UP: {
+    case actionTypes.SHOW_SIGN_UP: {
       return {
         ...state,
-        showSignIn: true,
+        showSignUp: true,
+        showSignIn: false,
+        showConnectOptions: true,
+      };
+    }
+
+    case actionTypes.HIDE_CONNECT_OPTIOS: {
+      return {
+        ...state,
+        showSignUp: false,
+        showSignIn: false,
+        showConnectOptions: false,
       };
     }
 

@@ -1,15 +1,28 @@
 import styles from "./ConnectOptionsDisplay.module.css";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import SignIn from "./signIn/SignIn";
+import SignUp from "./signUp/SignUp";
 import PropTypes from "prop-types";
-const ConnectOptionDisplay = ({ showSignIn, showSignUp }) => {
-  console.log("showSignIn: ", showSignIn);
-  console.log("showSignUp: ", showSignUp);
+const ConnectOptionDisplay = ({
+  showSignIn,
+  showSignUp,
+  setShowSignInAction,
+  setShowSignUpAction,
+}) => {
   return (
     <div className={styles.displayContent}>
       <div className={styles.connectionTitles}>
-        <div id={styles.title}>Log In</div>
-        <div id={styles.title}>Sign Up</div>
+        <div
+          className={showSignIn && styles.currentOption}
+          onClick={setShowSignInAction}
+        >
+          Log In
+        </div>
+        <div
+          className={showSignUp && styles.currentOption}
+          onClick={setShowSignUpAction}
+        >
+          Sign Up
+        </div>
       </div>
       {showSignIn ? <SignIn /> : null}
       {showSignUp ? <SignUp /> : null}

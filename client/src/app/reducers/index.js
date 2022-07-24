@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import guestViewReducer from "./guest-view-reducer";
-const allReducers = combineReducers({ guestViewReducer });
+import guestView from "./guest-view-reducer";
+const allReducers = combineReducers({ guestView });
 
 export default allReducers;

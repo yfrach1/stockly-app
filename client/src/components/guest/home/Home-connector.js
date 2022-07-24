@@ -4,16 +4,12 @@ import {
   setShowSignInAction,
   setShowSignUpAction,
 } from "../../../app/actions/guest-view-actions";
-import {
-  getShowSignIn,
-  getShowSignUp,
-} from "../../../app/selectors/guest-view-selectors";
-import ConnectOptionDisplay from "./ConnectOptionDisplay";
+import { getShowConnectOptions } from "../../../app/selectors/guest-view-selectors";
+import Home from "./Home";
 
 const mapStateToProps = (state, ownProps) => {
-  const showSignIn = getShowSignIn(state);
-  const showSignUp = getShowSignUp(state);
-  return { showSignIn, showSignUp };
+  const showConnectOptions = getShowConnectOptions(state);
+  return { showConnectOptions };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -23,7 +19,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ConnectOptionDisplay);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

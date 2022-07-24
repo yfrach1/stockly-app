@@ -1,10 +1,13 @@
 import actionsTypes from "./constants";
 
 const setShowSignIn = () => ({
-  type: actionsTypes.SET_SHOW_SIGN_IN,
+  type: actionsTypes.SHOW_SIGN_IN,
 });
 const setShowSignUp = () => ({
-  type: actionsTypes.SET_SHOW_SIGN_UP,
+  type: actionsTypes.SHOW_SIGN_UP,
+});
+const setHideConnectOptions = () => ({
+  type: actionsTypes.HIDE_CONNECT_OPTIOS,
 });
 
 export const setShowSignInAction = () => {
@@ -15,11 +18,8 @@ export const setShowSignUpAction = () => {
   return (dispatch) => dispatch(setShowSignUp());
 };
 
-////////////
-
-export const setSearchKeyAction = (input) => {
-  const searchKey = input === "" ? "none" : input;
-  return (dispatch) => {
-    dispatch(setSearchKey(searchKey));
-  };
+export const setHideConnectOptionsAction = () => {
+  return (dispatch) => dispatch(setHideConnectOptions());
 };
+
+////////////
