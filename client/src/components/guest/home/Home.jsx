@@ -1,60 +1,37 @@
-import React from "react";
-import ConnectOptionDisplayConnector from "../connectOptions/ConnectOptionDisplay-connector";
+import React, { Fragment } from "react";
 import styles from "./Home.module.css";
-import PropTypes from "prop-types";
+import ClientRoute from "../../../navigation/Route";
+import { Link } from "react-router-dom";
 
-const Home = ({
-  showConnectOptions,
-  setShowSignInAction,
-  setShowSignUpAction,
-}) => {
+const Home = () => {
   return (
-    <React.Fragment>
-      {showConnectOptions ? (
-        <ConnectOptionDisplayConnector />
-      ) : (
-        <React.Fragment>
-          <div className={styles.title}>
-            Stock Monitor <br /> Application
-          </div>
-          <div className={styles.text}>
-            Track your money and your investments,
-            <br /> and keep your finances organized with Stockly.
-            <br /> See the possibilities of your portfolio with our newly
-            designed.
-          </div>
-          <div className={styles.linksPosition}>
-            <div
-              className={styles.signInButton}
-              id={styles.option}
-              onClick={() => setShowSignInAction()}
-            >
-              SIGN IN
-            </div>
-            <div
-              className={styles.registerButton}
-              id={styles.option}
-              onClick={() => setShowSignUpAction()}
-            >
-              REGISTER
-            </div>
-          </div>
-        </React.Fragment>
-      )}
-    </React.Fragment>
+    <Fragment>
+      <div className={styles.title}>
+        Stock Monitor <br /> Application
+      </div>
+      <div className={styles.text}>
+        Track your money and your investments,
+        <br /> and keep your finances organized with Stockly.
+        <br /> See the possibilities of your portfolio with our newly designed.
+      </div>
+      <div className={styles.linksPosition}>
+        <Link
+          className={styles.signInButton}
+          id={styles.option}
+          to={ClientRoute.Guest.signIn}
+        >
+          SIGN IN
+        </Link>
+        <Link
+          className={styles.registerButton}
+          id={styles.option}
+          to={ClientRoute.Guest.signUp}
+        >
+          REGISTER
+        </Link>
+      </div>
+    </Fragment>
   );
-};
-
-Home.propTypes = {
-  showConnectOptions: PropTypes.bool,
-  setShowSignInAction: PropTypes.func,
-  setShowSignUpAction: PropTypes.func,
-};
-
-Home.defaultProps = {
-  showConnectOptions: false,
-  setShowSignInAction: () => {},
-  setShowSignUpAction: () => {},
 };
 
 export default Home;
