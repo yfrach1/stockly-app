@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./SignUp.module.css";
-const SignUp = ({ SignUpAction }) => {
+import PropTypes from "prop-types";
+
+const SignUp = ({ signUpAction }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,13 +16,14 @@ const SignUp = ({ SignUpAction }) => {
     /* need to connect this to DB */
   }
   const handleSignUp = () => {
+    //change name to first_name
     const newUser = {
-      firstName,
-      lastName,
+      name: firstName,
+      last_name: lastName,
       email,
       password,
     };
-    SignUpAction(newUser);
+    signUpAction(newUser);
   };
   return (
     <form
@@ -69,11 +72,19 @@ const SignUp = ({ SignUpAction }) => {
         minLength="6"
         required
       />
-      <button className={styles.SignUpButton} type="submit">
+      <button className={styles.signUpButton} type="submit">
         Sign Up
       </button>
     </form>
   );
+};
+
+SignUp.propTypes = {
+  signUpAction: PropTypes.func,
+};
+
+SignUp.defaultProps = {
+  signUpAction: () => {},
 };
 
 export default SignUp;

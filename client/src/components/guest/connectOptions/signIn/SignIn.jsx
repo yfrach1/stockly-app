@@ -1,16 +1,30 @@
 import { useState } from "react";
 import styles from "./SignIn.module.css";
-const SignIn = () => {
+import PropTypes from "prop-types";
+
+const SignIn = ({ signInAction }) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
   const handleInputLoginEmailChange = (e) => setLoginEmail(e.target.value);
   const handleInputLoginPasswordChange = (e) =>
     setLoginPassword(e.target.value);
+  const handleSignIn = () => {
+    const userData = {
+      email: loginEmail,
+      password: loginPassword,
+    };
+    signInAction(userData);
+  };
+
   return (
     <div>
-      {/* need to connect this to DB */}
-      <form onSubmit={() => console.log("check email and password on DB")}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSignIn();
+        }}
+      >
         <input
           type="email"
           placeholder="Email"
@@ -32,6 +46,14 @@ const SignIn = () => {
       </form>
     </div>
   );
+};
+
+SignIn.propTypes = {
+  signInAction: PropTypes.func,
+};
+
+SignIn.defaultProps = {
+  signInAction: () => {},
 };
 
 export default SignIn;

@@ -5,7 +5,7 @@ const initialState = {
   lastName: "",
 };
 
-const guestViewReducer = (state = initialState, action) => {
+const userViewReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SHOW_SIGN_IN: {
       return {
@@ -38,4 +38,4 @@ const guestViewReducer = (state = initialState, action) => {
   }
 };
 
-export default guestViewReducer;
+export default userViewReducer;
