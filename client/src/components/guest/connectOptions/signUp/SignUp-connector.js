@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { SignUpAction } from "../../../../app/actions/user-view-actions";
+import { signUpAction } from "../../../../app/actions/user-entities-actions";
 
 import SignUp from "./SignUp";
 
@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return bindActionCreators({ SignUpAction }, dispatch);
+  return bindActionCreators({ signUpAction }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

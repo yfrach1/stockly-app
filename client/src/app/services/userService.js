@@ -22,14 +22,14 @@ export default class UserService {
 }
 
 const axios = require("axios");
-const url = "http://localhost:8080";
+const url = "http://localhost:8080/user/";
 
 export const addNewUser = async (userData) => {
-  console.log("userData: ", userData);
-  const newUser = {
-    input: userData,
-  };
-
   const response = await axios.post(`${url}`, userData);
+  return response.data;
+};
+
+export const validateUser = async (userData) => {
+  const response = await axios.get(`${url}`, userData);
   return response.data;
 };

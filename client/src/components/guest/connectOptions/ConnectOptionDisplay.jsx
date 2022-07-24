@@ -1,8 +1,8 @@
 import styles from "./ConnectOptionsDisplay.module.css";
-import SignIn from "./signIn/SignIn";
-import SignUp from "./signUp/SignUp";
 import SignUpConnector from "./signUp/SignUp-connector";
+import SignInConnector from "./signIn/SignIn-connector";
 import PropTypes from "prop-types";
+
 const ConnectOptionDisplay = ({
   showSignIn,
   showSignUp,
@@ -25,7 +25,7 @@ const ConnectOptionDisplay = ({
           Sign Up
         </div>
       </div>
-      {showSignIn ? <SignIn /> : null}
+      {showSignIn ? <SignInConnector /> : null}
       {showSignUp ? <SignUpConnector /> : null}
     </div>
   );

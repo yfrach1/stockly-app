@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 
 class UserManager {
   async createUser(user) {
+    console.log("inside create");
     const hashedPassword = await bcrypt.hash(user.password, 10);
     user.password = hashedPassword;
 
