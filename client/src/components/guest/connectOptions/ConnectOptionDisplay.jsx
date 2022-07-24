@@ -1,29 +1,26 @@
 import styles from "./ConnectOptionsDisplay.module.css";
 import SignUpConnector from "./signUp/SignUp-connector";
 import SignInConnector from "./signIn/SignIn-connector";
+import ClientRoute from "../../../navigation/Route";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-const ConnectOptionDisplay = ({
-  showSignIn,
-  showSignUp,
-  setShowSignInAction,
-  setShowSignUpAction,
-}) => {
+const ConnectOptionDisplay = ({ showSignIn, showSignUp }) => {
   return (
     <div className={styles.displayContent}>
       <div className={styles.connectionTitles}>
-        <div
+        <Link
           className={showSignIn ? styles.currentOption : undefined}
-          onClick={setShowSignInAction}
+          to={ClientRoute.Guest.signIn}
         >
           Log In
-        </div>
-        <div
+        </Link>
+        <Link
           className={showSignUp ? styles.currentOption : undefined}
-          onClick={setShowSignUpAction}
+          to={ClientRoute.Guest.signUp}
         >
           Sign Up
-        </div>
+        </Link>
       </div>
       {showSignIn ? <SignInConnector /> : null}
       {showSignUp ? <SignUpConnector /> : null}
@@ -34,14 +31,10 @@ const ConnectOptionDisplay = ({
 ConnectOptionDisplay.propTypes = {
   showSignIn: PropTypes.bool,
   showSignUp: PropTypes.bool,
-  setShowSignInAction: PropTypes.func,
-  setShowSignUpAction: PropTypes.func,
 };
 
 ConnectOptionDisplay.defaultProps = {
   showSignIn: false,
   showSignUp: false,
-  setShowSignInAction: () => {},
-  setShowSignUpAction: () => {},
 };
 export default ConnectOptionDisplay;

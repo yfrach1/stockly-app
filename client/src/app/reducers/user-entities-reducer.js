@@ -40,4 +40,4 @@ const userEntitiesReducer = (state = initialState, action) => {
   }
 };
 
-export default guestViewReducer;
+export default userEntitiesReducer;
