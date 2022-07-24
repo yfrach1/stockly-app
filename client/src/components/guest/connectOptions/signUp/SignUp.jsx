@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./SignUp.module.css";
-const SignUp = () => {
+const SignUp = ({ SignUpAction }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,6 +20,7 @@ const SignUp = () => {
       email,
       password,
     };
+    SignUpAction(newUser);
   };
   return (
     <form

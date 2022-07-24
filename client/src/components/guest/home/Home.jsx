@@ -1,15 +1,13 @@
 import React from "react";
-import { useState } from "react";
-import ConnectOptionDisplay from "../connectOptions/ConnectOptionDisplay";
 import ConnectOptionDisplayConnector from "../connectOptions/ConnectOptionDisplay-connector";
 import styles from "./Home.module.css";
+import PropTypes from "prop-types";
+
 const Home = ({
   showConnectOptions,
   setShowSignInAction,
   setShowSignUpAction,
 }) => {
-  // const [showConnectOptions, setShowConnectOptions] = useState(false);
-  console.log("showConnectOptions: ", showConnectOptions);
   return (
     <React.Fragment>
       {showConnectOptions ? (
@@ -29,7 +27,6 @@ const Home = ({
             <div
               className={styles.signInButton}
               id={styles.option}
-              // onClick={() => setShowConnectOptions("sign in")}
               onClick={() => setShowSignInAction()}
             >
               SIGN IN
@@ -37,7 +34,6 @@ const Home = ({
             <div
               className={styles.registerButton}
               id={styles.option}
-              // onClick={() => setShowConnectOptions("sign up")}
               onClick={() => setShowSignUpAction()}
             >
               REGISTER
@@ -47,6 +43,18 @@ const Home = ({
       )}
     </React.Fragment>
   );
+};
+
+Home.propTypes = {
+  showConnectOptions: PropTypes.bool,
+  setShowSignInAction: PropTypes.func,
+  setShowSignUpAction: PropTypes.func,
+};
+
+Home.defaultProps = {
+  showConnectOptions: false,
+  setShowSignInAction: () => {},
+  setShowSignUpAction: () => {},
 };
 
 export default Home;

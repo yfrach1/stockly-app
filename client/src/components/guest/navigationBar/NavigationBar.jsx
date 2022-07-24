@@ -1,6 +1,7 @@
 import styles from "./NavigationBar.module.css";
 import LogoIcon from "../../../assets/images/app_logo.svg";
 import mainView from "../../../app/constant/MainView";
+import PropTypes from "prop-types";
 
 import { Link } from "react-router-dom"; // check if to use it or div
 
@@ -49,5 +50,17 @@ function NavigationBar({
     </div>
   );
 }
+
+NavigationBar.propTypes = {
+  //setComponentToView: PropTypes.object, // check about it
+  setHideConnectOptionsAction: PropTypes.func,
+  setShowSignUpAction: PropTypes.func,
+};
+
+NavigationBar.defaultProps = {
+  // showConnectOptions: null,
+  setHideConnectOptionsAction: () => {},
+  setShowSignUpAction: () => {},
+};
 
 export default NavigationBar;

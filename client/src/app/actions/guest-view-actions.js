@@ -21,5 +21,3 @@ export const setShowSignUpAction = () => {
 export const setHideConnectOptionsAction = () => {
   return (dispatch) => dispatch(setHideConnectOptions());
 };
-
-////////////
