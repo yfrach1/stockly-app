@@ -1,11 +1,11 @@
 const { Stock } = require("../../storage/models");
 
 class StockManager {
-   async createStock(stock) {
-      const response = await Stock.create(stock);
+  async createStock(stock) {
+    const response = await Stock.create(stock);
 
-      return response;
-   }
+    return response;
+  }
 }
 
 module.exports = new StockManager();

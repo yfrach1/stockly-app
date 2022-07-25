@@ -28,7 +28,7 @@ export const signInAction = (userData) => {
       console.log("res:", res);
       //dispatch(signUpRequestSuccessed());
     } catch (error) {
-      console.log("err");
+      console.log(error);
       //dispatch(signUpRequestFailed());
     }
   };

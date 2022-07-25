@@ -12,9 +12,7 @@ const SignUp = ({ signUpAction }) => {
   const handleInputLastNameChange = (e) => setLastName(e.target.value);
   const handleInputEmailChange = (e) => setEmail(e.target.value);
   const handleInputPasswordChange = (e) => setPassword(e.target.value);
-  {
-    /* need to connect this to DB */
-  }
+
   const handleSignUp = () => {
     //change name to first_name
     const newUser = {
@@ -35,16 +33,16 @@ const SignUp = ({ signUpAction }) => {
     >
       <div className={styles.displayNameInput}>
         <input
+          className={styles.inputTextBox}
           type="text"
-          id={styles.input}
           placeholder="First Name"
           value={firstName}
           onChange={handleInputFirstNameChange}
           required
         />
         <input
+          className={styles.inputTextBox}
           type="text"
-          id={styles.input}
           placeholder="Last Name"
           value={lastName}
           onChange={handleInputLastNameChange}
@@ -53,9 +51,9 @@ const SignUp = ({ signUpAction }) => {
       </div>
 
       <input
+        className={styles.inputTextBox}
         type="email"
         style={{ width: "99%" }}
-        id={styles.input}
         placeholder="Email"
         value={email}
         onChange={handleInputEmailChange}
@@ -63,9 +61,9 @@ const SignUp = ({ signUpAction }) => {
       />
 
       <input
+        className={styles.inputTextBox}
         type="password"
         style={{ width: "99%" }}
-        id={styles.input}
         placeholder="Password"
         value={password}
         onChange={handleInputPasswordChange}

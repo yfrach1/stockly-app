@@ -26,16 +26,16 @@ const SignIn = ({ signInAction }) => {
         }}
       >
         <input
+          className={styles.inputTextBox}
           type="email"
           placeholder="Email"
-          id={styles.input}
           value={loginEmail}
           onChange={handleInputLoginEmailChange}
         />
         <input
+          className={styles.inputTextBox}
           type="password"
           placeholder="Password"
-          id={styles.input}
           value={loginPassword}
           onChange={handleInputLoginPasswordChange}
         />
