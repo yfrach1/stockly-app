@@ -1,20 +1,12 @@
-//import styles from "./App.module.css";
-//import NavigationBar from "./components/NavigationBar/NavigationBar";
-//import TodoSwitch from "./navigation/TodoSwitch";
 import React from "react";
 import Main from "./components/guest/MainPage/Main";
-import GuestSwitch from "./navigation/GuestSwitch";
-import styles from "./App.module.css";
+import Sidebar from "./components/user/sideBar/Sidebar";
 function App() {
   return (
     <div>
-      {/* landingPage */}
-      <Main />
+      {/* <Main /> */}
+      <Sidebar />
     </div>
-
-    // <ChakraProvider>
-    //   <Login />
-    // </ChakraProvider>
   );
 }
 
