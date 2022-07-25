@@ -23,6 +23,7 @@
 
 const axios = require("axios");
 const url = "http://localhost:8080/user";
+axios.defaults.withCredentials = true;
 
 export const addNewUser = async (userData) => {
    console.log("in client server");
@@ -36,6 +37,6 @@ export const addNewUser = async (userData) => {
 };
 
 export const validateUser = async (userData) => {
-   const response = await axios.get(`${url}`, userData);
+   const response = await axios.post(`${url}/signIn`, userData);
    return response.data;
 };
