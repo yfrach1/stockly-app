@@ -22,20 +22,20 @@
 // }
 
 const axios = require("axios");
-const url = "http://localhost:8080/user/";
+const url = "http://localhost:8080/user";
 
 export const addNewUser = async (userData) => {
-  console.log("in client server");
-  let response;
-  try {
-    response = await axios.post(`${url}`, userData);
-  } catch (error) {
-    console.log("error in client service: ", error);
-  }
-  return response.data;
+   console.log("in client server");
+   let response;
+   try {
+      response = await axios.post(`${url}/signUp`, userData);
+   } catch (error) {
+      console.log("error in client service: ", error);
+   }
+   return response.data;
 };
 
 export const validateUser = async (userData) => {
-  const response = await axios.get(`${url}`, userData);
-  return response.data;
+   const response = await axios.get(`${url}`, userData);
+   return response.data;
 };
