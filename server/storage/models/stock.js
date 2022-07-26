@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
          name: DataTypes.STRING,
          ticker: DataTypes.STRING,
          quantity: DataTypes.FLOAT,
-         deleted: DataTypes.DATE,
          createdAt: {
             allowNull: false,
             type: DataTypes.DATE,

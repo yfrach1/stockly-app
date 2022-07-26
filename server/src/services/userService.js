@@ -40,7 +40,7 @@ class UserManager {
    async _createAccessToken(dbUserData) {
       const user = {
          id: dbUserData.user_id,
-         name: dbUserData.name,
+         name: dbUserData.first_name,
          lastName: dbUserData.last_name,
       };
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
