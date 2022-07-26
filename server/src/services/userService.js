@@ -11,9 +11,9 @@ class UserManager {
       if (await this._getUser(userData.email)) {
          return null;
       }
-
       const dbUserData = await User.create(userData);
-      accessToken = _createAccessToken(dbUserData);
+      console.log(dbUserData);
+      accessToken = this._createAccessToken(dbUserData);
 
       return accessToken;
    }
@@ -40,8 +40,8 @@ class UserManager {
    async _createAccessToken(dbUserData) {
       const user = {
          id: dbUserData.user_id,
-         name: dbUserData.first_name,
-         lastName: dbUserData.last_name,
+         first_name: dbUserData.first_name,
+         last_name: dbUserData.last_name,
       };
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
          expiresIn: "12h",
