@@ -42,7 +42,24 @@ const StockGraph = () => {
                   opacity: 0.7,
                },
             ]}
-            layout={{ width: 480, height: 300 }}
+            layout={{
+               modebar: {
+                  remove: [
+                     "pan",
+                     "zoom",
+                     "select",
+                     "lasso",
+                     "toImage",
+                     "zoomin",
+                     "zoomout",
+                     "autoscale",
+                  ],
+               },
+               paper_bgcolor: "rgb(166, 225, 255)",
+               plot_bgcolor: "rgb(166, 225, 255)",
+               margin: { b: 45, l: 45, r: 5, t: 30 },
+            }}
+            displayModeBar={false}
          />
       </div>
    );

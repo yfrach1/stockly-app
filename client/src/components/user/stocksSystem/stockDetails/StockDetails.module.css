@@ -1,9 +1,6 @@
 .stockDetails {
-   height: 100%;
-   width: 42em;
-   position: absolute;
-   left: 57em;
-   top: 0;
+   min-width: 22em;
+   flex: 1;
    padding: 1em;
    background-color: rgb(166, 225, 255);
    border-left: 2px solid rgb(115, 115, 115);
