@@ -1,0 +1,16 @@
+.stocksSystem {
+   height: 100%;
+   width: 42em;
+   position: absolute;
+   left: 15em;
+   top: 0;
+   background-color: rgb(235, 235, 235);
+}
+
+.grid {
+   display: flex;
+   flex-wrap: wrap;
+   padding-left: 0;
+   list-style: none;
+   flex: 0 0 33.333333%;
+}
