@@ -1,8 +1,8 @@
 import actionsTypes from "./constants";
 import { addNewUser, validateUser } from "../services/userService";
-const signUpRequestSuccessed = (message) => ({
+const signUpRequestSuccessed = (data) => ({
   type: actionsTypes.SIGN_UP_REQUEST_SUCCESSED,
-  message,
+  data,
 });
 const signUpRequestFailed = (message) => ({
   type: actionsTypes.SIGN_UP_REQUEST_FAILED,
@@ -13,10 +13,10 @@ export const signUpAction = (userData) => {
     //dispatch loader maybe
     try {
       const res = await addNewUser(userData);
-      console.log("res: ", res);
+      console.log("res: ", res.data);
       if (res.data) {
-        dispatch(signUpRequestSuccessed());
-        console.log("new user added");
+        const data = res.data;
+        dispatch(signUpRequestSuccessed(data));
       } else {
         dispatch(signUpRequestFailed(res.data.message));
       }

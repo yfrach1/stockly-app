@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getUserAuth } from "./app/selectors/user-inteties-selectors";
+import { getUserAuth } from "./app/selectors/user-entities-selectors";
 
 import App from "./App";
 

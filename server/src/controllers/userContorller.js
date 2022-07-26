@@ -1,15 +1,14 @@
 const userService = require("../services/userService");
 
 async function createUser(req, res) {
-  const { accessToken, user, portfolio } = await userService.createUser(
-    req.body
-  );
+  const { accessToken, data } = await userService.createUser(req.body);
+
   accessToken
     ? res
         .status(200)
         .cookie("token", accessToken, { httpOnly: true })
-        .json({ user, portfolio })
-    : res.status(200).json({ error: "User already exist" });
+        .send(data)
+    : res.status(201).json({ error: "User already exist" });
 }
 
 async function loginUser(req, res) {
