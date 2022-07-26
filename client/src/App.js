@@ -6,7 +6,7 @@ import Sidebar from "./components/user/sideBar/Sidebar";
 import UserView from "./components/user/userView/UserView";
 import UserViewConnector from "./components/user/userView/UserView-connector";
 function App({ userAuth }) {
-  return <Fragment>{userAuth ? <UserViewConnector /> : <Main />}</Fragment>;
+   return <StocksSystem />;
 }
 
 export default App;

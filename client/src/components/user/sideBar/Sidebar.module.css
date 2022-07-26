@@ -1,9 +1,10 @@
 .sidebar-container {
-   height: 100%;
-   width: 15em;
-   position: absolute;
-   left: 0;
-   top: 0;
+   min-width: 15em;
+   max-width: 15em;
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+
    background-color: rgb(235, 235, 235);
 }
 
