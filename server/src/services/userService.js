@@ -3,62 +3,71 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 class UserManager {
-   async createUser(userData) {
-      if (await this._getUser(userData.email)) {
-         return null;
-      }
+  async createUser(userData) {
+    if (await this._getUser(userData.email)) {
+      return null;
+    }
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    userData.password = hashedPassword;
+    const dbUserData = await User.create(userData);
+    const portfolio = await Portfolio.create({
+      user_id: dbUserData.user_id,
+      name: "My portfolio",
+    });
 
-      const hashedPassword = await bcrypt.hash(userData.password, 10);
-      userData.password = hashedPassword;
+    const data = {
+      firstName: dbUserData.first_name,
+      lastName: dbUserData.last_name,
+      portfolio: {
+        name: portfolio.name,
+        id: portfolio.portfolio_id,
+      },
+    };
+    const accessToken = await this._createAccessToken(dbUserData.user_id);
+    //  console.log("data: ", data);
+    //  console.log("accessToken: ", accessToken);
+    return { accessToken, data };
+  }
 
-      const dbUserData = await User.create(userData);
-      const portfolio = await Portfolio.create({
-         user_id: dbUserData.user_id,
-         name: "My portfolio",
-      });
-      const { accessToken, user } = await this._createAccessToken(dbUserData);
+  async loginUser(loginUserData) {
+    let accessToken = null;
+    const dbUserData = await this._getUser(loginUserData.email);
 
-      return { accessToken, user, portfolio };
-   }
+    if (
+      dbUserData &&
+      (await bcrypt.compare(loginUserData.password, dbUserData.password))
+    ) {
+      accessToken = _createAccessToken(dbUserData);
+    }
+    const allUserData = getUserData(dbUserData.user_id);
 
-   async loginUser(loginUserData) {
-      let accessToken = null;
-      const dbUserData = await this._getUser(loginUserData.email);
+    return { accessToken, allUserData };
+  }
 
-      if (dbUserData && (await bcrypt.compare(loginUserData.password, dbUserData.password))) {
-         accessToken = _createAccessToken(dbUserData);
-      }
-      const allUserData = getUserData(dbUserData.user_id);
+  async getUserData(userId) {
+    const response = await User.findByPk(userId, {
+      include: { model: Portfolio, include: Stock },
+    });
+    // console.log(response.dataValues.Portfolio.Stocks);
+    return response;
+  }
 
-      return { accessToken, allUserData };
-   }
+  async _createAccessToken(id) {
+    const userId = {
+      id,
+    };
+    const accessToken = jwt.sign(userId, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "12h",
+    });
 
-   async getUserData(userId) {
-      const response = await User.findByPk(userId, {
-         include: { model: Portfolio, include: Stock },
-      });
-      // console.log(response.dataValues.Portfolio.Stocks);
-      return response;
-   }
+    return accessToken;
+  }
 
-   async _createAccessToken(dbUserData) {
-      const user = {
-         id: dbUserData.user_id,
-         first_name: dbUserData.first_name,
-         last_name: dbUserData.last_name,
-      };
-      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-         expiresIn: "12h",
-      });
+  async _getUser(email) {
+    const response = await User.findOne({ where: { email: email } });
 
-      return { accessToken, user };
-   }
-
-   async _getUser(email) {
-      const response = await User.findOne({ where: { email: email } });
-
-      return response ? response : null;
-   }
+    return response ? response : null;
+  }
 }
 
 module.exports = new UserManager();

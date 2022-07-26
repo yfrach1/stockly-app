@@ -1,37 +1,27 @@
 import actionTypes from "../actions/constants";
 
 const initialState = {
-  firstName: "",
+  userAuth: false,
+  firstName: "Harel",
   lastName: "",
-  password: "",
-  email: "",
+  portfolio: null,
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SHOW_SIGN_IN: {
-      return {
-        ...state,
-        showSignUp: false,
-        showSignIn: true,
-        showConnectOptions: true,
-      };
-    }
-    case actionTypes.SHOW_SIGN_UP: {
-      return {
-        ...state,
-        showSignUp: true,
-        showSignIn: false,
-        showConnectOptions: true,
-      };
-    }
+    case actionTypes.SIGN_UP_REQUEST_SUCCESSED: {
+      console.log("action.data :", action.data);
+      console.log("lastName :", action.data.lastName);
+      console.log("firstName :", action.data.firstName);
 
-    case actionTypes.HIDE_CONNECT_OPTIOS: {
+      console.log("portfolio :", action.data.portfolio);
+
       return {
         ...state,
-        showSignUp: false,
-        showSignIn: false,
-        showConnectOptions: false,
+        userAuth: true,
+        lastName: action.data.lastName,
+        firstName: action.data.firstName,
+        portfolio: action.data.portfolio,
       };
     }
 
