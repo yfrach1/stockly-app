@@ -1,20 +1,19 @@
 import actionTypes from "../actions/constants";
 
 const initialState = {
+  userAuth: false,
   firstName: "",
   lastName: "",
-  password: "",
-  email: "",
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SHOW_SIGN_IN: {
+    case actionTypes.SIGN_UP_REQUEST_SUCCESSED: {
       return {
         ...state,
-        showSignUp: false,
-        showSignIn: true,
-        showConnectOptions: true,
+        userAuth: true,
+        firstName: "Harel",
+        lastName: "Yfrach",
       };
     }
     case actionTypes.SHOW_SIGN_UP: {

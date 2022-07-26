@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import "monday-ui-react-core/dist/main.css";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
+import AppConnector from "./App-connector";
 
 import { BrowserRouter } from "react-router-dom";
 
@@ -13,7 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <AppConnector />
     </Provider>
   </BrowserRouter>
 );
