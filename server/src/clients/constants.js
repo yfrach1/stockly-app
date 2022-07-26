@@ -3,6 +3,7 @@ const DATA_KINDS = {
    DAILY: "DAILY",
    WEEKLY: "WEEKLY",
    MONTHLY: "MONTHLY",
+   QUOTE: "QUOTE",
 };
 
 module.exports = DATA_KINDS;

@@ -7,7 +7,7 @@ async function createUser(req, res) {
            .status(200)
            .cookie("token", accessToken, { httpOnly: true })
            .json({ message: "User created successfuly" })
-      : res.status(400).json({ error: "User already exist" });
+      : res.status(200).json({ error: "User already exist" });
 }
 
 async function loginUser(req, res) {
@@ -18,7 +18,7 @@ async function loginUser(req, res) {
            .status(200)
            .cookie("token", accessToken, { httpOnly: true })
            .json({ message: "Login successful" })
-      : res.status(400).json({ error: "Username or password is wrong" });
+      : res.status(200).json({ error: "Username or password is wrong" });
 }
 
 async function getUserData(req, res) {

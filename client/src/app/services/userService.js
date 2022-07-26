@@ -28,15 +28,12 @@ axios.defaults.withCredentials = true;
 export const addNewUser = async (userData) => {
    console.log("in client server");
    let response;
-   try {
-      response = await axios.post(`${url}/signUp`, userData);
-   } catch (error) {
-      console.log("error in client service: ", error);
-   }
+   response = await axios.post(`${url}/sign-up`, userData);
+
    return response.data;
 };
 
 export const validateUser = async (userData) => {
-   const response = await axios.post(`${url}/signIn`, userData);
+   const response = await axios.post(`${url}/sign-in`, userData);
    return response.data;
 };
