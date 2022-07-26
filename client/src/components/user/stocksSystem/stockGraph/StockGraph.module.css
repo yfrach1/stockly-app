@@ -1,2 +1,5 @@
 .graphContainer {
+   flex: 1;
+   background-color: rgb(166, 225, 255);
+   border-left: 2px solid rgb(115, 115, 115);
 }

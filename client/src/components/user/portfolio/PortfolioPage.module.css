@@ -1,5 +1,6 @@
 .stocksSystem {
    min-width: 22em;
+   max-width: 45em;
    flex: 1;
    background-color: rgb(166, 225, 255);
 }
@@ -15,4 +16,5 @@
 .stockContainer {
    display: flex;
    flex-direction: column;
+   flex: 1;
 }
