@@ -4,16 +4,16 @@ const jwt = require("jsonwebtoken");
 
 class UserManager {
    async createUser(userData) {
-      let accessToken = null;
-      const hashedPassword = await bcrypt.hash(userData.password, 10);
-      userData.password = hashedPassword;
-
       if (await this._getUser(userData.email)) {
          return null;
       }
+
+      const hashedPassword = await bcrypt.hash(userData.password, 10);
+      userData.password = hashedPassword;
+
       const dbUserData = await User.create(userData);
-      console.log(dbUserData);
-      accessToken = this._createAccessToken(dbUserData);
+      await Portfolio.create({ user_id: dbUserData.user_id, name: "My portfolio" });
+      const accessToken = this._createAccessToken(dbUserData);
 
       return accessToken;
    }
