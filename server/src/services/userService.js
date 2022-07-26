@@ -12,10 +12,13 @@ class UserManager {
       userData.password = hashedPassword;
 
       const dbUserData = await User.create(userData);
-      await Portfolio.create({ user_id: dbUserData.user_id, name: "My portfolio" });
-      const accessToken = this._createAccessToken(dbUserData);
+      const portfolio = await Portfolio.create({
+         user_id: dbUserData.user_id,
+         name: "My portfolio",
+      });
+      const { accessToken, user } = await this._createAccessToken(dbUserData);
 
-      return accessToken;
+      return { accessToken, user, portfolio };
    }
 
    async loginUser(loginUserData) {
@@ -25,12 +28,13 @@ class UserManager {
       if (dbUserData && (await bcrypt.compare(loginUserData.password, dbUserData.password))) {
          accessToken = _createAccessToken(dbUserData);
       }
+      const allUserData = getUserData(dbUserData.user_id);
 
-      return accessToken;
+      return { accessToken, allUserData };
    }
 
-   async getUserData(user) {
-      const response = await User.findByPk(user.id, {
+   async getUserData(userId) {
+      const response = await User.findByPk(userId, {
          include: { model: Portfolio, include: Stock },
       });
       // console.log(response.dataValues.Portfolio.Stocks);
@@ -47,7 +51,7 @@ class UserManager {
          expiresIn: "12h",
       });
 
-      return accessToken;
+      return { accessToken, user };
    }
 
    async _getUser(email) {
