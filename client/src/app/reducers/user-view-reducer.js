@@ -1,35 +1,15 @@
 import actionTypes from "../actions/constants";
 
 const initialState = {
-  firstName: "",
-  lastName: "",
+  searchKey: "",
 };
 
 const userViewReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SHOW_SIGN_IN: {
+    case actionTypes.SET_SEARCH_KEY: {
       return {
         ...state,
-        showSignUp: false,
-        showSignIn: true,
-        showConnectOptions: true,
-      };
-    }
-    case actionTypes.SHOW_SIGN_UP: {
-      return {
-        ...state,
-        showSignUp: true,
-        showSignIn: false,
-        showConnectOptions: true,
-      };
-    }
-
-    case actionTypes.HIDE_CONNECT_OPTIOS: {
-      return {
-        ...state,
-        showSignUp: false,
-        showSignIn: false,
-        showConnectOptions: false,
+        searchKey: action.searchKey,
       };
     }
 

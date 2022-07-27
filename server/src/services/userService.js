@@ -1,6 +1,7 @@
 const { User, Portfolio, Stock } = require("../../storage/models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { use } = require("bcrypt/promises");
 
 class UserManager {
   async createUser(newUserData) {
@@ -16,7 +17,6 @@ class UserManager {
     });
 
     const userData = {
-      userId: dbUserData.user_id,
       firstName: dbUserData.first_name,
       lastName: dbUserData.last_name,
       portfolio: {
@@ -25,20 +25,20 @@ class UserManager {
       },
     };
     const accessToken = await this._createAccessToken(dbUserData.user_id);
+    console.log("userData: ", userData);
+    console.log("accessToken: ", accessToken);
     return { accessToken, userData };
   }
 
   async loginUser(loginUserData) {
     let accessToken = null;
-    const dbUserData = await this._getUser(loginUserData.email);
+    let userData = null;
 
-    if (
-      dbUserData &&
-      (await bcrypt.compare(loginUserData.password, dbUserData.password))
-    ) {
-      accessToken = this._createAccessToken(dbUserData);
+    const userId = await this._isUserValid(loginUserData);
+    if (userId) {
+      accessToken = await this._createAccessToken(userId);
+      userData = await this.getUserData(userId);
     }
-    const userData = await this.getUserData(dbUserData.user_id);
     return { accessToken, userData };
   }
 
@@ -48,7 +48,6 @@ class UserManager {
     });
     const { portfolio, stocks } = this._getPortfolioData(user.Portfolio);
     const userData = {
-      userId: user.user_id,
       firstName: user.first_name,
       lastName: user.last_name,
       portfolio,
@@ -78,9 +77,14 @@ class UserManager {
   }
 
   async _getUser(email) {
-    const response = await User.findOne({ where: { email: email } });
+    return await User.findOne({ where: { email } });
+  }
 
-    return response ? response : null;
+  async _isUserValid({ email, password }) {
+    const user = await this._getUser(email);
+    if (!user) return false;
+    if (!(await bcrypt.compare(password, user.password))) return false;
+    return user.user_id;
   }
 }
 

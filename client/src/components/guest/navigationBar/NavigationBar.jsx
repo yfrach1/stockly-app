@@ -7,7 +7,7 @@ function NavigationBar() {
   return (
     <div className={styles.navigationBarPosition}>
       <div>
-        <img className={styles.appLogo} src={LogoIcon} />
+        <img className={styles.appLogo} src={LogoIcon} alt={""} />
       </div>
       <div className={styles.navagationBarLinks}>
         <NavLink id={styles.option} to={ClientRoute.Guest.home}>

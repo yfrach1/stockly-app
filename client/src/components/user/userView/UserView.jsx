@@ -1,13 +1,14 @@
-import { Fragment } from "react";
-import Routes from "../../../navigation/userRoutes";
+import UserSwitch from "../../../navigation/UserSwitch";
 import Sidebar from "../sideBar/Sidebar";
-
-const UserView = ({ firstName, lastName, portfolio }) => {
+import styles from "./UserView.module.css";
+const UserView = () => {
   return (
-    <Fragment>
+    <div className={styles.mainPage}>
       <Sidebar />
-      <Routes />
-    </Fragment>
+      <div className={styles.userPreview}>
+        <UserSwitch />
+      </div>
+    </div>
   );
 };
 
