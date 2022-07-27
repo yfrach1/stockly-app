@@ -1,5 +1,5 @@
 import actionsTypes from "./constants";
-import { addNewUser, validateUser } from "../services/userService";
+import { addNewUser, validateUser, getData } from "../services/userService";
 const signUpRequestSuccessed = (userData) => ({
   type: actionsTypes.SIGN_UP_REQUEST_SUCCESSED,
   userData,
@@ -10,6 +10,10 @@ const signUpRequestFailed = () => ({
 
 const signInRequestSuccessed = (userData) => ({
   type: actionsTypes.SIGN_IN_REQUEST_SUCCESSED,
+  userData,
+});
+const checkTokenRequestSuccessed = (userData) => ({
+  type: actionsTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED,
   userData,
 });
 
@@ -40,5 +44,17 @@ export const signInAction = (loginUserData) => {
       console.log(error);
       //dispatch(signUpRequestFailed());
     }
+  };
+};
+
+export const checkUserTokenAction = () => {
+  return async (dispatch) => {
+    console.log("in action");
+    try {
+      const res = await getData();
+      // dispatch(checkUserToken());
+      console.log(" res.data:", res.data);
+      dispatch(checkTokenRequestSuccessed(res.data));
+    } catch (error) {}
   };
 };

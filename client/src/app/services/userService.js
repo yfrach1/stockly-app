@@ -12,3 +12,9 @@ export const validateUser = async (userData) => {
   const response = await axios.post(`${url}/sign-in`, userData);
   return response;
 };
+
+export const getData = async () => {
+  const response = await axios.get(`${url}`);
+  console.log("response : ", response);
+  return response;
+};
