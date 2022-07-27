@@ -22,11 +22,11 @@ const GuestSwitch = () => {
         path={ClientRoute.Guest.contactUs}
         component={(props) => <ContactUs {...props} />}
       ></Route>
-      <Route
+      {/* <Route
         exact={true}
         path={ClientRoute.Guest.contactUs}
         component={(props) => <ContactUs {...props} />}
-      ></Route>
+      ></Route> */}
       <Route
         exact={true}
         path={ClientRoute.Guest.signIn}
