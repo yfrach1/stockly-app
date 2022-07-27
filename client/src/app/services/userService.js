@@ -4,6 +4,7 @@ axios.defaults.withCredentials = true;
 
 export const addNewUser = async (userData) => {
   const response = await axios.post(`${url}/sign-up`, userData);
+
   return response;
 };
 

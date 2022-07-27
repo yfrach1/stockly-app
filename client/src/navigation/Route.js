@@ -6,6 +6,7 @@ export const ClientRoute = {
     signIn: "/sign-in",
     signUp: "/sign-up",
   },
+  User: {},
 };
 
 export default ClientRoute;
