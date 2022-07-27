@@ -1,42 +1,78 @@
-const Api = require("alphavantage")({ key: process.env.API_KEY });
-const dataKindOptions = require("./constants");
+const API_KEY = process.env.API_KEY;
+const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-class stockClient {
-   async getStockData(stockSymbol, dataKind) {
-      try {
-         let stockData;
+const getStockData = async (stockQuery) => {
+   const API_URL = "https://api.tiingo.com/tiingo/daily/";
+   try {
+      const params = new URLSearchParams({
+         startDate: stockQuery.startDate, //YYYY-MM-DD
+         endDate: stockQuery.endDate, //YYYY-MM-DD
+         resampleFreq: stockQuery.resampleFreq, // daily/weekly/monthly
+         token: API_KEY,
+      });
 
-         switch (dataKind) {
-            case dataKindOptions.INTRA_DAY:
-               stockData = await Api.data.intraday(stockSymbol);
-               break;
-            case dataKindOptions.DAILY:
-               stockData = await Api.data.daily(stockSymbol);
-               break;
-            case dataKindOptions.WEEKLY:
-               stockData = await Api.data.weekly(stockSymbol);
-               break;
-            case dataKindOptions.MONTHLY:
-               stockData = await Api.data.monthly(stockSymbol);
-               break;
-            case dataKindOptions.QUOTE:
-               stockData = await Api.data.quote(stockSymbol);
-               break;
+      let keysToDelete = [];
+      params.forEach((value, key) => {
+         if (value == "") {
+            keysToDelete.push(key);
          }
+      });
+      keysToDelete.forEach((key) => {
+         params.delete(key);
+      });
 
-         return stockData;
-      } catch (error) {
-         console.error(error);
-      }
+      const ticker = stockQuery.ticker;
+      const URL = `${API_URL}${ticker}/prices?${params.toString()}`;
+      const stockData = await fetch(URL);
+
+      return await stockData.json();
+   } catch (error) {
+      console.error(error);
    }
+};
 
-   async getStockSymbols(searchTerm) {
-      try {
-         return await Api.data.search(searchTerm);
-      } catch (error) {
-         console.error(error);
-      }
+const getStockMetaData = async (query) => {
+   const API_URL = "https://api.tiingo.com/tiingo/daily/";
+   try {
+      const params = new URLSearchParams({
+         token: API_KEY,
+      });
+
+      const URL = `${API_URL}${query.ticker}?${params.toString()}`;
+      const stockData = await fetch(URL);
+
+      return await stockData.json();
+   } catch (error) {
+      console.error(error);
    }
-}
+};
 
-module.exports = new stockClient();
+const searchStock = async (searchQuery) => {
+   const API_URL = "https://api.tiingo.com/tiingo/utilities/search?";
+   try {
+      const params = new URLSearchParams({
+         query: searchQuery.query,
+         token: API_KEY,
+      });
+
+      const URL = `${API_URL}${params.toString()}`;
+      const searchData = await fetch(URL);
+
+      return await searchData.json();
+   } catch (error) {
+      console.error(error);
+   }
+};
+
+module.exports = {
+   getStockData,
+   getStockMetaData,
+   searchStock,
+};
+
+// const stockQuery = {
+//    startDate: "2022-07-20",
+//    endDate: "",
+//    resampleFreq: "",
+//    ticker: "AMZN",
+// };
