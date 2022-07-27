@@ -1,9 +1,7 @@
 .stocksSystem {
-   height: 100%;
-   width: 42em;
-   position: absolute;
-   left: 15em;
-   top: 0;
+   min-width: 22em;
+   max-width: 45em;
+   flex: 1;
    background-color: rgb(166, 225, 255);
 }
 
@@ -13,4 +11,10 @@
    padding-left: 0;
    list-style: none;
    flex: 0 0 33.333333%;
+}
+
+.stockContainer {
+   display: flex;
+   flex-direction: column;
+   flex: 1;
 }

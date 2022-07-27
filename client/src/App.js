@@ -8,5 +8,4 @@ import UserViewConnector from "./components/user/userView/UserView-connector";
 function App({ userAuth }) {
   return <Fragment>{userAuth ? <UserView /> : <Main />}</Fragment>;
 }
-
 export default App;

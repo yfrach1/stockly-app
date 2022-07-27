@@ -14,7 +14,7 @@ const PortfolioPage = () => {
       { stockShortName: "FB", stockFullName: "Facebook", price: "500" },
    ]);
    return (
-      <div>
+      <>
          <div className={styles.stocksSystem}>
             <SearchBar stocks={stocks} setStocks={setStocks} />
             <div className={styles.grid}>
@@ -27,15 +27,17 @@ const PortfolioPage = () => {
                ))}
             </div>
          </div>
-         <StockDetails
-            details={[
-               { description: "previous Close", value: 4566.48 },
-               { description: "day range", value: "43,423-43,243" },
-               { description: "year range", value: "3,333-3,222" },
-            ]}
-         />
-         <StockGraph />
-      </div>
+         <div className={styles.stockContainer}>
+            <StockGraph />
+            <StockDetails
+               details={[
+                  { description: "previous Close", value: 4566.48 },
+                  { description: "day range", value: "43,423-43,243" },
+                  { description: "year range", value: "3,333-3,222" },
+               ]}
+            />
+         </div>
+      </>
    );
 };
 

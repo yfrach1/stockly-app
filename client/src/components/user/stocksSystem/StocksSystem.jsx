@@ -5,7 +5,7 @@ import styles from "./StocksSystem.module.css";
 
 const StocksSystem = () => {
    return (
-      <div>
+      <div className={styles.sidebarContainer}>
          <Sidebar />
          <Routes />
       </div>
