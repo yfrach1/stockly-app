@@ -25,6 +25,8 @@ class UserManager {
       },
     };
     const accessToken = await this._createAccessToken(dbUserData.user_id);
+    console.log("userData: ", userData);
+    console.log("accessToken: ", accessToken);
     return { accessToken, userData };
   }
 
