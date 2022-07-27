@@ -1,5 +1,7 @@
 import actionsTypes from "./constants";
 import { addNewUser, validateUser, getUserDataOnStart } from "../services/userService";
+import { addStock } from "../services/stockService";
+
 const signUpRequestSuccessed = (userData) => ({
    type: actionsTypes.SIGN_UP_REQUEST_SUCCESSED,
    userData,
@@ -15,6 +17,11 @@ const signInRequestSuccessed = (userData) => ({
 const checkTokenRequestSuccessed = (userData) => ({
    type: actionsTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED,
    userData,
+});
+
+const addStockSuccessed = (stockData) => ({
+   type: actionsTypes.ADD_STOCK_REQUEST_SUCCESSED,
+   stockData,
 });
 
 export const signUpAction = (newUserData) => {
@@ -53,6 +60,16 @@ export const checkUserTokenAction = () => {
       try {
          const res = await getUserDataOnStart();
          dispatch(checkTokenRequestSuccessed(res.data));
+      } catch (error) {}
+   };
+};
+
+export const addStockAction = (stockData) => {
+   return async (dispatch) => {
+      //dispatch loader maybe
+      try {
+         const res = await addStock(stockData);
+         dispatch(addStockSuccessed(res.data));
       } catch (error) {}
    };
 };

@@ -32,7 +32,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       }
       //check if need to stay with 2 same cases
       case actionTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED: {
-         console.log(`here: ${action.userData.lastName}`);
          return {
             ...state,
             userAuth: true,
@@ -40,6 +39,14 @@ const userEntitiesReducer = (state = initialState, action) => {
             firstName: action.userData.firstName,
             portfolio: action.userData.portfolio,
             stocks: action.userData.stocks,
+         };
+      }
+
+      case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
+         return {
+            ...state,
+            userAuth: true,
+            stocks: [...state.stocks, action.stockData],
          };
       }
       default:

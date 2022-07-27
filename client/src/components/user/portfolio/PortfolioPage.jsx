@@ -4,7 +4,7 @@ import StockDetails from "../stocksSystem/stockDetails/StockDetails";
 import StockGraph from "../stocksSystem/stockGraph/StockGraph";
 import styles from "./PortfolioPage.module.css";
 import SearchBarConnector from "../stocksSystem/searchBar/SearchBar-connector";
-const PortfolioPage = ({ stocks }) => {
+const PortfolioPage = ({ stocks, addStockAction }) => {
    return (
       <>
          <div className={styles.stocksSystem}>
@@ -19,6 +19,13 @@ const PortfolioPage = ({ stocks }) => {
                ))}
             </div>
          </div>
+         <button
+            onClick={() => {
+               addStockAction({ name: "Monday", ticker: "MNDY", quantity: 9 });
+            }}
+         >
+            Add stock
+         </button>
          <div className={styles.stockContainer}>
             <StockGraph />
             <StockDetails
