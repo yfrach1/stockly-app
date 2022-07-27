@@ -12,6 +12,7 @@ const mapStateToProps = (state, ownProps) => {
   const firstName = getFirstName(state);
   const lastName = getLastName(state);
   const portfolio = getPortfolio(state);
+
   return { firstName, lastName, portfolio };
 };
 

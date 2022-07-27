@@ -1,5 +1,9 @@
 import actionsTypes from "./constants";
-import { addNewUser, validateUser, getData } from "../services/userService";
+import {
+  addNewUser,
+  validateUser,
+  getUserDataOnStart,
+} from "../services/userService";
 const signUpRequestSuccessed = (userData) => ({
   type: actionsTypes.SIGN_UP_REQUEST_SUCCESSED,
   userData,
@@ -38,7 +42,6 @@ export const signInAction = (loginUserData) => {
     //dispatch loader maybe
     try {
       const res = await validateUser(loginUserData);
-      console.log("res:", res.data);
       dispatch(signInRequestSuccessed(res.data));
     } catch (error) {
       console.log(error);
@@ -49,11 +52,9 @@ export const signInAction = (loginUserData) => {
 
 export const checkUserTokenAction = () => {
   return async (dispatch) => {
-    console.log("in action");
+    //dispatch loader maybe
     try {
-      const res = await getData();
-      // dispatch(checkUserToken());
-      console.log(" res.data:", res.data);
+      const res = await getUserDataOnStart();
       dispatch(checkTokenRequestSuccessed(res.data));
     } catch (error) {}
   };

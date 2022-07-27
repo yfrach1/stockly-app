@@ -25,7 +25,7 @@
   padding: 8px 20px;
   cursor: pointer;
   text-decoration: none !important;
-  font-size: 50px;
+  font-size: 15px;
   /* font-weight: 700; */
   color: black;
 }
@@ -35,8 +35,9 @@
   justify-content: row;
   align-items: center;
   text-align: center;
-  border: 2px solid green;
+  /* border: 2px solid green; */
   margin-left: 8%;
+  margin-bottom: 15px;
   cursor: pointer;
 }
 
@@ -48,4 +49,5 @@
 .categoryText {
   margin-left: 10px;
   margin-right: 100px;
+  font-size: 20px;
 }

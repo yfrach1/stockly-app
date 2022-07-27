@@ -13,7 +13,7 @@ export const validateUser = async (userData) => {
   return response;
 };
 
-export const getData = async () => {
+export const getUserDataOnStart = async () => {
   const response = await axios.get(`${url}`);
   console.log("response : ", response);
   return response;
