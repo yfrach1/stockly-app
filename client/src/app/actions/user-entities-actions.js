@@ -1,22 +1,25 @@
 import actionsTypes from "./constants";
 import { addNewUser, validateUser } from "../services/userService";
-const signUpRequestSuccessed = (data) => ({
+const signUpRequestSuccessed = (userData) => ({
   type: actionsTypes.SIGN_UP_REQUEST_SUCCESSED,
-  data,
+  userData,
 });
-const signUpRequestFailed = (message) => ({
+const signUpRequestFailed = () => ({
   type: actionsTypes.SIGN_UP_REQUEST_FAILED,
-  message,
 });
-export const signUpAction = (userData) => {
+
+const signInRequestSuccessed = (userData) => ({
+  type: actionsTypes.SIGN_IN_REQUEST_SUCCESSED,
+  userData,
+});
+
+export const signUpAction = (newUserData) => {
   return async (dispatch) => {
     //dispatch loader maybe
     try {
-      const res = await addNewUser(userData);
-      console.log("res: ", res.data);
+      const res = await addNewUser(newUserData);
       if (res.data) {
-        const data = res.data;
-        dispatch(signUpRequestSuccessed(data));
+        dispatch(signUpRequestSuccessed(res.data));
       } else {
         dispatch(signUpRequestFailed(res.data.message));
       }
@@ -26,14 +29,13 @@ export const signUpAction = (userData) => {
   };
 };
 
-export const signInAction = (userData) => {
+export const signInAction = (loginUserData) => {
   return async (dispatch) => {
     //dispatch loader maybe
-    console.log("userData: ", userData);
     try {
-      const res = await validateUser(userData);
-      console.log("res:", res);
-      //dispatch(signUpRequestSuccessed());
+      const res = await validateUser(loginUserData);
+      console.log("res:", res.data);
+      dispatch(signInRequestSuccessed(res.data));
     } catch (error) {
       console.log(error);
       //dispatch(signUpRequestFailed());

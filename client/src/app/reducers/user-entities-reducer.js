@@ -2,26 +2,31 @@ import actionTypes from "../actions/constants";
 
 const initialState = {
   userAuth: false,
-  firstName: "Harel",
+  firstName: "",
   lastName: "",
-  portfolio: null,
+  portfolio: {}, //will change to [] later when we will have more then one
+  stocks: [],
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SIGN_UP_REQUEST_SUCCESSED: {
-      console.log("action.data :", action.data);
-      console.log("lastName :", action.data.lastName);
-      console.log("firstName :", action.data.firstName);
-
-      console.log("portfolio :", action.data.portfolio);
-
       return {
         ...state,
         userAuth: true,
-        lastName: action.data.lastName,
-        firstName: action.data.firstName,
-        portfolio: action.data.portfolio,
+        lastName: action.userData.lastName,
+        firstName: action.userData.firstName,
+        portfolio: action.userData.portfolio,
+      };
+    }
+    case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        userAuth: true,
+        lastName: action.userData.lastName,
+        firstName: action.userData.firstName,
+        portfolio: action.userData.portfolio,
+        stocks: action.userData.stocks,
       };
     }
 

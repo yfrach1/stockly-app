@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "plotly.js": "^2.13.3",
+    "react-plotly.js": "^2.5.1",
     "@chakra-ui/react": "^2.2.4",
     "@progress/kendo-react-dropdowns": "^5.5.0",
     "@reduxjs/toolkit": "^1.8.3",

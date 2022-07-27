@@ -12,16 +12,17 @@ async function createUser(req, res) {
 }
 
 async function loginUser(req, res) {
-  const { accessToken, allUserData } = await userService.loginUser(req.body);
+  const { accessToken, userData } = await userService.loginUser(req.body);
 
   accessToken
     ? res
         .status(200)
         .cookie("token", accessToken, { httpOnly: true })
-        .json(allUserData)
-    : res.status(200).json({ error: "Username or password is wrong" });
+        .json(userData)
+    : res.status(201).json({ error: "Username or password is wrong" });
 }
 
+//check for what this function
 async function getUserData(req, res) {
   const userData = await userService.getUserData(req.user.id);
   userData

@@ -1,10 +1,10 @@
 export const ClientRoute = {
   Guest: {
     home: "/home",
-    aboutUs: "/aboutUs",
-    contactUs: "/contactUs",
-    signIn: "/signIn",
-    signUp: "/signUp",
+    aboutUs: "/about-us",
+    contactUs: "/contact-us",
+    signIn: "/sign-in",
+    signUp: "/sign-up",
   },
 };
 

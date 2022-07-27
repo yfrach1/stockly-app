@@ -3,19 +3,20 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 class UserManager {
-  async createUser(userData) {
-    if (await this._getUser(userData.email)) {
+  async createUser(newUserData) {
+    if (await this._getUser(newUserData.email)) {
       return null;
     }
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
-    userData.password = hashedPassword;
-    const dbUserData = await User.create(userData);
+    const hashedPassword = await bcrypt.hash(newUserData.password, 10);
+    newUserData.password = hashedPassword;
+    const dbUserData = await User.create(newUserData);
     const portfolio = await Portfolio.create({
       user_id: dbUserData.user_id,
       name: "My portfolio",
     });
 
-    const data = {
+    const userData = {
+      userId: dbUserData.user_id,
       firstName: dbUserData.first_name,
       lastName: dbUserData.last_name,
       portfolio: {
@@ -24,9 +25,7 @@ class UserManager {
       },
     };
     const accessToken = await this._createAccessToken(dbUserData.user_id);
-    //  console.log("data: ", data);
-    //  console.log("accessToken: ", accessToken);
-    return { accessToken, data };
+    return { accessToken, userData };
   }
 
   async loginUser(loginUserData) {
@@ -37,21 +36,36 @@ class UserManager {
       dbUserData &&
       (await bcrypt.compare(loginUserData.password, dbUserData.password))
     ) {
-      accessToken = _createAccessToken(dbUserData);
+      accessToken = this._createAccessToken(dbUserData);
     }
-    const allUserData = getUserData(dbUserData.user_id);
-
-    return { accessToken, allUserData };
+    const userData = await this.getUserData(dbUserData.user_id);
+    return { accessToken, userData };
   }
 
   async getUserData(userId) {
-    const response = await User.findByPk(userId, {
+    const user = await User.findByPk(userId, {
       include: { model: Portfolio, include: Stock },
     });
-    // console.log(response.dataValues.Portfolio.Stocks);
-    return response;
+    const { portfolio, stocks } = this._getPortfolioData(user.Portfolio);
+    const userData = {
+      userId: user.user_id,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      portfolio,
+      stocks,
+    };
+    return userData;
   }
 
+  _getPortfolioData(userPortfolio) {
+    const portfolio = {
+      name: userPortfolio.name,
+      id: userPortfolio.portfolio_id,
+    };
+    const stocks = userPortfolio.Stocks;
+
+    return { portfolio, stocks };
+  }
   async _createAccessToken(id) {
     const userId = {
       id,

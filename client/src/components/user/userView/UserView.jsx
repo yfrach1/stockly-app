@@ -1,10 +1,12 @@
 import { Fragment } from "react";
+import Routes from "../../../navigation/userRoutes";
+import Sidebar from "../sideBar/Sidebar";
 
 const UserView = ({ firstName, lastName, portfolio }) => {
   return (
     <Fragment>
-      <div style={{ fontSize: "100" }}>first : {firstName}</div>
-      {/* <div style={{ fontSize: "100" }}>my portfolio: {portfolio}</div> */}
+      <Sidebar />
+      <Routes />
     </Fragment>
   );
 };
