@@ -31,14 +31,14 @@ const getStockData = async (stockQuery) => {
    }
 };
 
-const getStockMetaData = async (ticker) => {
+const getStockMetaData = async (query) => {
    const API_URL = "https://api.tiingo.com/tiingo/daily/";
    try {
       const params = new URLSearchParams({
          token: API_KEY,
       });
 
-      const URL = `${API_URL}${ticker}?${params.toString()}`;
+      const URL = `${API_URL}${query.ticker}?${params.toString()}`;
       const stockData = await fetch(URL);
 
       return await stockData.json();
@@ -51,7 +51,7 @@ const searchStock = async (searchQuery) => {
    const API_URL = "https://api.tiingo.com/tiingo/utilities/search?";
    try {
       const params = new URLSearchParams({
-         query: searchQuery,
+         query: searchQuery.query,
          token: API_KEY,
       });
 
