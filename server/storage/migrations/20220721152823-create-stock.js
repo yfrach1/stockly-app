@@ -12,17 +12,17 @@ module.exports = {
             type: Sequelize.INTEGER,
             allowNull: false,
          },
-         name: {
-            type: Sequelize.STRING,
-            allowNull: false,
-         },
          ticker: {
             type: Sequelize.STRING,
             allowNull: false,
          },
+         name: {
+            type: Sequelize.STRING,
+         },
+         price: { type: Sequelize.FLOAT },
+         change_percent: { type: Sequelize.FLOAT },
          quantity: {
             type: Sequelize.FLOAT,
-            allowNull: false,
          },
          createdAt: {
             allowNull: false,
