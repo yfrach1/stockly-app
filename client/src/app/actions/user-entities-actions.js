@@ -69,13 +69,13 @@ export const checkUserTokenAction = () => {
    };
 };
 
-export const addStockAction = (stockSearchKey) => {
+export const addStockAction = (stock) => {
    return async (dispatch) => {
       //dispatch loader maybe
       try {
-         const res = await addStock(stockSearchKey);
+         const res = await addStock(stock);
          console.log("res: ", res);
-         dispatch(addStockSuccessed(res.data));
+         if (res) dispatch(addStockSuccessed(res.data));
       } catch (error) {}
    };
 };

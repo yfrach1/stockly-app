@@ -2,11 +2,11 @@ const stockService = require("../services/stockService");
 const { getStockData, getStockMetaData } = require("../clients/stockClient");
 
 async function addStock(req, res) {
-   const stockSearchKey = req.body.stockSearchKey;
-   const stockData = await stockService.addStock(stockSearchKey, req.user);
+   const stock = req.body.stock;
+   const stockData = await stockService.addStock(stock, req.user);
    stockData
       ? res.status(200).json(stockData)
-      : res.status(200).json({ error: "Could not create stock" });
+      : res.status(200).json({ error: "Could not add stock" });
 }
 
 async function searchStock(req, res) {

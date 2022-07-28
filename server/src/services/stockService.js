@@ -13,23 +13,22 @@ class StockManager {
 
       return stocks;
    }
-   async addStock(stockSearchKey, user) {
+   async addStock(stock, user) {
       //  console.log("stockSearchKeyddd: ", stockSearchKey);
-      stockClient.searchStock(stockSearchKey);
+      // stockClient.searchStock(stockSearchKey);
 
-      //  const UserPortfolio = await Portfolio.findOne({
-      //    where: { user_id: user.id },
-      //  });
-      //  console.log(UserPortfolio);
-      //  const response = await Stock.create({
-      //    portfolio_id: UserPortfolio.portfolio_id,
-      //    name: stockData.name,
-      //    ticker: stockData.ticker,
-      //    quantity: stockData.quantity,
-      //  });
+      const UserPortfolio = await Portfolio.findOne({
+         where: { user_id: user.id },
+      });
+      const response = await Stock.create({
+         portfolio_id: UserPortfolio.portfolio_id,
+         name: stock.name,
+         ticker: stock.ticker,
+         price: stock.price,
+         change_percent: stock.change_percent,
+      });
 
-      //  return response;
-      return null;
+      return response;
    }
 
    doesTickerExistInDb(ticker, stocksDetailsFromDB) {

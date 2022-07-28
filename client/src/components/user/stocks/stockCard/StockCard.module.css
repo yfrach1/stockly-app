@@ -35,6 +35,25 @@
    font-weight: 500;
 }
 
+.addButton {
+   border: 0;
+   padding: 0;
+   background-color: rgb(113, 255, 85);
+   width: 1.2em;
+   height: auto;
+   border-radius: 100%;
+   position: relative;
+   left: 6em;
+   margin-top: -3.1em;
+   transition: all 0.2s ease-in-out;
+}
+
+.addButton:hover {
+   transform: scale(1.3);
+   background-color: rgb(67, 255, 29);
+   cursor: pointer;
+}
+
 .percentGreen,
 .percentRed {
    font-size: 1.2rem;

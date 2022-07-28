@@ -48,6 +48,9 @@ const userEntitiesReducer = (state = initialState, action) => {
             ...state,
             userAuth: true,
             stocks: [...state.stocks, action.stockData],
+            searchStocks: [
+               ...state.searchStocks.filter((stock) => stock.ticker !== action.stockData.ticker),
+            ],
          };
       }
       case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
