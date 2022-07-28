@@ -4,10 +4,12 @@ import styles from "./StockCard.module.css";
 const StockCard = ({ stock }) => {
    return (
       <div className={styles.stockCard}>
-         <h2>{stock.ticker}</h2>
-         <p>{stock.name}</p>
-         <p>{stock.price}</p>
-         <p>{stock.change_percent}%</p>
+         <h2 className={styles.ticker}>{stock.ticker}</h2>
+         <span className={styles.name}>{stock.name}</span>
+         <div className={styles.numbersContainer}>
+            <span className={styles.price}>{stock.price}</span>
+            <span className={styles.percent}>{stock.change_percent}%</span>
+         </div>
       </div>
    );
 };
