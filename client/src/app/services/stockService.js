@@ -7,3 +7,9 @@ export const addStock = async (stockData) => {
 
    return response;
 };
+
+export const deleteStock = async (stockId) => {
+   const response = await axios.delete(`${url}`, stockId);
+
+   return response;
+};
