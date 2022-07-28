@@ -22,9 +22,7 @@ async function loginUser(req, res) {
     : res.status(201).json({ error: "Username or password is wrong" });
 }
 
-//check for what this function
 async function getUserData(req, res) {
-  console.log("in get controller");
   const userData = await userService.getUserData(req.user.id);
   userData
     ? res.status(200).json(userData)

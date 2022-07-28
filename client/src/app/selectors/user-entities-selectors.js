@@ -4,4 +4,4 @@ export const getUserAuth = (state) => getUserEntities(state).userAuth;
 export const getFirstName = (state) => getUserEntities(state).firstName;
 export const getLastName = (state) => getUserEntities(state).lastName;
 export const getPortfolio = (state) => getUserEntities(state).portfolio;
-export const getUserStocks = (state) => getUserEntities(state).stocks;
+export const getStocks = (state) => getUserEntities(state).stocks;

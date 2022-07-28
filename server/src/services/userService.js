@@ -53,6 +53,7 @@ class UserManager {
       portfolio,
       stocks,
     };
+    console.log("userData: ", userData);
     return userData;
   }
 

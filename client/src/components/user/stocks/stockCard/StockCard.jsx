@@ -1,15 +1,16 @@
 import React from "react";
 import styles from "./StockCard.module.css";
 
+const StockCard = ({ stock }) => {
+  const { name, ticker } = stock;
 
-const StockCard = ({ stockFullName, stockShortName, price }) => {
   return (
     <div className={styles.stockCard}>
-      <h2>{stockFullName}</h2>
-      <p>{stockShortName}</p>
-      <p>{price}</p>
+      <h2>{name}</h2>
+      <p>{ticker}</p>
+      <p>{"100$"}</p>
     </div>
-  )
+  );
 };
 
 export default StockCard;
