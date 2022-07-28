@@ -20,8 +20,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
          },
          portfolio_Id: DataTypes.INTEGER,
-         name: DataTypes.STRING,
          ticker: DataTypes.STRING,
+         name: DataTypes.STRING,
+         price: DataTypes.FLOAT,
+         change_percent: DataTypes.FLOAT,
          quantity: DataTypes.FLOAT,
          createdAt: {
             allowNull: false,
