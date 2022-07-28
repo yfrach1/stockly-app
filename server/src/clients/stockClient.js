@@ -49,17 +49,38 @@ const getStockMetaData = async (query) => {
 };
 
 const searchStock = async (searchQuery) => {
+  let stockQuery = {
+    ticker: "",
+    startDate: "",
+    endDate: "",
+    resampleFreq: "",
+  };
+
+  const stockSearchKey = searchQuery;
   const API_URL = "https://api.tiingo.com/tiingo/utilities/search?";
   try {
     const params = new URLSearchParams({
-      query: searchQuery.query,
+      query: stockSearchKey,
       token: API_KEY,
     });
 
     const URL = `${API_URL}${params.toString()}`;
     const searchData = await fetch(URL);
+    searchResults = await searchData.json();
 
-    return await searchData.json();
+    let stocksDetailsToDB = searchResults.map((result) => {
+      return { ticker: result.ticker, name: result.name };
+    });
+    for (let i = 0; i < stocksDetailsToDB.length; i++) {
+      stockQuery.ticker = stocksDetailsToDB[i].ticker;
+      const fullStockDetails = await getStockData(stockQuery);
+
+      stocksDetailsToDB[i].price = fullStockDetails[0].adjClose;
+      stocksDetailsToDB[i].change_percent =
+        fullStockDetails[0].adjClose / fullStockDetails[0].adjOpen;
+    }
+    //  console.log(stocksDetailsToDB);
+    return stocksDetailsToDB;
   } catch (error) {
     console.error(error);
   }

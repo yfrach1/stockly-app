@@ -4,7 +4,7 @@ import {
   validateUser,
   getUserDataOnStart,
 } from "../services/userService";
-import { addStock } from "../services/stockService";
+import { addStock, searchStock } from "../services/stockService";
 
 const signUpRequestSuccessed = (userData) => ({
   type: actionsTypes.SIGN_UP_REQUEST_SUCCESSED,
@@ -68,11 +68,22 @@ export const checkUserTokenAction = () => {
   };
 };
 
-export const addStockAction = (stockData) => {
+export const addStockAction = (stockSearchKey) => {
   return async (dispatch) => {
     //dispatch loader maybe
     try {
-      const res = await addStock(stockData);
+      const res = await addStock(stockSearchKey);
+      console.log("res: ", res);
+      dispatch(addStockSuccessed(res.data));
+    } catch (error) {}
+  };
+};
+
+export const searchStockAction = (stockSearchKey, portfolioId) => {
+  return async (dispatch) => {
+    //dispatch loader maybe
+    try {
+      const res = await searchStock(stockSearchKey, portfolioId);
       console.log("res: ", res);
       dispatch(addStockSuccessed(res.data));
     } catch (error) {}

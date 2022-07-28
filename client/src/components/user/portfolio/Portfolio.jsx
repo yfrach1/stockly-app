@@ -5,19 +5,11 @@ import styles from "./Portfolio.module.css";
 import SearchBarConnector from "../stocksSystem/searchBar/SearchBar-connector";
 import ListStocks from "../stocks/ListStocks";
 import ListStocksConnector from "../stocks/ListStocksConnector";
-const Portfolio = ({ addStockAction }) => {
+const Portfolio = ({ addStockAction, portfolioId }) => {
   return (
     <div className={styles.portfolioGrid}>
       <div className={styles.portfolioPreview}>
-        <SearchBarConnector />
-        {/* <button
-          onClick={() => {
-            // addStockAction({ name: "Monday", ticker: "MNDY", quantity: 9 });
-            addStockAction({ name: "Monday", ticker: "MNDY", quantity: 9 });
-          }}
-        >
-          Add stock
-        </button> */}
+        <SearchBarConnector portfolioId={portfolioId} />
         <ListStocksConnector />
       </div>
       <div className={styles.stockPreview}>stock details view</div>
