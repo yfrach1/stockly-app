@@ -40,6 +40,7 @@ const userEntitiesReducer = (state = initialState, action) => {
             firstName: action.userData.firstName,
             portfolio: action.userData.portfolio,
             stocks: action.userData.stocks,
+            searchStocks: [],
          };
       }
 
