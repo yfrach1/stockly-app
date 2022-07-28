@@ -1,6 +1,6 @@
 const { Stock, Portfolio } = require("../../storage/models");
 const stockClient = require("../clients/stockClient");
-const { Op } = require("sequelize");
+const { Op, InstanceError } = require("sequelize");
 
 class StockManager {
   async _searchStockInDB(portfolioId, searchKey) {
@@ -32,17 +32,29 @@ class StockManager {
     return null;
   }
 
+  isTickerExistInDb(ticker, stocksDetailsFromDB) {
+    return stocksDetailsFromDB.every((stock) => stock.ticker !== ticker);
+  }
+
   async searchStock(stockSearchKey, portfolioId) {
     const stocksDetailsFromDB = await this._searchStockInDB(
       stockSearchKey,
       portfolioId
     );
     console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
-    const searchResult = await stockClient.searchStock(
+    const stocksDetailsFromApi = await stockClient.searchStock(
       stockSearchKey,
       portfolioId
     );
-    console.log("search result: ", searchResult);
+
+    console.log("search result: ", stocksDetailsFromApi);
+
+    const searchResult = stocksDetailsFromApi.map((result) => {
+      result.isMine = isTickerExistInDb(result.tricker, stocksDetailsFromDB)
+        ? true
+        : false;
+    });
+    console.log("searchResult: ", searchResult);
 
     return null;
   }
