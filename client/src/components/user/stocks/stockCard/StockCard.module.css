@@ -1,18 +1,50 @@
-.stockCard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(44, 150, 243);
-    border-radius: 10px;
-    box-shadow: rgba(0,0,0,0.2);
-    padding: 10px;
-    margin: 10px;
-    height: 8em;
-    width: 8em;
+.stockCard {
+   display: flex;
+   flex-direction: column;
+   background-color: rgb(44, 150, 243);
+   border-radius: 10px;
+   box-shadow: rgba(0, 0, 0, 0.2);
+   padding: 10px;
+   margin: 10px;
+   height: 7em;
+   width: 12em;
+   align-items: center;
+   gap: 1.2rem;
 }
-.h2{
-    font-size: 20px;
-    font-weight: 700;
-    color: #000;
+.ticker {
+   font-size: 1.7rem;
+   font-weight: 700;
+   color: #000;
+   margin: 0;
+   padding: 0;
+}
+
+.name {
+   font-size: 0.8rem;
+   font-weight: 500;
+   max-height: 1.2rem;
+}
+
+.numbersContainer {
+   display: flex;
+   gap: 2rem;
+}
+
+.price {
+   font-size: 1.2rem;
+   font-weight: 500;
+}
+
+.percentGreen,
+.percentRed {
+   font-size: 1.2rem;
+   font-weight: 500;
+}
+
+.percentGreen {
+   color: rgb(9, 255, 9);
+}
+
+.percentRed {
+   color: rgb(167, 33, 33);
 }

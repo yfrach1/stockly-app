@@ -6,6 +6,7 @@ const initialState = {
    lastName: "",
    portfolio: {}, //will change to [] later when we will have more then one
    stocks: [],
+   searchStocks: [],
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
@@ -47,6 +48,13 @@ const userEntitiesReducer = (state = initialState, action) => {
             ...state,
             userAuth: true,
             stocks: [...state.stocks, action.stockData],
+         };
+      }
+      case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
+         return {
+            ...state,
+            stocks: action.stockSearchData.myStocks,
+            searchStocks: action.stockSearchData.searchStocks,
          };
       }
       default:

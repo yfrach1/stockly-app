@@ -5,4 +5,5 @@ export const getFirstName = (state) => getUserEntities(state).firstName;
 export const getLastName = (state) => getUserEntities(state).lastName;
 export const getPortfolio = (state) => getUserEntities(state).portfolio;
 export const getPortfolioId = (state) => getUserEntities(state).portfolio.id;
-export const getStocks = (state) => getUserEntities(state).stocks;
+export const getMyStocks = (state) => getUserEntities(state).stocks;
+export const getSearchStocks = (state) => getUserEntities(state).searchStocks;
