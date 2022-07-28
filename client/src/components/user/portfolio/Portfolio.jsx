@@ -10,13 +10,14 @@ const Portfolio = ({ addStockAction }) => {
     <div className={styles.portfolioGrid}>
       <div className={styles.portfolioPreview}>
         <SearchBarConnector />
-        <button
+        {/* <button
           onClick={() => {
+            // addStockAction({ name: "Monday", ticker: "MNDY", quantity: 9 });
             addStockAction({ name: "Monday", ticker: "MNDY", quantity: 9 });
           }}
         >
           Add stock
-        </button>
+        </button> */}
         <ListStocksConnector />
       </div>
       <div className={styles.stockPreview}>stock details view</div>
