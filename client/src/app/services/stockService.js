@@ -2,9 +2,9 @@ const axios = require("axios");
 const url = "http://localhost:8080/stock";
 axios.defaults.withCredentials = true;
 
-export const addStock = async (stockSearchKey) => {
+export const addStock = async (stock) => {
    const body = {
-      stockSearchKey,
+      stock,
    };
    const response = await axios.post(`${url}`, body);
 

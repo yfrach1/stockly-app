@@ -73,14 +73,14 @@ const searchStock = async (searchQuery) => {
       for (let i = 0; i < stocksDetailsToDB.length; i++) {
          stockQuery.ticker = stocksDetailsToDB[i].ticker;
          const fullStockDetails = await getStockData(stockQuery);
-
-         stocksDetailsToDB[i].price = fullStockDetails[0].adjClose;
-         stocksDetailsToDB[i].change_percent = (
-            (fullStockDetails[0].adjClose / fullStockDetails[0].adjOpen) * 100 -
-            100
-         ).toFixed(2);
+         if (fullStockDetails[0]) {
+            stocksDetailsToDB[i].price = fullStockDetails[0].close;
+            stocksDetailsToDB[i].change_percent = (
+               (fullStockDetails[0].close / fullStockDetails[0].open) * 100 -
+               100
+            ).toFixed(2);
+         }
       }
-      //  console.log(stocksDetailsToDB);
       return stocksDetailsToDB;
    } catch (error) {
       console.error(error);

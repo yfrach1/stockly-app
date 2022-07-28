@@ -1,24 +1,24 @@
 .mainPage {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  margin-left: auth;
-  /* border: 2px solid red; */
-  background-color: rgb(235, 235, 235);
+   height: 100vh;
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   align-items: flex-start;
+   justify-content: flex-start;
+   margin-left: auth;
+   /* border: 2px solid red; */
+   background-color: rgb(237, 237, 237);
 }
 
 .userPreview {
-  width: 85%;
-  height: 100%;
-  /* border: 2px solid red; */
+   width: 85%;
+   height: 100%;
+   /* border: 2px solid red; */
 }
 
 .user-greeting {
-  font-family: helvetica, Arial;
-  color: rgb(49, 49, 49);
-  font-size: 1em;
-  margin: -1.5em 0 3em 1.3em;
+   font-family: helvetica, Arial;
+   color: rgb(49, 49, 49);
+   font-size: 1em;
+   margin: -1.5em 0 3em 1.3em;
 }

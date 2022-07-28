@@ -1,50 +1,37 @@
-import React from "react";
+import React, { useCallback, useMemo, useEffect } from "react";
 import { FaSearchPlus } from "react-icons/fa";
 import styles from "./SearchBar.module.css";
+import debounce from "lodash.debounce";
 
 // https://api.tiingo.com/tiingo/utilities/search/apple?token=af9c3096bb6a8de48a5fafb2b36d4be5acdcec39
-const SearchBar = ({
-  searchKey,
-  setSearchKeyAction,
-  searchStockAction,
-  portfolioId,
-}) => {
-  // const [searchValue, setSearchValue] = useState("");
-  // const searchStock = async () => {
-  //   if (searchValue === "") {
-  //     alert("Please Enter");
-  //   } else {
-  //   }
-  // };
+const SearchBar = ({ checkUserTokenAction, searchStockAction, portfolioId }) => {
+   const handleChange = useCallback(
+      (e) => {
+         if (e.target.value === "") {
+            checkUserTokenAction();
+         } else {
+            searchStockAction(e.target.value, portfolioId);
+         }
+      },
+      [searchStockAction]
+   );
 
-  // const handleStockSearchChange = (event) => {
-  //   setSearchValue(event.target.value);
-  //   setStocks(
-  //     stocks.filter((stock) =>
-  //       stock.stockFullName.toLowerCase().includes(searchValue.toLowerCase())
-  //     )
-  //   );
-  //   console.log(stocks);
-  // };
-  return (
-    <div className={styles.searchBar}>
-      <FaSearchPlus />
-      <input
-        type="text"
-        value={searchKey}
-        placeholder="Search.."
-        onChange={(e) => setSearchKeyAction(e.target.value)}
-      ></input>
+   const debouncedResults = useMemo(() => {
+      return debounce(handleChange, 500);
+   }, [handleChange]);
 
-      <button
-        onClick={() => {
-          searchStockAction(searchKey, portfolioId);
-        }}
-      >
-        Add stock search
-      </button>
-    </div>
-  );
+   useEffect(() => {
+      return () => {
+         debouncedResults.cancel();
+      };
+   });
+
+   return (
+      <div className={styles.searchBar}>
+         <FaSearchPlus />
+         <input type="text" placeholder="Search.." onChange={debouncedResults}></input>
+      </div>
+   );
 };
 
 export default SearchBar;

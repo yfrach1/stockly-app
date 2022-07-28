@@ -13,41 +13,39 @@ class StockManager {
 
       return stocks;
    }
-   async addStock(stockSearchKey, user) {
-      //  console.log("stockSearchKeyddd: ", stockSearchKey);
-      stockClient.searchStock(stockSearchKey);
+   async addStock(stock, user) {
+      const UserPortfolio = await Portfolio.findOne({
+         where: { user_id: user.id },
+      });
+      const response = await Stock.create({
+         portfolio_id: UserPortfolio.portfolio_id,
+         name: stock.name,
+         ticker: stock.ticker,
+         price: stock.price,
+         change_percent: stock.change_percent,
+      });
 
-      //  const UserPortfolio = await Portfolio.findOne({
-      //    where: { user_id: user.id },
-      //  });
-      //  console.log(UserPortfolio);
-      //  const response = await Stock.create({
-      //    portfolio_id: UserPortfolio.portfolio_id,
-      //    name: stockData.name,
-      //    ticker: stockData.ticker,
-      //    quantity: stockData.quantity,
-      //  });
-
-      //  return response;
-      return null;
+      return response;
    }
 
    doesTickerExistInDb(ticker, stocksDetailsFromDB) {
-      return stocksDetailsFromDB.every((stock) => stock.ticker !== ticker);
+      return stocksDetailsFromDB.some((stock) => {
+         return stock.ticker == ticker;
+      });
    }
 
    async searchStock(stockSearchKey, portfolioId) {
-      const stocksDetailsFromDB = await this._searchStockInDB(stockSearchKey, portfolioId);
-      console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
+      const stocksDetailsFromDB = await this._searchStockInDB(portfolioId, stockSearchKey);
+      // console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
       const stocksDetailsFromApi = await stockClient.searchStock(stockSearchKey, portfolioId);
 
-      console.log("search result: ", stocksDetailsFromApi);
+      // console.log("search result: ", stocksDetailsFromApi);
 
       const searchResult = stocksDetailsFromApi.map((result) => {
-         result.isMine = !this.doesTickerExistInDb(result.ticker, stocksDetailsFromDB);
+         result.isMine = this.doesTickerExistInDb(result.ticker, stocksDetailsFromDB);
          return result;
       });
-      console.log("searchResult: ", searchResult);
+      // console.log("searchResult: ", searchResult);
 
       return searchResult;
    }

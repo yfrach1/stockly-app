@@ -1,18 +1,21 @@
-input[type=text]{
-    padding-left: 15px;
-    width: 78%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    border: none;
-    background: #f1f1f1;
+input[type="text"] {
+   padding-left: 15px;
+   width: 78%;
+   padding: 15px;
+   margin: 5px 0 22px 0;
+   border: none;
+   background: #ffffff;
+   outline: none;
+
+   border-radius: 2px;
 }
-  
-input[type=text]:focus{
-    background-color: #ddd;
-    outline: none;
+
+input[type="text"]:focus {
+   background-color: rgb(255, 255, 255);
+   outline: 2px ridge rgb(255, 255, 255);
 }
 .button {
-    color: #f2f2f2;
-    font-size: 16px;
-    background-color: rgb(3, 15, 126);
-  }
+   color: #f2f2f2;
+   font-size: 16px;
+   background-color: rgb(3, 15, 126);
+}
