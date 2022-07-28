@@ -12,8 +12,11 @@ async function createUser(req, res) {
 }
 
 async function loginUser(req, res) {
-  const { accessToken, userData } = await userService.loginUser(req.body);
+  console.log("req.body: ", req.body);
 
+  const { accessToken, userData } = await userService.loginUser(req.body);
+  console.log("accessToken: ", accessToken);
+  console.log("userData: ", userData);
   accessToken
     ? res
         .status(200)

@@ -35,6 +35,7 @@ class UserManager {
     let userData = null;
 
     const userId = await this._isUserValid(loginUserData);
+    console.log("userId: ", userId);
     if (userId) {
       accessToken = await this._createAccessToken(userId);
       userData = await this.getUserData(userId);
@@ -83,6 +84,7 @@ class UserManager {
 
   async _isUserValid({ email, password }) {
     const user = await this._getUser(email);
+    console.log();
     if (!user) return false;
     if (!(await bcrypt.compare(password, user.password))) return false;
     return user.user_id;

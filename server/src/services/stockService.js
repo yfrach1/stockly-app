@@ -32,28 +32,29 @@ class StockManager {
     return null;
   }
 
-  isTickerExistInDb(ticker, stocksDetailsFromDB) {
-    return stocksDetailsFromDB.every((stock) => stock.ticker !== ticker);
-  }
-
   async searchStock(stockSearchKey, portfolioId) {
     const stocksDetailsFromDB = await this._searchStockInDB(
       stockSearchKey,
       portfolioId
     );
-    console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
+    const myTickers = stocksDetailsFromDB.map((stock) => stock.ticker);
+
+    //  console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
     const stocksDetailsFromApi = await stockClient.searchStock(
       stockSearchKey,
       portfolioId
     );
+    //  console.log("search result: ", stocksDetailsFromApi);
 
-    console.log("search result: ", stocksDetailsFromApi);
-
-    const searchResult = stocksDetailsFromApi.map((result) => {
-      result.isMine = isTickerExistInDb(result.tricker, stocksDetailsFromDB)
+    let searchResult = [...stocksDetailsFromApi];
+    for (let i = 0; i < stocksDetailsFromApi.length; i++) {
+      searchResult[i].isMine = myTickers.includes(
+        stocksDetailsFromApi[i].ticker
+      )
         ? true
         : false;
-    });
+    }
+
     console.log("searchResult: ", searchResult);
 
     return null;
