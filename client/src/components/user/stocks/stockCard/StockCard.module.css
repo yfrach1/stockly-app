@@ -20,8 +20,9 @@
 }
 
 .name {
-   font-size: 0.9rem;
+   font-size: 0.8rem;
    font-weight: 500;
+   max-height: 1.2rem;
 }
 
 .numbersContainer {
@@ -34,7 +35,16 @@
    font-weight: 500;
 }
 
-.percent {
+.percentGreen,
+.percentRed {
    font-size: 1.2rem;
    font-weight: 500;
+}
+
+.percentGreen {
+   color: rgb(9, 255, 9);
+}
+
+.percentRed {
+   color: rgb(167, 33, 33);
 }

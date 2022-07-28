@@ -8,7 +8,9 @@ const StockCard = ({ stock }) => {
          <span className={styles.name}>{stock.name}</span>
          <div className={styles.numbersContainer}>
             <span className={styles.price}>{stock.price}</span>
-            <span className={styles.percent}>{stock.change_percent}%</span>
+            <span className={stock.change_percent > 0 ? styles.percentGreen : styles.percentRed}>
+               {stock.change_percent}%
+            </span>
          </div>
       </div>
    );
