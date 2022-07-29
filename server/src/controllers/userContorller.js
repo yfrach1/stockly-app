@@ -22,7 +22,7 @@ async function loginUser(req, res) {
         .status(200)
         .cookie("token", accessToken, { httpOnly: true })
         .json(userData)
-    : res.status(201).json({ error: "Username or password is wrong" });
+    : res.status(409).json({ error: "Username or password is wrong" });
 }
 
 async function getUserData(req, res) {

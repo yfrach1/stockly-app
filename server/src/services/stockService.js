@@ -4,16 +4,26 @@ const { Op, InstanceError } = require("sequelize");
 
 class StockManager {
   _formatStocks(stock) {
+    //  const stockData = {
+    //    stock_id: stock.dataValues.stock_id,
+    //    data: {
+    //      stock_id: stock.dataValues.stock_id,
+    //      portfolio_id: stock.dataValues.portfolio_id,
+    //      ticker: stock.dataValues.ticker,
+    //      name: stock.dataValues.name,
+    //      price: stock.dataValues.price,
+    //      change_percent: stock.dataValues.change_percent,
+    //      quantity: stock.dataValues.quantity,
+    //    },
+    //  };
     const stockData = {
       stock_id: stock.dataValues.stock_id,
-      data: {
-        portfolio_id: stock.dataValues.portfolio_id,
-        ticker: stock.dataValues.ticker,
-        name: stock.dataValues.name,
-        price: stock.dataValues.price,
-        change_percent: stock.dataValues.change_percent,
-        quantity: stock.dataValues.quantity,
-      },
+      portfolio_id: stock.dataValues.portfolio_id,
+      ticker: stock.dataValues.ticker,
+      name: stock.dataValues.name,
+      price: stock.dataValues.price,
+      change_percent: stock.dataValues.change_percent,
+      quantity: stock.dataValues.quantity,
     };
 
     return stockData;
@@ -85,8 +95,9 @@ class StockManager {
 
     //check if the data is updated
     //check
+    console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
     const stocksDetailsFromApi = await stockClient.searchStock(stockSearchKey);
-    //  console.log("stocksDetailsFromApi: ", stocksDetailsFromApi);
+    console.log("stocksDetailsFromApi: ", stocksDetailsFromApi);
     const searchResult = stocksDetailsFromApi.map((result) => {
       result.isMine = this.doesTickerExistInDb(
         result.ticker,
