@@ -8,16 +8,11 @@ const StockGraph = ({ stockInfo }) => {
    const [yValues, setYValues] = useState([]);
 
    useEffect(() => {
-      console.log("in graph use effect, stockInfo:", stockInfo);
-      if (stockInfo) {
+      if (stockInfo.data) {
          let stockChartxValues = [];
          let stockChartyValues = [];
-         console.log(stockInfo);
-         stockInfo.forEach((point) => {
-            console.log("point date:", point.date);
+         stockInfo.data.forEach((point) => {
             stockChartxValues.push(point.date);
-            // stockChartyValues.push(stockData.intraday["Time Series (1min)"][key]["1. open"]);
-            console.log("point close:", point.close);
             stockChartyValues.push(point.close);
          });
 

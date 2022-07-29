@@ -5,7 +5,7 @@ const StockCard = ({ stock, addButton, addStockAction, getStockDetailsAction }) 
    return (
       <button
          onClick={() => {
-            getStockDetailsAction(stock.ticker); //add here show info on the left action
+            getStockDetailsAction(stock);
          }}
          className={styles.stockCard}
       >

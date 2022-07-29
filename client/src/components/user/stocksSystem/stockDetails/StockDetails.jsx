@@ -3,22 +3,21 @@ import { useEffect } from "react";
 import StockGraph from "../stockGraph/StockGraph";
 import styles from "./StockDetails.module.css";
 
-const StockDetails = ({ stockInfo }) => {
-   useEffect(() => console.log("inside details:", stockInfo), [stockInfo]);
+const StockDetails = ({ stock, stockInfo }) => {
+   useEffect(() => console.log("in stock details use effect:", stockInfo));
    return (
       <>
-         <StockGraph stockInfo={stockInfo} />
          <div className={styles.stockDetails}>
-            <h2>details</h2>
+            <h1>{stock.ticker}</h1>
+            <h2>{stock.name}</h2>
+            <StockGraph stockInfo={stockInfo} />
             <div className={styles.details}>
-               {/* {details.map((detail) => (
-                  <div className={styles.detail}>
-                     <h2>
-                        {" "}
-                        {detail.description} : {detail.value}
-                     </h2>
-                  </div>
-               ))} */}
+               <span>Open: {stockInfo.data ? `${stockInfo.data.at(-1).open}` : ""}</span>
+               <span>High: {stockInfo.data ? `${stockInfo.data.at(-1).high}` : ""}</span>
+               <span>Low: {stockInfo.data ? `${stockInfo.data.at(-1).low}` : ""}</span>
+               <span>
+                  Volume: {stockInfo.data ? `${stockInfo.data.at(-1).volume / 1000}K` : ""}
+               </span>
             </div>
             <button className={styles.buttonDelete}>Delete</button>
          </div>

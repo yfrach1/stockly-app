@@ -42,7 +42,6 @@ export const getStockDetails = async (ticker) => {
    };
 
    const response = await axios.post(`${url}/stockdata`, body);
-   console.log("stock details:", response.data);
 
    return response;
 };
