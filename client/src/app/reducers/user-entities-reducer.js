@@ -47,11 +47,17 @@ const userEntitiesReducer = (state = initialState, action) => {
       case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
          return {
             ...state,
-            userAuth: true,
             stocks: [...state.stocks, action.stockData],
             searchStocks: [
                ...state.searchStocks.filter((stock) => stock.ticker !== action.stockData.ticker),
             ],
+         };
+      }
+      case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
+         console.log(action.stockId);
+         return {
+            ...state,
+            stocks: [...state.stocks.filter((stock) => stock.stock_id !== action.stockId)],
          };
       }
       case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
