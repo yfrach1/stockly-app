@@ -3,58 +3,106 @@ const stockClient = require("../clients/stockClient");
 const { Op, InstanceError } = require("sequelize");
 
 class StockManager {
-   async _searchStockInDB(portfolioId, searchKey) {
-      const stocks = await Stock.findAll({
-         where: {
-            portfolio_id: portfolioId,
-            name: { [Op.substring]: searchKey },
-         },
-      });
+  _formatStocks(stock) {
+    const stockData = {
+      stock_id: stock.dataValues.stock_id,
+      data: {
+        portfolio_id: stock.dataValues.portfolio_id,
+        ticker: stock.dataValues.ticker,
+        name: stock.dataValues.name,
+        price: stock.dataValues.price,
+        change_percent: stock.dataValues.change_percent,
+        quantity: stock.dataValues.quantity,
+      },
+    };
 
-      return stocks;
-   }
-   async addStock(stock, user) {
-      const UserPortfolio = await Portfolio.findOne({
-         where: { user_id: user.id },
-      });
-      const response = await Stock.create({
-         portfolio_id: UserPortfolio.portfolio_id,
-         name: stock.name,
-         ticker: stock.ticker,
-         price: stock.price,
-         change_percent: stock.change_percent,
-      });
+    return stockData;
+  }
+  async _searchStockInDB(portfolioId, searchKey) {
+    const stocks = await Stock.findAll({
+      where: {
+        portfolio_id: portfolioId,
+        name: { [Op.substring]: searchKey },
+      },
+    });
 
-      return response;
-   }
+    const formateStockData = stocks.map((stock) => this._formatStocks(stock));
+    return formateStockData;
+  }
+  async addStock(stock, user) {
+    const UserPortfolio = await Portfolio.findOne({
+      where: { user_id: user.id },
+    });
+    const response = await Stock.create({
+      portfolio_id: UserPortfolio.portfolio_id,
+      name: stock.name,
+      ticker: stock.ticker,
+      price: stock.price,
+      change_percent: stock.change_percent,
+    });
 
-   doesTickerExistInDb(ticker, stocksDetailsFromDB) {
-      return stocksDetailsFromDB.some((stock) => {
-         return stock.ticker == ticker;
-      });
-   }
+    return response;
+  }
 
-   async searchStock(stockSearchKey, portfolioId) {
-      const stocksDetailsFromDB = await this._searchStockInDB(portfolioId, stockSearchKey);
-      // console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
-      const stocksDetailsFromApi = await stockClient.searchStock(stockSearchKey, portfolioId);
+  async updateStock(stock_id, price, change_percent) {
+    const stock = await Stock.findOne({ where: { stock_id } });
+    await stock.update({
+      price,
+      price,
+      change_percent,
+    });
+  }
 
-      // console.log("search result: ", stocksDetailsFromApi);
+  doesTickerExistInDb(ticker, stocksDetailsFromDB) {
+    return stocksDetailsFromDB.some((stock) => {
+      return stock.ticker == ticker;
+    });
+  }
 
-      const searchResult = stocksDetailsFromApi.map((result) => {
-         result.isMine = this.doesTickerExistInDb(result.ticker, stocksDetailsFromDB);
-         return result;
-      });
-      // console.log("searchResult: ", searchResult);
+  _compareStockLastUpdatedDay(date1, date2) {
+    if (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    )
+      return true;
+    else return false;
+  }
 
-      return searchResult;
-   }
+  async searchStock(stockSearchKey, portfolioId) {
+    const stocksDetailsFromDB = await this._searchStockInDB(
+      portfolioId,
+      stockSearchKey
+    );
 
-   async deleteStock(stockId) {
-      const response = await Stock.destroy({ where: { stock_id: stockId } });
+    //check if data on DB is updated or not
+    //   console.log(
+    //     this._compareStockLastUpdatedDay(
+    //       stocksDetailsFromDB[0].dataValues.updatedAt,
+    //       new Date()
+    //     )
+    //   );
 
-      return response;
-   }
+    //check if the data is updated
+    //check
+    const stocksDetailsFromApi = await stockClient.searchStock(stockSearchKey);
+    //  console.log("stocksDetailsFromApi: ", stocksDetailsFromApi);
+    const searchResult = stocksDetailsFromApi.map((result) => {
+      result.isMine = this.doesTickerExistInDb(
+        result.ticker,
+        stocksDetailsFromDB
+      );
+      return result;
+    });
+
+    return searchResult;
+  }
+
+  async deleteStock(stockId) {
+    const response = await Stock.destroy({ where: { stock_id: stockId } });
+
+    return response;
+  }
 }
 
 module.exports = new StockManager();
