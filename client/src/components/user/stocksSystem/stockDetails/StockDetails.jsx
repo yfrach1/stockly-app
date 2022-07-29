@@ -1,12 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
-// import StockGraph from "../stockGraph/StockGraph";
+import StockGraph from "../stockGraph/StockGraph";
 import styles from "./StockDetails.module.css";
 
 const StockDetails = ({ stockInfo }) => {
-   useEffect(() => console.log(stockInfo), [stockInfo]);
+   useEffect(() => console.log("inside details:", stockInfo), [stockInfo]);
    return (
       <>
+         <StockGraph stockInfo={stockInfo} />
          <div className={styles.stockDetails}>
             <h2>details</h2>
             <div className={styles.details}>

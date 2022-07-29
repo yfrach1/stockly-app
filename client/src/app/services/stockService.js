@@ -36,7 +36,7 @@ export const searchStock = async (stockSearchKey, portfolioId) => {
 export const getStockDetails = async (ticker) => {
    const body = {
       ticker: ticker,
-      startDate: "2022-07-01",
+      startDate: "2022-06-01",
       endDate: "",
       resampleFreq: "",
    };
