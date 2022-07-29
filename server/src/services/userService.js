@@ -2,6 +2,8 @@ const { User, Portfolio, Stock } = require("../../storage/models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { use } = require("bcrypt/promises");
+const stockService = require("../services/stockService");
+const stockClient = require("../clients/stockClient");
 
 class UserManager {
   async createUser(newUserData) {
@@ -25,8 +27,6 @@ class UserManager {
       },
     };
     const accessToken = await this._createAccessToken(dbUserData.user_id);
-    console.log("userData: ", userData);
-    console.log("accessToken: ", accessToken);
     return { accessToken, userData };
   }
 
@@ -43,6 +43,16 @@ class UserManager {
     return { accessToken, userData };
   }
 
+  _compareStockLastUpdatedDay(date1, date2) {
+    if (
+      date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate()
+    )
+      return true;
+    else return false;
+  }
+
   async getUserData(userId) {
     const user = await User.findByPk(userId, {
       include: { model: Portfolio, include: Stock },
@@ -54,8 +64,56 @@ class UserManager {
       portfolio,
       stocks,
     };
+
     console.log("userData: ", userData);
     return userData;
+  }
+
+  _extractDataFromFetchStockResult(stockDataFromApi) {
+    const close = stockDataFromApi[0].adjClose;
+    const open = stockDataFromApi[0].adjOpen;
+    const price = stockDataFromApi[0].adjClose;
+
+    console.log("close: ", close);
+    console.log("open: ", open);
+    console.log("price: ", price);
+    return { price, open, close };
+  }
+
+  async _updateStocksDataOnDb(stocks) {
+    let formatedStocks = [];
+    let stockQuery = {
+      ticker: "",
+      startDate: "",
+      endDate: "",
+      resampleFreq: "",
+    };
+    const tickers = stocks.map((stock) => stock.dataValues.ticker);
+    for (let i = 0; i < tickers.length; i++) {
+      //get the riggth format of stocks
+      let formatStockData = stockService._formatStocks(stocks[i]);
+
+      //fetch new data
+      stockQuery.ticker = tickers[i];
+      const result = await stockClient.getStockData(stockQuery);
+      const { price, open, close } =
+        this._extractDataFromFetchStockResult(result);
+      formatStockData.data.price = price;
+      formatStockData.data.change_percent = (
+        (close / open) * 100 -
+        100
+      ).toFixed(2);
+      //update the data to be most upsated
+      await stockService.updateStock(
+        formatStockData.stock_id,
+        formatStockData.data.price,
+        formatStockData.data.change_percent
+      );
+
+      formatedStocks.push(formatStockData);
+    }
+
+    return formatedStocks;
   }
 
   _getPortfolioData(userPortfolio) {
@@ -63,8 +121,17 @@ class UserManager {
       name: userPortfolio.name,
       id: userPortfolio.portfolio_id,
     };
-    const stocks = userPortfolio.Stocks;
-
+    let stocks = userPortfolio.Stocks;
+    if (stocks.length) {
+      if (
+        this._compareStockLastUpdatedDay(
+          stocks[0].dataValues.updatedAt,
+          new Date()
+        )
+      ) {
+        stocks = this._updateStocksDataOnDb(stocks);
+      }
+    }
     return { portfolio, stocks };
   }
   async _createAccessToken(id) {
