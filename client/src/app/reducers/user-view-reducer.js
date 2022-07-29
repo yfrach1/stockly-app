@@ -2,7 +2,8 @@ import actionTypes from "../actions/constants";
 
 const initialState = {
    searchKey: "",
-   showStockDetails: [],
+   stockDetails: {},
+   stock: {},
 };
 
 const userViewReducer = (state = initialState, action) => {
@@ -17,7 +18,8 @@ const userViewReducer = (state = initialState, action) => {
       case actionTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED: {
          return {
             ...state,
-            showStockDetails: action.stockData,
+            stockDetails: action.payload.stockData.stockData,
+            stock: action.payload.stockData.stock,
          };
       }
 

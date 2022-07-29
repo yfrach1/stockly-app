@@ -6,9 +6,9 @@ const setSearchKey = (searchKey) => ({
    searchKey,
 });
 
-const getStockDetailsSuccessed = (stockData) => ({
+const getStockDetailsSuccessed = (stockData, stock) => ({
    type: actionsTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED,
-   stockData,
+   payload: { stockData, stock },
 });
 
 export const setSearchKeyAction = (searchKey) => {
@@ -18,12 +18,12 @@ export const setSearchKeyAction = (searchKey) => {
    };
 };
 
-export const getStockDetailsAction = (ticker) => {
+export const getStockDetailsAction = (stock) => {
    return async (dispatch) => {
       //dispatch loader maybe
       try {
-         const res = await getStockDetails(ticker);
-         dispatch(getStockDetailsSuccessed(res));
+         const stockData = await getStockDetails(stock.ticker);
+         dispatch(getStockDetailsSuccessed({ stockData, stock }));
       } catch (error) {}
    };
 };
