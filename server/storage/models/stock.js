@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             type: DataTypes.INTEGER,
          },
-         portfolio_Id: DataTypes.INTEGER,
+         portfolio_id: DataTypes.INTEGER,
          ticker: DataTypes.STRING,
          name: DataTypes.STRING,
          price: DataTypes.FLOAT,

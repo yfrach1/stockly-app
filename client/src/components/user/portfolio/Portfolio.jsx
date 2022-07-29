@@ -1,5 +1,5 @@
 import React from "react";
-import StockDetails from "../stocksSystem/stockDetails/StockDetails";
+import StockDetailsConnector from "../stocksSystem/stockDetails/StockDetailsConnector";
 import StockGraph from "../stocksSystem/stockGraph/StockGraph";
 import styles from "./Portfolio.module.css";
 import SearchBarConnector from "../stocksSystem/searchBar/SearchBar-connector";
@@ -12,7 +12,7 @@ const Portfolio = ({ addStockAction, portfolioId }) => {
             <SearchBarConnector portfolioId={portfolioId} />
             <ListStocksConnector />
          </div>
-         <div className={styles.stockPreview}>{<StockDetails />}</div>
+         <div className={styles.stockPreview}>{<StockDetailsConnector />}</div>
       </div>
    );
 };

@@ -3,28 +3,23 @@ import styles from "./StockGraph.module.css";
 import { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 
-const StockGraph = () => {
+const StockGraph = ({ stockInfo }) => {
    const [xValues, setXValues] = useState([]);
    const [yValues, setYValues] = useState([]);
 
    useEffect(() => {
-      const ticker = "AMZN";
-      const getStockData = () => {}; // deleteee
-      getStockData(ticker).then((stockData) => {
-         console.log(stockData);
-
+      if (stockInfo.data) {
          let stockChartxValues = [];
          let stockChartyValues = [];
-
-         for (let key in stockData.intraday["Time Series (1min)"]) {
-            stockChartxValues.push(key);
-            stockChartyValues.push(stockData.intraday["Time Series (1min)"][key]["1. open"]);
-         }
+         stockInfo.data.forEach((point) => {
+            stockChartxValues.push(point.date);
+            stockChartyValues.push(point.close);
+         });
 
          setXValues(stockChartxValues);
          setYValues(stockChartyValues);
-      });
-   }, []);
+      }
+   }, [stockInfo]);
 
    return (
       <div className={styles.graphContainer}>
@@ -52,8 +47,8 @@ const StockGraph = () => {
                      "autoscale",
                   ],
                },
-               paper_bgcolor: "rgb(166, 225, 255)",
-               plot_bgcolor: "rgb(166, 225, 255)",
+               paper_bgcolor: "rgba(237, 237, 237, 255)",
+               plot_bgcolor: "rgba(237, 237, 237, 255)",
                margin: { b: 45, l: 45, r: 5, t: 30 },
             }}
             displayModeBar={false}
