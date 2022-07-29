@@ -1,6 +1,6 @@
 import actionsTypes from "./constants";
 import { addNewUser, validateUser, getUserDataOnStart } from "../services/userService";
-import { addStock, searchStock } from "../services/stockService";
+import { addStock, getStockDetails, searchStock } from "../services/stockService";
 
 const signUpRequestSuccessed = (userData) => ({
    type: actionsTypes.SIGN_UP_REQUEST_SUCCESSED,

@@ -1,9 +1,14 @@
 import React from "react";
 import styles from "./StockCard.module.css";
 
-const StockCard = ({ stock, addButton, addStockAction }) => {
+const StockCard = ({ stock, addButton, addStockAction, getStockDetailsAction }) => {
    return (
-      <div className={styles.stockCard}>
+      <button
+         onClick={() => {
+            getStockDetailsAction(stock.ticker); //add here show info on the left action
+         }}
+         className={styles.stockCard}
+      >
          <h2 className={styles.ticker}>{stock.ticker}</h2>
          {addButton ? (
             <button
@@ -24,7 +29,7 @@ const StockCard = ({ stock, addButton, addStockAction }) => {
                {stock.change_percent}%
             </span>
          </div>
-      </div>
+      </button>
    );
 };
 

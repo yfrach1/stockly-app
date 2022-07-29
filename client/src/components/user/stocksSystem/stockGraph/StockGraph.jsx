@@ -2,18 +2,15 @@ import React from "react";
 import styles from "./StockGraph.module.css";
 import { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
-import { getStockData } from "../../../../app/services/mockMethods";
 
 const StockGraph = () => {
    const [xValues, setXValues] = useState([]);
    const [yValues, setYValues] = useState([]);
 
-   const stockSymbol = "AMZN";
-
    useEffect(() => {
-      // here need action to fetch stock data!
-
-      getStockData(stockSymbol).then((stockData) => {
+      const ticker = "AMZN";
+      const getStockData = () => {}; // deleteee
+      getStockData(ticker).then((stockData) => {
          console.log(stockData);
 
          let stockChartxValues = [];
