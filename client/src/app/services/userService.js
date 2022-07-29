@@ -9,8 +9,13 @@ export const addNewUser = async (userData) => {
 };
 
 export const validateUser = async (userData) => {
-  const response = await axios.post(`${url}/sign-in`, userData);
-  return response;
+  try {
+    const response = await axios.post(`${url}/sign-in`, userData);
+    return response;
+  } catch (error) {
+    console.log("catch wrong log in");
+    throw new Error("throw some error");
+  }
 };
 
 export const getUserDataOnStart = async () => {

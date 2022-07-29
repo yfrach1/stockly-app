@@ -57,7 +57,7 @@ class UserManager {
     const user = await User.findByPk(userId, {
       include: { model: Portfolio, include: Stock },
     });
-    const { portfolio, stocks } = this._getPortfolioData(user.Portfolio);
+    const { portfolio, stocks } = await this._getPortfolioData(user.Portfolio);
     const userData = {
       firstName: user.first_name,
       lastName: user.last_name,
@@ -81,6 +81,7 @@ class UserManager {
   }
 
   async _updateStocksDataOnDb(stocks) {
+    console.log("stocks: ", stocks);
     let formatedStocks = [];
     let stockQuery = {
       ticker: "",
@@ -98,16 +99,13 @@ class UserManager {
       const result = await stockClient.getStockData(stockQuery);
       const { price, open, close } =
         this._extractDataFromFetchStockResult(result);
-      formatStockData.data.price = price;
-      formatStockData.data.change_percent = (
-        (close / open) * 100 -
-        100
-      ).toFixed(2);
+      formatStockData.price = price;
+      formatStockData.change_percent = ((close / open) * 100 - 100).toFixed(2);
       //update the data to be most upsated
       await stockService.updateStock(
         formatStockData.stock_id,
-        formatStockData.data.price,
-        formatStockData.data.change_percent
+        formatStockData.price,
+        formatStockData.change_percent
       );
 
       formatedStocks.push(formatStockData);
@@ -116,7 +114,7 @@ class UserManager {
     return formatedStocks;
   }
 
-  _getPortfolioData(userPortfolio) {
+  async _getPortfolioData(userPortfolio) {
     const portfolio = {
       name: userPortfolio.name,
       id: userPortfolio.portfolio_id,
@@ -129,7 +127,7 @@ class UserManager {
           new Date()
         )
       ) {
-        stocks = this._updateStocksDataOnDb(stocks);
+        stocks = await this._updateStocksDataOnDb(stocks);
       }
     }
     return { portfolio, stocks };
