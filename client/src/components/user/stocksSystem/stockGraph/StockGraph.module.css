@@ -1,3 +1,7 @@
 .graphContainer {
    flex: 1;
 }
+
+.graph {
+   background-color: rgb(9, 119, 215);
+}
