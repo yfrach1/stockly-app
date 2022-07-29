@@ -2,9 +2,9 @@ import React from "react";
 import { useEffect } from "react";
 import StockGraph from "../stockGraph/StockGraph";
 import styles from "./StockDetails.module.css";
+import { deleteStock } from "../../../../app/services/stockService";
 
-const StockDetails = ({ stock, stockInfo }) => {
-   useEffect(() => console.log("in stock details use effect:", stockInfo));
+const StockDetails = ({ stock, stockInfo, deleteStockAction }) => {
    return (
       <>
          <div className={styles.stockDetails}>
@@ -19,7 +19,12 @@ const StockDetails = ({ stock, stockInfo }) => {
                   Volume: {stockInfo.data ? `${stockInfo.data.at(-1).volume / 1000}K` : ""}
                </span>
             </div>
-            <button className={styles.buttonDelete}>Delete</button>
+            <button
+               onClick={() => deleteStockAction(stock.stock_id)}
+               className={styles.buttonDelete}
+            >
+               Delete
+            </button>
          </div>
       </>
    );

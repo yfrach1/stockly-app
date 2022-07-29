@@ -29,9 +29,10 @@ const StockGraph = ({ stockInfo }) => {
                   x: xValues,
                   y: yValues,
                   type: "scatter",
-                  mode: "lines+markers",
+                  mode: "lines",
                   marker: { color: "red" },
                   opacity: 0.7,
+                  line: { color: "#17BECF" },
                },
             ]}
             layout={{
@@ -47,10 +48,13 @@ const StockGraph = ({ stockInfo }) => {
                      "autoscale",
                   ],
                },
+               autosize: true,
                paper_bgcolor: "rgba(237, 237, 237, 255)",
                plot_bgcolor: "rgba(237, 237, 237, 255)",
                margin: { b: 45, l: 45, r: 5, t: 30 },
             }}
+            useResizeHandler={true}
+            style={{ width: "100%", height: "100%" }}
             displayModeBar={false}
          />
       </div>

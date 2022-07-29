@@ -12,7 +12,7 @@ export const addStock = async (stock) => {
 };
 
 export const deleteStock = async (stockId) => {
-   const response = await axios.delete(`${url}`, stockId);
+   const response = await axios.delete(`${url}`, { params: { id: stockId } });
 
    return response;
 };
@@ -34,9 +34,13 @@ export const searchStock = async (stockSearchKey, portfolioId) => {
 };
 
 export const getStockDetails = async (ticker) => {
+   const today = new Date();
+   today.setMonth(today.getMonth() - 12);
+   const startDate = today.toISOString().split("T")[0];
+
    const body = {
       ticker: ticker,
-      startDate: "2022-06-01",
+      startDate: startDate,
       endDate: "",
       resampleFreq: "",
    };
