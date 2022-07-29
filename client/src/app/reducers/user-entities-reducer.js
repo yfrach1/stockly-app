@@ -61,6 +61,7 @@ const userEntitiesReducer = (state = initialState, action) => {
             searchStocks: action.stockSearchData.searchStocks,
          };
       }
+
       default:
          return state;
    }

@@ -32,3 +32,17 @@ export const searchStock = async (stockSearchKey, portfolioId) => {
 
    return { myStocks, searchStocks };
 };
+
+export const getStockDetails = async (ticker) => {
+   const body = {
+      ticker: ticker,
+      startDate: "2022-07-01",
+      endDate: "",
+      resampleFreq: "",
+   };
+
+   const response = await axios.post(`${url}/stockdata`, body);
+   console.log("stock details:", response.data);
+
+   return response;
+};

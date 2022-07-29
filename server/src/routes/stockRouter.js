@@ -13,7 +13,7 @@ const authenticateToken = require("../middlewares/authenticateToken");
 stockRouter.post("/", authenticateToken, addStock);
 stockRouter.post("/search", authenticateToken, searchStock);
 stockRouter.delete("/", authenticateToken, deleteStock);
-stockRouter.get("/stockdata", authenticateToken, getAPIStockData);
+stockRouter.post("/stockdata", authenticateToken, getAPIStockData);
 stockRouter.get("/metadata", authenticateToken, getAPIStockMetaData);
 stockRouter.get("/searchdata", authenticateToken, getAPISearchData); // ?
 
