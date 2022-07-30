@@ -1,53 +1,67 @@
 .sidebarContainer {
-   height: 100%;
-   width: 15rem;
-   display: flex;
-   flex-direction: column;
-   border: 2px solid green;
-   background-color: rgb(255, 255, 255);
+  height: 100%;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid green;
+  background-color: rgb(255, 255, 255);
+  position: relative;
 }
 
 .sidebarLogo {
-   width: 14em;
-   height: auto;
+  width: 14em;
+  height: auto;
 }
 
 .userGreeting {
-   font-family: helvetica, Arial;
-   color: rgb(49, 49, 49);
-   font-size: 1em;
-   margin: -1.5em 0 3em 1.3em;
+  font-family: helvetica, Arial;
+  color: rgb(49, 49, 49);
+  font-size: 1em;
+  margin: -1.5em 0 3em 1.3em;
 }
 
 #option {
-   transition: all 0.4s;
-   margin: 0 30px;
-   padding: 8px 20px;
-   cursor: pointer;
-   text-decoration: none !important;
-   font-size: 15px;
-   /* font-weight: 700; */
-   color: black;
+  transition: all 0.4s;
+  margin: 0 30px;
+  padding: 8px 0px;
+  padding-left: 20px;
+  cursor: pointer;
+  text-decoration: none !important;
+  font-size: 15px;
+  /* font-weight: 700; */
+  color: black;
 }
 
 .alignCategory {
-   display: flex;
-   justify-content: row;
-   align-items: center;
-   text-align: center;
-   /* border: 2px solid green; */
-   margin-left: 8%;
-   margin-bottom: 15px;
-   cursor: pointer;
+  display: flex;
+  justify-content: row;
+  align-items: center;
+  text-align: center;
+  /* border: 2px solid green; */
+  margin-left: 8%;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+.alignSignOut {
+  position: absolute;
+  display: flex;
+  justify-content: row;
+  align-items: center;
+  text-align: center;
+  /* border: 2px solid green; */
+  margin-left: 8%;
+  bottom: 0;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .arrowIcon {
-   height: 20px;
-   width: 20px;
+  height: 20px;
+  width: 20px;
 }
 
 .categoryText {
-   margin-left: 30px;
-   margin-right: 100px;
-   font-size: 20px;
+  margin-left: 20px;
+  margin-right: 80px;
+  font-size: 20px;
 }

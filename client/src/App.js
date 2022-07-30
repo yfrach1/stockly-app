@@ -7,6 +7,8 @@ function App({ userAuth, checkUserTokenAction }) {
     console.log("in use effect");
     checkUserTokenAction();
   }, []);
-  return <Fragment>{userAuth ? <UserView /> : <Main />}</Fragment>;
+  return (
+    <div style={{ width: "100%" }}>{userAuth ? <UserView /> : <Main />}</div>
+  );
 }
 export default App;

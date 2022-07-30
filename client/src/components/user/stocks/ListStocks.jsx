@@ -3,18 +3,23 @@ import { v4 as uuidv4 } from "uuid";
 import StockCardConnector from "./stockCard/StockCardConnector";
 
 const ListStocks = ({ myStocks, searchStocks }) => {
-   return (
-      <div>
-         <div className={styles.grid}>
-            {myStocks.map((stock, index) => (
-               <StockCardConnector key={uuidv4()} stock={stock} />
-            ))}
-            {searchStocks.map((stock, index) => (
-               <StockCardConnector key={uuidv4()} stock={stock} addButton={true} />
-            ))}
-         </div>
+  console.log("myStocks: ", myStocks);
+  return (
+    <div>
+      <div className={styles.grid}>
+        {myStocks.map((stock, index) => (
+          <StockCardConnector key={stock.stock_id} stock={stock} />
+        ))}
+        {searchStocks.map((stock, index) => (
+          <StockCardConnector
+            key={stock.stock_id}
+            stock={stock}
+            addButton={true}
+          />
+        ))}
       </div>
-   );
+    </div>
+  );
 };
 
 export default ListStocks;
