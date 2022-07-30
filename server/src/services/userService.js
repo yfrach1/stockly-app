@@ -73,10 +73,6 @@ class UserManager {
     const close = stockDataFromApi[0].adjClose;
     const open = stockDataFromApi[0].adjOpen;
     const price = stockDataFromApi[0].adjClose;
-
-    console.log("close: ", close);
-    console.log("open: ", open);
-    console.log("price: ", price);
     return { price, open, close };
   }
 
