@@ -1,5 +1,5 @@
 import actionsTypes from "./constants";
-import { getStockDetails } from "../services/stockService";
+import { getStockDetails, getPortfolioDetails } from "../services/stockService";
 
 const setSearchKey = (searchKey) => ({
    type: actionsTypes.SET_SEARCH_KEY,
@@ -24,6 +24,15 @@ export const getStockDetailsAction = (stock) => {
       try {
          const stockData = await getStockDetails(stock.ticker);
          dispatch(getStockDetailsSuccessed({ stockData, stock }));
+      } catch (error) {}
+   };
+};
+
+export const getPortfolioHistorysAction = (stocks) => {
+   return async (dispatch) => {
+      try {
+         const stockData = await getPortfolioDetails(stocks);
+         //need to return and dispatch
       } catch (error) {}
    };
 };

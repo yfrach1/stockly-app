@@ -62,17 +62,27 @@ const searchStock = async (searchQuery) => {
       let stocksDetailsToDB = searchResults.map((result) => {
          return { ticker: result.ticker, name: result.name };
       });
-      for (let i = 0; i < stocksDetailsToDB.length; i++) {
-         stockQuery.ticker = stocksDetailsToDB[i].ticker;
-         const fullStockDetails = await getStockData(stockQuery);
-         if (fullStockDetails.length) {
-            stocksDetailsToDB[i].price = fullStockDetails[0].close;
-            stocksDetailsToDB[i].change_percent = (
-               (fullStockDetails[0].close / fullStockDetails[0].open) * 100 -
+
+      const allStocksSearchResults = await Promise.all(
+         stocksDetailsToDB.map(async (stock) => {
+            stockQuery.ticker = stock.ticker;
+            const fullStockDetails = await getStockData(stockQuery);
+            return fullStockDetails;
+         })
+      );
+
+      stocksDetailsToDB = stocksDetailsToDB.map((stock, index) => {
+         if (allStocksSearchResults[index].length) {
+            stock.price = allStocksSearchResults[index][0].close;
+            stock.change_percent = (
+               (allStocksSearchResults[index][0].close / allStocksSearchResults[index][0].open) *
+                  100 -
                100
             ).toFixed(2);
          }
-      }
+         return stock;
+      });
+
       return stocksDetailsToDB;
    } catch (error) {
       console.error(error);

@@ -49,3 +49,30 @@ export const getStockDetails = async (ticker) => {
 
    return response;
 };
+
+export const getPortfolioDetails = async (stocks) => {
+   const stockQuantity = 4; // will use the user quantity in the future
+
+   const totalPortfolioValues = {};
+   console.log("starting totalPortfolioValues", totalPortfolioValues);
+
+   for (let i = 0; i < stocks.length; i++) {
+      let { data } = await getStockDetails(stocks[i].ticker);
+      for (const stockPrice of data) {
+         if (!totalPortfolioValues[stockPrice.date]) {
+            totalPortfolioValues[stockPrice.date] = 0;
+         }
+
+         totalPortfolioValues[stockPrice.date] += stockPrice.close * stockQuantity;
+      }
+   }
+
+   console.log("ending totalPortfolioValues", totalPortfolioValues);
+   const list = Object.entries(totalPortfolioValues).map(([date, value]) => ({
+      date,
+      value,
+   }));
+   console.log(list);
+
+   // return response;
+};
