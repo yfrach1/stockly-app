@@ -43,10 +43,19 @@ const userEntitiesReducer = (state = initialState, action) => {
     }
 
     case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
-      console.log("action.stockData: ", action.stockData);
+      console.log("action.stockTicker: ", action.stockTicker);
+      let newStocks = [...state.stocks];
+      newStocks = newStocks.map((stock) => {
+        if (stock.ticker === action.stockTicker) {
+          stock.isMine = true;
+        }
+        return stock;
+      });
+
+      console.log("newStocks: ", newStocks);
       return {
         ...state,
-        stocks: [...state.stocks, action.stockData],
+        stocks: newStocks,
         // searchStocks: [
         //   ...state.searchStocks.filter(
         //     (stock) => stock.ticker !== action.stockData.ticker

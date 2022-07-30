@@ -98,7 +98,12 @@ const userViewReducer = (state = initialState, action) => {
         fetchLoading: false,
       };
     }
-
+    case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        stock: (state.stock.isMine = true),
+      };
+    }
     default:
       return state;
   }

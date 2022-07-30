@@ -24,6 +24,8 @@ export const getStockDetailsAction = (stock) => {
     try {
       const stockData = await getStockDetails(stock.ticker);
       dispatch(getStockDetailsSuccessed({ stockData, stock }));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
