@@ -16,9 +16,9 @@ function NavigationBar() {
         <NavLink id={styles.option} to={ClientRoute.Guest.aboutUs}>
           About
         </NavLink>
-        <NavLink id={styles.option} to={ClientRoute.Guest.contactUs}>
+        {/* <NavLink id={styles.option} to={ClientRoute.Guest.contactUs}>
           Contact
-        </NavLink>
+        </NavLink> */}
         <NavLink className={styles.signUpButton} to={ClientRoute.Guest.signUp}>
           SignUp
         </NavLink>

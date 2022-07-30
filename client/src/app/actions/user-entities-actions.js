@@ -11,6 +11,10 @@ import {
   deleteStock,
 } from "../services/stockService";
 
+const signUpRequest = () => ({
+  type: actionsTypes.SIGN_UP_REQUEST,
+});
+
 const signUpRequestSuccessed = (userData) => ({
   type: actionsTypes.SIGN_UP_REQUEST_SUCCESSED,
   userData,
@@ -19,18 +23,41 @@ const signUpRequestFailed = () => ({
   type: actionsTypes.SIGN_UP_REQUEST_FAILED,
 });
 
+const signInRequest = () => ({
+  type: actionsTypes.SIGN_IN_REQUEST,
+});
 const signInRequestSuccessed = (userData) => ({
   type: actionsTypes.SIGN_IN_REQUEST_SUCCESSED,
   userData,
 });
+
+const checkTokenRequest = () => ({
+  type: actionsTypes.CHECK_USER_TOKEN_REQUEST,
+});
+
 const checkTokenRequestSuccessed = (userData) => ({
   type: actionsTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED,
   userData,
 });
 
-const searchStockSuccessed = (stockSearchData) => ({
+const checkTokenRequestFailed = (userData) => ({
+  type: actionsTypes.CHECK_USER_TOKEN_REQUEST_FAILED,
+  userData,
+});
+
+const searchStockRequest = (stocks) => ({
+  type: actionsTypes.SEARCH_STOCK_REQUEST,
+  stocks,
+});
+
+const searchStockSuccessed = (stocks) => ({
   type: actionsTypes.SEARCH_STOCK_REQUEST_SUCCESSED,
-  stockSearchData,
+  stocks,
+});
+
+const searchStockFailed = (stocks) => ({
+  type: actionsTypes.SEARCH_STOCK_REQUEST_FAILED,
+  stocks,
 });
 
 const addStockSuccessed = (stockData) => ({
@@ -45,7 +72,7 @@ const deleteStockSuccessed = (stockId) => ({
 
 export const signUpAction = (newUserData) => {
   return async (dispatch) => {
-    //dispatch loader maybe
+    dispatch(signUpRequest());
     try {
       const res = await addNewUser(newUserData);
       if (res.data) {
@@ -54,6 +81,10 @@ export const signUpAction = (newUserData) => {
         dispatch(signUpRequestFailed(res.data.message));
       }
     } catch (error) {
+      // const stopLoadin = setTimeout(() => {
+      //   dispatch(signUpRequestFailed("error"));
+      // }, 1000);
+      // stopLoadin();
       dispatch(signUpRequestFailed("error"));
     }
   };
@@ -61,10 +92,9 @@ export const signUpAction = (newUserData) => {
 
 export const signInAction = (loginUserData) => {
   return async (dispatch) => {
-    //dispatch loader maybe
+    dispatch(signInRequest());
     try {
       const res = await validateUser(loginUserData);
-      console.log("in log in: ", res.data);
       dispatch(signInRequestSuccessed(res.data));
     } catch (error) {
       console.log(error.message);
@@ -76,14 +106,18 @@ export const signInAction = (loginUserData) => {
 export const checkUserTokenAction = () => {
   return async (dispatch) => {
     //dispatch loader maybe
+    dispatch(checkTokenRequest());
     try {
       const res = await getUserDataOnStart();
       dispatch(checkTokenRequestSuccessed(res.data));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(checkTokenRequestFailed());
+    }
   };
 };
 
 export const addStockAction = (stock) => {
+  console.log("in add stock action");
   return async (dispatch) => {
     //dispatch loader maybe
     try {
@@ -107,10 +141,12 @@ export const deleteStockAction = (stockId) => {
 export const searchStockAction = (stockSearchKey, portfolioId) => {
   return async (dispatch) => {
     //dispatch loader maybe
+    dispatch(searchStockRequest());
     try {
       const res = await searchStock(stockSearchKey, portfolioId);
-      console.log("res: ", res.data);
-      dispatch(searchStockSuccessed(res));
-    } catch (error) {}
+      dispatch(searchStockSuccessed(res.data));
+    } catch (error) {
+      dispatch(searchStockFailed());
+    }
   };
 };

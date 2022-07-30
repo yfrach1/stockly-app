@@ -2,19 +2,29 @@ import styles from "./ListStocks.module.css";
 import { v4 as uuidv4 } from "uuid";
 import StockCardConnector from "./stockCard/StockCardConnector";
 
-const ListStocks = ({ myStocks, searchStocks }) => {
-   return (
-      <div>
-         <div className={styles.grid}>
-            {myStocks.map((stock, index) => (
-               <StockCardConnector key={uuidv4()} stock={stock} />
-            ))}
-            {searchStocks.map((stock, index) => (
-               <StockCardConnector key={uuidv4()} stock={stock} addButton={true} />
-            ))}
-         </div>
+const ListStocks = ({ stocks }) => {
+  console.log("stocks: ", stocks);
+  const notMyStocksArray = stocks
+    .map((stock, index) => {
+      return stock.isMine ? null : (
+        <StockCardConnector key={index} stock={stock} />
+      );
+    })
+    .filter((stock) => stock !== null);
+  //   console.log("notMyStocksArray: ", notMyStocksArray.length);
+  //   console.log("notMyStocksArray: ", notMyStocksArray);
+  const sepreatedLine = "********************************";
+  return (
+    <div>
+      <div className={styles.grid}>
+        {stocks.map((stock, index) =>
+          stock.isMine ? <StockCardConnector key={index} stock={stock} /> : null
+        )}
+        {notMyStocksArray.length ? sepreatedLine : null}
+        {notMyStocksArray}
       </div>
-   );
+    </div>
+  );
 };
 
 export default ListStocks;

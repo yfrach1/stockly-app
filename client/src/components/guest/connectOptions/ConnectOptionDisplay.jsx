@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const ConnectOptionDisplay = ({ showSignIn, showSignUp }) => {
   return (
     <div className={styles.displayContent}>
-      <div className={styles.connectionTitles}>
+      {/* <div className={styles.connectionTitles}>
         <Link
           className={showSignIn ? styles.currentOption : undefined}
           to={ClientRoute.Guest.signIn}
@@ -21,9 +21,19 @@ const ConnectOptionDisplay = ({ showSignIn, showSignUp }) => {
         >
           Sign Up
         </Link>
-      </div>
+      </div> */}
       {showSignIn ? <SignInConnector /> : null}
       {showSignUp ? <SignUpConnector /> : null}
+      {showSignUp ? (
+        <Link className={styles.textLink} to={ClientRoute.Guest.signIn}>
+          already sign out ?
+        </Link>
+      ) : null}
+      {showSignIn ? (
+        <Link className={styles.textLink} to={ClientRoute.Guest.signUp}>
+          not sign out ?
+        </Link>
+      ) : null}
     </div>
   );
 };

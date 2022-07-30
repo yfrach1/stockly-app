@@ -28,9 +28,12 @@
 }
 
 .portfolioPreview {
+  display: flex;
+  flex-direction: column;
+
   height: 100%;
   width: 50%;
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .stockPreview {

@@ -7,10 +7,12 @@
 
 .grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  padding-left: 10px;
+  /* flex-wrap: wrap;
   padding-left: 0;
   list-style: none;
-  flex: 0 0 33.333333%;
+  flex: 0 0 33.333333%; */
 }
 
 .stockContainer {

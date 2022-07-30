@@ -1,76 +1,82 @@
 .stockCard {
-   display: flex;
-   flex-direction: column;
-   background-color: rgb(255, 255, 255);
-   border-radius: 5px;
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-   padding: 10px;
-   margin: 10px;
-   height: 9.5em;
-   width: 13em;
-   align-items: center;
-   gap: 1.2rem;
-   transition: 0.3s;
-   border: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  min-height: 60px;
+  width: 70%;
+  align-items: center;
+  transition: 0.3s;
+  margin-bottom: 5px;
 }
 
 .stockCard:hover {
-   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.alignStockRow {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
 }
 
 .ticker {
-   font-size: 1.7rem;
-   font-weight: 700;
-   color: #000;
-   margin: 0;
-   padding: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
 }
 
 .name {
-   font-size: 0.8rem;
-   font-weight: 500;
-   max-height: 1.2rem;
-}
-
-.numbersContainer {
-   display: flex;
-   gap: 2rem;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .price {
-   font-size: 1.2rem;
-   font-weight: 500;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.changePercent {
+  font-size: 12px;
+  border-radius: 3px;
+  width: 50px;
+  text-align: right;
+  color: white;
 }
 
 .addButton {
-   border: 0;
-   padding: 0;
-   background-color: rgb(113, 255, 85);
-   width: 1.2em;
-   height: auto;
-   border-radius: 100%;
-   position: relative;
-   left: 6em;
-   margin-top: -3.1em;
-   transition: all 0.2s ease-in-out;
+  border: 0;
+  padding: 0;
+  background-color: rgb(113, 255, 85);
+  width: 1.2em;
+  height: auto;
+  border-radius: 100%;
+  position: relative;
+  left: 6em;
+  margin-top: -3.1em;
+  transition: all 0.2s ease-in-out;
 }
 
 .addButton:hover {
-   transform: scale(1.3);
-   background-color: rgb(67, 255, 29);
-   cursor: pointer;
+  transform: scale(1.3);
+  background-color: rgb(67, 255, 29);
+  cursor: pointer;
 }
 
 .percentGreen,
 .percentRed {
-   font-size: 1.2rem;
-   font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .percentGreen {
-   color: rgb(81, 234, 81);
+  color: rgb(81, 234, 81);
 }
 
 .percentRed {
-   color: rgb(208, 37, 37);
+  color: rgb(208, 37, 37);
 }
