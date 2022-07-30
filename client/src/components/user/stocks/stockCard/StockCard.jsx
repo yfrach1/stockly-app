@@ -1,36 +1,35 @@
 import React from "react";
 import styles from "./StockCard.module.css";
 
-const StockCard = ({ stock, addButton, addStockAction, getStockDetailsAction }) => {
-   return (
-      <button
-         onClick={() => {
-            getStockDetailsAction(stock);
-         }}
-         className={styles.stockCard}
-      >
-         <h2 className={styles.ticker}>{stock.ticker}</h2>
-         {addButton ? (
-            <button
-               onClick={() => {
-                  addStockAction(stock);
-               }}
-               className={styles.addButton}
-            >
-               +
-            </button>
-         ) : (
-            <></>
-         )}
-         <span className={styles.name}>{stock.name}</span>
-         <div className={styles.numbersContainer}>
-            <span className={styles.price}>{stock.price}</span>
-            <span className={stock.change_percent > 0 ? styles.percentGreen : styles.percentRed}>
-               {stock.change_percent}%
-            </span>
-         </div>
-      </button>
-   );
+const StockCard = ({ stock, addStockAction, getStockDetailsAction }) => {
+  return (
+    <div
+      className={styles.stockCard}
+      onClick={() => getStockDetailsAction(stock)}
+    >
+      <div className={styles.alignStockRow}>
+        <div className={styles.ticker}>{stock.ticker}</div>
+        <div className={styles.price}>{stock.price}</div>
+      </div>
+
+      <div className={styles.alignStockRow}>
+        <div
+          className={styles.name}
+          style={{ color: !stock.name ? "red" : "" }}
+        >
+          {stock.name ? stock.name : "name not avialbe"}
+        </div>
+        <div
+          className={styles.changePercent}
+          style={{
+            backgroundColor: stock.change_percent > 0 ? "#38ef7d" : "#F00000",
+          }}
+        >
+          {`${stock.change_percent}%`}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default StockCard;

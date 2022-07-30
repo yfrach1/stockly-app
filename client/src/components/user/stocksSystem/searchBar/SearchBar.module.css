@@ -1,21 +1,37 @@
-/* input[type="text"] {
-   padding-left: 15px;
-   width: 78%;
-   padding: 15px;
-   margin: 5px 0 22px 0;
-   border: none;
-   background: #ffffff;
-   outline: none;
+.searchBarContainer {
+  position: relative;
+  /* border: 2px solid red; */
+  display: flex;
+  flex-direction: column;
+  width: 30%;
 
-   border-radius: 2px;
-} */
-
-input[type="text"]:focus {
-  background-color: rgb(255, 255, 255);
-  outline: 2px ridge rgb(255, 255, 255);
+  /* border: 2px solid red; */
 }
-.button {
-  color: #f2f2f2;
-  font-size: 16px;
-  background-color: rgb(3, 15, 126);
+
+.searchBarTextBox {
+  width: 100%;
+  padding: 5px 0px;
+  padding-left: 8px;
+  font-size: 20px;
+  margin: 10px;
+  outline: none;
+  border: 2px solid;
+  border-radius: 10px;
+
+  /* background-color: rgba(166, 225, 255, 0.37); */
+  background-color: #a4adb07c;
+  /* background-color: #bdc3c77e; */
+}
+
+.searchBarTextBox:focus {
+  background-color: rgb(255, 255, 255);
+}
+
+.searchIcon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translate(0, -50%);
 }

@@ -19,7 +19,10 @@ export const validateUser = async (userData) => {
 };
 
 export const getUserDataOnStart = async () => {
-  const response = await axios.get(`${url}`);
-  console.log("response : ", response);
-  return response;
+  try {
+    const response = await axios.get(`${url}`);
+    return response;
+  } catch (error) {
+    throw new Error("cockies not exist");
+  }
 };

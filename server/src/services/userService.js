@@ -65,7 +65,6 @@ class UserManager {
       stocks,
     };
 
-    console.log("userData: ", userData);
     return userData;
   }
 
@@ -126,6 +125,12 @@ class UserManager {
         stocks = await this._updateStocksDataOnDb(stocks);
       }
     }
+
+    stocks = stocks.map((stock) => {
+      stock.isMine = true;
+      return stock;
+    });
+    // console.log("stocks in get portfolio: ", stocks);
     return { portfolio, stocks };
   }
   async _createAccessToken(id) {

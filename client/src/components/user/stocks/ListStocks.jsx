@@ -2,21 +2,26 @@ import styles from "./ListStocks.module.css";
 import { v4 as uuidv4 } from "uuid";
 import StockCardConnector from "./stockCard/StockCardConnector";
 
-const ListStocks = ({ myStocks, searchStocks }) => {
-  console.log("myStocks: ", myStocks);
+const ListStocks = ({ stocks }) => {
+  console.log("stocks: ", stocks);
+  const notMyStocksArray = stocks
+    .map((stock, index) => {
+      return stock.isMine ? null : (
+        <StockCardConnector key={index} stock={stock} />
+      );
+    })
+    .filter((stock) => stock !== null);
+  //   console.log("notMyStocksArray: ", notMyStocksArray.length);
+  //   console.log("notMyStocksArray: ", notMyStocksArray);
+  const sepreatedLine = "********************************";
   return (
     <div>
       <div className={styles.grid}>
-        {myStocks.map((stock, index) => (
-          <StockCardConnector key={stock.stock_id} stock={stock} />
-        ))}
-        {searchStocks.map((stock, index) => (
-          <StockCardConnector
-            key={stock.stock_id}
-            stock={stock}
-            addButton={true}
-          />
-        ))}
+        {stocks.map((stock, index) =>
+          stock.isMine ? <StockCardConnector key={index} stock={stock} /> : null
+        )}
+        {notMyStocksArray.length ? sepreatedLine : null}
+        {notMyStocksArray}
       </div>
     </div>
   );

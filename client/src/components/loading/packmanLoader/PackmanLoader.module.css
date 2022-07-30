@@ -1,0 +1,17 @@
+.packmanLoaderContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.packmanLoaderSize {
+  width: 400px;
+}
+
+.text {
+  font-size: 100px;
+  font-weight: 700;
+}
