@@ -1,5 +1,5 @@
 const stockService = require("../services/stockService");
-const { getStockData, getStockMetaData } = require("../clients/stockClient");
+const { getStockData, getStockMetaData, getAPIStockNews } = require("../clients/stockClient");
 
 async function addStock(req, res) {
    const stock = req.body.stock;
@@ -47,6 +47,13 @@ async function getAPISearchData(req, res) {
       : res.status(200).json({ error: "Could not search" });
 }
 
+async function getStockNews(req, res) {
+   const newsArticles = await getAPIStockNews(req.body);
+   newsArticles
+      ? res.status(200).json(newsArticles)
+      : res.status(200).json({ error: "Could not find news" });
+}
+
 module.exports = {
    addStock,
    deleteStock,
@@ -54,4 +61,5 @@ module.exports = {
    getAPIStockMetaData,
    getAPISearchData,
    searchStock,
+   getStockNews,
 };

@@ -7,6 +7,7 @@ const {
    getAPIStockData,
    getAPIStockMetaData,
    getAPISearchData,
+   getStockNews,
 } = require("../controllers/stockContorller");
 const authenticateToken = require("../middlewares/authenticateToken");
 
@@ -16,5 +17,6 @@ stockRouter.delete("/", authenticateToken, deleteStock);
 stockRouter.post("/stockdata", authenticateToken, getAPIStockData);
 stockRouter.get("/metadata", authenticateToken, getAPIStockMetaData);
 stockRouter.get("/searchdata", authenticateToken, getAPISearchData); // ?
+stockRouter.post("/news", authenticateToken, getStockNews);
 
 module.exports = stockRouter;
