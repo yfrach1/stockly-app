@@ -19,7 +19,7 @@ async function searchStock(req, res) {
 }
 
 async function deleteStock(req, res) {
-   stockIdToDelete = req.originalUrl.at(-1);
+   stockIdToDelete = req.originalUrl.split("=")[1];
    const stockData = await stockService.deleteStock(stockIdToDelete);
    stockData
       ? res.status(200).json(stockIdToDelete)
