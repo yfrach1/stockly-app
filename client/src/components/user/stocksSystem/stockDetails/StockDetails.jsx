@@ -37,7 +37,7 @@ const StockDetails = ({
 
         <input type="text" />
         <button
-          onClick={stock.isMine ? "Update" : () => addStockAction(stock)}
+          onClick={stock.isMine ? () => {} : () => addStockAction(stock)}
           className={styles.buttonDelete}
         >
           {stock.isMine ? "Update" : "Add"}

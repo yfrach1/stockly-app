@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./StockCard.module.css";
 
-const StockCard = ({ stock, addStockAction, getStockDetailsAction }) => {
+const StockCard = ({ stock, getStockDetailsAction }) => {
   return (
     <div
       className={styles.stockCard}
