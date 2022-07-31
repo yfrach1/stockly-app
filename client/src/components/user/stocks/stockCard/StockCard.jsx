@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./StockCard.module.css";
 
-const StockCard = ({ stock, getStockDetailsAction }) => {
+const StockCard = ({ stock, getStockDetailsAction  ,getStockNewsAction}) => {
   return (
     <div
       className={styles.stockCard}
-      onClick={() => getStockDetailsAction(stock)}
+      onClick={() => {getStockDetailsAction(stock) ;getStockNewsAction(stock)}}
     >
       <div className={styles.alignStockRow}>
         <div className={styles.ticker}>{stock.ticker}</div>

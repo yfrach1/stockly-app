@@ -91,3 +91,15 @@ export const getPortfolioDetails = async (stocks) => {
 
    // return response;
 };
+
+
+export const getStockNews = async (tickers) => {
+
+  const body = {
+    tickers: tickers,
+  };
+
+  const response = await axios.post(`${url}/news`, body);
+  console.log(response)
+  return response;
+};

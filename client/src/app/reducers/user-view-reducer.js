@@ -1,12 +1,21 @@
 import actionTypes from "../actions/constants";
 
 const initialState = {
+  stockNews: {},
   redirectLoading: false,
   fetchLoading: false,
 };
 
 const userViewReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case actionTypes.GET_STOCK_NEWS_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        stockNews: action.payload.stockNews,
+      };
+    }
+
     case actionTypes.CHECK_USER_TOKEN_REQUEST: {
       return {
         ...state,

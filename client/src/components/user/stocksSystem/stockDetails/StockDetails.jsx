@@ -1,15 +1,11 @@
 import React from "react";
 import { useState, useCallback, useRef } from "react";
 import StockGraph from "../stockGraph/StockGraph";
+import ListNews from "../news/ListNews";
 import styles from "./StockDetails.module.css";
 
-const StockDetails = ({
-   stock,
-   stockInfo,
-   deleteStockAction,
-   addStockAction,
-   updateStockQuantityAction,
-}) => {
+const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction, stockNews,updateStockQuantityAction }) => {
+
    const [quantity, setQuantity] = useState(0);
    const inputElement = useRef(null);
 
@@ -46,7 +42,7 @@ const StockDetails = ({
                   Volume: {stockInfo.data ? `${stockInfo.data.at(-1).volume / 1000}K` : ""}
                </span>
             </div>
-
+            <div className={styles.quantityContainer}>
             <input
                type="text"
                placeholder={stock.quantity ? stock.quantity : ""}
@@ -66,6 +62,8 @@ const StockDetails = ({
                Delete
             </button>
          </div>
+         <ListNews stockNews={stockNews} />
+
       </>
    );
 };

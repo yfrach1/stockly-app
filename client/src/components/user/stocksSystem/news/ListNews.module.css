@@ -1,0 +1,5 @@
+.container {
+   max-height: 20vh;
+   border: 2px solid rgb(115, 115, 115);
+   overflow: scroll;
+}

@@ -3,6 +3,7 @@
    flex: 1;
    padding: 1em;
    background-color: rgba(237, 237, 237, 255);
+   border-left: 2px solid rgb(115, 115, 115);
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -26,6 +27,10 @@
    color: #f2f2f2;
    font-size: 16px;
    background-color: rgb(82, 97, 229);
+}
+
+.quantityContainer {
+   display: flex;
 }
 
 .details {
