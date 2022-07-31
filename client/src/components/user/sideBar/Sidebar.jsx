@@ -23,7 +23,7 @@ function Sidebar({ firstName, lastName, portfolio, signOutAction }) {
       <div className={styles.sidebarContainer}>
          <img src={logo} alt="logo" className={styles.sidebarLogo} />
          <div className={styles.userGreeting}>
-            Welcome back {firstName} {lastName}
+            Welcome back {firstName} {lastName}!
          </div>
 
          <div className={styles.alignCategory} onClick={handleDisplayStocksContent}>

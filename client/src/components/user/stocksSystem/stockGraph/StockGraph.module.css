@@ -1,6 +1,11 @@
 .graphContainer {
    height: 100%;
    width: 100%;
+   padding: 6px;
+   margin-top: 0.8em;
+   border-radius: 10px;
+   background-color: white;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .graph {

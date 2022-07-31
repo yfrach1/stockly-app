@@ -36,35 +36,58 @@ const StockDetails = ({
 
    return (
       <div className={styles.stockDetailsContainer}>
-         <h1>{stock.ticker}</h1>
-         <h2>{stock.name}</h2>
+         <div className={styles.header}>
+            <div className={styles.companyDetailsContainer}>
+               <h1 className={styles.ticker}>{stock.ticker}</h1>
+               <h2 className={styles.stockName}>{stock.name}</h2>
+            </div>
+            <div className={styles.companyRevContainer}>
+               <div className={styles.price}>{stock.price}</div>
+               <div
+                  className={styles.percentage}
+                  style={{
+                     backgroundColor: stock.change_percent > 0 ? "#38ef7d" : "#F00000",
+                  }}
+               >
+                  {stock.change_percent}%
+               </div>
+            </div>
+         </div>
          <StockGraph stockInfo={stockInfo} />
-         <div className={styles.details}>
-            <span>Open: {stockInfo.data ? `${stockInfo.data.at(-1).open}` : ""}</span>
-            <span>High: {stockInfo.data ? `${stockInfo.data.at(-1).high}` : ""}</span>
-            <span>Low: {stockInfo.data ? `${stockInfo.data.at(-1).low}` : ""}</span>
-            <span>Volume: {stockInfo.data ? `${stockInfo.data.at(-1).volume / 1000}K` : ""}</span>
+         <div className={styles.detailsAndAddContainer}>
+            {" "}
+            <div className={styles.details}>
+               <span>Open: {stockInfo.data ? `${stockInfo.data.at(-1).open}` : ""}</span>
+               <span>High: {stockInfo.data ? `${stockInfo.data.at(-1).high}` : ""}</span>
+               <span>Low: {stockInfo.data ? `${stockInfo.data.at(-1).low}` : ""}</span>
+               <span>
+                  Volume: {stockInfo.data ? `${stockInfo.data.at(-1).volume / 1000}K` : ""}
+               </span>
+            </div>
+            <div className={styles.quantityContainer}>
+               Quantity:
+               <input
+                  type="text"
+                  placeholder={stock.quantity ? stock.quantity : ""}
+                  onChange={handleChange}
+                  ref={inputElement}
+                  className={styles.input}
+               />
+               <button
+                  onClick={() => (stock.isMine ? updateStockQuantity() : addStock())}
+                  className={styles.buttonAdd}
+               >
+                  {stock.isMine ? "Update" : "Add"}
+               </button>
+               <button
+                  onClick={() => deleteStockAction(stock.ticker, stock.stock_id)}
+                  className={styles.buttonDelete}
+               >
+                  Delete Stock
+               </button>
+            </div>
          </div>
-         <div className={styles.quantityContainer}>
-            <input
-               type="text"
-               placeholder={stock.quantity ? stock.quantity : ""}
-               onChange={handleChange}
-               ref={inputElement}
-            />
-            <button
-               onClick={() => (stock.isMine ? updateStockQuantity() : addStock())}
-               className={styles.buttonDelete}
-            >
-               {stock.isMine ? "Update" : "Add"}
-            </button>
-            <button
-               onClick={() => deleteStockAction(stock.ticker, stock.stock_id)}
-               className={styles.buttonDelete}
-            >
-               Delete
-            </button>
-         </div>
+
          <ListNews stockNews={stockNews} />
       </div>
    );

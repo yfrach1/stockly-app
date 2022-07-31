@@ -49,8 +49,8 @@ const StockGraph = ({ stockInfo }) => {
                   ],
                },
                autosize: true,
-               paper_bgcolor: "rgba(237, 237, 237, 255)",
-               plot_bgcolor: "rgba(237, 237, 237, 255)",
+               paper_bgcolor: "rgba(255, 255, 255, 255)",
+               plot_bgcolor: "rgba(255, 255, 255, 255)",
                margin: { b: 45, l: 45, r: 5, t: 30 },
             }}
             useResizeHandler={true}
