@@ -39,6 +39,5 @@ const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction }) =
          </div>
       </>
    );
-
-
+};
 export default StockDetails;
