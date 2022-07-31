@@ -55,9 +55,10 @@ const searchStockFailed = (stocks) => ({
    stocks,
 });
 
-const addStockSuccessed = (stockData) => ({
-   type: actionsTypes.ADD_STOCK_REQUEST_SUCCESSED,
-   stockData,
+
+const addStockSuccessed = (stockTicker) => ({
+  type: actionsTypes.ADD_STOCK_REQUEST_SUCCESSED,
+  stockTicker,
 });
 
 const deleteStockSuccessed = (stockId) => ({
@@ -125,15 +126,16 @@ export const checkUserTokenAction = () => {
 };
 
 export const addStockAction = (stock) => {
-   console.log("in add stock action");
-   return async (dispatch) => {
-      //dispatch loader maybe
-      try {
-         const res = await addStock(stock);
-         console.log("res: ", res);
-         if (res) dispatch(addStockSuccessed(res.data));
-      } catch (error) {}
-   };
+  console.log("in add stock action");
+  return async (dispatch) => {
+    //dispatch loader maybe
+    try {
+      const res = await addStock(stock);
+      console.log("stock: ", stock);
+      console.log("res: ", res);
+      if (res) dispatch(addStockSuccessed(stock.ticker));
+    } catch (error) {}
+  };
 };
 
 export const deleteStockAction = (stockId) => {

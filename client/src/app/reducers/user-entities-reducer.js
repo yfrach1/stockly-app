@@ -49,32 +49,43 @@ const userEntitiesReducer = (state = initialState, action) => {
          };
       }
 
-      case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
-         console.log("action.stockData: ", action.stockData);
-         return {
-            ...state,
-            stocks: [...state.stocks, action.stockData],
-            // searchStocks: [
-            //   ...state.searchStocks.filter(
-            //     (stock) => stock.ticker !== action.stockData.ticker
-            //   ),
-            // ],
-         };
-      }
-      case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
-         console.log(action.stockId);
-         return {
-            ...state,
-            stocks: [...state.stocks.filter((stock) => stock.stock_id !== action.stockId)],
-         };
-      }
-      case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
-         console.log(action);
-         return {
-            ...state,
-            stocks: action.stocks,
-         };
-      }
+    case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
+      console.log("action.stockTicker: ", action.stockTicker);
+      let newStocks = [...state.stocks];
+      newStocks = newStocks.map((stock) => {
+        if (stock.ticker === action.stockTicker) {
+          stock.isMine = true;
+        }
+        return stock;
+      });
+
+      console.log("newStocks: ", newStocks);
+      return {
+        ...state,
+        stocks: newStocks,
+        // searchStocks: [
+        //   ...state.searchStocks.filter(
+        //     (stock) => stock.ticker !== action.stockData.ticker
+        //   ),
+        // ],
+      };
+    }
+    case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
+      console.log(action.stockId);
+      return {
+        ...state,
+        stocks: [
+          ...state.stocks.filter((stock) => stock.stock_id !== action.stockId),
+        ],
+      };
+    }
+    case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
+      console.log(action);
+      return {
+        ...state,
+        stocks: action.stocks,
+      };
+    }
 
       default:
          return state;
