@@ -1,7 +1,6 @@
 import actionTypes from "../actions/constants";
 
 const initialState = {
-<<<<<<< HEAD
   userAuth: false,
   firstName: "",
   lastName: "",
@@ -46,55 +45,6 @@ const userEntitiesReducer = (state = initialState, action) => {
         stocks: action.userData.stocks,
       };
     }
-=======
-   userAuth: false,
-   firstName: "",
-   lastName: "",
-   portfolio: {}, //will change to [] later when we will have more then one
-   stocks: [],
-};
-
-const userEntitiesReducer = (state = initialState, action) => {
-   switch (action.type) {
-      case actionTypes.SIGN_UP_REQUEST_SUCCESSED: {
-         return {
-            ...state,
-            userAuth: true,
-            lastName: action.userData.lastName,
-            firstName: action.userData.firstName,
-            portfolio: action.userData.portfolio,
-         };
-      }
-      case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
-         console.log(`userdata:${action.userData.stocks}`);
-         return {
-            ...state,
-            userAuth: true,
-            lastName: action.userData.lastName,
-            firstName: action.userData.firstName,
-            portfolio: action.userData.portfolio,
-            stocks: action.userData.stocks,
-         };
-      }
-
-      case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
-         return {
-            ...state,
-            userAuth: false,
-         };
-      }
-      //check if need to stay with 2 same cases
-      case actionTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED: {
-         return {
-            ...state,
-            userAuth: true,
-            lastName: action.userData.lastName,
-            firstName: action.userData.firstName,
-            portfolio: action.userData.portfolio,
-            stocks: action.userData.stocks,
-         };
-      }
->>>>>>> 84acf34ec58e57ed25cf237abf874f6ba865bcbe
 
     case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
       console.log("action.stockTicker: ", action.stockTicker);
@@ -132,9 +82,9 @@ const userEntitiesReducer = (state = initialState, action) => {
       };
     }
 
-      default:
-         return state;
-   }
+    default:
+      return state;
+  }
 };
 
 export default userEntitiesReducer;
