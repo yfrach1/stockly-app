@@ -31,6 +31,15 @@
 
 .quantityContainer {
    display: flex;
+   background-color: white;
+   font-size: 1.3em;
+   transition: 0.4s;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+   padding: 0.7em 1.5em;
+   border-radius: 5px;
+   background-color: white;
+   margin-top: -2.3em;
+   margin-bottom: 1em;
 }
 
 .details {
@@ -42,8 +51,18 @@
 
 .details {
    display: flex;
-   margin-top: 2rem;
-   gap: 2rem;
+   margin-top: 1rem;
+   gap: 2.5rem;
+   padding: 0.7em 2em;
+   border-radius: 5px;
+   background-color: white;
+   font-size: 1.3em;
+   transition: 0.4s;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.details:hover {
+   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header {
