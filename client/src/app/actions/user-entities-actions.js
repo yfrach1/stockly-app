@@ -6,7 +6,6 @@ import {
    searchStock,
    deleteStock,
    updateStockQuantity,
-   updateStockQuantity,
 } from "../services/stockService";
 
 const signUpRequest = () => ({

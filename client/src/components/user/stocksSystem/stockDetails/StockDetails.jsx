@@ -4,8 +4,14 @@ import StockGraph from "../stockGraph/StockGraph";
 import ListNews from "../news/ListNews";
 import styles from "./StockDetails.module.css";
 
-const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction, stockNews,updateStockQuantityAction }) => {
-
+const StockDetails = ({
+   stock,
+   stockInfo,
+   deleteStockAction,
+   addStockAction,
+   stockNews,
+   updateStockQuantityAction,
+}) => {
    const [quantity, setQuantity] = useState(0);
    const inputElement = useRef(null);
 
@@ -29,20 +35,17 @@ const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction, sto
    }, [quantity]);
 
    return (
-      <>
-         <div className={styles.stockDetailsContainer}>
-            <h1>{stock.ticker}</h1>
-            <h2>{stock.name}</h2>
-            <StockGraph stockInfo={stockInfo} />
-            <div className={styles.details}>
-               <span>Open: {stockInfo.data ? `${stockInfo.data.at(-1).open}` : ""}</span>
-               <span>High: {stockInfo.data ? `${stockInfo.data.at(-1).high}` : ""}</span>
-               <span>Low: {stockInfo.data ? `${stockInfo.data.at(-1).low}` : ""}</span>
-               <span>
-                  Volume: {stockInfo.data ? `${stockInfo.data.at(-1).volume / 1000}K` : ""}
-               </span>
-            </div>
-            <div className={styles.quantityContainer}>
+      <div className={styles.stockDetailsContainer}>
+         <h1>{stock.ticker}</h1>
+         <h2>{stock.name}</h2>
+         <StockGraph stockInfo={stockInfo} />
+         <div className={styles.details}>
+            <span>Open: {stockInfo.data ? `${stockInfo.data.at(-1).open}` : ""}</span>
+            <span>High: {stockInfo.data ? `${stockInfo.data.at(-1).high}` : ""}</span>
+            <span>Low: {stockInfo.data ? `${stockInfo.data.at(-1).low}` : ""}</span>
+            <span>Volume: {stockInfo.data ? `${stockInfo.data.at(-1).volume / 1000}K` : ""}</span>
+         </div>
+         <div className={styles.quantityContainer}>
             <input
                type="text"
                placeholder={stock.quantity ? stock.quantity : ""}
@@ -63,8 +66,8 @@ const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction, sto
             </button>
          </div>
          <ListNews stockNews={stockNews} />
-
-      </>
+      </div>
    );
 };
+
 export default StockDetails;
