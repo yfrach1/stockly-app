@@ -54,6 +54,15 @@ async function getStockNews(req, res) {
       : res.status(200).json({ error: "Could not find news" });
 }
 
+async function updateStockQuantity(req, res) {
+   const stock = req.body.stock;
+   const stockData = await stockService.updateStockQuantity(stock, req.user);
+   stockData
+      ? res.status(200).json(stockData)
+      : res.status(200).json({ error: "Could not add stock" });
+}
+updateStockQuantity;
+
 module.exports = {
    addStock,
    deleteStock,
@@ -62,4 +71,5 @@ module.exports = {
    getAPISearchData,
    searchStock,
    getStockNews,
+   updateStockQuantity,
 };
