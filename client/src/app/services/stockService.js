@@ -23,11 +23,7 @@ export const searchStock = async (stockSearchKey, portfolioId) => {
     portfolioId,
   };
 
-  console.log("portfolioId: ", portfolioId);
-  console.log("stockSearchKey: ", stockSearchKey);
-
   const response = await axios.post(`${url}/search`, body);
-  console.log("response:", response);
   return response;
 
   //   console.log("response: ", response);

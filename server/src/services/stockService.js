@@ -24,8 +24,8 @@ class StockManager {
         name: { [Op.substring]: searchKey },
       },
     });
-
-    const formateStockData = stocks.map((stock) => this._formatStocks(stock));
+    const formateStockData = stocks.map((stock) => this.formatStocks(stock));
+    console.log("formateStockData:", formateStockData);
     return formateStockData;
   }
   async addStock(stock, user) {
@@ -73,6 +73,9 @@ class StockManager {
       portfolioId,
       stockSearchKey
     );
+    if (!stockSearchKey.length) {
+      return stocksDetailsFromDB;
+    }
     const stocksDetailsFromApi = await stockClient.searchStock(stockSearchKey);
     const searchResult = stocksDetailsFromApi.map((result) => {
       result.isMine = this.doesTickerExistInDb(

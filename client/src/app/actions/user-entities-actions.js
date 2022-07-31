@@ -159,7 +159,6 @@ export const deleteStockAction = (stockId) => {
 
 export const searchStockAction = (stockSearchKey, portfolioId) => {
   return async (dispatch) => {
-    //dispatch loader maybe
     dispatch(searchStockRequest());
     try {
       const res = await searchStock(stockSearchKey, portfolioId);
