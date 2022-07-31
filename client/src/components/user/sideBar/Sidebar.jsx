@@ -1,5 +1,4 @@
 import styles from "./Sidebar.module.css";
-import { Navigation } from "react-minimal-side-navigation";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import downArrow from "../../../assets/images/down_arrow.svg";
 import upArrow from "../../../assets/images/up_arrow.svg";
@@ -7,9 +6,7 @@ import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
 import { FaDollarSign, FaBitcoin, FaSignOutAlt, FaArrowDown } from "react-icons/fa";
 import logo from "../../../assets/images/newlogo.png";
 import { Fragment, useState } from "react";
-import { useEffect } from "react";
-import { logOutUser } from "../../../app/services/userService";
-function Sidebar({ firstName, lastName, portfolio }) {
+function Sidebar({ firstName, lastName, portfolio, signOutAction }) {
    const [showStocksContent, setShowStocksContent] = useState(false);
    const [showCryptoContent, setShowCryptoContent] = useState(false);
 
@@ -53,7 +50,8 @@ function Sidebar({ firstName, lastName, portfolio }) {
             <FaSignOutAlt />{" "}
             <button
                onClick={() => {
-                  logOutUser();
+                  signOutAction();
+                  history.push("/home");
                }}
                className={styles.categoryText}
             >
