@@ -3,7 +3,7 @@ import actionTypes from "../actions/constants";
 const initialState = {
   searchKey: "ccc",
   stockDetails: {},
-  stock: {},
+  //stock: {},
   redirectLoading: false,
   fetchLoading: false,
 };
@@ -11,7 +11,6 @@ const initialState = {
 const userViewReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_SEARCH_KEY: {
-      console.log("in search case : ", action.searchKey);
       return {
         ...state,
         searchKey: action.searchKey,
@@ -22,7 +21,7 @@ const userViewReducer = (state = initialState, action) => {
       return {
         ...state,
         stockDetails: action.payload.stockData.stockData,
-        stock: action.payload.stockData.stock,
+        //stock: action.payload.stockData.stock,
       };
     }
     case actionTypes.CHECK_USER_TOKEN_REQUEST: {
@@ -102,7 +101,7 @@ const userViewReducer = (state = initialState, action) => {
     case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
       return {
         ...state,
-        stock: (state.stock.isMine = true),
+        //stock: (state.stock.isMine = true),
       };
     }
     default:

@@ -28,9 +28,7 @@ const userEntitiesReducer = (state = initialState, action) => {
         firstName: action.userData.firstName,
         portfolio: action.userData.portfolio,
         stocks: action.userData.stocks,
-        stock: action.userData.stocks.length
-          ? action.userData.stocks.length[0]
-          : {},
+        stock: action.userData.stocks.length ? action.userData.stocks[0] : {},
       };
     }
     //check if need to stay with 2 same cases
@@ -43,11 +41,11 @@ const userEntitiesReducer = (state = initialState, action) => {
         firstName: action.userData.firstName,
         portfolio: action.userData.portfolio,
         stocks: action.userData.stocks,
+        stock: action.stocks.length ? action.stocks[0] : {},
       };
     }
 
     case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
-      console.log("action.stockTicker: ", action.stockTicker);
       let newStocks = [...state.stocks];
       newStocks = newStocks.map((stock) => {
         if (stock.ticker === action.stockTicker) {
@@ -56,10 +54,10 @@ const userEntitiesReducer = (state = initialState, action) => {
         return stock;
       });
 
-      console.log("newStocks: ", newStocks);
       return {
         ...state,
         stocks: newStocks,
+        stock: (state.stock.isMine = true),
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
@@ -72,11 +70,10 @@ const userEntitiesReducer = (state = initialState, action) => {
       };
     }
     case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
-      console.log(action);
       return {
         ...state,
         stocks: action.stocks,
-        stock: action.stocks.length ? action.stocks.length[0] : {},
+        stock: action.stocks.length ? action.stocks[0] : {},
       };
     }
     case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {

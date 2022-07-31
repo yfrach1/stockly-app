@@ -162,7 +162,6 @@ export const searchStockAction = (stockSearchKey, portfolioId) => {
     dispatch(searchStockRequest());
     try {
       const res = await searchStock(stockSearchKey, portfolioId);
-      console.log("res.data: ", res.data);
       dispatch(searchStockSuccessed(res.data));
     } catch (error) {
       console.log("error: ", error);
