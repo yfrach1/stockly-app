@@ -1,5 +1,5 @@
 import actionsTypes from "./constants";
-import { getStockDetails, getPortfolioDetails } from "../services/stockService";
+import { getStockDetails, getPortfolioDetails ,getStockNews} from "../services/stockService";
 
 const setSearchKey = (searchKey) => ({
   type: actionsTypes.SET_SEARCH_KEY,
@@ -9,6 +9,10 @@ const setSearchKey = (searchKey) => ({
 const getStockDetailsSuccessed = (stockData, stock) => ({
   type: actionsTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED,
   payload: { stockData, stock },
+});
+const getStockNewsSuccessed = (stockNews) => ({
+  type: actionsTypes.GET_STOCK_NEWS_REQUEST_SUCCESSED,
+  payload: { stockNews },
 });
 
 export const setSearchKeyAction = (searchKey) => {
@@ -29,7 +33,16 @@ export const getStockDetailsAction = (stock) => {
     }
   };
 };
-
+export const getStockNewsAction = (stock) => {
+  return async (dispatch) => {
+    try {
+      const stockNews = await getStockNews(stock.ticker);
+      dispatch(getStockNewsSuccessed(stockNews ));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 export const getPortfolioHistorysAction = (stocks) => {
    return async (dispatch) => {
       try {

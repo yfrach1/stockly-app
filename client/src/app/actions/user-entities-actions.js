@@ -1,6 +1,6 @@
 import actionsTypes from "./constants";
 import { addNewUser, validateUser, getUserDataOnStart, logOutUser } from "../services/userService";
-import { addStock, getStockDetails, searchStock, deleteStock } from "../services/stockService";
+import { addStock, getStockDetails, searchStock, deleteStock,getStockNews} from "../services/stockService";
 
 const signUpRequest = () => ({
    type: actionsTypes.SIGN_UP_REQUEST,
