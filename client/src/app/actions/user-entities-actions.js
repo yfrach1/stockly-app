@@ -75,6 +75,11 @@ const deleteStockSuccessed = (stockId) => ({
   stockId,
 });
 
+const getStockDetailsSuccessed = (stockData, stock) => ({
+  type: actionsTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED,
+  payload: { stockData, stock },
+});
+
 export const signUpAction = (newUserData) => {
   return async (dispatch) => {
     dispatch(signUpRequest());
@@ -100,7 +105,6 @@ export const signInAction = (loginUserData) => {
     dispatch(signInRequest());
     try {
       const res = await validateUser(loginUserData);
-      console.log("sign in action res:", res);
       dispatch(signInRequestSuccessed(res.data));
     } catch (error) {
       console.log(error.message);
@@ -135,13 +139,10 @@ export const checkUserTokenAction = () => {
 };
 
 export const addStockAction = (stock) => {
-  console.log("in add stock action");
   return async (dispatch) => {
     //dispatch loader maybe
     try {
       const res = await addStock(stock);
-      console.log("stock: ", stock);
-      console.log("res: ", res);
       if (res) dispatch(addStockSuccessed(stock.ticker));
     } catch (error) {}
   };
@@ -151,7 +152,6 @@ export const deleteStockAction = (stockId) => {
   return async (dispatch) => {
     try {
       const res = await deleteStock(stockId);
-      console.log("res inside action: ", res);
       if (res) dispatch(deleteStockSuccessed(stockId));
     } catch (error) {}
   };
@@ -169,3 +169,29 @@ export const searchStockAction = (stockSearchKey, portfolioId) => {
     }
   };
 };
+
+export const getStockDetailsAction = (stock) => {
+  return async (dispatch) => {
+    //dispatch loader maybe
+    try {
+      const stockData = await getStockDetails(stock.ticker);
+
+      dispatch(getStockDetailsSuccessed({ stockData, stock }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// export const updateStockAction = (stock) => {
+//   return async (dispatch) => {
+//     dispatch(signInRequest());
+//     try {
+//       const res = await validateUser(loginUserData);
+//       dispatch(signInRequestSuccessed(res.data));
+//     } catch (error) {
+//       console.log(error.message);
+//       //dispatch(signUpRequestFailed());
+//     }
+//   };
+// };

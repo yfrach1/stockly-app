@@ -1,24 +1,14 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getSearchKey } from "../../../../app/selectors/user-view-selectors";
-import { setSearchKeyAction } from "../../../../app/actions/user-view-actions";
-import {
-  searchStockAction,
-  checkUserTokenAction,
-} from "../../../../app/actions/user-entities-actions";
+import { searchStockAction } from "../../../../app/actions/user-entities-actions";
 import SearchBar from "./SearchBar";
 
 const mapStateToProps = (state, ownProps) => {
-  const searchKey = getSearchKey(state);
-
-  return { searchKey };
+  return {};
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return bindActionCreators(
-    { setSearchKeyAction, searchStockAction, checkUserTokenAction },
-    dispatch
-  );
+  return bindActionCreators({ searchStockAction }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
