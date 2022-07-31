@@ -36,8 +36,23 @@ const StockDetails = ({
 
    return (
       <div className={styles.stockDetailsContainer}>
-         <h1>{stock.ticker}</h1>
-         <h2>{stock.name}</h2>
+         <div className={styles.header}>
+            <div className={styles.companyDetailsContainer}>
+               <h1 className={styles.ticker}>{stock.ticker}</h1>
+               <h2 className={styles.stockName}>{stock.name}</h2>
+            </div>
+            <div className={styles.companyRevContainer}>
+               <div className={styles.price}>{stock.price}</div>
+               <div
+                  className={styles.percentage}
+                  style={{
+                     backgroundColor: stock.change_percent > 0 ? "#38ef7d" : "#F00000",
+                  }}
+               >
+                  {stock.change_percent}%
+               </div>
+            </div>
+         </div>
          <StockGraph stockInfo={stockInfo} />
          <div className={styles.details}>
             <span>Open: {stockInfo.data ? `${stockInfo.data.at(-1).open}` : ""}</span>

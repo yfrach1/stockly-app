@@ -1,6 +1,6 @@
 .container {
    border: 2px solid rgb(169, 169, 169);
-   height: 15%;
+   height: 10%;
    display: flex;
    justify-content: space-between;
 }
@@ -12,7 +12,6 @@
    background-color: rgb(3, 15, 126);
    transition: all 0.4s;
    cursor: pointer;
-   text-decoration: none !important;
    font-size: 20px;
    font-weight: 700;
    color: #f2f2f2;
