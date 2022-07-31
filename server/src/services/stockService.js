@@ -27,6 +27,7 @@ class StockManager {
       const formateStockData = stocks.map((stock) => this.formatStocks(stock));
       return formateStockData;
    }
+
    async addStock(stock, user) {
       const UserPortfolio = await Portfolio.findOne({
          where: { user_id: user.id },
@@ -86,13 +87,16 @@ class StockManager {
 
       return response;
    }
+
+   async updateStockQuantity(stock, user) {
+      const quantity = stock.quantity;
+      const stockToUpdate = await Stock.findOne({ where: { stock_id: stock.stock_id } });
+      const res = await stockToUpdate.update({
+         quantity,
+      });
+
+      return res;
+   }
 }
 
 module.exports = new StockManager();
-
-// const stockMock = {
-//    portfolio_id: "1",
-//    name: "monday",
-//    ticker: "MNDY",
-//    quantity: 3,
-// };

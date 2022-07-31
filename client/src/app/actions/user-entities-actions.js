@@ -1,6 +1,12 @@
 import actionsTypes from "./constants";
 import { addNewUser, validateUser, getUserDataOnStart, logOutUser } from "../services/userService";
-import { addStock, getStockDetails, searchStock, deleteStock } from "../services/stockService";
+import {
+   addStock,
+   getStockDetails,
+   searchStock,
+   deleteStock,
+   updateStockQuantity,
+} from "../services/stockService";
 
 const signUpRequest = () => ({
    type: actionsTypes.SIGN_UP_REQUEST,
@@ -58,6 +64,11 @@ const searchStockFailed = (stocks) => ({
 const addStockSuccessed = (stockTicker) => ({
    type: actionsTypes.ADD_STOCK_REQUEST_SUCCESSED,
    stockTicker,
+});
+
+const updateStockQuantitySuccessed = (stock) => ({
+   type: actionsTypes.UPDATE_STOCK_REQUEST_SUCCESSED,
+   stock,
 });
 
 const deleteStockSuccessed = (stockTicker) => ({
@@ -139,7 +150,15 @@ export const addStockAction = (stock, quantity) => {
       } catch (error) {}
    };
 };
-
+export const updateStockQuantityAction = (stock) => {
+   return async (dispatch) => {
+      //dispatch loader maybe
+      try {
+         await updateStockQuantity(stock);
+         dispatch(updateStockQuantitySuccessed(stock));
+      } catch (error) {}
+   };
+};
 export const deleteStockAction = (stockTicker, stockId) => {
    return async (dispatch) => {
       try {

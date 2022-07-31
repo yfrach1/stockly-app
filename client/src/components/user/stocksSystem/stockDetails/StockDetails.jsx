@@ -3,7 +3,13 @@ import { useState, useCallback, useRef } from "react";
 import StockGraph from "../stockGraph/StockGraph";
 import styles from "./StockDetails.module.css";
 
-const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction }) => {
+const StockDetails = ({
+   stock,
+   stockInfo,
+   deleteStockAction,
+   addStockAction,
+   updateStockQuantityAction,
+}) => {
    const [quantity, setQuantity] = useState(0);
    const inputElement = useRef(null);
 
@@ -19,6 +25,13 @@ const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction }) =
       addStockAction(stock);
       inputElement.current.value = "";
    }, [quantity]);
+
+   const updateStockQuantity = useCallback(() => {
+      stock.quantity = quantity;
+      updateStockQuantityAction(stock);
+      inputElement.current.value = "";
+   }, [quantity]);
+
    return (
       <>
          <div className={styles.stockDetailsContainer}>
@@ -41,7 +54,7 @@ const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction }) =
                ref={inputElement}
             />
             <button
-               onClick={() => (stock.isMine ? "" : addStock())}
+               onClick={() => (stock.isMine ? updateStockQuantity() : addStock())}
                className={styles.buttonDelete}
             >
                {stock.isMine ? "Update" : "Add"}
