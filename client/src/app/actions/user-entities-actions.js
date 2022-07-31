@@ -131,8 +131,10 @@ export const checkUserTokenAction = () => {
     dispatch(checkTokenRequest());
     try {
       const res = await getUserDataOnStart();
+      console.log(res);
       dispatch(checkTokenRequestSuccessed(res.data));
     } catch (error) {
+      console.log(error);
       dispatch(checkTokenRequestFailed());
     }
   };

@@ -42,6 +42,7 @@ const userEntitiesReducer = (state = initialState, action) => {
       action.userData.stocks.forEach(
         (stock) => (stocksDict[stock.ticker] = stock)
       );
+
       return {
         ...state,
         userAuth: true,
@@ -49,7 +50,7 @@ const userEntitiesReducer = (state = initialState, action) => {
         firstName: action.userData.firstName,
         portfolio: action.userData.portfolio,
         stocks: stocksDict,
-        stock: action.stocks.length ? action.stocks[0] : {},
+        stock: action.userData.stocks.length ? action.userData.stocks[0] : {},
       };
     }
 

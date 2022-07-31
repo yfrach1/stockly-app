@@ -6,8 +6,8 @@ import UserView from "./components/user/userView/UserView";
 import PackmanLoader from "./components/loading/packmanLoader/PackmanLoader";
 import OpacityLoader from "./components/loading/fetchStockLoader/OpacityLoader";
 function App({ userAuth, redirectLoading, checkUserTokenAction }) {
-  console.log("userAuth: ", userAuth);
-  console.log("redirectLoading: ", redirectLoading);
+  // console.log("userAuth: ", userAuth);
+  // console.log("redirectLoading: ", redirectLoading);
 
   useEffect(() => {
     console.log("in use effect");

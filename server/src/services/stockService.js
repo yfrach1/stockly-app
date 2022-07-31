@@ -76,7 +76,6 @@ class StockManager {
       return stocksDetailsFromDB;
     }
     const stocksDetailsFromApi = await stockClient.searchStock(stockSearchKey);
-    console.log("stocksDetailsFromApi: ", stocksDetailsFromApi);
     const searchResult = stocksDetailsFromApi.map((result) => {
       result.isMine = this.doesTickerExistInDb(
         result.ticker,
