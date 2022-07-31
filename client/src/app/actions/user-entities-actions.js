@@ -159,11 +159,9 @@ export const deleteStockAction = (stockId) => {
 
 export const searchStockAction = (stockSearchKey, portfolioId) => {
   return async (dispatch) => {
-    //dispatch loader maybe
     dispatch(searchStockRequest());
     try {
       const res = await searchStock(stockSearchKey, portfolioId);
-      console.log("res.data: ", res.data);
       dispatch(searchStockSuccessed(res.data));
     } catch (error) {
       console.log("error: ", error);

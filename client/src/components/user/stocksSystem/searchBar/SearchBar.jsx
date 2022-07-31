@@ -11,9 +11,10 @@ const SearchBar = ({
 }) => {
   const handleChange = useCallback(
     (e) => {
-      if (e.target.value !== "") {
-        searchStockAction(e.target.value, portfolioId);
-      }
+      searchStockAction(e.target.value, portfolioId);
+      // if (e.target.value !== "") {
+      //   searchStockAction(e.target.value, portfolioId);
+      // }
     },
     [searchStockAction]
   );
