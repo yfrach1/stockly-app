@@ -79,12 +79,16 @@ const StockDetails = ({
                >
                   {stock.isMine ? "Update" : "Add"}
                </button>
-               <button
-                  onClick={() => deleteStockAction(stock.ticker, stock.stock_id)}
-                  className={styles.buttonDelete}
-               >
-                  Delete Stock
-               </button>
+               {stock.isMine ? (
+                  <button
+                     onClick={() => deleteStockAction(stock.ticker, stock.stock_id)}
+                     className={styles.buttonDelete}
+                  >
+                     Delete Stock
+                  </button>
+               ) : (
+                  <></>
+               )}
             </div>
          </div>
 
