@@ -5,6 +5,10 @@ export const getFirstName = (state) => getUserEntities(state).firstName;
 export const getLastName = (state) => getUserEntities(state).lastName;
 export const getPortfolio = (state) => getUserEntities(state).portfolio;
 export const getPortfolioId = (state) => getUserEntities(state).portfolio.id;
-export const getMyStocks = (state) => getUserEntities(state).stocks;
+export const getMyStocks = (state) => {
+  const stockObj = getUserEntities(state).stocks;
+  const stocksArray = Object.keys(stockObj).map((key) => stockObj[key]);
+  return stocksArray;
+};
 export const getStock = (state) => getUserEntities(state).stock;
 export const getStockDetails = (state) => getUserEntities(state).stockDetails;

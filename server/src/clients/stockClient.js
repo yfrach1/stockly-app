@@ -6,8 +6,8 @@ const getStockData = async (stockQuery) => {
   const API_URL = "https://api.tiingo.com/tiingo/daily/";
   try {
     let params = new URLSearchParams({
-      // startDate: stockQuery.startDate, //YYYY-MM-DD
-      startDate: "2020-01-01",
+      startDate: stockQuery.startDate, //YYYY-MM-DD
+      //startDate: "2020-01-01",
       endDate: stockQuery.endDate, //YYYY-MM-DD
       resampleFreq: stockQuery.resampleFreq, // daily/weekly/monthly
       token: API_KEY,
@@ -61,28 +61,36 @@ const searchStock = async (searchQuery) => {
     const searchData = await fetch(URL);
     searchResults = await searchData.json();
 
-    let stocksDetailsToDB = searchResults.map((result) => {
+    let stocksList = searchResults.map((result) => {
       return { ticker: result.ticker, name: result.name };
     });
-
-    const allStocksSearchResults = await Promise.all(
-      stocksDetailsToDB.map(async (stock) => {
+    console.log("**************************");
+    let allStocksSearchResults = await Promise.all(
+      stocksList.map(async (stock) => {
         stockQuery.ticker = stock.ticker;
         const fullStockDetails = await getStockData(stockQuery);
         return fullStockDetails;
       })
     );
-
-    stocksDetailsToDB = stocksDetailsToDB.map((stock, index) => {
-      if (allStocksSearchResults[index].length) {
-        stock.price = allStocksSearchResults[index][0].close;
-        stock.change_percent = (
-          (allStocksSearchResults[index][0].close /
-            allStocksSearchResults[index][0].open) *
-            100 -
-          100
-        ).toFixed(2);
+    for (let i = 0; i < stocksList.length; i++) {
+      if (!allStocksSearchResults[i].length) {
+        stocksList.splice(i, 1);
       }
+    }
+
+    allStocksSearchResults = allStocksSearchResults.filter(
+      (stock) => stock.length
+    );
+
+    let stocksDetailsToDB = stocksList.map((stock, index) => {
+      stock.price = allStocksSearchResults[index][0].adjClose;
+      stock.change_percent = (
+        (allStocksSearchResults[index][0].adjClose /
+          allStocksSearchResults[index][0].adjOpen) *
+          100 -
+        100
+      ).toFixed(2);
+
       return stock;
     });
 

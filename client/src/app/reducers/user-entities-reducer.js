@@ -5,7 +5,7 @@ const initialState = {
   firstName: "",
   lastName: "",
   portfolio: {}, //will change to [] later when we will have more then one
-  stocks: [],
+  stocks: {},
   stock: {},
   stockDetails: {},
 };
@@ -22,57 +22,60 @@ const userEntitiesReducer = (state = initialState, action) => {
       };
     }
     case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
+      const stocksDict = {};
+      action.userData.stocks.forEach(
+        (stock) => (stocksDict[stock.ticker] = stock)
+      );
       return {
         ...state,
         userAuth: true,
         lastName: action.userData.lastName,
         firstName: action.userData.firstName,
         portfolio: action.userData.portfolio,
-        stocks: action.userData.stocks,
+        stocks: stocksDict,
         stock: action.userData.stocks.length ? action.userData.stocks[0] : {},
       };
     }
     //check if need to stay with 2 same cases
     case actionTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED: {
+      const stocksDict = {};
+      action.userData.stocks.forEach(
+        (stock) => (stocksDict[stock.ticker] = stock)
+      );
       return {
         ...state,
         userAuth: true,
         lastName: action.userData.lastName,
         firstName: action.userData.firstName,
         portfolio: action.userData.portfolio,
-        stocks: action.userData.stocks,
+        stocks: stocksDict,
         stock: action.stocks.length ? action.stocks[0] : {},
       };
     }
 
     case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
-      let newStocks = [...state.stocks];
-      newStocks = newStocks.map((stock) => {
-        if (stock.ticker === action.stockTicker) {
-          stock.isMine = true;
-        }
-        return stock;
-      });
-
+      const updatedStocks = { ...state.stocks };
+      updatedStocks[action.stockTicker].isMine = true;
       return {
         ...state,
-        stocks: newStocks,
-        stock: (state.stock.isMine = true),
+        stocks: updatedStocks,
+        stock: updatedStocks[action.stockTicker],
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
-      console.log(action.stockId);
+      const updatedStocks = { ...state.stocks };
+      delete updatedStocks[action.stockTicker];
       return {
         ...state,
-        stocks: [
-          ...state.stocks.filter((stock) => stock.stock_id !== action.stockId),
-        ],
+        stocks: updatedStocks,
       };
     }
     case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
+      const stocksDict = {};
+      action.stocks.forEach((stock) => (stocksDict[stock.ticker] = stock));
       return {
         ...state,
-        stocks: action.stocks,
+        stocks: stocksDict,
         stock: action.stocks.length ? action.stocks[0] : {},
       };
     }
