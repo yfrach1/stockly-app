@@ -1,53 +1,50 @@
 import actionTypes from "../actions/constants";
 
 const initialState = {
-   userAuth: false,
-   firstName: "",
-   lastName: "",
-   portfolio: {}, //will change to [] later when we will have more then one
-   stocks: [],
+  userAuth: false,
+  firstName: "",
+  lastName: "",
+  portfolio: {}, //will change to [] later when we will have more then one
+  stocks: [],
+  stock: {},
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
-   switch (action.type) {
-      case actionTypes.SIGN_UP_REQUEST_SUCCESSED: {
-         return {
-            ...state,
-            userAuth: true,
-            lastName: action.userData.lastName,
-            firstName: action.userData.firstName,
-            portfolio: action.userData.portfolio,
-         };
-      }
-      case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
-         console.log(`userdata:${action.userData.stocks}`);
-         return {
-            ...state,
-            userAuth: true,
-            lastName: action.userData.lastName,
-            firstName: action.userData.firstName,
-            portfolio: action.userData.portfolio,
-            stocks: action.userData.stocks,
-         };
-      }
-
-      case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
-         return {
-            ...state,
-            userAuth: false,
-         };
-      }
-      //check if need to stay with 2 same cases
-      case actionTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED: {
-         return {
-            ...state,
-            userAuth: true,
-            lastName: action.userData.lastName,
-            firstName: action.userData.firstName,
-            portfolio: action.userData.portfolio,
-            stocks: action.userData.stocks,
-         };
-      }
+  switch (action.type) {
+    case actionTypes.SIGN_UP_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        userAuth: true,
+        lastName: action.userData.lastName,
+        firstName: action.userData.firstName,
+        portfolio: action.userData.portfolio,
+      };
+    }
+    case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        userAuth: true,
+        lastName: action.userData.lastName,
+        firstName: action.userData.firstName,
+        portfolio: action.userData.portfolio,
+        stocks: action.userData.stocks,
+        stock: action.userData.stocks.length
+          ? action.userData.stocks.length[0]
+          : {},
+      };
+    }
+    //check if need to stay with 2 same cases
+    case actionTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED: {
+      console.log("action: ", action);
+      return {
+        ...state,
+        userAuth: true,
+        lastName: action.userData.lastName,
+        firstName: action.userData.firstName,
+        portfolio: action.userData.portfolio,
+        stocks: action.userData.stocks,
+      };
+    }
 
     case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
       console.log("action.stockTicker: ", action.stockTicker);
@@ -63,11 +60,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: newStocks,
-        // searchStocks: [
-        //   ...state.searchStocks.filter(
-        //     (stock) => stock.ticker !== action.stockData.ticker
-        //   ),
-        // ],
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
@@ -84,12 +76,19 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: action.stocks,
+        stock: action.stocks.length ? action.stocks.length[0] : {},
+      };
+    }
+    case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        userAuth: false,
       };
     }
 
-      default:
-         return state;
-   }
+    default:
+      return state;
+  }
 };
 
 export default userEntitiesReducer;

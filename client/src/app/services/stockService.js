@@ -23,8 +23,13 @@ export const searchStock = async (stockSearchKey, portfolioId) => {
     portfolioId,
   };
 
+  console.log("portfolioId: ", portfolioId);
+  console.log("stockSearchKey: ", stockSearchKey);
+
   const response = await axios.post(`${url}/search`, body);
+  console.log("response:", response);
   return response;
+
   //   console.log("response: ", response);
   //   const myStocks = response.data.filter((stock) =>
   //     stock.isMine ? true : false
@@ -56,28 +61,28 @@ export const getStockDetails = async (ticker) => {
 };
 
 export const getPortfolioDetails = async (stocks) => {
-   const stockQuantity = 4; // will use the user quantity in the future
+  const stockQuantity = 4; // will use the user quantity in the future
 
-   const totalPortfolioValues = {};
-   console.log("starting totalPortfolioValues", totalPortfolioValues);
+  const totalPortfolioValues = {};
+  console.log("starting totalPortfolioValues", totalPortfolioValues);
 
-   for (let i = 0; i < stocks.length; i++) {
-      let { data } = await getStockDetails(stocks[i].ticker);
-      for (const stockPrice of data) {
-         if (!totalPortfolioValues[stockPrice.date]) {
-            totalPortfolioValues[stockPrice.date] = 0;
-         }
-
-         totalPortfolioValues[stockPrice.date] += stockPrice.close * stockQuantity;
+  for (let i = 0; i < stocks.length; i++) {
+    let { data } = await getStockDetails(stocks[i].ticker);
+    for (const stockPrice of data) {
+      if (!totalPortfolioValues[stockPrice.date]) {
+        totalPortfolioValues[stockPrice.date] = 0;
       }
-   }
 
-   console.log("ending totalPortfolioValues", totalPortfolioValues);
-   const list = Object.entries(totalPortfolioValues).map(([date, value]) => ({
-      date,
-      value,
-   }));
-   console.log(list);
+      totalPortfolioValues[stockPrice.date] += stockPrice.close * stockQuantity;
+    }
+  }
 
-   // return response;
+  console.log("ending totalPortfolioValues", totalPortfolioValues);
+  const list = Object.entries(totalPortfolioValues).map(([date, value]) => ({
+    date,
+    value,
+  }));
+  console.log(list);
+
+  // return response;
 };

@@ -1,7 +1,7 @@
 import actionTypes from "../actions/constants";
 
 const initialState = {
-  searchKey: "",
+  searchKey: "ccc",
   stockDetails: {},
   stock: {},
   redirectLoading: false,
@@ -11,6 +11,7 @@ const initialState = {
 const userViewReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_SEARCH_KEY: {
+      console.log("in search case : ", action.searchKey);
       return {
         ...state,
         searchKey: action.searchKey,

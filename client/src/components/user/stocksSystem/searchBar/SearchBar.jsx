@@ -7,12 +7,11 @@ const SearchBar = ({
   checkUserTokenAction,
   searchStockAction,
   portfolioId,
+  searchKey,
 }) => {
   const handleChange = useCallback(
     (e) => {
-      if (e.target.value === "") {
-        checkUserTokenAction();
-      } else {
+      if (e.target.value !== "") {
         searchStockAction(e.target.value, portfolioId);
       }
     },
@@ -20,7 +19,7 @@ const SearchBar = ({
   );
 
   const debouncedResults = useMemo(() => {
-    return debounce(handleChange, 500);
+    return debounce(handleChange, 1000);
   }, [handleChange]);
 
   useEffect(() => {
@@ -38,6 +37,7 @@ const SearchBar = ({
         className={styles.searchBarTextBox}
         type="text"
         placeholder="Search.."
+        // value={searchKey}
         onChange={debouncedResults}
       />
     </div>
