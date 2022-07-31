@@ -1,5 +1,5 @@
 .container {
-   max-height: 23vh;
+   max-height: 20vh;
    overflow: scroll;
    margin-top: -0.2rem;
 }

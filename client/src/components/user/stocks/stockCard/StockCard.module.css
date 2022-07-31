@@ -15,6 +15,7 @@
 .stockCard:hover {
    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
    transform: scale(1.04);
+   cursor: pointer;
 }
 
 .alignStockRow {
@@ -43,11 +44,13 @@
 }
 
 .changePercent {
-   font-size: 12px;
+   font-size: 14px;
    border-radius: 3px;
    width: 50px;
    text-align: right;
    color: white;
+   padding: 0.15rem 0.2rem;
+   text-align: center;
 }
 
 .addButton {
@@ -73,12 +76,4 @@
 .percentRed {
    font-size: 1.2rem;
    font-weight: 500;
-}
-
-.percentGreen {
-   color: rgb(81, 234, 81);
-}
-
-.percentRed {
-   color: rgb(208, 37, 37);
 }

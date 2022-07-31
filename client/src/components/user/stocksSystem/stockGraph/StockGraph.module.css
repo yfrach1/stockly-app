@@ -8,6 +8,20 @@
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.graph {
-   background-color: rgb(9, 119, 215);
+.button {
+   border: none;
+   cursor: pointer;
+   color: white;
+   background-color: #008cba;
+   border-radius: 2px;
+   padding: 0.35rem;
+   margin: 0.1rem;
+   font-weight: 600;
+   transition: all 0.3s;
+   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.button:hover {
+   transform: scale(1.12);
+   background-color: #00b4f0;
 }
