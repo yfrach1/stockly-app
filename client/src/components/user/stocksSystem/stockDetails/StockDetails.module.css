@@ -3,7 +3,6 @@
    flex: 1;
    padding: 1em;
    background-color: rgba(237, 237, 237, 255);
-   border-left: 2px solid rgb(115, 115, 115);
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -118,7 +117,6 @@
    gap: 0.4em;
    justify-content: center;
    align-items: center;
-   max-width: 70%;
 }
 
 .input {

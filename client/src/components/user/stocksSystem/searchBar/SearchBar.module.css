@@ -12,16 +12,13 @@
    font-size: 20px;
    margin: 10px;
    outline: none;
-   border: 2px solid;
-   border-radius: 10px;
-
-   /* background-color: rgba(166, 225, 255, 0.37); */
-   background-color: #a4adb07c;
-   /* background-color: #bdc3c77e; */
+   border: none;
+   border-radius: 5px;
+   background-color: rgb(255, 255, 255);
 }
 
 .searchBarTextBox:focus {
-   background-color: rgb(255, 255, 255);
+   background-color: #f4fcff;
 }
 
 .searchIcon {
