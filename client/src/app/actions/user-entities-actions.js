@@ -70,9 +70,9 @@ const addStockSuccessed = (stockTicker) => ({
   stockTicker,
 });
 
-const deleteStockSuccessed = (stockId) => ({
+const deleteStockSuccessed = (stockTicker) => ({
   type: actionsTypes.DELETE_STOCK_REQUEST_SUCCESSED,
-  stockId,
+  stockTicker,
 });
 
 const getStockDetailsSuccessed = (stockData, stock) => ({
@@ -142,17 +142,17 @@ export const addStockAction = (stock) => {
   return async (dispatch) => {
     //dispatch loader maybe
     try {
-      const res = await addStock(stock);
-      if (res) dispatch(addStockSuccessed(stock.ticker));
+      await addStock(stock);
+      dispatch(addStockSuccessed(stock.ticker));
     } catch (error) {}
   };
 };
 
-export const deleteStockAction = (stockId) => {
+export const deleteStockAction = (stockTicker, stockId) => {
   return async (dispatch) => {
     try {
       const res = await deleteStock(stockId);
-      if (res) dispatch(deleteStockSuccessed(stockId));
+      if (res) dispatch(deleteStockSuccessed(stockTicker));
     } catch (error) {}
   };
 };
@@ -174,6 +174,7 @@ export const getStockDetailsAction = (stock) => {
   return async (dispatch) => {
     //dispatch loader maybe
     try {
+      console.log("stock:", stock);
       const stockData = await getStockDetails(stock.ticker);
 
       dispatch(getStockDetailsSuccessed({ stockData, stock }));
