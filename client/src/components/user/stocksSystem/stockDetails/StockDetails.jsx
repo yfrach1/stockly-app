@@ -1,8 +1,6 @@
 import React from "react";
-import { useEffect } from "react";
 import StockGraph from "../stockGraph/StockGraph";
 import styles from "./StockDetails.module.css";
-import { deleteStock } from "../../../../app/services/stockService";
 
 const StockDetails = ({
   stock,

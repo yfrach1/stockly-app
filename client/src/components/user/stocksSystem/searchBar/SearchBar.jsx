@@ -3,18 +3,10 @@ import search_icon from "../../../../assets/images/search_icon.svg";
 import styles from "./SearchBar.module.css";
 import debounce from "lodash.debounce";
 
-const SearchBar = ({
-  checkUserTokenAction,
-  searchStockAction,
-  portfolioId,
-  searchKey,
-}) => {
+const SearchBar = ({ searchStockAction, portfolioId }) => {
   const handleChange = useCallback(
     (e) => {
       searchStockAction(e.target.value, portfolioId);
-      // if (e.target.value !== "") {
-      //   searchStockAction(e.target.value, portfolioId);
-      // }
     },
     [searchStockAction]
   );
@@ -38,7 +30,6 @@ const SearchBar = ({
         className={styles.searchBarTextBox}
         type="text"
         placeholder="Search.."
-        // value={searchKey}
         onChange={debouncedResults}
       />
     </div>

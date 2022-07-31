@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addStockAction } from "../../../../app/actions/user-entities-actions";
-import { getStockDetailsAction } from "../../../../app/actions/user-view-actions";
+import { getStockDetailsAction } from "../../../../app/actions/user-entities-actions";
 
 import StockCard from "./StockCard";
 

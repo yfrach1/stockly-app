@@ -7,6 +7,7 @@ const initialState = {
   portfolio: {}, //will change to [] later when we will have more then one
   stocks: [],
   stock: {},
+  stockDetails: {},
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
@@ -33,7 +34,6 @@ const userEntitiesReducer = (state = initialState, action) => {
     }
     //check if need to stay with 2 same cases
     case actionTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED: {
-      console.log("action: ", action);
       return {
         ...state,
         userAuth: true,
@@ -80,6 +80,14 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         userAuth: false,
+      };
+    }
+    //matabe need to add loader before this action
+    case actionTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        stockDetails: action.payload.stockData.stockData,
+        stock: action.payload.stockData.stock,
       };
     }
 
