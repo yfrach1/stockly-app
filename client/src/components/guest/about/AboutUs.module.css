@@ -1,10 +1,29 @@
-.contentPlacement {
-  padding: 20px 20px;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 10px;
-  box-shadow: 0 2px 10px silver;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  margin-top: 140px;
+.title {
+   font-weight: 700;
+   font-size: 60px;
+   color: white;
+}
+
+.text {
+   width: 300px;
+   margin-top: 20px;
+   line-height: 25px;
+   color: #ffffff;
+   font-size: 16px;
+}
+
+.creatorsTitle {
+   margin-top: 1em;
+   width: 300px;
+   color: #ffffff;
+   font-size: 30px;
+   font-weight: 600;
+}
+
+.creatorLink {
+   margin-top: 1em;
+   width: 300px;
+   color: #ffffff;
+   font-size: 20px;
+   font-weight: 600;
 }

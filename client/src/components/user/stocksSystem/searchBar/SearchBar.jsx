@@ -3,24 +3,16 @@ import search_icon from "../../../../assets/images/search_icon.svg";
 import styles from "./SearchBar.module.css";
 import debounce from "lodash.debounce";
 
-const SearchBar = ({
-  checkUserTokenAction,
-  searchStockAction,
-  portfolioId,
-}) => {
+const SearchBar = ({ searchStockAction, portfolioId }) => {
   const handleChange = useCallback(
     (e) => {
-      if (e.target.value === "") {
-        checkUserTokenAction();
-      } else {
-        searchStockAction(e.target.value, portfolioId);
-      }
+      searchStockAction(e.target.value, portfolioId);
     },
     [searchStockAction]
   );
 
   const debouncedResults = useMemo(() => {
-    return debounce(handleChange, 500);
+    return debounce(handleChange, 1000);
   }, [handleChange]);
 
   useEffect(() => {

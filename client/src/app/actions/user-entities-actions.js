@@ -1,6 +1,13 @@
 import actionsTypes from "./constants";
 import { addNewUser, validateUser, getUserDataOnStart, logOutUser } from "../services/userService";
-import { addStock, getStockDetails, searchStock, deleteStock,getStockNews} from "../services/stockService";
+import {
+   addStock,
+   getStockDetails,
+   searchStock,
+   deleteStock,
+   updateStockQuantity,
+   updateStockQuantity,
+} from "../services/stockService";
 
 const signUpRequest = () => ({
    type: actionsTypes.SIGN_UP_REQUEST,
@@ -55,15 +62,24 @@ const searchStockFailed = (stocks) => ({
    stocks,
 });
 
-
 const addStockSuccessed = (stockTicker) => ({
-  type: actionsTypes.ADD_STOCK_REQUEST_SUCCESSED,
-  stockTicker,
+   type: actionsTypes.ADD_STOCK_REQUEST_SUCCESSED,
+   stockTicker,
 });
 
-const deleteStockSuccessed = (stockId) => ({
+const updateStockQuantitySuccessed = (stock) => ({
+   type: actionsTypes.UPDATE_STOCK_REQUEST_SUCCESSED,
+   stock,
+});
+
+const deleteStockSuccessed = (stockTicker) => ({
    type: actionsTypes.DELETE_STOCK_REQUEST_SUCCESSED,
-   stockId,
+   stockTicker,
+});
+
+const getStockDetailsSuccessed = (stockData, stock) => ({
+   type: actionsTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED,
+   payload: { stockData, stock },
 });
 
 export const signUpAction = (newUserData) => {
@@ -91,7 +107,6 @@ export const signInAction = (loginUserData) => {
       dispatch(signInRequest());
       try {
          const res = await validateUser(loginUserData);
-         console.log("sign in action res:", res);
          dispatch(signInRequestSuccessed(res.data));
       } catch (error) {
          console.log(error.message);
@@ -102,7 +117,7 @@ export const signInAction = (loginUserData) => {
 
 export const signOutAction = () => {
    return async (dispatch) => {
-      dispatch(signInRequest());
+      // dispatch(signInRequest());
       try {
          const res = await logOutUser();
          dispatch(signOutRequestSuccessed(res));
@@ -118,45 +133,78 @@ export const checkUserTokenAction = () => {
       dispatch(checkTokenRequest());
       try {
          const res = await getUserDataOnStart();
+         console.log(res);
          dispatch(checkTokenRequestSuccessed(res.data));
       } catch (error) {
+         console.log(error);
          dispatch(checkTokenRequestFailed());
       }
    };
 };
 
-export const addStockAction = (stock) => {
-  console.log("in add stock action");
-  return async (dispatch) => {
-    //dispatch loader maybe
-    try {
-      const res = await addStock(stock);
-      console.log("stock: ", stock);
-      console.log("res: ", res);
-      if (res) dispatch(addStockSuccessed(stock.ticker));
-    } catch (error) {}
-  };
+export const addStockAction = (stock, quantity) => {
+   return async (dispatch) => {
+      //dispatch loader maybe
+      try {
+         await addStock(stock);
+         dispatch(addStockSuccessed(stock.ticker));
+      } catch (error) {}
+   };
 };
-
-export const deleteStockAction = (stockId) => {
+export const updateStockQuantityAction = (stock) => {
+   return async (dispatch) => {
+      //dispatch loader maybe
+      try {
+         await updateStockQuantity(stock);
+         dispatch(updateStockQuantitySuccessed(stock));
+      } catch (error) {}
+   };
+};
+export const deleteStockAction = (stockTicker, stockId) => {
    return async (dispatch) => {
       try {
          const res = await deleteStock(stockId);
-         console.log("res inside action: ", res);
-         if (res) dispatch(deleteStockSuccessed(stockId));
+         if (res) dispatch(deleteStockSuccessed(stockTicker));
       } catch (error) {}
    };
 };
 
 export const searchStockAction = (stockSearchKey, portfolioId) => {
    return async (dispatch) => {
-      //dispatch loader maybe
       dispatch(searchStockRequest());
       try {
          const res = await searchStock(stockSearchKey, portfolioId);
          dispatch(searchStockSuccessed(res.data));
       } catch (error) {
+         console.log("error: ", error);
          dispatch(searchStockFailed());
       }
    };
 };
+
+export const getStockDetailsAction = (stock) => {
+   return async (dispatch) => {
+      //dispatch loader maybe
+      try {
+         console.log("stock:", stock);
+         const stockData = await getStockDetails(stock.ticker);
+
+         dispatch(getStockDetailsSuccessed({ stockData, stock }));
+      } catch (error) {
+         console.log(error);
+      }
+   };
+};
+
+// export const updateStockAction = (stock) => {
+//   return async (dispatch) => {
+//     dispatch(signInRequest());
+//     try {
+//       const res = await validateUser(loginUserData);
+//       dispatch(signInRequestSuccessed(res.data));
+//     } catch (error) {
+//       console.log(error.message);
+//       //dispatch(signUpRequestFailed());
+//     }
+//   };
+// };

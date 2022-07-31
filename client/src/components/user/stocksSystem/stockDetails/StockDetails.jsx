@@ -1,14 +1,32 @@
 import React from "react";
-import { useEffect } from "react";
+import { useState, useCallback, useRef } from "react";
 import StockGraph from "../stockGraph/StockGraph";
 import ListNews from "../news/ListNews";
 import styles from "./StockDetails.module.css";
-import { deleteStock } from "../../../../app/services/stockService";
 
-const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction, stockNews }) => {
-   console.log("stock: ", stock);
-   console.log("stockInfo: ", stockInfo);
-   console.log("stockNews!@#!#!#!#!#!: ", stockNews);
+const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction, stockNews,updateStockQuantityAction }) => {
+
+   const [quantity, setQuantity] = useState(0);
+   const inputElement = useRef(null);
+
+   const handleChange = useCallback(
+      (e) => {
+         setQuantity(e.target.value);
+      },
+      [setQuantity]
+   );
+
+   const addStock = useCallback(() => {
+      stock.quantity = quantity;
+      addStockAction(stock);
+      inputElement.current.value = "";
+   }, [quantity]);
+
+   const updateStockQuantity = useCallback(() => {
+      stock.quantity = quantity;
+      updateStockQuantityAction(stock);
+      inputElement.current.value = "";
+   }, [quantity]);
 
    return (
       <>
@@ -25,22 +43,27 @@ const StockDetails = ({ stock, stockInfo, deleteStockAction, addStockAction, sto
                </span>
             </div>
             <div className={styles.quantityContainer}>
-               <input type="text" />
-               <button
-                  onClick={() => (stock.isMine ? "Update" : () => addStockAction(stock))}
-                  className={styles.buttonDelete}
-               >
-                  {stock.isMine ? "Update" : "Add"}
-               </button>
-               <button
-                  onClick={() => deleteStockAction(stock.stock_id)}
-                  className={styles.buttonDelete}
-               >
-                  Delete
-               </button>
-            </div>
-            <ListNews stockNews={stockNews} />
+            <input
+               type="text"
+               placeholder={stock.quantity ? stock.quantity : ""}
+               onChange={handleChange}
+               ref={inputElement}
+            />
+            <button
+               onClick={() => (stock.isMine ? updateStockQuantity() : addStock())}
+               className={styles.buttonDelete}
+            >
+               {stock.isMine ? "Update" : "Add"}
+            </button>
+            <button
+               onClick={() => deleteStockAction(stock.ticker, stock.stock_id)}
+               className={styles.buttonDelete}
+            >
+               Delete
+            </button>
          </div>
+         <ListNews stockNews={stockNews} />
+
       </>
    );
 };

@@ -3,111 +3,100 @@ const stockClient = require("../clients/stockClient");
 const { Op, InstanceError } = require("sequelize");
 
 class StockManager {
-  _formatStocks(stock) {
-    //  const stockData = {
-    //    stock_id: stock.dataValues.stock_id,
-    //    data: {
-    //      stock_id: stock.dataValues.stock_id,
-    //      portfolio_id: stock.dataValues.portfolio_id,
-    //      ticker: stock.dataValues.ticker,
-    //      name: stock.dataValues.name,
-    //      price: stock.dataValues.price,
-    //      change_percent: stock.dataValues.change_percent,
-    //      quantity: stock.dataValues.quantity,
-    //    },
-    //  };
-    const stockData = {
-      stock_id: stock.dataValues.stock_id,
-      portfolio_id: stock.dataValues.portfolio_id,
-      ticker: stock.dataValues.ticker,
-      name: stock.dataValues.name,
-      price: stock.dataValues.price,
-      change_percent: stock.dataValues.change_percent,
-      quantity: stock.dataValues.quantity,
-    };
+   formatStocks(stock) {
+      const stockData = {
+         stock_id: stock.dataValues.stock_id,
+         portfolio_id: stock.dataValues.portfolio_id,
+         ticker: stock.dataValues.ticker,
+         name: stock.dataValues.name,
+         price: stock.dataValues.price,
+         change_percent: stock.dataValues.change_percent,
+         quantity: stock.dataValues.quantity,
+         isMine: true,
+      };
 
-    return stockData;
-  }
-  async _searchStockInDB(portfolioId, searchKey) {
-    const stocks = await Stock.findAll({
-      where: {
-        portfolio_id: portfolioId,
-        name: { [Op.substring]: searchKey },
-      },
-    });
+      return stockData;
+   }
+   async _searchStockInDB(portfolioId, searchKey) {
+      const stocks = await Stock.findAll({
+         where: {
+            portfolio_id: portfolioId,
+            name: { [Op.substring]: searchKey },
+         },
+      });
+      const formateStockData = stocks.map((stock) => this.formatStocks(stock));
+      return formateStockData;
+   }
 
-    const formateStockData = stocks.map((stock) => this._formatStocks(stock));
-    return formateStockData;
-  }
-  async addStock(stock, user) {
-    const UserPortfolio = await Portfolio.findOne({
-      where: { user_id: user.id },
-    });
-    const response = await Stock.create({
-      portfolio_id: UserPortfolio.portfolio_id,
-      name: stock.name,
-      ticker: stock.ticker,
-      price: stock.price,
-      change_percent: stock.change_percent,
-    });
+   async addStock(stock, user) {
+      const UserPortfolio = await Portfolio.findOne({
+         where: { user_id: user.id },
+      });
+      const response = await Stock.create({
+         portfolio_id: UserPortfolio.portfolio_id,
+         name: stock.name,
+         ticker: stock.ticker,
+         quantity: stock.quantity,
+         price: stock.price,
+         change_percent: stock.change_percent,
+      });
 
-    return response;
-  }
+      return response;
+   }
 
-  async updateStock(stock_id, price, change_percent) {
-    const stock = await Stock.findOne({ where: { stock_id } });
-    await stock.update({
-      price,
-      price,
-      change_percent,
-    });
-  }
+   async updateStock(stock_id, price, change_percent) {
+      const stock = await Stock.findOne({ where: { stock_id } });
+      await stock.update({
+         price,
+         price,
+         change_percent,
+      });
+   }
 
-  doesTickerExistInDb(ticker, stocksDetailsFromDB) {
-    return stocksDetailsFromDB.some((stock) => {
-      return stock.ticker == ticker;
-    });
-  }
+   doesTickerExistInDb(ticker, stocksDetailsFromDB) {
+      return stocksDetailsFromDB.some((stock) => {
+         return stock.ticker == ticker;
+      });
+   }
 
-  _compareStockLastUpdatedDay(date1, date2) {
-    if (
-      date1.getFullYear() === date2.getFullYear() &&
-      date1.getMonth() === date2.getMonth() &&
-      date1.getDate() === date2.getDate()
-    )
-      return true;
-    else return false;
-  }
+   _compareStockLastUpdatedDay(date1, date2) {
+      if (
+         date1.getFullYear() === date2.getFullYear() &&
+         date1.getMonth() === date2.getMonth() &&
+         date1.getDate() === date2.getDate()
+      )
+         return true;
+      else return false;
+   }
 
-  async searchStock(stockSearchKey, portfolioId) {
-    const stocksDetailsFromDB = await this._searchStockInDB(
-      portfolioId,
-      stockSearchKey
-    );
-    const stocksDetailsFromApi = await stockClient.searchStock(stockSearchKey);
-    const searchResult = stocksDetailsFromApi.map((result) => {
-      result.isMine = this.doesTickerExistInDb(
-        result.ticker,
-        stocksDetailsFromDB
-      );
-      return result;
-    });
-    console.log("searchResult:", searchResult);
-    return searchResult;
-  }
+   async searchStock(stockSearchKey, portfolioId) {
+      const stocksDetailsFromDB = await this._searchStockInDB(portfolioId, stockSearchKey);
+      if (!stockSearchKey.length) {
+         return stocksDetailsFromDB;
+      }
+      const stocksDetailsFromApi = await stockClient.searchStock(stockSearchKey);
+      const searchResult = stocksDetailsFromApi.map((result) => {
+         result.isMine = this.doesTickerExistInDb(result.ticker, stocksDetailsFromDB);
+         return result;
+      });
+      return searchResult;
+   }
 
-  async deleteStock(stockId) {
-    const response = await Stock.destroy({ where: { stock_id: stockId } });
+   async deleteStock(stockId) {
+      const response = await Stock.destroy({ where: { stock_id: stockId } });
 
-    return response;
-  }
+      return response;
+   }
+
+   async updateStockQuantity(stock, user) {
+      const quantity = stock.quantity;
+      const stockToUpdate = await Stock.findOne({ where: { stock_id: stock.stock_id } });
+      const res = await stockToUpdate.update({
+         quantity,
+      });
+
+      return res;
+   }
 }
 
 module.exports = new StockManager();
-
-// const stockMock = {
-//    portfolio_id: "1",
-//    name: "monday",
-//    ticker: "MNDY",
-//    quantity: 3,
-// };

@@ -6,9 +6,9 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const ConnectOptionDisplay = ({ showSignIn, showSignUp }) => {
-  return (
-    <div className={styles.displayContent}>
-      {/* <div className={styles.connectionTitles}>
+   return (
+      <div className={styles.displayContent}>
+         {/* <div className={styles.connectionTitles}>
         <Link
           className={showSignIn ? styles.currentOption : undefined}
           to={ClientRoute.Guest.signIn}
@@ -22,29 +22,29 @@ const ConnectOptionDisplay = ({ showSignIn, showSignUp }) => {
           Sign Up
         </Link>
       </div> */}
-      {showSignIn ? <SignInConnector /> : null}
-      {showSignUp ? <SignUpConnector /> : null}
-      {showSignUp ? (
-        <Link className={styles.textLink} to={ClientRoute.Guest.signIn}>
-          already sign out ?
-        </Link>
-      ) : null}
-      {showSignIn ? (
-        <Link className={styles.textLink} to={ClientRoute.Guest.signUp}>
-          not sign out ?
-        </Link>
-      ) : null}
-    </div>
-  );
+         {showSignIn ? <SignInConnector /> : null}
+         {showSignUp ? <SignUpConnector /> : null}
+         {showSignUp ? (
+            <Link className={styles.textLink} to={ClientRoute.Guest.signIn}>
+               Already registered? Click to sign in
+            </Link>
+         ) : null}
+         {showSignIn ? (
+            <Link className={styles.textLink} to={ClientRoute.Guest.signUp}>
+               First time here? Please click to register
+            </Link>
+         ) : null}
+      </div>
+   );
 };
 
 ConnectOptionDisplay.propTypes = {
-  showSignIn: PropTypes.bool,
-  showSignUp: PropTypes.bool,
+   showSignIn: PropTypes.bool,
+   showSignUp: PropTypes.bool,
 };
 
 ConnectOptionDisplay.defaultProps = {
-  showSignIn: false,
-  showSignUp: false,
+   showSignIn: false,
+   showSignUp: false,
 };
 export default ConnectOptionDisplay;
