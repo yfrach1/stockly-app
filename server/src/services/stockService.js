@@ -81,7 +81,6 @@ class StockManager {
       );
       return result;
     });
-    console.log("searchResult: ", searchResult);
     return searchResult;
   }
 

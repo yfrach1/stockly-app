@@ -76,9 +76,13 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: action.stocks,
-        stock: action.userData.stocks.length
-          ? action.userData.stocks.length[0]
-          : {},
+        stock: action.stocks.length ? action.stocks.length[0] : {},
+      };
+    }
+    case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        userAuth: false,
       };
     }
 

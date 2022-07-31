@@ -39,6 +39,7 @@ class UserManager {
       accessToken = await this._createAccessToken(userId);
       userData = await this.getUserData(userId);
     }
+
     return { accessToken, userData };
   }
 
@@ -63,7 +64,6 @@ class UserManager {
       portfolio,
       stocks,
     };
-    // console.log("userData: ", userData);
     return userData;
   }
 
@@ -86,22 +86,20 @@ class UserManager {
     // const tickers = stocks.map((stock) => stock.dataValues.ticker);
     const formatedStocks = await Promise.all(
       stocks.map(async (stock) => {
-        let formatStockData = stockService.formatStocks(stock);
+        let StockData = { ...stock };
         stockQuery.ticker = stock.ticker;
         const fetchResult = await stockClient.getStockData(stockQuery);
         const { price, open, close } =
           this._extractDataFromFetchStockResult(fetchResult);
-        formatStockData.price = price;
-        formatStockData.change_percent = ((close / open) * 100 - 100).toFixed(
-          2
-        );
+        StockData.price = price;
+        StockData.change_percent = ((close / open) * 100 - 100).toFixed(2);
         //update the data to be most upsated
         await stockService.updateStock(
-          formatStockData.stock_id,
-          formatStockData.price,
-          formatStockData.change_percent
+          StockData.stock_id,
+          StockData.price,
+          StockData.change_percent
         );
-        return formatStockData;
+        return StockData;
       })
     );
 
@@ -137,10 +135,9 @@ class UserManager {
     };
     let stocksFromDb = userPortfolio.Stocks;
     let stocks = stocksFromDb.map((stock) => stockService.formatStocks(stock));
-    // console.log("stocks: ", stocks);
     if (stocksFromDb.length) {
       if (
-        this._compareStockLastUpdatedDay(
+        !this._compareStockLastUpdatedDay(
           stocksFromDb[0].dataValues.updatedAt,
           new Date()
         )

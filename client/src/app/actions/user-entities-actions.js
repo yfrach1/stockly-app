@@ -100,14 +100,23 @@ export const signInAction = (loginUserData) => {
     dispatch(signInRequest());
     try {
       const res = await validateUser(loginUserData);
-      const stopLoadin = setTimeout(() => {
-        dispatch(signInRequestSuccessed(res.data));
-      }, 1500);
-      stopLoadin();
-      // dispatch(signInRequestSuccessed(res.data));
+      console.log("sign in action res:", res);
+      dispatch(signInRequestSuccessed(res.data));
     } catch (error) {
       console.log(error.message);
       //dispatch(signUpRequestFailed());
+    }
+  };
+};
+
+export const signOutAction = () => {
+  return async (dispatch) => {
+    // dispatch(signInRequest());
+    try {
+      const res = await logOutUser();
+      dispatch(signOutRequestSuccessed(res));
+    } catch (error) {
+      console.log(error.message);
     }
   };
 };
@@ -118,16 +127,8 @@ export const checkUserTokenAction = () => {
     dispatch(checkTokenRequest());
     try {
       const res = await getUserDataOnStart();
-      // console.log("in success check token: ", res.data);
-      // dispatch(checkTokenRequestSuccessed(res.data));
-      setTimeout(() => {
-        console.log("res.data: ", res.data);
-        dispatch(checkTokenRequestSuccessed(res.data));
-      }, 1500);
-
-      // dispatch(checkTokenRequestSuccessed(res.data));
+      dispatch(checkTokenRequestSuccessed(res.data));
     } catch (error) {
-      console.log("in failed check token: ", error);
       dispatch(checkTokenRequestFailed());
     }
   };
@@ -162,8 +163,10 @@ export const searchStockAction = (stockSearchKey, portfolioId) => {
     dispatch(searchStockRequest());
     try {
       const res = await searchStock(stockSearchKey, portfolioId);
+      console.log("res.data: ", res.data);
       dispatch(searchStockSuccessed(res.data));
     } catch (error) {
+      console.log("error: ", error);
       dispatch(searchStockFailed());
     }
   };
