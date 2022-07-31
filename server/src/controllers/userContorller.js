@@ -27,6 +27,7 @@ async function loginUser(req, res) {
 
 async function getUserData(req, res) {
   const userData = await userService.getUserData(req.user.id);
+  // console.log("userDatauserData: ", userData);
   userData
     ? res.status(200).json(userData)
     : res.status(401).json({ error: "Authorization denied" });

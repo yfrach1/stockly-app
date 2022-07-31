@@ -3,19 +3,7 @@ const stockClient = require("../clients/stockClient");
 const { Op, InstanceError } = require("sequelize");
 
 class StockManager {
-  _formatStocks(stock) {
-    //  const stockData = {
-    //    stock_id: stock.dataValues.stock_id,
-    //    data: {
-    //      stock_id: stock.dataValues.stock_id,
-    //      portfolio_id: stock.dataValues.portfolio_id,
-    //      ticker: stock.dataValues.ticker,
-    //      name: stock.dataValues.name,
-    //      price: stock.dataValues.price,
-    //      change_percent: stock.dataValues.change_percent,
-    //      quantity: stock.dataValues.quantity,
-    //    },
-    //  };
+  formatStocks(stock) {
     const stockData = {
       stock_id: stock.dataValues.stock_id,
       portfolio_id: stock.dataValues.portfolio_id,
@@ -24,6 +12,7 @@ class StockManager {
       price: stock.dataValues.price,
       change_percent: stock.dataValues.change_percent,
       quantity: stock.dataValues.quantity,
+      isMine: true,
     };
 
     return stockData;
@@ -92,7 +81,7 @@ class StockManager {
       );
       return result;
     });
-    console.log("searchResult:", searchResult);
+    console.log("searchResult: ", searchResult);
     return searchResult;
   }
 

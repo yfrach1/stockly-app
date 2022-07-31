@@ -35,7 +35,6 @@ class UserManager {
     let userData = null;
 
     const userId = await this._isUserValid(loginUserData);
-    console.log("userId: ", userId);
     if (userId) {
       accessToken = await this._createAccessToken(userId);
       userData = await this.getUserData(userId);
@@ -64,7 +63,7 @@ class UserManager {
       portfolio,
       stocks,
     };
-
+    // console.log("userData: ", userData);
     return userData;
   }
 
@@ -76,35 +75,57 @@ class UserManager {
   }
 
   async _updateStocksDataOnDb(stocks) {
-    console.log("stocks: ", stocks);
-    let formatedStocks = [];
+    // let formatedStocks = [];
     let stockQuery = {
       ticker: "",
       startDate: "",
       endDate: "",
       resampleFreq: "",
     };
-    const tickers = stocks.map((stock) => stock.dataValues.ticker);
-    for (let i = 0; i < tickers.length; i++) {
-      //get the riggth format of stocks
-      let formatStockData = stockService._formatStocks(stocks[i]);
 
-      //fetch new data
-      stockQuery.ticker = tickers[i];
-      const result = await stockClient.getStockData(stockQuery);
-      const { price, open, close } =
-        this._extractDataFromFetchStockResult(result);
-      formatStockData.price = price;
-      formatStockData.change_percent = ((close / open) * 100 - 100).toFixed(2);
-      //update the data to be most upsated
-      await stockService.updateStock(
-        formatStockData.stock_id,
-        formatStockData.price,
-        formatStockData.change_percent
-      );
+    // const tickers = stocks.map((stock) => stock.dataValues.ticker);
+    const formatedStocks = await Promise.all(
+      stocks.map(async (stock) => {
+        let formatStockData = stockService.formatStocks(stock);
+        stockQuery.ticker = stock.ticker;
+        const fetchResult = await stockClient.getStockData(stockQuery);
+        const { price, open, close } =
+          this._extractDataFromFetchStockResult(fetchResult);
+        formatStockData.price = price;
+        formatStockData.change_percent = ((close / open) * 100 - 100).toFixed(
+          2
+        );
+        //update the data to be most upsated
+        await stockService.updateStock(
+          formatStockData.stock_id,
+          formatStockData.price,
+          formatStockData.change_percent
+        );
+        return formatStockData;
+      })
+    );
 
-      formatedStocks.push(formatStockData);
-    }
+    // const tickers = stocks.map((stock) => stock.dataValues.ticker);
+    // for (let i = 0; i < tickers.length; i++) {
+    //   //get the riggth format of stocks
+    //   let formatStockData = stockService._formatStocks(stocks[i]);
+
+    //   //fetch new data
+    //   stockQuery.ticker = tickers[i];
+    //   const result = await stockClient.getStockData(stockQuery);
+    //   const { price, open, close } =
+    //     this._extractDataFromFetchStockResult(result);
+    //   formatStockData.price = price;
+    //   formatStockData.change_percent = ((close / open) * 100 - 100).toFixed(2);
+    //   //update the data to be most upsated
+    //   await stockService.updateStock(
+    //     formatStockData.stock_id,
+    //     formatStockData.price,
+    //     formatStockData.change_percent
+    //   );
+
+    //   formatedStocks.push(formatStockData);
+    // }
 
     return formatedStocks;
   }
@@ -114,11 +135,13 @@ class UserManager {
       name: userPortfolio.name,
       id: userPortfolio.portfolio_id,
     };
-    let stocks = userPortfolio.Stocks;
-    if (stocks.length) {
+    let stocksFromDb = userPortfolio.Stocks;
+    let stocks = stocksFromDb.map((stock) => stockService.formatStocks(stock));
+    // console.log("stocks: ", stocks);
+    if (stocksFromDb.length) {
       if (
         this._compareStockLastUpdatedDay(
-          stocks[0].dataValues.updatedAt,
+          stocksFromDb[0].dataValues.updatedAt,
           new Date()
         )
       ) {
@@ -126,11 +149,10 @@ class UserManager {
       }
     }
 
-    stocks = stocks.map((stock) => {
-      stock.isMine = true;
-      return stock;
-    });
-    // console.log("stocks in get portfolio: ", stocks);
+    // stocks = stocks.map((stock) => {
+    //   stock.isMine = true;
+    //   return stock;
+    // });
     return { portfolio, stocks };
   }
   async _createAccessToken(id) {
@@ -150,7 +172,6 @@ class UserManager {
 
   async _isUserValid({ email, password }) {
     const user = await this._getUser(email);
-    console.log();
     if (!user) return false;
     if (!(await bcrypt.compare(password, user.password))) return false;
     return user.user_id;

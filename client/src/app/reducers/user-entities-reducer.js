@@ -6,6 +6,7 @@ const initialState = {
   lastName: "",
   portfolio: {}, //will change to [] later when we will have more then one
   stocks: [],
+  stock: {},
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
@@ -20,7 +21,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       };
     }
     case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
-      console.log(`userdata:${action.userData.stocks}`);
       return {
         ...state,
         userAuth: true,
@@ -28,10 +28,14 @@ const userEntitiesReducer = (state = initialState, action) => {
         firstName: action.userData.firstName,
         portfolio: action.userData.portfolio,
         stocks: action.userData.stocks,
+        stock: action.userData.stocks.length
+          ? action.userData.stocks.length[0]
+          : {},
       };
     }
     //check if need to stay with 2 same cases
     case actionTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED: {
+      console.log("action: ", action);
       return {
         ...state,
         userAuth: true,
@@ -56,11 +60,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: newStocks,
-        // searchStocks: [
-        //   ...state.searchStocks.filter(
-        //     (stock) => stock.ticker !== action.stockData.ticker
-        //   ),
-        // ],
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
@@ -77,6 +76,9 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: action.stocks,
+        stock: action.userData.stocks.length
+          ? action.userData.stocks.length[0]
+          : {},
       };
     }
 

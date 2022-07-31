@@ -81,11 +81,11 @@ export const signUpAction = (newUserData) => {
         dispatch(signUpRequestFailed(res.data.message));
       }
     } catch (error) {
-      // const stopLoadin = setTimeout(() => {
-      //   dispatch(signUpRequestFailed("error"));
-      // }, 1000);
-      // stopLoadin();
-      dispatch(signUpRequestFailed("error"));
+      const stopLoadin = setTimeout(() => {
+        dispatch(signUpRequestFailed("error"));
+      }, 1000);
+      stopLoadin();
+      //dispatch(signUpRequestFailed("error"));
     }
   };
 };
@@ -95,7 +95,11 @@ export const signInAction = (loginUserData) => {
     dispatch(signInRequest());
     try {
       const res = await validateUser(loginUserData);
-      dispatch(signInRequestSuccessed(res.data));
+      const stopLoadin = setTimeout(() => {
+        dispatch(signInRequestSuccessed(res.data));
+      }, 1500);
+      stopLoadin();
+      // dispatch(signInRequestSuccessed(res.data));
     } catch (error) {
       console.log(error.message);
       //dispatch(signUpRequestFailed());
@@ -109,8 +113,16 @@ export const checkUserTokenAction = () => {
     dispatch(checkTokenRequest());
     try {
       const res = await getUserDataOnStart();
-      dispatch(checkTokenRequestSuccessed(res.data));
+      // console.log("in success check token: ", res.data);
+      // dispatch(checkTokenRequestSuccessed(res.data));
+      setTimeout(() => {
+        console.log("res.data: ", res.data);
+        dispatch(checkTokenRequestSuccessed(res.data));
+      }, 1500);
+
+      // dispatch(checkTokenRequestSuccessed(res.data));
     } catch (error) {
+      console.log("in failed check token: ", error);
       dispatch(checkTokenRequestFailed());
     }
   };
