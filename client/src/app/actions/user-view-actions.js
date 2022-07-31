@@ -13,7 +13,6 @@ const getStockDetailsSuccessed = (stockData, stock) => ({
 
 export const setSearchKeyAction = (searchKey) => {
   return async (dispatch) => {
-    console.log(searchKey);
     dispatch(setSearchKey(searchKey));
   };
 };
@@ -31,10 +30,10 @@ export const getStockDetailsAction = (stock) => {
 };
 
 export const getPortfolioHistorysAction = (stocks) => {
-   return async (dispatch) => {
-      try {
-         const stockData = await getPortfolioDetails(stocks);
-         //need to return and dispatch
-      } catch (error) {}
-   };
+  return async (dispatch) => {
+    try {
+      const stockData = await getPortfolioDetails(stocks);
+      //need to return and dispatch
+    } catch (error) {}
+  };
 };

@@ -7,7 +7,7 @@ const getStockData = async (stockQuery) => {
   try {
     let params = new URLSearchParams({
       // startDate: stockQuery.startDate, //YYYY-MM-DD
-      startDate: "2000-01-01",
+      startDate: "2020-01-01",
       endDate: stockQuery.endDate, //YYYY-MM-DD
       resampleFreq: stockQuery.resampleFreq, // daily/weekly/monthly
       token: API_KEY,
