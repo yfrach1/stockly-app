@@ -10,55 +10,61 @@
    justify-content: center;
 }
 
-.buttonDelete {
+.buttonDelete,
+.buttonAdd {
    padding: 8px 20px;
-   border-radius: 20px;
-   background-color: rgb(3, 15, 126);
+   border-radius: 5px;
    transition: all 0.4s;
-   margin: 0 30px;
    cursor: pointer;
-   text-decoration: none !important;
-   font-size: 20px;
+   margin: 0.2rem;
+   font-size: 15px;
    font-weight: 700;
-   color: #f2f2f2;
+   color: #ffffff;
+   border: none;
+}
+
+.buttonAdd {
+   background-color: #008cba;
+}
+.buttonAdd:hover {
+   transform: scale(1.02);
+   background-color: #00b4f0;
+}
+
+.buttonDelete {
+   background-color: #f44336;
+   white-space: nowrap;
 }
 
 .buttonDelete:hover {
-   color: #f2f2f2;
-   font-size: 16px;
-   background-color: rgb(82, 97, 229);
+   transform: scale(1.02);
+   background-color: #ff7866;
 }
 
 .quantityContainer {
    display: flex;
    background-color: white;
-   font-size: 1.3em;
-   transition: 0.4s;
+   align-items: center;
+   font-size: 1em;
+   height: 2em;
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-   padding: 0.7em 1.5em;
+   padding: 0.85em 1.5em;
    border-radius: 5px;
    background-color: white;
-   margin-top: -2.3em;
-   margin-bottom: 1em;
-}
-
-.details {
-   font-family: helvetica, Arial;
-   color: rgb(49, 49, 49);
-   font-size: 1em;
-   margin: -1.5em 0 3em 1.3em;
 }
 
 .details {
    display: flex;
-   margin-top: 1rem;
+   justify-content: center;
+   align-items: center;
    gap: 2.5rem;
    padding: 0.7em 2em;
    border-radius: 5px;
    background-color: white;
-   font-size: 1.3em;
+   font-size: 1em;
    transition: 0.4s;
    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+   margin: 1em;
 }
 
 .details:hover {
@@ -99,9 +105,27 @@
 .price {
    font-size: 2rem;
 }
+
 .percentage {
    font-size: 1.5rem;
    padding: 0.2rem 0.8rem;
    border-radius: 5px;
    color: white;
+}
+
+.detailsAndAddContainer {
+   display: flex;
+   gap: 0.4em;
+   justify-content: center;
+   align-items: center;
+   max-width: 70%;
+}
+
+.input {
+   margin-right: 1em;
+   margin-left: 1em;
+   max-width: 5em;
+   min-width: 2em;
+   height: 2em;
+   text-align: center;
 }
