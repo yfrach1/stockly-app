@@ -59,8 +59,8 @@ const searchStock = async (searchQuery) => {
 
     const URL = `${API_URL}${params.toString()}`;
     const searchData = await fetch(URL);
-    searchResults = await searchData.json();
-
+    const searchResults = await searchData.json();
+    console.log("searchResults: ", searchResults);
     let stocksList = searchResults.map((result) => {
       return { ticker: result.ticker, name: result.name };
     });

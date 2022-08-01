@@ -12,9 +12,8 @@ const Portfolio = ({ fetchLoading, portfolioId, stocksAmount }) => {
       <div className={styles.portfolioGrid}>
         <div className={styles.portfolioPreview}>
           <PortfolioDataConnector />
-
-          <SearchBarConnector portfolioId={portfolioId} />
           {/* display something else when stocklist is empty */}
+          <SearchBarConnector portfolioId={portfolioId} />
 
           {fetchLoading ? <OpacityLoader /> : <ListStocksConnector />}
         </div>
