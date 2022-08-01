@@ -12,9 +12,11 @@
    font-size: 20px;
    margin: 10px;
    outline: none;
-   border: none;
+   border: 1px solid;
    border-radius: 5px;
    background-color: rgb(255, 255, 255);
+   border: 1px solid rgba(181, 181, 181, 0.674);
+   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .searchBarTextBox:focus {

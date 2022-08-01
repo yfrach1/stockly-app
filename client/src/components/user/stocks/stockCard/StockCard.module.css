@@ -2,9 +2,9 @@
    display: flex;
    flex-direction: column;
    justify-content: space-between;
-   background-color: rgb(255, 255, 255);
+   background-color: rgb(253, 253, 253);
    border-radius: 5px;
-   min-height: 60px;
+   border: 1px solid rgba(181, 181, 181, 0.674);
    width: 95%;
    align-items: center;
    transition: 0.4s;
@@ -51,25 +51,6 @@
    color: white;
    padding: 0.15rem 0.2rem;
    text-align: center;
-}
-
-.addButton {
-   border: 0;
-   padding: 0;
-   background-color: rgb(113, 255, 85);
-   width: 1.2em;
-   height: auto;
-   border-radius: 100%;
-   position: relative;
-   left: 6em;
-   margin-top: -3.1em;
-   transition: all 0.2s ease-in-out;
-}
-
-.addButton:hover {
-   transform: scale(1.3);
-   background-color: rgb(67, 255, 29);
-   cursor: pointer;
 }
 
 .percentGreen,

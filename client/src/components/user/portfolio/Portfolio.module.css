@@ -31,8 +31,12 @@
 .portfolioPreview {
    display: flex;
    flex-direction: column;
-   height: 100vh;
+   height: 96vh;
    width: 30%;
+   background-color: white;
+   margin: 1em;
+   border-radius: 5px;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .stockPreview {
