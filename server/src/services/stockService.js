@@ -27,8 +27,10 @@ class StockManager {
         ],
       },
     });
-    console.log("stocks: ", stocks);
+    console.log("stocks: ", stocks.length);
     const formateStockData = stocks.map((stock) => this.formatStocks(stock));
+    console.log("formateStockData: ", formateStockData);
+
     return formateStockData;
   }
 
@@ -59,7 +61,7 @@ class StockManager {
 
   doesTickerExistInDb(ticker, stocksDetailsFromDB) {
     return stocksDetailsFromDB.some((stock) => {
-      return stock.ticker == ticker;
+      return stock.ticker === ticker;
     });
   }
 
@@ -81,16 +83,25 @@ class StockManager {
     if (!stockSearchKey.length) {
       return stocksDetailsFromDB;
     }
-    console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
-    const stocksDetailsFromApi = await stockClient.searchStock(stockSearchKey);
-    const searchResult = stocksDetailsFromApi.map((result) => {
-      result.isMine = this.doesTickerExistInDb(
-        result.ticker,
-        stocksDetailsFromDB
-      );
-      return result;
-    });
-    return searchResult;
+    //  console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
+    const myTickers = stocksDetailsFromDB.map((stock) => stock.ticker);
+    //  console.log("myTickers:", myTickers);
+
+    const stocksDetailsFromApi = await stockClient.searchStock(
+      stockSearchKey,
+      myTickers
+    );
+
+    //  const searchResult = stocksDetailsFromApi.map((result) => {
+    //    result.isMine = this.doesTickerExistInDb(
+    //      result.ticker,
+    //      stocksDetailsFromDB
+    //    );
+    //    return result;
+    //  });
+    const res = [...stocksDetailsFromApi, ...stocksDetailsFromDB];
+    console.log("res: ", res);
+    return [...stocksDetailsFromApi, ...stocksDetailsFromDB];
   }
 
   async deleteStock(stockId) {
