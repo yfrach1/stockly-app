@@ -27,9 +27,7 @@ class StockManager {
         ],
       },
     });
-    console.log("stocks: ", stocks.length);
     const formateStockData = stocks.map((stock) => this.formatStocks(stock));
-    console.log("formateStockData: ", formateStockData);
 
     return formateStockData;
   }
@@ -53,7 +51,6 @@ class StockManager {
   async updateStock(stock_id, price, change_percent) {
     const stock = await Stock.findOne({ where: { stock_id } });
     await stock.update({
-      price,
       price,
       change_percent,
     });
@@ -83,24 +80,13 @@ class StockManager {
     if (!stockSearchKey.length) {
       return stocksDetailsFromDB;
     }
-    //  console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
     const myTickers = stocksDetailsFromDB.map((stock) => stock.ticker);
-    //  console.log("myTickers:", myTickers);
 
     const stocksDetailsFromApi = await stockClient.searchStock(
       stockSearchKey,
       myTickers
     );
 
-    //  const searchResult = stocksDetailsFromApi.map((result) => {
-    //    result.isMine = this.doesTickerExistInDb(
-    //      result.ticker,
-    //      stocksDetailsFromDB
-    //    );
-    //    return result;
-    //  });
-    const res = [...stocksDetailsFromApi, ...stocksDetailsFromDB];
-    console.log("res: ", res);
     return [...stocksDetailsFromApi, ...stocksDetailsFromDB];
   }
 
@@ -110,10 +96,9 @@ class StockManager {
     return response;
   }
 
-  async updateStockQuantity(stock, user) {
-    const quantity = stock.quantity;
+  async updateStockQuantity(ticker, quantity) {
     const stockToUpdate = await Stock.findOne({
-      where: { stock_id: stock.stock_id },
+      where: { ticker },
     });
     const res = await stockToUpdate.update({
       quantity,
