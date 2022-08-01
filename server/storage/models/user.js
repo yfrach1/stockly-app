@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
        * The `models/index` file will call this method automatically.
        */
       static associate(models) {
-         User.hasOne(models.Portfolio, { foreignKey: "user_id" });
+         User.hasMany(models.Portfolio, { foreignKey: "user_id" });
       }
    }
    User.init(
