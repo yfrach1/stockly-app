@@ -85,6 +85,12 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         userAuth: false,
+        firstName: "",
+        lastName: "",
+        portfolio: {},
+        stocks: {},
+        stock: {},
+        stockDetails: {},
       };
     }
     //matabe need to add loader before this action
@@ -98,8 +104,8 @@ const userEntitiesReducer = (state = initialState, action) => {
 
     case actionTypes.UPDATE_STOCK_REQUEST_SUCCESSED: {
       const updatedStocks = { ...state.stocks };
-      updatedStocks[action.stock.ticker].quantity = action.stock.quantity;
-      const updatedStock = { ...updatedStocks[action.stock.ticker] };
+      updatedStocks[action.ticker].quantity = action.quantity;
+      const updatedStock = { ...updatedStocks[action.ticker] };
       return {
         ...state,
         stocks: updatedStocks,
