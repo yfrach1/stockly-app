@@ -42,8 +42,14 @@ const getStockMetaData = async (query) => {
 };
 
 const isTickerExist = (myTickers, ticker) => {
-  const res = myTickers.some((myTicker) => myTicker !== ticker);
-  return res;
+  for (let i = 0; i < myTickers.length; i++) {
+    if (myTickers[i] === ticker) return true;
+  }
+  return false;
+  // mayce there is snarte way to do it
+  //   const res = myTickers.some((myTicker) => myTicker !== ticker);
+  //   console.log(res);
+  //   return res;
 };
 
 const searchStock = async (searchQuery, myTickers) => {
@@ -67,14 +73,11 @@ const searchStock = async (searchQuery, myTickers) => {
   let searchResults = await searchData.json();
 
   searchResults = searchResults.filter((result) => {
-    return isTickerExist(myTickers, result.ticker);
+    return !isTickerExist(myTickers, result.ticker);
   });
-  //  searchResults = console.log("searchResults: ", searchResults.length);
-  console.log("searchResults: ", searchResults);
   let stocksList = searchResults.map((result) => {
     return { ticker: result.ticker, name: result.name };
   });
-  console.log("**************************");
   let allStocksSearchResults = await Promise.all(
     stocksList.map(async (stock) => {
       stockQuery.ticker = stock.ticker;

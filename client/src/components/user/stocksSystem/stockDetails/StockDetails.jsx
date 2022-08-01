@@ -13,6 +13,7 @@ const StockDetails = ({
   updateStockQuantityAction,
 }) => {
   const [quantity, setQuantity] = useState(0);
+  const [inputValid, setInputValid] = useState(true);
   const inputElement = useRef(null);
 
   const handleChange = useCallback(
@@ -25,8 +26,11 @@ const StockDetails = ({
   const addStock = useCallback(() => {
     console.log("compare:", inputElement.current.value === "");
     if (!inputElement.current.value.length) {
-      alert("must have quantiti >= 0");
+      //change css style
+      setInputValid(false);
+      return;
     }
+    setInputValid(true);
     stock.quantity = quantity;
     addStockAction(stock);
     inputElement.current.value = "";
@@ -77,12 +81,13 @@ const StockDetails = ({
         <div className={styles.quantityContainer}>
           Quantity:
           <input
+            className={inputValid ? styles.input : styles.inputNotValid}
             type="text"
             placeholder={stock.quantity ? stock.quantity : ""}
             onChange={handleChange}
             ref={inputElement}
-            className={styles.input}
           />
+          {!inputValid ? "please enter number >= 0" : null}
           <button
             onClick={() => (stock.isMine ? updateStockQuantity() : addStock())}
             className={styles.buttonAdd}

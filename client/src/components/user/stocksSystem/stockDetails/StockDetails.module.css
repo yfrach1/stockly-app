@@ -1,129 +1,138 @@
 .stockDetailsContainer {
-   min-width: 22em;
-   flex: 1;
-   padding: 1em;
-   background-color: rgba(237, 237, 237, 255);
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
+  min-width: 22em;
+  flex: 1;
+  padding: 1em;
+  background-color: rgba(237, 237, 237, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .buttonDelete,
 .buttonAdd {
-   padding: 8px 20px;
-   border-radius: 5px;
-   transition: all 0.4s;
-   cursor: pointer;
-   margin: 0.2rem;
-   font-size: 15px;
-   font-weight: 700;
-   color: #ffffff;
-   border: none;
+  padding: 8px 20px;
+  border-radius: 5px;
+  transition: all 0.4s;
+  cursor: pointer;
+  margin: 0.2rem;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  border: none;
 }
 
 .buttonAdd {
-   background-color: #008cba;
+  background-color: #008cba;
 }
 .buttonAdd:hover {
-   transform: scale(1.02);
-   background-color: #00b4f0;
+  transform: scale(1.02);
+  background-color: #00b4f0;
 }
 
 .buttonDelete {
-   background-color: #f44336;
-   white-space: nowrap;
+  background-color: #f44336;
+  white-space: nowrap;
 }
 
 .buttonDelete:hover {
-   transform: scale(1.02);
-   background-color: #ff7866;
+  transform: scale(1.02);
+  background-color: #ff7866;
 }
 
 .quantityContainer {
-   display: flex;
-   background-color: white;
-   align-items: center;
-   font-size: 1em;
-   height: 2em;
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-   padding: 0.85em 1.5em;
-   border-radius: 5px;
-   background-color: white;
+  display: flex;
+  background-color: white;
+  align-items: center;
+  font-size: 1em;
+  height: 2em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 0.85em 1.5em;
+  border-radius: 5px;
+  background-color: white;
 }
 
 .details {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   gap: 2.5rem;
-   padding: 0.7em 2em;
-   border-radius: 5px;
-   background-color: white;
-   font-size: 1em;
-   transition: 0.4s;
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-   margin: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 0.7em 2em;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 1em;
+  transition: 0.4s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 1em;
 }
 
 .details:hover {
-   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header {
-   display: flex;
-   align-items: center;
-   height: 5em;
-   gap: 2em;
-   justify-content: space-between;
-   width: 60%;
-   background-color: white;
-   padding: 0.8em 2em;
-   border-radius: 5px;
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  height: 5em;
+  gap: 2em;
+  justify-content: space-between;
+  width: 60%;
+  background-color: white;
+  padding: 0.8em 2em;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .companyDetailsContainer,
 .companyRevContainer {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   gap: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
 }
 
 .ticker {
-   margin: 0;
-   font-size: 3rem;
+  margin: 0;
+  font-size: 3rem;
 }
 
 .stockName {
-   margin: 0;
-   font-size: 1rem;
+  margin: 0;
+  font-size: 1rem;
 }
 
 .price {
-   font-size: 2rem;
+  font-size: 2rem;
 }
 
 .percentage {
-   font-size: 1.5rem;
-   padding: 0.2rem 0.8rem;
-   border-radius: 5px;
-   color: white;
+  font-size: 1.5rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 5px;
+  color: white;
 }
 
 .detailsAndAddContainer {
-   display: flex;
-   gap: 0.4em;
-   justify-content: center;
-   align-items: center;
+  display: flex;
+  gap: 0.4em;
+  justify-content: center;
+  align-items: center;
 }
 
 .input {
-   margin-right: 1em;
-   margin-left: 1em;
-   max-width: 5em;
-   min-width: 2em;
-   height: 2em;
-   text-align: center;
+  margin-right: 1em;
+  margin-left: 1em;
+  max-width: 5em;
+  min-width: 2em;
+  height: 2em;
+  text-align: center;
+}
+.inputNotValid {
+  margin-right: 1em;
+  margin-left: 1em;
+  max-width: 5em;
+  min-width: 2em;
+  height: 2em;
+  text-align: center;
+  background-color: #ff786671;
 }
