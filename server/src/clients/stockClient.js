@@ -41,7 +41,7 @@ const getStockMetaData = async (query) => {
   }
 };
 
-const searchStock = async (searchQuery) => {
+const searchStock = async (searchQuery, myTickers) => {
   let stockQuery = {
     ticker: "",
     startDate: "",
@@ -61,6 +61,7 @@ const searchStock = async (searchQuery) => {
     const searchData = await fetch(URL);
     const searchResults = await searchData.json();
     console.log("searchResults: ", searchResults);
+
     let stocksList = searchResults.map((result) => {
       return { ticker: result.ticker, name: result.name };
     });

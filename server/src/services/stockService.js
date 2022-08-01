@@ -21,9 +21,13 @@ class StockManager {
     const stocks = await Stock.findAll({
       where: {
         portfolio_id: portfolioId,
-        name: { [Op.substring]: searchKey },
+        [Op.or]: [
+          { ticker: { [Op.substring]: searchKey } },
+          { name: { [Op.substring]: searchKey } },
+        ],
       },
     });
+    console.log("stocks: ", stocks);
     const formateStockData = stocks.map((stock) => this.formatStocks(stock));
     return formateStockData;
   }
