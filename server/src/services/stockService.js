@@ -69,7 +69,7 @@ class StockManager {
             where: {
                ticker: stockQuery.ticker,
             },
-            order: [["date", "DESC"]],
+            order: [["date", "ASC"]],
          });
 
          return stockDataDB;
