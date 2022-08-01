@@ -59,6 +59,7 @@ class UserManager {
          include: { model: Portfolio, include: Stock },
       });
       const { portfolio, stocks } = await this._getPortfolioData(user.Portfolios);
+      console.log(portfolio);
       const userData = {
          firstName: user.first_name,
          lastName: user.last_name,
@@ -89,7 +90,6 @@ class UserManager {
          stocks.map(async (stock) => {
             let StockData = { ...stock };
             stockQuery.ticker = stock.ticker;
-            console.log(stockQuery);
             const fetchResult = await stockClient.getStockDataAPI(stockQuery);
             const { price, open, close } = this._extractDataFromFetchStockResult(fetchResult);
             StockData.price = price;
@@ -131,8 +131,8 @@ class UserManager {
 
    async _getPortfolioData(userPortfolio) {
       const portfolio = {
-         name: userPortfolio.name,
-         id: userPortfolio.portfolio_id,
+         name: userPortfolio[0].name,
+         id: userPortfolio[0].portfolio_id,
       };
       let stocksFromDb = userPortfolio[0].Stocks;
       let stocks = stocksFromDb.map((stock) => stockService.formatStocks(stock));
@@ -142,10 +142,6 @@ class UserManager {
          }
       }
 
-      // stocks = stocks.map((stock) => {
-      //   stock.isMine = true;
-      //   return stock;
-      // });
       return { portfolio, stocks };
    }
    async _createAccessToken(id) {
