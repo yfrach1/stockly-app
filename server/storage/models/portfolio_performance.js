@@ -21,7 +21,11 @@ module.exports = (sequelize, DataTypes) => {
          },
          ticker: DataTypes.STRING,
          date: DataTypes.DATE,
-         close_price: DataTypes.FLOAT,
+         open: DataTypes.FLOAT,
+         close: DataTypes.FLOAT,
+         low: DataTypes.FLOAT,
+         high: DataTypes.FLOAT,
+         volume: DataTypes.FLOAT,
          createdAt: {
             allowNull: false,
             type: DataTypes.DATE,

@@ -15,7 +15,11 @@ module.exports = {
          date: {
             type: Sequelize.DATE,
          },
-         close_price: { type: Sequelize.FLOAT },
+         open: { type: Sequelize.FLOAT },
+         close: { type: Sequelize.FLOAT },
+         low: { type: Sequelize.FLOAT },
+         high: { type: Sequelize.FLOAT },
+         volume: { type: Sequelize.FLOAT },
          createdAt: {
             allowNull: false,
             type: Sequelize.DATE,
