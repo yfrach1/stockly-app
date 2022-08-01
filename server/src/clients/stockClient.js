@@ -1,20 +1,20 @@
 const API_KEY = process.env.API_KEY;
 const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-const getStockData = async (stockQuery) => {
+const getStockDataAPI = async (stockQuery) => {
    const API_URL = "https://api.tiingo.com/tiingo/daily/";
+   let params = new URLSearchParams({
+      startDate: stockQuery.startDate, //YYYY-MM-DD
+      endDate: stockQuery.endDate, //YYYY-MM-DD
+      resampleFreq: stockQuery.resampleFreq, // daily/weekly/monthly
+      token: API_KEY,
+   });
+
+   params = _deleteEmptyKeys(params);
+
+   const ticker = stockQuery.ticker;
+   const URL = `${API_URL}${ticker}/prices?${params.toString()}`;
    try {
-      let params = new URLSearchParams({
-         startDate: stockQuery.startDate, //YYYY-MM-DD
-         endDate: stockQuery.endDate, //YYYY-MM-DD
-         resampleFreq: stockQuery.resampleFreq, // daily/weekly/monthly
-         token: API_KEY,
-      });
-
-      params = _deleteEmptyKeys(params);
-
-      const ticker = stockQuery.ticker;
-      const URL = `${API_URL}${ticker}/prices?${params.toString()}`;
       const stockData = await fetch(URL);
 
       return await stockData.json();
@@ -79,7 +79,7 @@ const searchStock = async (searchQuery, myTickers) => {
    let allStocksSearchResults = await Promise.all(
       stocksList.map(async (stock) => {
          stockQuery.ticker = stock.ticker;
-         const fullStockDetails = await getStockData(stockQuery);
+         const fullStockDetails = await getStockDataAPI(stockQuery);
          return fullStockDetails;
       })
    );
@@ -138,7 +138,7 @@ function _deleteEmptyKeys(params) {
 }
 
 module.exports = {
-   getStockData,
+   getStockDataAPI,
    getStockMetaData,
    searchStock,
    getAPIStockNews,

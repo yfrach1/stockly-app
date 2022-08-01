@@ -63,6 +63,21 @@ class StockManager {
       return await Portfolio_performance.findOne({ where: { ticker } });
    }
 
+   async getStockData(stockQuery) {
+      if (await this._tickerExistInPerformanceDB(stockQuery.ticker)) {
+         const stockDataDB = await Portfolio_performance.findAll({
+            where: {
+               ticker: stockQuery.ticker,
+            },
+            order: [["date", "DESC"]],
+         });
+
+         return stockDataDB;
+      } else {
+         return await stockClient.getStockDataAPI(stockQuery);
+      }
+   }
+
    async _addHistoricalDataToDB(stock) {
       const startDate = this._getStartDate20YearsAgo();
       const existInDB = await this._tickerExistInPerformanceDB(stock.ticker);
@@ -73,7 +88,7 @@ class StockManager {
             endDate: "",
             resampleFreq: "",
          };
-         const stocksDetailsFromApi = await stockClient.getStockData(stockQuery);
+         const stocksDetailsFromApi = await stockClient.getStockDataAPI(stockQuery);
 
          const addToDbResponse = await Portfolio_performance.bulkCreate(
             stocksDetailsFromApi.map((dailyStockData) => {
@@ -90,6 +105,7 @@ class StockManager {
          );
       }
    }
+
    _compareStockLastUpdatedDay(date1, date2) {
       if (
          date1.getFullYear() === date2.getFullYear() &&
