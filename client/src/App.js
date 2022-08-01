@@ -5,7 +5,13 @@ import { getData } from "../../client/src/app/services/userService";
 import UserView from "./components/user/userView/UserView";
 import PackmanLoader from "./components/loading/packmanLoader/PackmanLoader";
 import OpacityLoader from "./components/loading/fetchStockLoader/OpacityLoader";
-function App({ userAuth, redirectLoading, checkUserTokenAction }) {
+function App({
+  userAuth,
+  redirectLoading,
+  checkUserTokenAction,
+  showToast,
+  toastParam,
+}) {
   // console.log("userAuth: ", userAuth);
   // console.log("redirectLoading: ", redirectLoading);
 
@@ -15,6 +21,11 @@ function App({ userAuth, redirectLoading, checkUserTokenAction }) {
   }, []);
   return (
     <>
+      <MyToast
+        showToast={showToast}
+        property={toastParam}
+        hideToastAction={hideToastAction}
+      />
       {redirectLoading ? (
         <PackmanLoader />
       ) : (

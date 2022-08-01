@@ -4,11 +4,12 @@ const initialState = {
   stockNews: {},
   redirectLoading: false,
   fetchLoading: false,
+  showToast: false,
+  toastParam: { toastType: null, message: null, autoHideDuration: null },
 };
 
 const userViewReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case actionTypes.GET_STOCK_NEWS_REQUEST_SUCCESSED: {
       return {
         ...state,

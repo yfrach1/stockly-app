@@ -6,3 +6,6 @@ export const getStock = (state) => getUserView(state).stock;
 export const getRedirectLoading = (state) => getUserView(state).redirectLoading;
 export const getFetchLoading = (state) => getUserView(state).fetchLoading;
 export const getStockNews = (state) => getUserView(state).stockNews;
+export const getShowToast = (state) => getUserView(state).showToast;
+
+export const getToastParam = (state) => getUserView(state).toastParam;
