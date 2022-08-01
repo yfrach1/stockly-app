@@ -36,16 +36,16 @@ module.exports = (sequelize, DataTypes) => {
          },
       },
       {
+         sequelize,
+         modelName: "Portfolio_performance",
+      },
+      {
          indexes: [
             {
                unique: false,
                fields: ["ticker", "date"],
             },
          ],
-      },
-      {
-         sequelize,
-         modelName: "Portfolio_performance",
       }
    );
    return Portfolio_performance;
