@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
          },
       },
       {
+         sequelize,
+         modelName: "Portfolio",
+      },
+      {
          indexes: [
             {
                unique: true,
@@ -38,10 +42,6 @@ module.exports = (sequelize, DataTypes) => {
             },
             { unique: false, fields: ["user_id"] },
          ],
-      },
-      {
-         sequelize,
-         modelName: "Portfolio",
       }
    );
    return Portfolio;

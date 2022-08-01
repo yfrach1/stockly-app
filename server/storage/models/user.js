@@ -33,6 +33,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
          },
       },
+
+      {
+         sequelize,
+         modelName: "User",
+      },
       {
          indexes: [
             {
@@ -40,10 +45,6 @@ module.exports = (sequelize, DataTypes) => {
                fields: ["user_id", "email"],
             },
          ],
-      },
-      {
-         sequelize,
-         modelName: "User",
       }
    );
    return User;
