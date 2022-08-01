@@ -32,6 +32,9 @@ const signInRequestSuccessed = (userData) => ({
   type: actionsTypes.SIGN_IN_REQUEST_SUCCESSED,
   userData,
 });
+const signInRequestFailed = () => ({
+  type: actionsTypes.SIGN_IN_REQUEST_FAILED,
+});
 
 const signOutRequestSuccessed = (userData) => ({
   type: actionsTypes.SIGN_OUT_REQUEST_SUCCESSED,
@@ -91,20 +94,11 @@ export const signUpAction = (newUserData) => {
     dispatch(signUpRequest());
     try {
       const res = await addNewUser(newUserData);
-      setTimeout(() => {
-        dispatch(signUpRequestSuccessed(res.data));
-      }, 2000);
-      // if (res.data) {
-      //   dispatch(signUpRequestSuccessed(res.data));
-      // } else {
-      //   dispatch(signUpRequestFailed(res.data.message));
-      // }
+      dispatch(signUpRequestSuccessed(res.data));
     } catch (error) {
-      const stopLoadin = setTimeout(() => {
-        dispatch(signUpRequestFailed("error"));
-      }, 2000);
-      stopLoadin();
-      dispatch(signUpRequestFailed("error"));
+      setTimeout(() => {
+        dispatch(signUpRequestFailed());
+      }, 1000);
     }
   };
 };
@@ -116,7 +110,9 @@ export const signInAction = (loginUserData) => {
       const res = await validateUser(loginUserData);
       dispatch(signInRequestSuccessed(res.data));
     } catch (error) {
-      dispatch(signUpRequestFailed());
+      setTimeout(() => {
+        dispatch(signInRequestFailed());
+      }, 1000);
     }
   };
 };

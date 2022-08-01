@@ -21,3 +21,11 @@ export const getStocksObj = (state) => getUserEntities(state).stocks;
 export const getStocksAmount = createSelector([getStocksObj], (stocksObj) => {
   return Object.keys(stocksObj).length;
 });
+
+export const getPortfolioValue = createSelector([getMyStocks], (stocks) => {
+  let portfolioValue = 0;
+  stocks.forEach((stock) => {
+    portfolioValue += stock.quantity * stock.price;
+  });
+  return portfolioValue;
+});

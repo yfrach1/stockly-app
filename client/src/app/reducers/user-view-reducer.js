@@ -1,5 +1,6 @@
 import actionTypes from "../actions/constants";
-
+import toastTypes from "../actions/constants/Toast";
+import message from "../actions/constants/Message";
 const initialState = {
   stockNews: {},
   redirectLoading: false,
@@ -59,6 +60,12 @@ const userViewReducer = (state = initialState, action) => {
       return {
         ...state,
         redirectLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.NEGATIVE,
+          message: message.SIGN_UP_FALIED,
+          autoHideDuration: null,
+        },
       };
     }
     case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
@@ -71,6 +78,12 @@ const userViewReducer = (state = initialState, action) => {
       return {
         ...state,
         redirectLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.NEGATIVE,
+          message: message.SIGN_IN_FALIED,
+          autoHideDuration: null,
+        },
       };
     }
     case actionTypes.SEARCH_STOCK_REQUEST: {
@@ -89,6 +102,13 @@ const userViewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchLoading: false,
+      };
+    }
+    case actionTypes.HIDE_TOAST: {
+      return {
+        ...state,
+        showToast: false,
+        toastParam: { toastType: null, message: null, autoHideDuration: null },
       };
     }
 

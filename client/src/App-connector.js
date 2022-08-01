@@ -8,7 +8,7 @@ import {
 } from "./app/selectors/user-view-selectors";
 
 import { checkUserTokenAction } from "./app/actions/user-entities-actions";
-
+import { hideToastAction } from "./app/actions/user-view-actions";
 import App from "./App";
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,7 +20,10 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return bindActionCreators({ checkUserTokenAction }, dispatch);
+  return bindActionCreators(
+    { checkUserTokenAction, hideToastAction },
+    dispatch
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
