@@ -39,8 +39,12 @@ const StockGraph = ({ stockInfo }) => {
 
    return (
       <div className={styles.graphContainer}>
-         {buttonsData.map((button) => (
-            <button onClick={() => buttonHandle(button.daysToShow)} className={styles.button}>
+         {buttonsData.map((button, index) => (
+            <button
+               onClick={() => buttonHandle(button.daysToShow)}
+               className={styles.button}
+               key={index}
+            >
                {button.text}
             </button>
          ))}

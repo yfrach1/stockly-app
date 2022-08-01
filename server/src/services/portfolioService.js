@@ -1,16 +1,15 @@
 const { Portfolio } = require("../../storage/models");
 
 class PortfolioManager {
-  async createPortfolio(portfolio) {
-    const response = await Portfolio.create(portfolio);
+   async createPortfolio(portfolio) {
+      const response = await Portfolio.create(portfolio);
 
-    return response;
-  }
+      return response;
+   }
+
+   async getPortfolioPerformanceData(portfolioId) {
+      return portfolioId;
+   }
 }
 
 module.exports = new PortfolioManager();
-
-// const portfolioMock = {
-//    user_id: "1",
-//    name: "my stocks",
-// };

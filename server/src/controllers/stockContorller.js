@@ -12,6 +12,7 @@ async function addStock(req, res) {
 async function searchStock(req, res) {
    const stockSearchKey = req.body.stockSearchKey;
    const portfolioId = req.body.portfolioId;
+   console.log(req.body);
    const stockData = await stockService.searchStock(stockSearchKey, portfolioId);
    stockData
       ? res.status(200).json(stockData)
