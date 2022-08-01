@@ -1,26 +1,31 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-   class Portfolio extends Model {
+   class Portfolio_performance extends Model {
       /**
        * Helper method for defining associations.
        * This method is not a part of Sequelize lifecycle.
        * The `models/index` file will call this method automatically.
        */
       static associate(models) {
-         Portfolio.hasMany(models.Stock, { foreignKey: "portfolio_id" });
+         // define association here
       }
    }
-   Portfolio.init(
+   Portfolio_performance.init(
       {
-         portfolio_id: {
+         id: {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
             type: DataTypes.INTEGER,
          },
-         user_id: DataTypes.INTEGER,
-         name: DataTypes.STRING,
+         ticker: DataTypes.STRING,
+         date: DataTypes.DATE,
+         open: DataTypes.FLOAT,
+         close: DataTypes.FLOAT,
+         low: DataTypes.FLOAT,
+         high: DataTypes.FLOAT,
+         volume: DataTypes.FLOAT,
          createdAt: {
             allowNull: false,
             type: DataTypes.DATE,
@@ -33,16 +38,15 @@ module.exports = (sequelize, DataTypes) => {
       {
          indexes: [
             {
-               unique: true,
-               fields: ["portfolio_id"],
+               unique: false,
+               fields: ["ticker", "date"],
             },
-            { unique: false, fields: ["user_id"] },
          ],
       },
       {
          sequelize,
-         modelName: "Portfolio",
+         modelName: "Portfolio_performance",
       }
    );
-   return Portfolio;
+   return Portfolio_performance;
 };
