@@ -3,67 +3,67 @@ const url = "http://localhost:8080/stock";
 axios.defaults.withCredentials = true;
 
 export const addStock = async (stock) => {
-   const body = {
-      stock,
-   };
-   const response = await axios.post(`${url}`, body);
+  const body = {
+    stock,
+  };
+  const response = await axios.post(`${url}`, body);
 
-   return response;
+  return response;
 };
 
 export const deleteStock = async (stockId) => {
-   const response = await axios.delete(`${url}`, { params: { id: stockId } });
+  const response = await axios.delete(`${url}`, { params: { id: stockId } });
 
-   return response;
+  return response;
 };
 
 export const updateStockQuantity = async (ticker, quantity) => {
-   const body = {
-      ticker,
-      quantity,
-   };
-   const response = await axios.put(`${url}/update`, body);
+  const body = {
+    ticker,
+    quantity,
+  };
+  const response = await axios.put(`${url}/update`, body);
 
-   return response;
+  return response;
 };
 
 export const searchStock = async (stockSearchKey, portfolioId) => {
-   const body = {
-      stockSearchKey,
-      portfolioId,
-   };
+  const body = {
+    stockSearchKey,
+    portfolioId,
+  };
 
-   const response = await axios.post(`${url}/search`, body);
-   return response;
+  const response = await axios.post(`${url}/search`, body);
+  return response;
 
-   //   console.log("response: ", response);
-   //   const myStocks = response.data.filter((stock) =>
-   //     stock.isMine ? true : false
-   //   );
-   //   console.log(`my stocks: ${myStocks}`);
-   //   const searchStocks = response.data.filter((stock) =>
-   //     stock.isMine ? false : true
-   //   );
-   //   console.log(`search stocks: ${searchStocks}`);
+  //   console.log("response: ", response);
+  //   const myStocks = response.data.filter((stock) =>
+  //     stock.isMine ? true : false
+  //   );
+  //   console.log(`my stocks: ${myStocks}`);
+  //   const searchStocks = response.data.filter((stock) =>
+  //     stock.isMine ? false : true
+  //   );
+  //   console.log(`search stocks: ${searchStocks}`);
 
-   //   return { myStocks, searchStocks };
+  //   return { myStocks, searchStocks };
 };
 
 export const getStockDetails = async (ticker) => {
-   const today = new Date();
-   today.setMonth(today.getMonth() - 240);
-   const startDate = today.toISOString().split("T")[0];
+  const today = new Date();
+  today.setMonth(today.getMonth() - 240);
+  const startDate = today.toISOString().split("T")[0];
 
-   const body = {
-      ticker: ticker,
-      startDate: startDate,
-      endDate: "",
-      resampleFreq: "",
-   };
+  const body = {
+    ticker: ticker,
+    startDate: startDate,
+    endDate: "",
+    resampleFreq: "",
+  };
 
-   const response = await axios.post(`${url}/stockdata`, body);
+  const response = await axios.post(`${url}/stockdata`, body);
 
-   return response;
+  return response;
 };
 
 // export const getPortfolioDetails = async (stocks) => {
@@ -94,11 +94,11 @@ export const getStockDetails = async (ticker) => {
 // };
 
 export const getStockNews = async (tickers) => {
-   const body = {
-      tickers: tickers,
-   };
+  const body = {
+    tickers: tickers,
+  };
 
-   const response = await axios.post(`${url}/news`, body);
-   console.log(response);
-   return response;
+  const response = await axios.post(`${url}/news`, body);
+  console.log(response);
+  return response;
 };

@@ -3,6 +3,7 @@ import { useState, useCallback, useRef } from "react";
 import StockGraph from "../stockGraph/StockGraph";
 import ListNews from "../news/ListNews";
 import styles from "./StockDetails.module.css";
+import StockGraphConnector from "../stockGraph/StockGraphConnector";
 
 const StockDetails = ({
   stock,
@@ -12,6 +13,7 @@ const StockDetails = ({
   stockNews,
   updateStockQuantityAction,
 }) => {
+  console.log("stockInfo: ", stockInfo);
   const [quantity, setQuantity] = useState(0);
   const [inputValid, setInputValid] = useState(true);
   const inputElement = useRef(null);
@@ -61,21 +63,19 @@ const StockDetails = ({
           </div>
         </div>
       </div>
-      <StockGraph stockInfo={stockInfo} />
+      <StockGraphConnector />
       <div className={styles.detailsAndAddContainer}>
         <div className={styles.details}>
           <span>
-            Open: {stockInfo.data ? `${stockInfo.data.at(-1).open}` : ""}
+            Open: {stockInfo.length ? `${stockInfo.at(-1).open}` : ""}
           </span>
           <span>
-            High: {stockInfo.data ? `${stockInfo.data.at(-1).high}` : ""}
+            High: {stockInfo.length ? `${stockInfo.at(-1).high}` : ""}
           </span>
-          <span>
-            Low: {stockInfo.data ? `${stockInfo.data.at(-1).low}` : ""}
-          </span>
+          <span>Low: {stockInfo.length ? `${stockInfo.at(-1).low}` : ""}</span>
           <span>
             Volume:{" "}
-            {stockInfo.data ? `${stockInfo.data.at(-1).volume / 1000}K` : ""}
+            {stockInfo.length ? `${stockInfo.at(-1).volume / 1000} K` : ""}
           </span>
         </div>
         <div className={styles.quantityContainer}>

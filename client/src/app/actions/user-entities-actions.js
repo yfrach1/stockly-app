@@ -11,6 +11,7 @@ import {
   searchStock,
   deleteStock,
   updateStockQuantity,
+  getStockNews,
 } from "../services/stockService";
 
 const signUpRequest = () => ({
@@ -85,9 +86,15 @@ const deleteStockSuccessed = (stockTicker) => ({
   stockTicker,
 });
 
-const getStockDetailsSuccessed = (stockData, stock) => ({
+const getStockDetailsSuccessed = (stockInfo, ticker) => ({
   type: actionsTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED,
-  payload: { stockData, stock },
+  stockInfo,
+  ticker,
+});
+
+const getStockNewsSuccessed = (stockNews) => ({
+  type: actionsTypes.GET_STOCK_NEWS_REQUEST_SUCCESSED,
+  payload: { stockNews },
 });
 
 export const signUpAction = (newUserData) => {
@@ -180,26 +187,24 @@ export const searchStockAction = (stockSearchKey, portfolioId) => {
   };
 };
 
-export const getStockDetailsAction = (stock) => {
+export const getStockDetailsAction = (ticker) => {
   return async (dispatch) => {
     //dispatch loader maybe
     try {
-      const stockData = await getStockDetails(stock.ticker);
-
-      dispatch(getStockDetailsSuccessed({ stockData, stock }));
+      const res = await getStockDetails(ticker);
+      console.log("res,data: ", res.data);
+      dispatch(getStockDetailsSuccessed(res.data, ticker));
     } catch (error) {}
   };
 };
 
-// export const updateStockAction = (stock) => {
-//   return async (dispatch) => {
-//     dispatch(signInRequest());
-//     try {
-//       const res = await validateUser(loginUserData);
-//       dispatch(signInRequestSuccessed(res.data));
-//     } catch (error) {
-//       console.log(error.message);
-//       //dispatch(signUpRequestFailed());
-//     }
-//   };
-// };
+export const getStockNewsAction = (stock) => {
+  return async (dispatch) => {
+    try {
+      const stockNews = await getStockNews(stock.ticker);
+      dispatch(getStockNewsSuccessed(stockNews));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

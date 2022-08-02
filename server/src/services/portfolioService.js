@@ -53,20 +53,31 @@ class PortfolioManager {
       return response;
    }
 
-   async getPortfolioPerformanceData(portfolioId) {
+   async _getStocksByPortfolioId(portfolioId) {
       const portfolioStocks = await Stock.findAll({
          where: {
             portfolio_id: portfolioId,
          },
       });
+      return portfolioStocks;
+   }
+
+   async getPortfolioPerformanceData(portfolioId) {
+      //  const portfolioStocks = await Stock.findAll({
+      //    where: {
+      //      portfolio_id: portfolioId,
+      //    },
+      //  });
+      const portfolioStocks = this._getStocksByPortfolioId(portfolioId);
 
       const historicalDataByTicker = await this._getDBHistoricalDataByTicker(portfolioStocks);
       let summedPortfolioData = this._calcPortfolioSum(portfolioStocks, historicalDataByTicker);
       summedPortfolioData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      const { portfolioRevenue, portfolioDiffPercent } = this._calcRevAndDiff(summedPortfolioData);
+      const { last12MonthRevenue, last12MonthDiffPercent } =
+         this._calcRevAndDiff(summedPortfolioData);
 
-      return { summedPortfolioData, portfolioRevenue, portfolioDiffPercent };
+      return { summedPortfolioData, last12MonthRevenue, last12MonthDiffPercent };
    }
 
    async _getDBHistoricalDataByTicker(portfolioStocks) {

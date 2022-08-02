@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const getUserEntities = (state) => state.userEntities;
+export const getUserEntities = (state) => state.userEntities;
 
 export const getUserAuth = (state) => getUserEntities(state).userAuth;
 export const getFirstName = (state) => getUserEntities(state).firstName;
@@ -14,7 +14,8 @@ export const getMyStocks = (state) => {
 };
 
 export const getStock = (state) => getUserEntities(state).stock;
-export const getStockDetails = (state) => getUserEntities(state).stockDetails;
+export const getStockDetails = (state) =>
+  getUserEntities(state).stockDetails.stockInfo;
 
 export const getStocksObj = (state) => getUserEntities(state).stocks;
 
@@ -29,3 +30,8 @@ export const getPortfolioValue = createSelector([getMyStocks], (stocks) => {
   });
   return portfolioValue;
 });
+
+export const getStockRevenu = (state) =>
+  getUserEntities(state).stockDetails.stockRevenue;
+export const getStockDiffPercent = (state) =>
+  getUserEntities(state).stockDetails.stockDiffPercent;
