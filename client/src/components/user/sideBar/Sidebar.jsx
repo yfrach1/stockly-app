@@ -11,8 +11,13 @@ import {
 } from "react-icons/fa";
 import logo from "../../../assets/images/newlogo.png";
 import { Fragment, useState } from "react";
-function Sidebar({ firstName, lastName, portfolio, signOutAction }) {
-  console.log("portfolio.name: ", portfolio.id);
+function Sidebar({
+  firstName,
+  lastName,
+  portfolio,
+  signOutAction,
+  setPortfolioIdAction,
+}) {
   const [showStocksContent, setShowStocksContent] = useState(false);
   const [showCryptoContent, setShowCryptoContent] = useState(false);
 
@@ -45,9 +50,13 @@ function Sidebar({ firstName, lastName, portfolio, signOutAction }) {
       {showStocksContent ? (
         <Fragment>
           <div style={{ marginLeft: "50px" }}>
-            <Link id={styles.option} to={`/stocks/${portfolio.name}/dashboard`}>
+            <Link
+              id={styles.option}
+              to={`/stocks/${portfolio.id}/dashboard`}
+              onClick={() => setPortfolioIdAction(portfolio.id)}
+            >
               {portfolio.name}
-            </Link>{" "}
+            </Link>
             {/* <NavLink id={styles.option} to={"/stocks/myportfolio"}>
                {portfolio.name}
              </NavLink> */}

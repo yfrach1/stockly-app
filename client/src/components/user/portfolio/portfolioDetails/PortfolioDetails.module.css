@@ -1,0 +1,18 @@
+.portfolioDetailsGrid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.portfolioDetails {
+  border: 2px solid red;
+}
+
+.portfolioGraph {
+  border: 2px solid black;
+}
+
+.button:hover {
+  transform: scale(1.02);
+  background-color: #00b4f0;
+}

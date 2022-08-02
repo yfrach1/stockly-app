@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import PortfolioConnector from "../components/user/portfolio/PortfolioConnector";
 import CryptoPage from "../components/user/crypto/CryptoPage";
-import PortfolioPerformance from "../components/user/portfolio/portfolioPerformance/PortfolioPerformance";
 
 const UserSwitch = () => {
   return (
