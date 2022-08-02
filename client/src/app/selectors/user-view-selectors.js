@@ -1,9 +1,5 @@
-import {
-  getStockRevenu,
-  getStockDiffPercent,
-  getStockDetails,
-} from "./user-entities-selectors";
-
+import { getStockRevenu, getStockDiffPercent } from "./user-entities-selectors";
+import { createSelector } from "@reduxjs/toolkit";
 const getUserView = (state) => state.userView;
 
 export const getSearchKey = (state) => getUserView(state).searchKey;
