@@ -12,14 +12,16 @@ export const addStock = async (stock) => {
 };
 
 export const deleteStock = async (stockId) => {
-   const response = await axios.delete(`${url}/stock`, { params: { id: stockId } });
+   const response = await axios.delete(`${url}/stock`, {
+      params: { id: stockId },
+   });
 
    return response;
 };
 
-export const updateStockQuantity = async (ticker, quantity) => {
+export const updateStockQuantity = async (id, quantity) => {
    const body = {
-      ticker,
+      id,
       quantity,
    };
    const response = await axios.put(`${url}/stock/update`, body);

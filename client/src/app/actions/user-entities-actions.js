@@ -7,7 +7,6 @@ import {
    deleteStock,
    updateStockQuantity,
    getStockNews,
-   getHistoricalPortfolioData,
 } from "../services/stockService";
 
 const signUpRequest = () => ({
@@ -153,12 +152,12 @@ export const addStockAction = (stock, quantity) => {
       } catch (error) {}
    };
 };
-export const updateStockQuantityAction = (ticker, quantity) => {
+export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
    return async (dispatch) => {
       //dispatch loader maybe
       try {
-         await updateStockQuantity(ticker, quantity);
-         dispatch(updateStockQuantitySuccessed(ticker, quantity));
+         await updateStockQuantity(stockId, quantity);
+         dispatch(updateStockQuantitySuccessed(stockTicker, quantity));
       } catch (error) {}
    };
 };

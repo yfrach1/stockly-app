@@ -39,7 +39,7 @@ const StockDetails = ({
 
    const updateStockQuantity = useCallback(() => {
       stock.quantity = quantity;
-      updateStockQuantityAction(stock.ticker, quantity);
+      updateStockQuantityAction(stock.stock_id, stock.ticker, quantity);
       inputElement.current.value = "";
    }, [quantity]);
 
