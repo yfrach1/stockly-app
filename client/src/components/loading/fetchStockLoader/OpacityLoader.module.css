@@ -1,17 +1,18 @@
 .opacityLoaderContainer {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  top: 0;
-  left: 0;
-  /* position: absolute; */
-  width: 100%;
-  /* z-index: 1; */
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.35);
+   width: 100%;
+   height: 100%;
+   display: flex;
+   top: 0;
+   left: 0;
+   /* position: absolute; */
+   width: 100%;
+   /* z-index: 1; */
+   align-items: center;
+   justify-content: center;
+   background: rgb(255, 255, 255);
 }
 
 .opacityLoaderSize {
-  width: 200px;
+   margin-top: 10em;
+   width: 160px;
 }
