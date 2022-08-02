@@ -1,10 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import PortfolioConnector from "../components/user/portfolio/PortfolioConnector";
-import CryptoPage from "../components/user/crypto/CryptoPage";
 import PortfolioPerformance from "../components/user/portfolio/portfolioPerformance/PortfolioPerformance";
-
-const UserSwitch = () => {
+const DetailsSwitch = () => {
   return (
     <Switch>
       <Route path="/" exact>
@@ -12,14 +9,12 @@ const UserSwitch = () => {
       </Route>
       <Route path="/stocks/myportfolio">
         <PortfolioPerformance />
-        <PortfolioConnector />
       </Route>
-      <Route path="/crypto">
-        <CryptoPage />
+      <Route path="/stocks/myportfolio">
+        <PortfolioPerformance />
       </Route>
-      <Route path="/signout"></Route>
     </Switch>
   );
 };
 
-export default UserSwitch;
+export default DetailsSwitch;
