@@ -25,6 +25,7 @@
     "lodash": "^4.17.21",
     "mysql2": "^2.3.3",
     "node-fetch": "^3.2.9",
+    "node-schedule": "^2.1.0",
     "nodemon": "^2.0.16",
     "npm": "^8.15.0",
     "sequelize": "^6.21.0"
