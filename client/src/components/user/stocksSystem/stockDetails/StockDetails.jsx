@@ -13,7 +13,6 @@ const StockDetails = ({
    stockNews,
    updateStockQuantityAction,
 }) => {
-   console.log("stockInfo: ", stockInfo);
    const [quantity, setQuantity] = useState(0);
    const [inputValid, setInputValid] = useState(true);
    const inputElement = useRef(null);

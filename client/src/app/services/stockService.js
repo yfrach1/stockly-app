@@ -60,12 +60,8 @@ export const getHistoricalPortfolioData = async (portfolioId) => {
       portfolioId,
    };
 
-   const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = await axios.post(
-      `${url}/portfolio/performance`,
-      body
-   );
-
-   return { summedPortfolioData, portfolioRevenue, portfolioDiffPercent };
+   const res = await axios.post(`${url}/portfolio/performance`, body);
+   return res;
 };
 
 export const getStockNews = async (tickers) => {
@@ -74,6 +70,5 @@ export const getStockNews = async (tickers) => {
    };
 
    const response = await axios.post(`${url}/stock/news`, body);
-   console.log(response);
    return response;
 };

@@ -68,16 +68,14 @@ class PortfolioManager {
       //      portfolio_id: portfolioId,
       //    },
       //  });
-      const portfolioStocks = this._getStocksByPortfolioId(portfolioId);
-
+      const portfolioStocks = await this._getStocksByPortfolioId(portfolioId);
       const historicalDataByTicker = await this._getDBHistoricalDataByTicker(portfolioStocks);
       let summedPortfolioData = this._calcPortfolioSum(portfolioStocks, historicalDataByTicker);
       summedPortfolioData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      const { last12MonthRevenue, last12MonthDiffPercent } =
-         this._calcRevAndDiff(summedPortfolioData);
+      const { portfolioRevenue, portfolioDiffPercent } = this._calcRevAndDiff(summedPortfolioData);
 
-      return { summedPortfolioData, last12MonthRevenue, last12MonthDiffPercent };
+      return { summedPortfolioData, portfolioRevenue, portfolioDiffPercent };
    }
 
    async _getDBHistoricalDataByTicker(portfolioStocks) {
@@ -131,12 +129,11 @@ class PortfolioManager {
       };
       const portfolioDiffPercent = { ...portfolioRevenue };
 
-      for (let key in daysOfTrade) {
-         daysOfTrade[key] = (
-            summedPortfolioData.at(0).value - summedPortfolioData.at(daysOfTrade[key]).value
+      for (let key in portfolioRevenue) {
+         portfolioRevenue[key] = (
+            summedPortfolioData.at(0).value - summedPortfolioData.at(portfolioRevenue[key]).value
          ).toFixed(2);
       }
-
       for (let key in portfolioDiffPercent) {
          portfolioDiffPercent[key] = (
             (summedPortfolioData.at(0).value /

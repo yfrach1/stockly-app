@@ -32,10 +32,12 @@ export const setDateFilterAction = (filter) => {
    };
 };
 
-export const setPortfolioData = async (portfolioId) => {
+export const setPortfolioData = (portfolioId) => {
    return async (dispatch) => {
       try {
          const res = await getHistoricalPortfolioData(portfolioId);
+         console.log(res);
+         // const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = { ...res.data };
       } catch (error) {}
    };
 };

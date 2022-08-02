@@ -9,6 +9,7 @@ const initialState = {
    stock: {},
    stockDetails: { stockInfo: [], stockRevenue: null, stockDiffPercent: null },
    stockNews: [],
+   portfolioDetails: { summedPortfolioData: [], portfolioRevenue: {}, portfolioDiffPercent: {} },
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
@@ -63,7 +64,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
          const updatedStocks = { ...state.stocks };
          delete updatedStocks[action.stockTicker];
-         console.log("test:", updatedStocks["dfdfd"]);
          return {
             ...state,
             stocks: updatedStocks,
@@ -96,8 +96,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       }
       //matabe need to add loader before this action
       case actionTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED: {
-         // const updatedStock = { ...updatedStocks[action.ticker] };
-
          return {
             ...state,
             stockDetails: {
@@ -121,7 +119,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       }
 
       case actionTypes.GET_STOCK_NEWS_REQUEST_SUCCESSED: {
-         console.log("paload:", action.payload.stockNews.data);
          return {
             ...state,
             stockNews: action.payload.stockNews.data,

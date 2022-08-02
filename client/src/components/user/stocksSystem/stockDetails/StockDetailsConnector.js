@@ -18,7 +18,6 @@ const mapStateToProps = (state, ownProps) => {
    const stockInfo = getStockDetails(state);
    const stockNews = getStockNews(state);
    const stock = getStock(state);
-   console.log("news:", stockNews);
    return { stock, stockInfo, stockNews };
 };
 

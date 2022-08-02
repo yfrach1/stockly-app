@@ -7,6 +7,7 @@ import {
    deleteStock,
    updateStockQuantity,
    getStockNews,
+   getHistoricalPortfolioData,
 } from "../services/stockService";
 
 const signUpRequest = () => ({
@@ -148,7 +149,6 @@ export const addStockAction = (stock, quantity) => {
       //dispatch loader maybe
       try {
          await addStock(stock);
-         console.log(stock);
          dispatch(addStockSuccessed(stock.ticker));
       } catch (error) {}
    };
@@ -188,7 +188,6 @@ export const getStockDetailsAction = (ticker) => {
       //dispatch loader maybe
       try {
          const res = await getStockDetails(ticker);
-         console.log("res,data: ", res.data);
          dispatch(getStockDetailsSuccessed(res.data, ticker));
       } catch (error) {}
    };
@@ -202,5 +201,15 @@ export const getStockNewsAction = (stock) => {
       } catch (error) {
          console.log(error);
       }
+   };
+};
+
+export const setPortfolioData = (portfolioId) => {
+   return async (dispatch) => {
+      try {
+         const res = await getHistoricalPortfolioData(portfolioId);
+         console.log(res);
+         // const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = { ...res.data };
+      } catch (error) {}
    };
 };
