@@ -7,10 +7,10 @@ async function createPortfolio(req, res) {
 
 async function getPortfolioPerformanceData(req, res) {
    portfolioId = req.body.portfolio_id;
-   const { summedPortfolioData, last12MonthRevenue, last12MonthDiffPercent } =
+   const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } =
       await portfolioService.getPortfolioPerformanceData(portfolioId);
    summedPortfolioData
-      ? res.status(200).json({ summedPortfolioData, last12MonthRevenue, last12MonthDiffPercent })
+      ? res.status(200).json({ summedPortfolioData, portfolioRevenue, portfolioDiffPercent })
       : res.status(500).json({ error: "Could not get data" });
 }
 

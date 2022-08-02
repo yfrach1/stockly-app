@@ -64,10 +64,9 @@ class PortfolioManager {
       let summedPortfolioData = this._calcPortfolioSum(portfolioStocks, historicalDataByTicker);
       summedPortfolioData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      const { last12MonthRevenue, last12MonthDiffPercent } =
-         this._calcRevAndDiff(summedPortfolioData);
+      const { portfolioRevenue, portfolioDiffPercent } = this._calcRevAndDiff(summedPortfolioData);
 
-      return { summedPortfolioData, last12MonthRevenue, last12MonthDiffPercent };
+      return { summedPortfolioData, portfolioRevenue, portfolioDiffPercent };
    }
 
    async _getDBHistoricalDataByTicker(portfolioStocks) {
@@ -107,16 +106,36 @@ class PortfolioManager {
    }
 
    _calcRevAndDiff(summedPortfolioData) {
-      const last12MonthRevenue = (
-         summedPortfolioData[0].value - summedPortfolioData[252].value
-      ).toFixed(2);
+      const daysOfTradeEachMonth = 21;
 
-      const last12MonthDiffPercent = (
-         (summedPortfolioData[0].value / summedPortfolioData[252].value - 1) *
-         100
-      ).toFixed(2);
+      const portfolioRevenue = {
+         "1W": 5,
+         "1M": daysOfTradeEachMonth,
+         "3M": daysOfTradeEachMonth * 3,
+         "6M": daysOfTradeEachMonth * 6,
+         "1Y": daysOfTradeEachMonth * 12,
+         "3Y": daysOfTradeEachMonth * 3 * 12,
+         "5Y": daysOfTradeEachMonth * 5 * 12,
+         "1All": -1,
+      };
+      const portfolioDiffPercent = { ...portfolioRevenue };
 
-      return { last12MonthRevenue, last12MonthDiffPercent };
+      for (let key in daysOfTrade) {
+         daysOfTrade[key] = (
+            summedPortfolioData.at(0).value - summedPortfolioData.at(daysOfTrade[key]).value
+         ).toFixed(2);
+      }
+
+      for (let key in portfolioDiffPercent) {
+         portfolioDiffPercent[key] = (
+            (summedPortfolioData.at(0).value /
+               summedPortfolioData.at(portfolioDiffPercent[key]).value -
+               1) *
+            100
+         ).toFixed(2);
+      }
+
+      return { portfolioRevenue, portfolioDiffPercent };
    }
 }
 
