@@ -6,11 +6,11 @@ const StockCard = ({ stock, getStockDetailsAction, getStockNewsAction }) => {
   return (
     <Link
       className={styles.stockCard}
-      to={`/stocks/myportfolio/${stock.ticker}`}
       onClick={() => {
-        getStockDetailsAction(stock);
+        getStockDetailsAction(stock.ticker);
         getStockNewsAction(stock);
       }}
+      to={`/stocks/1/${stock.ticker}`}
     >
       <div className={styles.alignStockRow}>
         <div className={styles.ticker}>{stock.ticker}</div>

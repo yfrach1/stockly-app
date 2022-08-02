@@ -7,7 +7,8 @@ const initialState = {
   portfolio: {}, //will change to [] later when we will have more then one
   stocks: {},
   stock: {},
-  stockDetails: {},
+  stockDetails: { stockInfo: [], stockRevenue: null, stockDiffPercent: null },
+  stockNews: {},
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
@@ -90,15 +91,25 @@ const userEntitiesReducer = (state = initialState, action) => {
         portfolio: {},
         stocks: {},
         stock: {},
-        stockDetails: {},
+        stockDetails: {
+          stockInfo: [],
+          stockRevenue: null,
+          stockDiffPercent: null,
+        },
       };
     }
     //matabe need to add loader before this action
     case actionTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED: {
+      // const updatedStock = { ...updatedStocks[action.ticker] };
+
       return {
         ...state,
-        stockDetails: action.payload.stockData.stockData,
-        stock: action.payload.stockData.stock,
+        stockDetails: {
+          stockInfo: action.stockInfo,
+          stockDiffPercent: state.stockDetails.stockDiffPercent,
+          stockRevenue: state.stockDetails.stockRevenue,
+        },
+        stock: state.stocks[action.ticker],
       };
     }
 
@@ -110,6 +121,13 @@ const userEntitiesReducer = (state = initialState, action) => {
         ...state,
         stocks: updatedStocks,
         stock: updatedStock,
+      };
+    }
+
+    case actionTypes.GET_STOCK_NEWS_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        stockNews: action.stockNews,
       };
     }
 

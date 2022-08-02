@@ -1,17 +1,21 @@
 import actionsTypes from "./constants";
-import { getStockDetails, getPortfolioDetails, getStockNews } from "../services/stockService";
-
-const getStockNewsSuccessed = (stockNews) => ({
-   type: actionsTypes.GET_STOCK_NEWS_REQUEST_SUCCESSED,
-   payload: { stockNews },
-});
 
 const hideToast = () => ({
-   type: actionsTypes.HIDE_TOAST,
+  type: actionsTypes.HIDE_TOAST,
+});
+
+const setPortfolioId = (portfolioId) => ({
+  type: actionsTypes.SET_PORTFOLIO_ID,
+  portfolioId,
+});
+
+const setDateFilter = (filter) => ({
+  type: actionsTypes.SET_DATE_FILTER,
+  filter,
 });
 
 export const hideToastAction = () => {
-   return (dispatch) => dispatch(hideToast());
+  return (dispatch) => dispatch(hideToast());
 };
 
 // export const getPortfolioHistorysAction = (stocks) => {
@@ -23,13 +27,16 @@ export const hideToastAction = () => {
 //   };
 // };
 
-export const getStockNewsAction = (stock) => {
-   return async (dispatch) => {
-      try {
-         const stockNews = await getStockNews(stock.ticker);
-         dispatch(getStockNewsSuccessed(stockNews));
-      } catch (error) {
-         console.log(error);
-      }
-   };
+export const setPortfolioIdAction = (portfolioId) => {
+  return async (dispatch) => {
+    dispatch(setPortfolioId(portfolioId));
+  };
+};
+
+export const setDateFilterAction = (filter) => {
+  return async (dispatch) => {
+    dispatch(setDateFilter(filter));
+    //get to server to get result
+    return 1;
+  };
 };
