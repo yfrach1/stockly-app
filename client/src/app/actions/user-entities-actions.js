@@ -7,6 +7,7 @@ import {
    deleteStock,
    updateStockQuantity,
    getStockNews,
+   getHistoricalPortfolioData,
 } from "../services/stockService";
 
 const signUpRequest = () => ({

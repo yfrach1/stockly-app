@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 // import { getDiffPercent, getRevenu } from "../../../app/selectors/user-view-selectors";
 import { getPortfolioId } from "../../../../app/selectors/user-entities-selectors";
-import { setPortfolioData } from "../../../../app/actions/user-view-actions";
+import { setPortfolioData } from "../../../../app/actions/user-entities-actions";
 import PortfolioDetails from "./PortfolioDetails";
 
 const mapStateToProps = (state, ownProps) => {

@@ -1,7 +1,5 @@
 import actionsTypes from "./constants";
 
-import { getHistoricalPortfolioData } from "../services/stockService";
-
 const hideToast = () => ({
    type: actionsTypes.HIDE_TOAST,
 });
@@ -29,15 +27,5 @@ export const setPortfolioIdAction = (portfolioId) => {
 export const setDateFilterAction = (filter) => {
    return async (dispatch) => {
       dispatch(setDateFilter(filter));
-   };
-};
-
-export const setPortfolioData = (portfolioId) => {
-   return async (dispatch) => {
-      try {
-         const res = await getHistoricalPortfolioData(portfolioId);
-         console.log(res);
-         // const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = { ...res.data };
-      } catch (error) {}
    };
 };
