@@ -3,14 +3,14 @@ import StockHeaderCardConnector from "../../stocksSystem/stockHeaderCard/stockHe
 import StockGraphConnector from "../../stocksSystem/stockGraph/StockGraphConnector";
 
 const PortfolioDetails = ({ setPortfolioData, portfolioId }) => {
-   setPortfolioData(3);
-
-   return (
-      <div className={styles.stockDetailsContainer}>
-         <StockHeaderCardConnector />
-         <StockGraphConnector />
-      </div>
-   );
+  setPortfolioData(portfolioId);
+  console.log("portfolioId", portfolioId);
+  return (
+    <div className={styles.stockDetailsContainer}>
+      <StockHeaderCardConnector />
+      <StockGraphConnector />
+    </div>
+  );
 };
 
 export default PortfolioDetails;
