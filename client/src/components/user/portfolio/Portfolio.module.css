@@ -1,45 +1,57 @@
 .stocksSystem {
-   min-width: 22em;
-   max-width: 45em;
-   flex: 1;
-   background-color: rgb(166, 225, 255);
+  min-width: 22em;
+  max-width: 45em;
+  flex: 1;
+  background-color: rgb(166, 225, 255);
 }
 
 .grid {
-   display: flex;
-   flex-wrap: wrap;
-   padding-left: 0;
-   list-style: none;
-   flex: 0 0 33.333333%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  list-style: none;
+  flex: 0 0 33.333333%;
 }
 
 .stockContainer {
-   display: flex;
-   flex-direction: column;
-   flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .portfolioGrid {
-   height: 100%;
-   width: 100%;
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
-   align-items: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .portfolioPreview {
-   display: flex;
-   flex-direction: column;
-   height: 96vh;
-   width: 30%;
-   background-color: white;
-   margin: 1em;
-   border-radius: 5px;
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 96vh;
+  width: 30%;
+  background-color: white;
+  margin: 1em;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.listStocksPreview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  background-color: white;
+  margin: 1em;
+  border-radius: 5px;
+  overflow-y: scroll;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
 }
 
 .stockPreview {
-   height: 100vh;
-   width: 70%;
+  height: 100vh;
+  width: 70%;
 }

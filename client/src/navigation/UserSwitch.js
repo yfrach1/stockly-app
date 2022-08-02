@@ -10,8 +10,8 @@ const UserSwitch = () => {
       <Route path="/" exact>
         <div>this is an empty page</div>
       </Route>
-      <Route path="/stocks/myportfolio">
-        <PortfolioPerformance />
+      <Route path="/stocks/:potfolioId">
+        {/* <PortfolioPerformance /> */}
         <PortfolioConnector />
       </Route>
       <Route path="/crypto">

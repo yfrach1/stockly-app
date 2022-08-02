@@ -5,19 +5,19 @@ import SearchBarConnector from "../stocksSystem/searchBar/SearchBar-connector";
 import ListStocksConnector from "../stocks/ListStocksConnector";
 import OpacityLoader from "../../loading/fetchStockLoader/OpacityLoader";
 import PortfolioDataConnector from "../portfolioData/PortfolioDataConnector";
-
+import DetailsSwitch from "../../../navigation/DetailsSwitch";
 const Portfolio = ({ fetchLoading, portfolioId, stocksAmount }) => {
   return (
     <div className={styles.portfolioGrid}>
       <div className={styles.portfolioPreview}>
         <PortfolioDataConnector />
-        {/* display something else when stocklist is empty */}
         <SearchBarConnector portfolioId={portfolioId} />
-
-        {fetchLoading ? <OpacityLoader /> : <ListStocksConnector />}
+        <div className={styles.listStocksPreview}>
+          {fetchLoading ? <OpacityLoader /> : <ListStocksConnector />}
+        </div>
       </div>
-
-      <div className={styles.stockPreview}>{<StockDetailsConnector />}</div>
+      {/* <div className={styles.stockPreview}>{<StockDetailsConnector />}</div> */}
+      <div className={styles.stockPreview}>{<DetailsSwitch />}</div>
     </div>
   );
 };

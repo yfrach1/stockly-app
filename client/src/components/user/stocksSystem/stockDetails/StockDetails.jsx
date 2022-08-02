@@ -24,7 +24,7 @@ const StockDetails = ({
   );
 
   const addStock = useCallback(() => {
-    console.log("compare:", inputElement.current.value === "");
+    //  console.log("compare:", inputElement.current.value === "");
     if (!inputElement.current.value.length) {
       //change css style
       setInputValid(false);
