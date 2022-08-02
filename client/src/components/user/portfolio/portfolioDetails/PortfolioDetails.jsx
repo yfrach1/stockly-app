@@ -1,13 +1,16 @@
 import styles from "./PortfolioDetails.module.css";
+import StockHeaderCardConnector from "../../stocksSystem/stockHeaderCard/stockHeaderCardConnector";
+import StockGraphConnector from "../../stocksSystem/stockGraph/StockGraphConnector";
 
-const PortfolioDetails = ({ revenu, diffPercent, stockInfo }) => {
-  return (
-    <div className={styles.portfolioDetailsGrid}>
-      <div className={styles.portfolioDetails}> details</div>
-      <div className={styles.portfolioGraph}>graph</div>
-      this is your portfolio sweety
-    </div>
-  );
+const PortfolioDetails = ({ setPortfolioData }) => {
+   // setPortfolioData(3);
+
+   return (
+      <div className={styles.stockDetailsContainer}>
+         <StockHeaderCardConnector />
+         <StockGraphConnector />
+      </div>
+   );
 };
 
 export default PortfolioDetails;

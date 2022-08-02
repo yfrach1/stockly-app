@@ -1,23 +1,20 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  getDiffPercent,
-  getRevenu,
-  get,
-} from "../../../app/selectors/user-view-selectors";
-import { getStockDetails } from "../../../app/selectors/user-entities-selectors";
-import Portfolio from "./Portfolio";
+// import { getDiffPercent, getRevenu } from "../../../app/selectors/user-view-selectors";
+// import { getStockDetails } from "../../../app/selectors/user-entities-selectors";
+import { setPortfolioData } from "../../../../app/actions/user-view-actions";
+import PortfolioDetails from "./PortfolioDetails";
 
 const mapStateToProps = (state, ownProps) => {
-  const revenu = getRevenu(state);
-  const diffPercent = getDiffPercent(state);
-  const stockInfo = getStockDetails(state);
+   //  const revenu = getRevenu(state);
+   //  const diffPercent = getDiffPercent(state);
+   //  const stockInfo = getStockDetails(state);
 
-  return { revenu, diffPercent, stockInfo };
+   return {};
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return bindActionCreators({}, dispatch);
+   return bindActionCreators({ setPortfolioData }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioDetails);
