@@ -30,3 +30,24 @@
 .portfolioValue {
   font-weight: 500;
 }
+
+.disabled {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  flex: 1;
+  transition: all 0.4s;
+  cursor: pointer;
+  margin: 0.2rem;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 700;
+  color: #ffffff;
+  border: none;
+  background-color: #008cba;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.wrapper {
+  cursor: not-allowed;
+}

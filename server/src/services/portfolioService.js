@@ -69,6 +69,9 @@ class PortfolioManager {
 
   async getPortfolioPerformanceData(portfolioId) {
     const portfolioStocks = await this._getStocksByPortfolioId(portfolioId);
+    if (!portfolioStocks.length) {
+      return null;
+    }
     const historicalDataByTicker = await this._getDBHistoricalDataByTicker(
       portfolioStocks
     );

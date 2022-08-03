@@ -3,14 +3,14 @@ import { Switch, Route } from "react-router-dom";
 import PortfolioDetailsConnector from "../components/user/portfolio/portfolioDetails/PortfolioDetailsConnector";
 import StockDetailsConnector from "../components/user/stocksSystem/stockDetails/StockDetailsConnector";
 
-const DetailsSwitch = () => {
+const DetailsSwitch = ({ myStocks }) => {
   return (
     <Switch>
       <Route path="/" exact>
         <div>this is an empty page</div>
       </Route>
       <Route path="/stocks/:portfolioId/dashboard" exact={true}>
-        <PortfolioDetailsConnector />
+        {myStocks.length ? <PortfolioDetailsConnector /> : <></>}
       </Route>
       <Route path="/stocks/:portfolioId/:stockTicker" exact={true}>
         {/* <PortfolioPerformance /> */}
