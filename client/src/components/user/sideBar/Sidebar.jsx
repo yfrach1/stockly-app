@@ -49,19 +49,17 @@ function Sidebar({
       </div>
       {showStocksContent ? (
         <Fragment>
-          <div style={{ marginLeft: "50px" }}>
-            <Link
-              id={styles.option}
-              to={`/stocks/${portfolio.id}/dashboard`}
-              onClick={() => setPortfolioIdAction(portfolio.id)}
-            >
-              {portfolio.name}
-            </Link>
-            {/* <NavLink id={styles.option} to={"/stocks/myportfolio"}>
+          <Link
+            id={styles.option}
+            to={`/stocks/${portfolio.id}/dashboard`}
+            onClick={() => setPortfolioIdAction(portfolio.id)}
+          >
+            {portfolio.name}
+          </Link>
+          {/* <NavLink id={styles.option} to={"/stocks/myportfolio"}>
                {portfolio.name}
              </NavLink> */}
-            <div id={styles.option}>add protfolio</div>
-          </div>
+          {/* <div id={styles.option}>add protfolio</div> */}
         </Fragment>
       ) : null}
 
