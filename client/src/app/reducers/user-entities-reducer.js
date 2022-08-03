@@ -61,7 +61,7 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: updatedStocks,
-        stock: updatedStocks[action.stockTicker],
+        stock: { ...updatedStocks[action.stockTicker], isMine: true },
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
