@@ -6,7 +6,7 @@ const initialState = {
   portfolioId: null,
   fetchLoading: false,
   showToast: false,
-  dateFilter: null,
+  dateFilter: "",
   toastParam: { toastType: null, message: null, autoHideDuration: null },
 };
 
@@ -112,7 +112,7 @@ const userViewReducer = (state = initialState, action) => {
         portfolioId: action.portfolioId,
       };
     }
-    case actionTypes.SET_PORTFOLIO_FILTER: {
+    case actionTypes.SET_DATE_FILTER: {
       return {
         ...state,
         dateFilter: action.filter,

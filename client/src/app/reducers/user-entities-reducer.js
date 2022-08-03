@@ -7,13 +7,8 @@ const initialState = {
   portfolio: {}, //will change to [] later when we will have more then one
   stocks: {},
   stock: {},
-  stockDetails: { stockInfo: [], stockRevenue: null, stockDiffPercent: null },
+  stockDetails: { stockInfo: [], stockRevenue: "", stockDiffPercent: "" },
   stockNews: [],
-  //   portfolioDetails: {
-  //     summedPortfolioData: [],
-  //     portfolioRevenue: {},
-  //     portfolioDiffPercent: {},
-  //   },
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
@@ -130,19 +125,18 @@ const userEntitiesReducer = (state = initialState, action) => {
       const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = {
         ...action.payload.portfolioData.data,
       };
-      console.log(summedPortfolioData);
+      console.log("inside reducer: ", portfolioRevenue);
       return {
         ...state,
         stockDetails: {
           stockInfo: summedPortfolioData,
-          stockRevenue: 0,
-          stockDiffPercent: 0,
+          stockRevenue: portfolioRevenue,
+          stockDiffPercent: portfolioDiffPercent,
         },
-        //   portfolioDetails: {
-        //     summedPortfolioData,
-        //     portfolioRevenue,
-        //     portfolioDiffPercent,
-        //   },
+        stock: {
+          ticker: state.portfolio.name,
+          name: `${state.firstName} ${state.lastName}`,
+        },
       };
     }
 

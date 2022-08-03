@@ -1,5 +1,5 @@
 import styles from "./PortfolioDetails.module.css";
-import StockHeaderCardConnector from "../../stocksSystem/stockHeaderCard/stockHeaderCardConnector";
+import PortfolioHeaderCardConnector from "../../stocksSystem/portfolioHeaderCard /PortfolioHeaderCardConnector";
 import StockGraphConnector from "../../stocksSystem/stockGraph/StockGraphConnector";
 
 const PortfolioDetails = ({ setPortfolioData, portfolioId }) => {
@@ -7,7 +7,7 @@ const PortfolioDetails = ({ setPortfolioData, portfolioId }) => {
   console.log("portfolioId", portfolioId);
   return (
     <div className={styles.stockDetailsContainer}>
-      <StockHeaderCardConnector />
+      <PortfolioHeaderCardConnector />
       <StockGraphConnector />
     </div>
   );
