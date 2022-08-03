@@ -78,7 +78,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: stocksDict,
-        stock: action.stocks.length ? action.stocks[0] : {},
       };
     }
     case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
