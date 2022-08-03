@@ -92,8 +92,8 @@ const userEntitiesReducer = (state = initialState, action) => {
         stock: {},
         stockDetails: {
           stockInfo: [],
-          stockRevenue: null,
-          stockDiffPercent: null,
+          stockRevenue: "",
+          stockDiffPercent: "",
         },
       };
     }

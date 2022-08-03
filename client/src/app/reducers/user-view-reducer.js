@@ -6,7 +6,7 @@ const initialState = {
   portfolioId: null,
   fetchLoading: false,
   showToast: false,
-  dateFilter: "",
+  dateFilter: "All",
   toastParam: { toastType: null, message: null, autoHideDuration: null },
 };
 
