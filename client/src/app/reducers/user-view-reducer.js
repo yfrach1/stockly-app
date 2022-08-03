@@ -2,22 +2,16 @@ import actionTypes from "../actions/constants";
 import toastTypes from "../actions/constants/Toast";
 import message from "../actions/constants/Message";
 const initialState = {
-  stockNews: {},
   redirectLoading: false,
+  portfolioId: null,
   fetchLoading: false,
   showToast: false,
+  dateFilter: "",
   toastParam: { toastType: null, message: null, autoHideDuration: null },
 };
 
 const userViewReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.GET_STOCK_NEWS_REQUEST_SUCCESSED: {
-      return {
-        ...state,
-        stockNews: action.payload.stockNews,
-      };
-    }
-
     case actionTypes.CHECK_USER_TOKEN_REQUEST: {
       return {
         ...state,
@@ -63,11 +57,12 @@ const userViewReducer = (state = initialState, action) => {
         showToast: true,
         toastParam: {
           toastType: toastTypes.NEGATIVE,
-          message: message.SIGN_UP_FALIED,
+          message: message.SIGN_UP_FAILED,
           autoHideDuration: null,
         },
       };
     }
+
     case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
       return {
         ...state,
@@ -81,7 +76,7 @@ const userViewReducer = (state = initialState, action) => {
         showToast: true,
         toastParam: {
           toastType: toastTypes.NEGATIVE,
-          message: message.SIGN_IN_FALIED,
+          message: message.SIGN_IN_FAILED,
           autoHideDuration: null,
         },
       };
@@ -109,6 +104,19 @@ const userViewReducer = (state = initialState, action) => {
         ...state,
         showToast: false,
         toastParam: { toastType: null, message: null, autoHideDuration: null },
+      };
+    }
+
+    case actionTypes.SET_PORTFOLIO_ID: {
+      return {
+        ...state,
+        portfolioId: action.portfolioId,
+      };
+    }
+    case actionTypes.SET_DATE_FILTER: {
+      return {
+        ...state,
+        dateFilter: action.filter,
       };
     }
 

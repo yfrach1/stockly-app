@@ -17,8 +17,8 @@ const MESSAGE = {
   INPUT_NOT_VALID: "Input is not valid",
 
   ///
-  SIGN_UP_FALIED: "Something went wrong while sign up",
-  SIGN_IN_FALIED: "Something went wrong while sign in",
+  SIGN_UP_FAILED: "Something went wrong on sign up",
+  SIGN_IN_FAILED: "Something went wrong on sign in",
 };
 
 export default MESSAGE;

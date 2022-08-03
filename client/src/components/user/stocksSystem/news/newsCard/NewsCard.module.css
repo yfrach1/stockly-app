@@ -5,13 +5,13 @@
    background-color: rgb(255, 255, 255);
    border-radius: 5px;
    min-height: 60px;
-   width: 100%;
    align-items: center;
    transition: 0.3s;
-   margin-bottom: 5px;
    text-decoration: none;
    color: black;
    text-align: center;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+   margin: 5px 10px;
 }
 
 .newsCard:visited {
@@ -21,7 +21,7 @@
 
 .newsCard:hover {
    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-   transform: scale(1.04);
+   transform: scale(1.01);
    cursor: pointer;
 }
 

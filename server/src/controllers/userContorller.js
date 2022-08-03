@@ -2,7 +2,7 @@ const userService = require("../services/userService");
 
 async function createUser(req, res) {
   const { accessToken, userData } = await userService.createUser(req.body);
-  console.log("accessToken: ", accessToken);
+
   accessToken
     ? res
         .status(200)

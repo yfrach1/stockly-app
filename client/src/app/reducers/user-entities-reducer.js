@@ -7,7 +7,8 @@ const initialState = {
   portfolio: {}, //will change to [] later when we will have more then one
   stocks: {},
   stock: {},
-  stockDetails: {},
+  stockDetails: { stockInfo: [], stockRevenue: "", stockDiffPercent: "" },
+  stockNews: [],
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
@@ -60,16 +61,16 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: updatedStocks,
-        stock: updatedStocks[action.stockTicker],
+        stock: { ...updatedStocks[action.stockTicker], isMine: true },
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
       const updatedStocks = { ...state.stocks };
       delete updatedStocks[action.stockTicker];
-      console.log("test:", updatedStocks["dfdfd"]);
       return {
         ...state,
         stocks: updatedStocks,
+        stock: { ...state.stock, isMine: false, quantity: 0 },
       };
     }
     case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
@@ -78,7 +79,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: stocksDict,
-        stock: action.stocks.length ? action.stocks[0] : {},
       };
     }
     case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
@@ -90,15 +90,23 @@ const userEntitiesReducer = (state = initialState, action) => {
         portfolio: {},
         stocks: {},
         stock: {},
-        stockDetails: {},
+        stockDetails: {
+          stockInfo: [],
+          stockRevenue: null,
+          stockDiffPercent: null,
+        },
       };
     }
     //matabe need to add loader before this action
     case actionTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED: {
       return {
         ...state,
-        stockDetails: action.payload.stockData.stockData,
-        stock: action.payload.stockData.stock,
+        stockDetails: {
+          stockInfo: action.stockInfo,
+          stockDiffPercent: state.stockDetails.stockDiffPercent,
+          stockRevenue: state.stockDetails.stockRevenue,
+        },
+        stock: state.stocks[action.ticker],
       };
     }
 
@@ -110,6 +118,31 @@ const userEntitiesReducer = (state = initialState, action) => {
         ...state,
         stocks: updatedStocks,
         stock: updatedStock,
+      };
+    }
+
+    case actionTypes.GET_HISTORICAL_PORTFOLIO_REQUEST_SUCCESSED: {
+      const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = {
+        ...action.payload.portfolioData.data,
+      };
+      return {
+        ...state,
+        stockDetails: {
+          stockInfo: summedPortfolioData,
+          stockRevenue: portfolioRevenue,
+          stockDiffPercent: portfolioDiffPercent,
+        },
+        stock: {
+          ticker: state.portfolio.name,
+          name: `${state.firstName} ${state.lastName}`,
+        },
+      };
+    }
+
+    case actionTypes.GET_STOCK_NEWS_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        stockNews: action.payload.stockNews.data,
       };
     }
 

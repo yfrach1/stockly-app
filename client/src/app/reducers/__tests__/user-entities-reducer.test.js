@@ -14,7 +14,7 @@ const initialState = {
 
 describe("user Entities Reducer ", () => {
   const prevState = { ...initialState };
-  // let newStateAfterSetData;
+  let newStateAfterSetData;
   test("return prev state when no match case for a given action", () => {
     const action = { type: "ADD_USER" };
     const newState = userEntitiesReducer(prevState, action);

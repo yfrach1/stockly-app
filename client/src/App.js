@@ -14,16 +14,10 @@ function App({
 }) {
   const { toastType, message, autoHideDuration } = toastParam;
   useEffect(() => {
-    console.log("in use effect");
     checkUserTokenAction();
-  }, []);
+  }, [checkUserTokenAction]);
   return (
     <Fragment>
-      {/* <MyToast
-        showToast={showToast}
-        property={toastParam}
-        hideToastAction={hideToastAction}
-      /> */}
       <Toast
         open={showToast}
         type={Toast.types[toastType]}

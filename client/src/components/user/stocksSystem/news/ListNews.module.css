@@ -1,5 +1,7 @@
 .container {
    max-height: 20vh;
-   overflow: scroll;
+   overflow-y: auto;
+   overflow-x: hidden;
    margin-top: -0.2rem;
+   max-width: 59rem;
 }

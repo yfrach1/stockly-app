@@ -1,8 +1,9 @@
 import React from "react";
 import { useState, useCallback, useRef } from "react";
-import StockGraph from "../stockGraph/StockGraph";
+import StockHeaderCardConnector from "../stockHeaderCard/stockHeaderCardConnector";
 import ListNews from "../news/ListNews";
 import styles from "./StockDetails.module.css";
+import StockGraphConnector from "../stockGraph/StockGraphConnector";
 
 const StockDetails = ({
   stock,
@@ -24,9 +25,7 @@ const StockDetails = ({
   );
 
   const addStock = useCallback(() => {
-    console.log("compare:", inputElement.current.value === "");
     if (!inputElement.current.value.length) {
-      //change css style
       setInputValid(false);
       return;
     }
@@ -34,48 +33,30 @@ const StockDetails = ({
     stock.quantity = quantity;
     addStockAction(stock);
     inputElement.current.value = "";
-  }, [quantity]);
+  }, [quantity, addStockAction, stock]);
 
   const updateStockQuantity = useCallback(() => {
     stock.quantity = quantity;
-    updateStockQuantityAction(stock.ticker, quantity);
+    updateStockQuantityAction(stock.stock_id, stock.ticker, quantity);
     inputElement.current.value = "";
-  }, [quantity]);
+  }, [quantity, stock, updateStockQuantityAction]);
 
   return (
     <div className={styles.stockDetailsContainer}>
-      <div className={styles.header}>
-        <div className={styles.companyDetailsContainer}>
-          <h1 className={styles.ticker}>{stock.ticker}</h1>
-          <h2 className={styles.stockName}>{stock.name}</h2>
-        </div>
-        <div className={styles.companyRevContainer}>
-          <div className={styles.price}>{stock.price}</div>
-          <div
-            className={styles.percentage}
-            style={{
-              backgroundColor: stock.change_percent > 0 ? "#38ef7d" : "#F00000",
-            }}
-          >
-            {stock.change_percent}%
-          </div>
-        </div>
-      </div>
-      <StockGraph stockInfo={stockInfo} />
+      <StockHeaderCardConnector />
+      <StockGraphConnector />
       <div className={styles.detailsAndAddContainer}>
         <div className={styles.details}>
           <span>
-            Open: {stockInfo.data ? `${stockInfo.data.at(-1).open}` : ""}
+            Open: {stockInfo.length ? `${stockInfo.at(-1).open}` : ""}
           </span>
           <span>
-            High: {stockInfo.data ? `${stockInfo.data.at(-1).high}` : ""}
+            High: {stockInfo.length ? `${stockInfo.at(-1).high}` : ""}
           </span>
-          <span>
-            Low: {stockInfo.data ? `${stockInfo.data.at(-1).low}` : ""}
-          </span>
+          <span>Low: {stockInfo.length ? `${stockInfo.at(-1).low}` : ""}</span>
           <span>
             Volume:{" "}
-            {stockInfo.data ? `${stockInfo.data.at(-1).volume / 1000}K` : ""}
+            {stockInfo.length ? `${stockInfo.at(-1).volume / 1000} K` : ""}
           </span>
         </div>
         <div className={styles.quantityContainer}>
@@ -83,7 +64,7 @@ const StockDetails = ({
           <input
             className={inputValid ? styles.input : styles.inputNotValid}
             type="text"
-            placeholder={stock.quantity ? stock.quantity : ""}
+            placeholder={stock.isMine ? stock.quantity : 0}
             onChange={handleChange}
             ref={inputElement}
           />
@@ -96,7 +77,11 @@ const StockDetails = ({
           </button>
           {stock.isMine ? (
             <button
-              onClick={() => deleteStockAction(stock.ticker, stock.stock_id)}
+              onClick={() => {
+                deleteStockAction(stock.ticker, stock.stock_id);
+                setQuantity(0);
+                inputElement.current.value = "";
+              }}
               className={styles.buttonDelete}
             >
               Delete Stock

@@ -1,12 +1,16 @@
 .grid {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
 }
 
 .seperatingLine {
-   border: 2px dashed rgb(137, 137, 137);
-   width: 100%;
-   margin: 1rem 0;
+  border: 2px dashed rgb(137, 137, 137);
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.emptyState {
+  height: 10em;
 }

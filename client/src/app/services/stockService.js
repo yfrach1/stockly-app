@@ -1,28 +1,30 @@
 const axios = require("axios");
-const url = "http://localhost:8080/stock";
+const url = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 
 export const addStock = async (stock) => {
    const body = {
       stock,
    };
-   const response = await axios.post(`${url}`, body);
+   const response = await axios.post(`${url}/stock`, body);
 
    return response;
 };
 
 export const deleteStock = async (stockId) => {
-   const response = await axios.delete(`${url}`, { params: { id: stockId } });
+   const response = await axios.delete(`${url}/stock`, {
+      params: { id: stockId },
+   });
 
    return response;
 };
 
-export const updateStockQuantity = async (ticker, quantity) => {
+export const updateStockQuantity = async (id, quantity) => {
    const body = {
-      ticker,
+      id,
       quantity,
    };
-   const response = await axios.put(`${url}/update`, body);
+   const response = await axios.put(`${url}/stock/update`, body);
 
    return response;
 };
@@ -33,20 +35,9 @@ export const searchStock = async (stockSearchKey, portfolioId) => {
       portfolioId,
    };
 
-   const response = await axios.post(`${url}/search`, body);
+   const response = await axios.post(`${url}/stock/search`, body);
+
    return response;
-
-   //   console.log("response: ", response);
-   //   const myStocks = response.data.filter((stock) =>
-   //     stock.isMine ? true : false
-   //   );
-   //   console.log(`my stocks: ${myStocks}`);
-   //   const searchStocks = response.data.filter((stock) =>
-   //     stock.isMine ? false : true
-   //   );
-   //   console.log(`search stocks: ${searchStocks}`);
-
-   //   return { myStocks, searchStocks };
 };
 
 export const getStockDetails = async (ticker) => {
@@ -61,36 +52,18 @@ export const getStockDetails = async (ticker) => {
       resampleFreq: "",
    };
 
-   const response = await axios.post(`${url}/stockdata`, body);
+   const response = await axios.post(`${url}/stock/stockdata`, body);
 
    return response;
 };
 
-export const getPortfolioDetails = async (stocks) => {
-   const stockQuantity = 4; // will use the user quantity in the future
+export const getHistoricalPortfolioData = async (portfolioId) => {
+   const body = {
+      portfolioId,
+   };
 
-   const totalPortfolioValues = {};
-   console.log("starting totalPortfolioValues", totalPortfolioValues);
-
-   for (let i = 0; i < stocks.length; i++) {
-      let { data } = await getStockDetails(stocks[i].ticker);
-      for (const stockPrice of data) {
-         if (!totalPortfolioValues[stockPrice.date]) {
-            totalPortfolioValues[stockPrice.date] = 0;
-         }
-
-         totalPortfolioValues[stockPrice.date] += stockPrice.close * stockQuantity;
-      }
-   }
-
-   console.log("ending totalPortfolioValues", totalPortfolioValues);
-   const list = Object.entries(totalPortfolioValues).map(([date, value]) => ({
-      date,
-      value,
-   }));
-   console.log(list);
-
-   // return response;
+   const res = await axios.post(`${url}/portfolio/performance`, body);
+   return res;
 };
 
 export const getStockNews = async (tickers) => {
@@ -98,7 +71,6 @@ export const getStockNews = async (tickers) => {
       tickers: tickers,
    };
 
-   const response = await axios.post(`${url}/news`, body);
-   console.log(response);
+   const response = await axios.post(`${url}/stock/news`, body);
    return response;
 };
