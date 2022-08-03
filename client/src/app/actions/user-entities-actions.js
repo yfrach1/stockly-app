@@ -208,7 +208,7 @@ export const getStockNewsAction = (stock) => {
       const stockNews = await getStockNews(stock.ticker);
       dispatch(getStockNewsSuccessed(stockNews));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 };

@@ -125,7 +125,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = {
         ...action.payload.portfolioData.data,
       };
-      console.log("inside reducer: ", portfolioRevenue);
       return {
         ...state,
         stockDetails: {

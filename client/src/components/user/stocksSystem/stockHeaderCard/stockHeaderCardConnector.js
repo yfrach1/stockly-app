@@ -4,7 +4,6 @@ import stockHeaderCard from "./stockHeaderCard";
 
 const mapStateToProps = (state, ownProps) => {
   const stock = getStock(state);
-  console.log("stock", stock);
   return { stock };
 };
 

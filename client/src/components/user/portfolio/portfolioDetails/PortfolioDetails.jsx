@@ -4,7 +4,6 @@ import StockGraphConnector from "../../stocksSystem/stockGraph/StockGraphConnect
 
 const PortfolioDetails = ({ setPortfolioData, portfolioId }) => {
   setPortfolioData(portfolioId);
-  console.log("portfolioId", portfolioId);
   return (
     <div className={styles.stockDetailsContainer}>
       <PortfolioHeaderCardConnector />

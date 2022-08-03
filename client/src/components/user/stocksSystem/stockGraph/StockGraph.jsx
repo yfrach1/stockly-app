@@ -27,7 +27,6 @@ const StockGraph = ({ stockInfo, setDateFilterAction }) => {
 
   useEffect(() => {
     buttonHandle(0);
-    console.log("stockInfo", stockInfo);
   }, [stockInfo, buttonHandle]);
 
   const buttonsData = [
