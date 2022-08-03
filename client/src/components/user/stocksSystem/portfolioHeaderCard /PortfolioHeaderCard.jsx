@@ -1,7 +1,17 @@
 import React from "react";
+import { useEffect } from "react";
 import styles from "./PortfolioHeaderCard.module.css";
 
-const PortfolioHeaderCard = ({ stock, price, percent }) => {
+const PortfolioHeaderCard = ({
+  stock,
+  price,
+  percent,
+  setDateFilterAction,
+}) => {
+  useEffect(() => {
+    setDateFilterAction("All");
+  }, []);
+
   return (
     <div className={styles.header}>
       <div className={styles.companyDetailsContainer}>

@@ -1,9 +1,11 @@
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { getStock } from "../../../../app/selectors/user-entities-selectors";
 import {
   getRevenue,
   getDiffPercent,
 } from "../../../../app/selectors/user-view-selectors";
+import { setDateFilterAction } from "../../../../app/actions/user-view-actions";
 import PortfolioHeaderCard from "./PortfolioHeaderCard";
 
 const mapStateToProps = (state, ownProps) => {
@@ -13,4 +15,11 @@ const mapStateToProps = (state, ownProps) => {
   return { stock, price, percent };
 };
 
-export default connect(mapStateToProps, null)(PortfolioHeaderCard);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return bindActionCreators({ setDateFilterAction }, dispatch);
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PortfolioHeaderCard);
