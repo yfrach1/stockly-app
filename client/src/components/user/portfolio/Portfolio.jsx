@@ -1,5 +1,4 @@
 import React from "react";
-import StockDetailsConnector from "../stocksSystem/stockDetails/StockDetailsConnector";
 import styles from "./Portfolio.module.css";
 import SearchBarConnector from "../stocksSystem/searchBar/SearchBar-connector";
 import ListStocksConnector from "../stocks/ListStocksConnector";
@@ -16,7 +15,6 @@ const Portfolio = ({ fetchLoading, portfolioId, stocksAmount, myStocks }) => {
           {fetchLoading ? <OpacityLoader /> : <ListStocksConnector />}
         </div>
       </div>
-      {/* <div className={styles.stockPreview}>{<StockDetailsConnector />}</div> */}
       <div className={styles.stockPreview}>{<DetailsSwitch />}</div>
     </div>
   );

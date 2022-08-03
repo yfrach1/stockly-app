@@ -1,5 +1,4 @@
 import styles from "./ListStocks.module.css";
-import { v4 as uuidv4 } from "uuid";
 import StockCardConnector from "./stockCard/StockCardConnector";
 import emptyState from "../../../assets/images/emptyState.png";
 

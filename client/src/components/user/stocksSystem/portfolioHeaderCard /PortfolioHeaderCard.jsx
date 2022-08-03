@@ -10,7 +10,7 @@ const PortfolioHeaderCard = ({
 }) => {
   useEffect(() => {
     setDateFilterAction("All");
-  }, []);
+  }, [setDateFilterAction]);
 
   return (
     <div className={styles.header}>

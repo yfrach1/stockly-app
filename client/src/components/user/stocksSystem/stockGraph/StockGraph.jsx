@@ -8,24 +8,27 @@ const StockGraph = ({ stockInfo, setDateFilterAction }) => {
   const [xValues, setXValues] = useState([]);
   const [yValues, setYValues] = useState([]);
 
+  const buttonHandle = useCallback(
+    (graphDays) => {
+      if (stockInfo.length) {
+        let stockChartxValues = [];
+        let stockChartyValues = [];
+        stockInfo.slice(-graphDays).forEach((point) => {
+          stockChartxValues.push(point.date);
+          stockChartyValues.push(point.close);
+        });
+
+        setXValues(stockChartxValues);
+        setYValues(stockChartyValues);
+      }
+    },
+    [stockInfo]
+  );
+
   useEffect(() => {
     buttonHandle(0);
     console.log("stockInfo", stockInfo);
-  }, [stockInfo]);
-
-  const buttonHandle = useCallback((graphDays) => {
-    if (stockInfo.length) {
-      let stockChartxValues = [];
-      let stockChartyValues = [];
-      stockInfo.slice(-graphDays).forEach((point) => {
-        stockChartxValues.push(point.date);
-        stockChartyValues.push(point.close);
-      });
-
-      setXValues(stockChartxValues);
-      setYValues(stockChartyValues);
-    }
-  });
+  }, [stockInfo, buttonHandle]);
 
   const buttonsData = [
     { text: "1W", daysToShow: 5 },

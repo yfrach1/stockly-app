@@ -1,5 +1,3 @@
-import { getStockRevenu, getStockDiffPercent } from "./user-entities-selectors";
-import { createSelector } from "@reduxjs/toolkit";
 const getUserView = (state) => state.userView;
 export const getUserEntities = (state) => state.userEntities;
 
@@ -32,10 +30,3 @@ export const getDiffPercent = (state) => {
 
   return diffPercentObj[dateFilter];
 };
-
-// export const getDiffPercent = createSelector(
-//   [getFilter, getStockDiffPercent],
-//   (filter, diffPercent) => {
-//     return diffPercent[filter];
-//   }
-// );

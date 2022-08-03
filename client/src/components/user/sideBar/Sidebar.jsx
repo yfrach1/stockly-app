@@ -1,14 +1,9 @@
 import styles from "./Sidebar.module.css";
-import { Link, NavLink, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import downArrow from "../../../assets/images/down_arrow.svg";
 import upArrow from "../../../assets/images/up_arrow.svg";
 import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
-import {
-  FaDollarSign,
-  FaBitcoin,
-  FaSignOutAlt,
-  FaArrowDown,
-} from "react-icons/fa";
+import { FaDollarSign, FaBitcoin, FaSignOutAlt } from "react-icons/fa";
 import logo from "../../../assets/images/newlogo.png";
 import { Fragment, useState } from "react";
 function Sidebar({
@@ -22,7 +17,6 @@ function Sidebar({
   const [showCryptoContent, setShowCryptoContent] = useState(false);
 
   const history = useHistory();
-  const location = useLocation();
   const handleDisplayStocksContent = () => {
     setShowStocksContent((prevShowStocksContent) => !prevShowStocksContent);
   };
@@ -45,6 +39,7 @@ function Sidebar({
         <img
           className={styles.arrowIcon}
           src={showStocksContent ? upArrow : downArrow}
+          alt="arrow"
         />
       </div>
       {showStocksContent ? (
@@ -71,6 +66,7 @@ function Sidebar({
         <img
           className={styles.arrowIcon}
           src={showCryptoContent ? upArrow : downArrow}
+          alt="arrow"
         />
       </div>
       {showCryptoContent ? <div id={styles.option}>Coming soon!</div> : <></>}
