@@ -142,14 +142,15 @@ class PortfolioManager {
 
     for (let key in portfolioRevenue) {
       portfolioRevenue[key] = (
-        summedPortfolioData.at(0).value -
-        summedPortfolioData.at(portfolioRevenue[key]).value
+        summedPortfolioData.at(-1).close -
+        summedPortfolioData.at(-portfolioRevenue[key]).close
       ).toFixed(2);
     }
+
     for (let key in portfolioDiffPercent) {
       portfolioDiffPercent[key] = (
-        (summedPortfolioData.at(0).value /
-          summedPortfolioData.at(portfolioDiffPercent[key]).value -
+        (summedPortfolioData.at(-1).close /
+          summedPortfolioData.at(-portfolioDiffPercent[key]).close -
           1) *
         100
       ).toFixed(2);

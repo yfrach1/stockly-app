@@ -28,10 +28,10 @@ const StockGraph = ({ stockInfo, setDateFilterAction }) => {
   });
 
   const buttonsData = [
-    { text: "1W", daysToShow: 7 },
-    { text: "1M", daysToShow: 30 },
-    { text: "3M", daysToShow: 90 },
-    { text: "6M", daysToShow: 180 },
+    { text: "1W", daysToShow: 5 },
+    { text: "1M", daysToShow: 21 },
+    { text: "3M", daysToShow: 21 * 3 },
+    { text: "6M", daysToShow: 21 * 6 },
     { text: "1Y", daysToShow: 252 },
     { text: "3Y", daysToShow: 252 * 3 },
     { text: "5Y", daysToShow: 252 * 5 },
@@ -42,13 +42,10 @@ const StockGraph = ({ stockInfo, setDateFilterAction }) => {
     <div className={styles.graphContainer}>
       {buttonsData.map((button, index) => (
         <button
-          onClick={
-            () => {
-              buttonHandle(button.daysToShow);
-              // setDateFilterAction(button.text);
-            }
-            // calc difference action, calc revenu
-          }
+          onClick={() => {
+            buttonHandle(button.daysToShow);
+            setDateFilterAction(button.text);
+          }}
           className={styles.button}
           key={index}
         >

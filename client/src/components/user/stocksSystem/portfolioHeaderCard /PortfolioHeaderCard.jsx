@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./stockHeaderCard.module.css";
+import styles from "./PortfolioHeaderCard.module.css";
 
-const stockHeaderCard = ({ stock }) => {
+const PortfolioHeaderCard = ({ stock, price, percent }) => {
   return (
     <div className={styles.header}>
       <div className={styles.companyDetailsContainer}>
@@ -9,18 +9,18 @@ const stockHeaderCard = ({ stock }) => {
         <h2 className={styles.stockName}>{stock.name}</h2>
       </div>
       <div className={styles.companyRevContainer}>
-        <div className={styles.price}>{stock.price}</div>
+        <div className={styles.price}>{price}</div>
         <div
           className={styles.percentage}
           style={{
-            backgroundColor: stock.change_percent > 0 ? "#38ef7d" : "#F00000",
+            backgroundColor: percent > 0 ? "#38ef7d" : "#F00000",
           }}
         >
-          {stock.change_percent}%
+          {percent}%
         </div>
       </div>
     </div>
   );
 };
 
-export default stockHeaderCard;
+export default PortfolioHeaderCard;

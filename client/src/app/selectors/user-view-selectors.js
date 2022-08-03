@@ -1,6 +1,7 @@
 import { getStockRevenu, getStockDiffPercent } from "./user-entities-selectors";
 import { createSelector } from "@reduxjs/toolkit";
 const getUserView = (state) => state.userView;
+export const getUserEntities = (state) => state.userEntities;
 
 export const getSearchKey = (state) => getUserView(state).searchKey;
 // export const getStockDetails = (state) => getUserView(state).stockDetails;
@@ -10,15 +11,31 @@ export const getFetchLoading = (state) => getUserView(state).fetchLoading;
 export const getShowToast = (state) => getUserView(state).showToast;
 export const getToastParam = (state) => getUserView(state).toastParam;
 
-export const getFilter = (state) => getUserView(state).dateFilter;
+// export const getFilter = (state) => getUserView(state).dateFilter;
 
-export const getRevenu = createSelector([getFilter, getStockRevenu], (filter, revenuObj) => {
-   return revenuObj[filter];
-});
+export const getRevenue = (state) => {
+  let dateFilter = getUserView(state).dateFilter;
+  if (dateFilter === "All") {
+    dateFilter = "1All";
+  }
+  const revenueObj = getUserEntities(state).stockDetails.stockRevenue;
 
-export const getDiffPercent = createSelector(
-   [getFilter, getStockDiffPercent],
-   (filter, diffPercent) => {
-      return diffPercent[filter];
-   }
-);
+  return revenueObj[dateFilter];
+};
+
+export const getDiffPercent = (state) => {
+  let dateFilter = getUserView(state).dateFilter;
+  if (dateFilter === "All") {
+    dateFilter = "1All";
+  }
+  const diffPercentObj = getUserEntities(state).stockDetails.stockDiffPercent;
+
+  return diffPercentObj[dateFilter];
+};
+
+// export const getDiffPercent = createSelector(
+//   [getFilter, getStockDiffPercent],
+//   (filter, diffPercent) => {
+//     return diffPercent[filter];
+//   }
+// );
