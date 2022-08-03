@@ -1,12 +1,11 @@
 import React from "react";
-import StockDetailsConnector from "../stocksSystem/stockDetails/StockDetailsConnector";
 import styles from "./Portfolio.module.css";
 import SearchBarConnector from "../stocksSystem/searchBar/SearchBar-connector";
 import ListStocksConnector from "../stocks/ListStocksConnector";
 import OpacityLoader from "../../loading/fetchStockLoader/OpacityLoader";
 import PortfolioDataConnector from "../portfolioData/PortfolioDataConnector";
 import DetailsSwitch from "../../../navigation/DetailsSwitch";
-const Portfolio = ({ fetchLoading, portfolioId, stocksAmount }) => {
+const Portfolio = ({ fetchLoading, portfolioId, stocksAmount, myStocks }) => {
   return (
     <div className={styles.portfolioGrid}>
       <div className={styles.portfolioPreview}>
@@ -16,7 +15,6 @@ const Portfolio = ({ fetchLoading, portfolioId, stocksAmount }) => {
           {fetchLoading ? <OpacityLoader /> : <ListStocksConnector />}
         </div>
       </div>
-      {/* <div className={styles.stockPreview}>{<StockDetailsConnector />}</div> */}
       <div className={styles.stockPreview}>{<DetailsSwitch />}</div>
     </div>
   );

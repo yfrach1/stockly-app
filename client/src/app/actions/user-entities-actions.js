@@ -111,7 +111,7 @@ export const signUpAction = (newUserData) => {
     } catch (error) {
       setTimeout(() => {
         dispatch(signUpRequestFailed());
-      }, 1000);
+      }, 500);
     }
   };
 };
@@ -208,7 +208,7 @@ export const getStockNewsAction = (stock) => {
       const stockNews = await getStockNews(stock.ticker);
       dispatch(getStockNewsSuccessed(stockNews));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 };

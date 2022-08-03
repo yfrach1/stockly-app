@@ -10,7 +10,6 @@ import UserView from "./UserView";
 
 const mapStateToProps = (state, ownProps) => {
   const firstName = getFirstName(state);
-  console.log("firstName: ", firstName);
   const lastName = getLastName(state);
   const portfolio = getPortfolio(state);
   return { firstName, lastName, portfolio };

@@ -57,11 +57,12 @@ const userViewReducer = (state = initialState, action) => {
         showToast: true,
         toastParam: {
           toastType: toastTypes.NEGATIVE,
-          message: message.SIGN_UP_FALIED,
+          message: message.SIGN_UP_FAILED,
           autoHideDuration: null,
         },
       };
     }
+
     case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
       return {
         ...state,
@@ -75,7 +76,7 @@ const userViewReducer = (state = initialState, action) => {
         showToast: true,
         toastParam: {
           toastType: toastTypes.NEGATIVE,
-          message: message.SIGN_IN_FALIED,
+          message: message.SIGN_IN_FAILED,
           autoHideDuration: null,
         },
       };

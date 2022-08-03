@@ -61,7 +61,7 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: updatedStocks,
-        stock: updatedStocks[action.stockTicker],
+        stock: { ...updatedStocks[action.stockTicker], isMine: true },
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
@@ -70,6 +70,7 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: updatedStocks,
+        stock: { ...state.stock, isMine: false, quantity: 0 },
       };
     }
     case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
@@ -78,7 +79,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: stocksDict,
-        stock: action.stocks.length ? action.stocks[0] : {},
       };
     }
     case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
@@ -125,7 +125,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = {
         ...action.payload.portfolioData.data,
       };
-      console.log("inside reducer: ", portfolioRevenue);
       return {
         ...state,
         stockDetails: {
