@@ -70,7 +70,7 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stocks: updatedStocks,
-        stock: { ...state.stock, isMine: false },
+        stock: { ...state.stock, isMine: false, quantity: 0 },
       };
     }
     case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {

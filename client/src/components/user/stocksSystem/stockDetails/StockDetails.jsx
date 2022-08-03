@@ -64,7 +64,7 @@ const StockDetails = ({
           <input
             className={inputValid ? styles.input : styles.inputNotValid}
             type="text"
-            placeholder={stock.quantity ? stock.quantity : ""}
+            placeholder={stock.isMine ? stock.quantity : 0}
             onChange={handleChange}
             ref={inputElement}
           />
@@ -77,7 +77,11 @@ const StockDetails = ({
           </button>
           {stock.isMine ? (
             <button
-              onClick={() => deleteStockAction(stock.ticker, stock.stock_id)}
+              onClick={() => {
+                deleteStockAction(stock.ticker, stock.stock_id);
+                setQuantity(0);
+                inputElement.current.value = "";
+              }}
               className={styles.buttonDelete}
             >
               Delete Stock
