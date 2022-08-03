@@ -10,6 +10,7 @@ export const getShowToast = (state) => getUserView(state).showToast;
 export const getToastParam = (state) => getUserView(state).toastParam;
 
 // export const getFilter = (state) => getUserView(state).dateFilter;
+export const getTimePeriodFilter = (state) => getUserView(state).dateFilter;
 
 export const getRevenue = (state) => {
   let dateFilter = getUserView(state).dateFilter;
