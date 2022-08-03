@@ -73,6 +73,7 @@ function Sidebar({
           src={showCryptoContent ? upArrow : downArrow}
         />
       </div>
+      {showCryptoContent ? <div id={styles.option}>Coming soon!</div> : <></>}
 
       <div className={styles.alignSignOut}>
         <FaSignOutAlt />{" "}
