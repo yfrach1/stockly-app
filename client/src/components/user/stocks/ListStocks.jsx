@@ -1,6 +1,7 @@
 import styles from "./ListStocks.module.css";
 import { v4 as uuidv4 } from "uuid";
 import StockCardConnector from "./stockCard/StockCardConnector";
+import emptyState from "../../../assets/images/emptyState.png";
 
 const ListStocks = ({ stocks }) => {
   const notMyStocksArray = stocks
@@ -10,10 +11,14 @@ const ListStocks = ({ stocks }) => {
       );
     })
     .filter((stock) => stock !== null);
-
   const seperatingLine = <span className={styles.seperatingLine}></span>;
   return (
     <div className={styles.grid}>
+      {!stocks.length ? (
+        <img src={emptyState} alt="Empty state" className={styles.emptyState} />
+      ) : (
+        <></>
+      )}
       {stocks.map((stock, index) =>
         stock.isMine ? <StockCardConnector key={index} stock={stock} /> : null
       )}

@@ -6,7 +6,7 @@ import ListStocksConnector from "../stocks/ListStocksConnector";
 import OpacityLoader from "../../loading/fetchStockLoader/OpacityLoader";
 import PortfolioDataConnector from "../portfolioData/PortfolioDataConnector";
 import DetailsSwitch from "../../../navigation/DetailsSwitch";
-const Portfolio = ({ fetchLoading, portfolioId, stocksAmount }) => {
+const Portfolio = ({ fetchLoading, portfolioId, stocksAmount, myStocks }) => {
   return (
     <div className={styles.portfolioGrid}>
       <div className={styles.portfolioPreview}>
