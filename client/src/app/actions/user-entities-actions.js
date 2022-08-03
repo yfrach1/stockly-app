@@ -111,7 +111,7 @@ export const signUpAction = (newUserData) => {
     } catch (error) {
       setTimeout(() => {
         dispatch(signUpRequestFailed());
-      }, 1000);
+      }, 500);
     }
   };
 };

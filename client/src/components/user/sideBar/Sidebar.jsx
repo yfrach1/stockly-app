@@ -34,7 +34,7 @@ function Sidebar({
     <div className={styles.sidebarContainer}>
       <img src={logo} alt="logo" className={styles.sidebarLogo} />
       <div className={styles.userGreeting}>
-        Welcome back {firstName} {lastName}!
+        Welcome {firstName} {lastName}!
       </div>
 
       <div
