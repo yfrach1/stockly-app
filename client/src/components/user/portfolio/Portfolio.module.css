@@ -5,10 +5,6 @@
   background-color: rgb(166, 225, 255);
 }
 
-.emptyState {
-  height: 10em;
-}
-
 .grid {
   display: flex;
   flex-wrap: wrap;
