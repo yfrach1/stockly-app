@@ -1,8 +1,9 @@
 import styles from "./ListStocks.module.css";
-import StockCardConnector from "./stockCard/StockCardConnector";
-import emptyState from "../../../assets/images/emptyState.png";
+import StockCardConnector from "../stockCard/StockCardConnector";
+import emptyState from "../../../../assets/images/emptyState.png";
 
 const ListStocks = ({ stocks }) => {
+  console.log("stocks: ", stocks);
   const notMyStocksArray = stocks
     .map((stock, index) => {
       return stock.isMine ? null : (

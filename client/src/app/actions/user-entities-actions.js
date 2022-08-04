@@ -71,9 +71,10 @@ const searchStockFailed = (stocks) => ({
   stocks,
 });
 
-const addStockSuccessed = (stockTicker) => ({
+const addStockSuccessed = (newStock, stockTicker) => ({
   type: actionsTypes.ADD_STOCK_REQUEST_SUCCESSED,
   stockTicker,
+  newStock,
 });
 
 const updateStockQuantitySuccessed = (ticker, quantity) => ({
@@ -157,8 +158,9 @@ export const addStockAction = (stock, quantity) => {
   return async (dispatch) => {
     //dispatch loader maybe
     try {
-      await addStock(stock);
-      dispatch(addStockSuccessed(stock.ticker));
+      const res = await addStock(stock);
+      console.log(res.data);
+      dispatch(addStockSuccessed(res.data, stock.ticker));
     } catch (error) {}
   };
 };

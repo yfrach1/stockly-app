@@ -92,6 +92,7 @@ const searchStock = async (searchQuery, myTickers) => {
 
   let stocksDetailsToDB = stocksList.map((stock, index) => {
     stock.price = allStocksSearchResults[index][0].adjClose;
+    stock.isMine = false;
     stock.change_percent = (
       (allStocksSearchResults[index][0].adjClose /
         allStocksSearchResults[index][0].adjOpen) *
