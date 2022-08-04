@@ -12,5 +12,14 @@
 }
 
 .emptyState {
-  height: 10em;
+  height: 20em;
+  overflow: hidden;
+  margin-left: 1em;
+}
+
+.addText {
+  margin-top: 1em;
+  font-size: 2em;
+  font-weight: 300;
+  text-align: center;
 }
