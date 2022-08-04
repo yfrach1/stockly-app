@@ -32,6 +32,7 @@ async function deleteStock(req, res) {
 }
 
 async function getAPIStockData(req, res) {
+  // const dateFilter = "2022-07-16";
   const stockData = await stockService.getStockData(req.body);
   stockData
     ? res.status(200).json(stockData)

@@ -1,14 +1,16 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getMyStocks } from "../app/selectors/user-entities-selectors";
+import {
+  getStocksAmount,
+  getMyStocksAmount,
+} from "../app/selectors/user-entities-selectors";
 import DetailsSwitch from "./DetailsSwitch";
 
 const mapStateToProps = (state, ownProps) => {
-  const myStocks = getMyStocks(state);
-
-  return { myStocks };
+  const allStocksAmount = getStocksAmount(state);
+  const myStocksAmount = getMyStocksAmount(state);
+  return { allStocksAmount, myStocksAmount };
 };
-
 const mapDispatchToProps = (dispatch, ownProps) => {
   return bindActionCreators({}, dispatch);
 };

@@ -75,6 +75,20 @@ class StockManager {
         },
         order: [["date", "ASC"]],
       });
+      // const date = new Date(dateFilter);
+      // console.log("date: ", date);
+      // console.log("stockDataDB: ", stockDataDB[0].dataValues.date);
+      // console.log("stockDataDB: ", stockDataDB[0].dataValues.date > date);
+
+      // if (dateFilter.length) {
+      //   const x = stockDataDB
+      //     .map((stock) => {
+      //       if (stock.dataValues.date > date) return stock;
+      //     })
+      //     .filter((stock) => stock !== undefined);
+      //   console.log("x ", x);
+      //   console.log("x ", x.length);
+      // }
 
       return stockDataDB;
     } else {

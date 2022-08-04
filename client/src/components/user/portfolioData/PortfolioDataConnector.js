@@ -3,16 +3,15 @@ import { bindActionCreators } from "redux";
 import {
   getPortfolioValue,
   getPortfolioId,
-  getMyStocks,
+  getMyStocksAmount,
 } from "../../../app/selectors/user-entities-selectors";
 import PortfolioData from "./PortfolioData";
 
 const mapStateToProps = (state, ownProps) => {
   const portfolioValue = getPortfolioValue(state);
   const portfolioId = getPortfolioId(state);
-  const myStocks = getMyStocks(state);
-
-  return { portfolioValue, portfolioId, myStocks };
+  const myStocksAmount = getMyStocksAmount(state);
+  return { portfolioValue, portfolioId, myStocksAmount };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
