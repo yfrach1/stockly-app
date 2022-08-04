@@ -5,6 +5,7 @@ const initialState = {
   redirectLoading: false,
   portfolioId: null,
   fetchLoading: false,
+  detailsLoading: false,
   showToast: false,
   dateFilter: "All",
   toastParam: { toastType: null, message: null, autoHideDuration: null },
@@ -117,6 +118,18 @@ const userViewReducer = (state = initialState, action) => {
       return {
         ...state,
         dateFilter: action.filter,
+      };
+    }
+    case actionTypes.DETAILS_REQUEST: {
+      return {
+        ...state,
+        detailsLoading: true,
+      };
+    }
+    case actionTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        detailsLoading: false,
       };
     }
 

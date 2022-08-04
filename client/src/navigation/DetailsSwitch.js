@@ -4,7 +4,6 @@ import PortfolioDetailsConnector from "../components/user/portfolio/portfolioDet
 import StockDetailsConnector from "../components/user/stocksSystem/stockDetails/StockDetailsConnector";
 
 const DetailsSwitch = ({ allStocksAmount, myStocksAmount }) => {
-  console.log("myStocksAmount: ", myStocksAmount);
   return (
     <Switch>
       <Route path="/" exact>

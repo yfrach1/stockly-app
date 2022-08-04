@@ -4,6 +4,7 @@ import StockHeaderCardConnector from "../stockHeaderCard/stockHeaderCardConnecto
 import ListNews from "../news/ListNews";
 import styles from "./StockDetails.module.css";
 import StockGraphConnector from "../stockGraph/StockGraphConnector";
+import OpacityLoader from "../../../loading/fetchStockLoader/OpacityLoader";
 
 const StockDetails = ({
   stock,
@@ -12,8 +13,8 @@ const StockDetails = ({
   addStockAction,
   stockNews,
   updateStockQuantityAction,
+  detailsLoading,
 }) => {
-  console.log("stock: ", Object.keys(stock).length);
   const [quantity, setQuantity] = useState(0);
   const [inputValid, setInputValid] = useState(true);
   const inputElement = useRef(null);
@@ -44,7 +45,9 @@ const StockDetails = ({
 
   return (
     <div className={styles.stockDetailsContainer}>
-      {Object.keys(stock).length ? (
+      {detailsLoading ? (
+        <OpacityLoader />
+      ) : Object.keys(stock).length ? (
         <Fragment>
           <StockHeaderCardConnector />
           <StockGraphConnector />

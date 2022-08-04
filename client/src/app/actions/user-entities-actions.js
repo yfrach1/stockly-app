@@ -103,8 +103,11 @@ const getHistoricalPortfolioDataSuccessed = (portfolioData) => ({
   payload: { portfolioData },
 });
 
-const clearStockOnEmptySearch = (portfolioData) => ({
-  type: actionsTypes.CLEAR_STOCK_ON_EMPTY_SEARCH,
+// const clearStockOnEmptySearch = (portfolioData) => ({
+//   type: actionsTypes.CLEAR_STOCK_ON_EMPTY_SEARCH,
+// });
+const detailsRequest = () => ({
+  type: actionsTypes.DETAILS_REQUEST,
 });
 
 export const signUpAction = (newUserData) => {
@@ -116,7 +119,7 @@ export const signUpAction = (newUserData) => {
     } catch (error) {
       setTimeout(() => {
         dispatch(signUpRequestFailed());
-      }, 500);
+      }, 1000);
     }
   };
 };
@@ -126,7 +129,9 @@ export const signInAction = (loginUserData) => {
     dispatch(signInRequest());
     try {
       const res = await validateUser(loginUserData);
-      dispatch(signInRequestSuccessed(res.data));
+      setTimeout(() => {
+        dispatch(signInRequestSuccessed(res.data));
+      }, 1000);
     } catch (error) {
       setTimeout(() => {
         dispatch(signInRequestFailed());
@@ -137,7 +142,6 @@ export const signInAction = (loginUserData) => {
 
 export const signOutAction = () => {
   return async (dispatch) => {
-    // dispatch(signInRequest());
     try {
       const res = await logOutUser();
       dispatch(signOutRequestSuccessed(res));
@@ -147,7 +151,6 @@ export const signOutAction = () => {
 
 export const checkUserTokenAction = () => {
   return async (dispatch) => {
-    //dispatch loader maybe
     dispatch(checkTokenRequest());
     try {
       const res = await getUserDataOnStart();
@@ -160,18 +163,16 @@ export const checkUserTokenAction = () => {
 
 export const addStockAction = (stock, quantity) => {
   return async (dispatch) => {
-    //dispatch loader maybe
     try {
       const res = await addStock(stock);
-      console.log(res.data);
       dispatch(addStockSuccessed(res.data, stock.ticker));
     } catch (error) {}
   };
 };
 export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
   return async (dispatch) => {
-    //dispatch loader maybe
     try {
+      //maybe need loader in the input text field
       await updateStockQuantity(stockId, quantity);
       dispatch(updateStockQuantitySuccessed(stockTicker, quantity));
     } catch (error) {}
@@ -200,7 +201,7 @@ export const searchStockAction = (stockSearchKey, portfolioId) => {
 
 export const getStockDetailsAction = (ticker) => {
   return async (dispatch) => {
-    //dispatch loader maybe
+    dispatch(detailsRequest());
     try {
       const res = await getStockDetails(ticker);
       dispatch(getStockDetailsSuccessed(res.data, ticker));
