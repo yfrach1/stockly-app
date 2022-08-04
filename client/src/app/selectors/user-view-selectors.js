@@ -13,6 +13,7 @@ export const getRedirectLoading = (state) => getUserView(state).redirectLoading;
 export const getFetchLoading = (state) => getUserView(state).fetchLoading;
 export const getShowToast = (state) => getUserView(state).showToast;
 export const getToastParam = (state) => getUserView(state).toastParam;
+export const getPortfolioId = (state) => getUserView(state).portfolioId;
 
 // export const getFilter = (state) => getUserView(state).dateFilter;
 export const getDateFilter = (state) => getUserView(state).dateFilter;

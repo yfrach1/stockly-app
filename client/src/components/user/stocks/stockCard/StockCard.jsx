@@ -2,7 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./StockCard.module.css";
 
-const StockCard = ({ stock, getStockDetailsAction, getStockNewsAction }) => {
+const StockCard = ({
+  stock,
+  getStockDetailsAction,
+  getStockNewsAction,
+  portfolioId,
+}) => {
   return (
     <Link
       className={styles.stockCard}
@@ -10,7 +15,7 @@ const StockCard = ({ stock, getStockDetailsAction, getStockNewsAction }) => {
         getStockDetailsAction(stock.ticker);
         getStockNewsAction(stock);
       }}
-      to={`/stocks/1/${stock.ticker}`}
+      to={`/stocks/${portfolioId}/${stock.ticker}`}
     >
       <div className={styles.alignStockRow}>
         <div className={styles.ticker}>{stock.ticker}</div>

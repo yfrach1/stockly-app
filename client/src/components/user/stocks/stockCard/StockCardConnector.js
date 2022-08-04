@@ -5,10 +5,12 @@ import {
   getStockNewsAction,
 } from "../../../../app/actions/user-entities-actions";
 
+import { getPortfolioId } from "../../../../app/selectors/user-view-selectors";
 import StockCard from "./StockCard";
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  const portfolioId = getPortfolioId(state);
+  return { portfolioId };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
