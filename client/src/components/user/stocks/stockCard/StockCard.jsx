@@ -27,7 +27,7 @@ const StockCard = ({
           className={styles.name}
           style={{ color: !stock.name ? "red" : "" }}
         >
-          {stock.name ? stock.name : "name not avialbe"}
+          {stock.name ? stock.name : "name not available"}
         </div>
         <div
           className={styles.changePercent}

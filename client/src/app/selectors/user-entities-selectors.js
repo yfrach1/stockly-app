@@ -20,11 +20,24 @@ export const getMyStocks = (state) => {
   return stocksArray;
 };
 
+export const getAllStocks = (state) => {
+  const stockObj = getUserEntities(state).stocks;
+  const stocksArray = Object.keys(stockObj).map((key) => stockObj[key]);
+  return stocksArray;
+};
+
 export const getStock = (state) => getUserEntities(state).stock;
 export const getStockDetails = (state) =>
   getUserEntities(state).stockDetails.stockInfo;
 
 export const getStocksObj = (state) => getUserEntities(state).stocks;
+
+export const getMyStocksAmount = createSelector([getMyStocks], (stockArray) => {
+  const myStocksAmount = stockArray
+    .filter((stock) => stock.isMine)
+    .filter((stock) => stock !== undefined).length;
+  return myStocksAmount;
+});
 
 export const getStocksAmount = createSelector([getStocksObj], (stocksObj) => {
   return Object.keys(stocksObj).length;

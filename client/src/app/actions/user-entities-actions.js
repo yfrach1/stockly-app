@@ -103,6 +103,10 @@ const getHistoricalPortfolioDataSuccessed = (portfolioData) => ({
   payload: { portfolioData },
 });
 
+const clearStockOnEmptySearch = (portfolioData) => ({
+  type: actionsTypes.CLEAR_STOCK_ON_EMPTY_SEARCH,
+});
+
 export const signUpAction = (newUserData) => {
   return async (dispatch) => {
     dispatch(signUpRequest());
@@ -224,3 +228,9 @@ export const setPortfolioData = (portfolioId) => {
     } catch (error) {}
   };
 };
+
+// export const clearStockOnEmptySearchAction = () => {
+//   return async (dispatch) => {
+//     dispatch(clearStockOnEmptySearch());
+//   };
+// };
