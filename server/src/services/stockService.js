@@ -41,7 +41,7 @@ class StockManager {
       where: { user_id: user.id },
     });
 
-    const response = await Stock.create({
+    const newStock = await Stock.create({
       portfolio_id: UserPortfolio.portfolio_id,
       name: stock.name,
       ticker: stock.ticker,
@@ -52,7 +52,7 @@ class StockManager {
 
     this._addHistoricalDataToDB(stock);
 
-    return response;
+    return this.formatStocks(newStock);
   }
 
   async updateStock(stock_id, price, change_percent) {

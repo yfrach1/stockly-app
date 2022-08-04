@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import {
   getMyStocks,
   getSearchStocks,
-} from "../../../app/selectors/user-entities-selectors";
+} from "../../../../app/selectors/user-entities-selectors";
 
 import ListStocks from "./ListStocks";
 
