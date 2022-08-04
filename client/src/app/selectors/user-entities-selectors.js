@@ -8,6 +8,11 @@ export const getLastName = (state) => getUserEntities(state).lastName;
 export const getPortfolio = (state) => getUserEntities(state).portfolio;
 export const getPortfolioId = (state) => getUserEntities(state).portfolio.id;
 export const getStockNews = (state) => getUserEntities(state).stockNews;
+export const getStockRevenue = (state) =>
+  getUserEntities(state).stockDetails.stockRevenue;
+
+export const getStockDiffPercent = (state) =>
+  getUserEntities(state).stockDetails.stockDiffPercent;
 
 export const getMyStocks = (state) => {
   const stockObj = getUserEntities(state).stocks;

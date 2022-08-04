@@ -7,7 +7,7 @@ const initialState = {
   portfolio: {}, //will change to [] later when we will have more then one
   stocks: {},
   stock: {},
-  stockDetails: { stockInfo: [], stockRevenue: "", stockDiffPercent: "" },
+  stockDetails: { stockInfo: [], stockRevenue: {}, stockDiffPercent: {} },
   stockNews: [],
 };
 

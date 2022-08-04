@@ -139,7 +139,7 @@ class PortfolioManager {
       "1Y": daysOfTradeEachMonth * 12,
       "3Y": daysOfTradeEachMonth * 3 * 12,
       "5Y": daysOfTradeEachMonth * 5 * 12,
-      "1All": -1,
+      All: -1,
     };
     const portfolioDiffPercent = { ...portfolioRevenue };
 
