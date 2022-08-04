@@ -38,10 +38,12 @@ const signInRequestFailed = () => ({
   type: actionsTypes.SIGN_IN_REQUEST_FAILED,
 });
 
-const signOutRequestSuccessed = (userData) => ({
+const signOutRequestSuccessed = () => ({
   type: actionsTypes.SIGN_OUT_REQUEST_SUCCESSED,
 });
-
+const signOutRequestFailed = () => ({
+  type: actionsTypes.SIGN_OUT_REQUEST_FAILED,
+});
 const checkTokenRequest = () => ({
   type: actionsTypes.CHECK_USER_TOKEN_REQUEST,
 });
@@ -66,9 +68,8 @@ const searchStockSuccessed = (stocks) => ({
   stocks,
 });
 
-const searchStockFailed = (stocks) => ({
+const searchStockFailed = () => ({
   type: actionsTypes.SEARCH_STOCK_REQUEST_FAILED,
-  stocks,
 });
 
 const addStockSuccessed = (newStock, stockTicker) => ({
@@ -76,22 +77,35 @@ const addStockSuccessed = (newStock, stockTicker) => ({
   stockTicker,
   newStock,
 });
-
+const addStockFailed = () => ({
+  type: actionsTypes.ADD_STOCK_REQUEST_FAILED,
+});
 const updateStockQuantitySuccessed = (ticker, quantity) => ({
   type: actionsTypes.UPDATE_STOCK_REQUEST_SUCCESSED,
   ticker,
   quantity,
 });
 
+const updateStockQuantityFailed = () => ({
+  type: actionsTypes.UPDATE_STOCK_REQUEST_FAILED,
+});
+
 const deleteStockSuccessed = (stockTicker) => ({
   type: actionsTypes.DELETE_STOCK_REQUEST_SUCCESSED,
   stockTicker,
+});
+const deleteStockFailed = () => ({
+  type: actionsTypes.DELETE_STOCK_REQUEST_FAILED,
 });
 
 const getStockDetailsSuccessed = (stockInfo, ticker) => ({
   type: actionsTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED,
   stockInfo,
   ticker,
+});
+
+const getStockDetailsFailed = () => ({
+  type: actionsTypes.GET_STOCK_DETAILS_REQUEST_FAILED,
 });
 
 const getStockNewsSuccessed = (stockNews) => ({
@@ -102,10 +116,10 @@ const getHistoricalPortfolioDataSuccessed = (portfolioData) => ({
   type: actionsTypes.GET_HISTORICAL_PORTFOLIO_REQUEST_SUCCESSED,
   payload: { portfolioData },
 });
+const getHistoricalPortfolioDataFailed = () => ({
+  type: actionsTypes.GET_HISTORICAL_PORTFOLIO_REQUEST_FAILED,
+});
 
-// const clearStockOnEmptySearch = (portfolioData) => ({
-//   type: actionsTypes.CLEAR_STOCK_ON_EMPTY_SEARCH,
-// });
 const detailsRequest = () => ({
   type: actionsTypes.DETAILS_REQUEST,
 });
@@ -143,9 +157,11 @@ export const signInAction = (loginUserData) => {
 export const signOutAction = () => {
   return async (dispatch) => {
     try {
-      const res = await logOutUser();
-      dispatch(signOutRequestSuccessed(res));
-    } catch (error) {}
+      await logOutUser();
+      dispatch(signOutRequestSuccessed());
+    } catch (error) {
+      dispatch(signOutRequestFailed());
+    }
   };
 };
 
@@ -166,7 +182,9 @@ export const addStockAction = (stock, quantity) => {
     try {
       const res = await addStock(stock);
       dispatch(addStockSuccessed(res.data, stock.ticker));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(addStockFailed());
+    }
   };
 };
 export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
@@ -175,15 +193,19 @@ export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
       //maybe need loader in the input text field
       await updateStockQuantity(stockId, quantity);
       dispatch(updateStockQuantitySuccessed(stockTicker, quantity));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(updateStockQuantityFailed());
+    }
   };
 };
 export const deleteStockAction = (stockTicker, stockId) => {
   return async (dispatch) => {
     try {
-      const res = await deleteStock(stockId);
-      if (res) dispatch(deleteStockSuccessed(stockTicker));
-    } catch (error) {}
+      await deleteStock(stockId);
+      dispatch(deleteStockSuccessed(stockTicker));
+    } catch (error) {
+      dispatch(deleteStockFailed());
+    }
   };
 };
 
@@ -205,7 +227,9 @@ export const getStockDetailsAction = (ticker) => {
     try {
       const res = await getStockDetails(ticker);
       dispatch(getStockDetailsSuccessed(res.data, ticker));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(getStockDetailsFailed());
+    }
   };
 };
 
@@ -224,14 +248,9 @@ export const setPortfolioData = (portfolioId) => {
   return async (dispatch) => {
     try {
       const portfolioData = await getHistoricalPortfolioData(portfolioId);
-      // const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = { ...res.data };
       dispatch(getHistoricalPortfolioDataSuccessed(portfolioData));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(getHistoricalPortfolioDataFailed());
+    }
   };
 };
-
-// export const clearStockOnEmptySearchAction = () => {
-//   return async (dispatch) => {
-//     dispatch(clearStockOnEmptySearch());
-//   };
-// };

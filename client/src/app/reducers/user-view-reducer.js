@@ -6,8 +6,8 @@ const initialState = {
   portfolioId: null,
   fetchLoading: false,
   detailsLoading: false,
-  showToast: false,
   dateFilter: "All",
+  showToast: false,
   toastParam: { toastType: null, message: null, autoHideDuration: null },
 };
 
@@ -48,6 +48,8 @@ const userViewReducer = (state = initialState, action) => {
       return {
         ...state,
         redirectLoading: false,
+        showToast: false,
+        toastParam: { toastType: null, message: null, autoHideDuration: null },
       };
     }
 
@@ -63,11 +65,25 @@ const userViewReducer = (state = initialState, action) => {
         },
       };
     }
+    case actionTypes.SIGN_OUT_REQUEST_FAILED: {
+      return {
+        ...state,
+        redirectLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.NEGATIVE,
+          message: message.SIGN_OUT_FAILED,
+          autoHideDuration: null,
+        },
+      };
+    }
 
     case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
       return {
         ...state,
         redirectLoading: false,
+        showToast: false,
+        toastParam: { toastType: null, message: null, autoHideDuration: null },
       };
     }
     case actionTypes.SIGN_IN_REQUEST_FAILED: {
@@ -130,6 +146,93 @@ const userViewReducer = (state = initialState, action) => {
       return {
         ...state,
         detailsLoading: false,
+      };
+    }
+    case actionTypes.GET_STOCK_DETAILS_REQUEST_FAILED: {
+      return {
+        ...state,
+        detailsLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.NEGATIVE,
+          message: message.DETAILS_REQUEST_FAILED,
+          autoHideDuration: null,
+        },
+      };
+    }
+
+    case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        detailsLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.POSITIVE,
+          message: message.ADD_STOCK_REQUEST_SUCCESSED,
+          autoHideDuration: 5000,
+        },
+      };
+    }
+    case actionTypes.ADD_STOCK_REQUEST_FAILED: {
+      return {
+        ...state,
+        detailsLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.NEGATIVE,
+          message: message.ADD_STOCK_REQUEST_FAILED,
+          autoHideDuration: null,
+        },
+      };
+    }
+    case actionTypes.UPDATE_STOCK_REQUEST_FAILED: {
+      return {
+        ...state,
+        detailsLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.NEGATIVE,
+          message: message.UPDATE_STOCK_REQUEST_FAILED,
+          autoHideDuration: null,
+        },
+      };
+    }
+    case actionTypes.SEARCH_STOCK_REQUEST_FAILED: {
+      return {
+        ...state,
+        detailsLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.NEGATIVE,
+          message: message.SEARCH_STOCK_REQUEST_FAILED,
+          autoHideDuration: null,
+        },
+      };
+    }
+
+    case actionTypes.GET_STOCK_DETAILS_REQUEST_FAILED: {
+      return {
+        ...state,
+        detailsLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.NEGATIVE,
+          message: message.GET_STOCK_DETAILS_REQUEST_FAILED,
+          autoHideDuration: null,
+        },
+      };
+    }
+
+    case actionTypes.GET_HISTORICAL_PORTFOLIO_REQUEST_FAILED: {
+      return {
+        ...state,
+        detailsLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.NEGATIVE,
+          message: message.GET_HISTORICAL_PORTFOLIO_REQUEST_FAILED,
+          autoHideDuration: null,
+        },
       };
     }
 
