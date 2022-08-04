@@ -3,7 +3,6 @@ import StockCardConnector from "../stockCard/StockCardConnector";
 import emptyStateImage from "../../../../assets/images/emptyState.png";
 
 const ListStocks = ({ stocks }) => {
-  console.log("stocks: ", stocks);
   const notMyStocksArray = stocks
     .map((stock, index) => {
       return stock.isMine ? null : (

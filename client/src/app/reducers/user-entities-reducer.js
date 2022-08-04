@@ -148,15 +148,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       };
     }
 
-    // case actionTypes.CLEAR_STOCK_ON_EMPTY_SEARCH: {
-    //   return {
-    //     ...state,
-    //     stock: {},
-    //     stockDetails: { stockInfo: [], stockRevenue: {}, stockDiffPercent: {} },
-    //     stockNews: [],
-    //   };
-    // }
-
     default:
       return state;
   }

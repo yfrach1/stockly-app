@@ -1,24 +1,19 @@
 const MESSAGE = {
-  FETCH_REQUEST_SUCCESSED: "Successfully get all items",
-  FETCH_REQUEST_FAILED: "Something failed while get items",
-  GET_ALL_EMPTY: "",
-  ADD_ITEM_SUCCESSED: "Successfully add new items",
-  ADD_ITEM_FAILED: "Something failed while add new items",
-  ITEM_ALREADY_HAVE: "Already have this task, try to add a new task",
-  DELETE_ITEM_SUCCESSED: "Successfully delete item",
-  DELETE_ITEM_FAILED: "Something failed while delete item",
-  CLEAR_ALL_ITEMS_SUCCESSED: "Successfully delete all items",
-  CLEAR_ALL_ITEMS_FAILED: "Something failed while delete all items",
-  TOGGLE_STATUS_CHECKED_SUCCESSED: "Successfully checked item",
-  TOGGLE_STATUS_UNCHECKED_SUCCESSED: "Successfully unchecked item",
-  TOGGLE_STATUS_FAILED: "Something failed while toggle item status",
-  EDIT_ITEM_SUCCESSED: "Successfully edit & save item",
-  EDIT_ITEM_FAILED: "Something failed while updating item text",
-  INPUT_NOT_VALID: "Input is not valid",
-
   ///
-  SIGN_UP_FAILED: "Something went wrong on sign up",
-  SIGN_IN_FAILED: "Something went wrong on sign in",
+  SIGN_UP_FAILED: "Something went wrong while sign up",
+  SIGN_IN_FAILED: "Something went wrong while sign in",
+  SIGN_OUT_FAILED: "Something went wrong while sign out",
+  DETAILS_REQUEST_FAILED: "Something went wrong while get stock details",
+  ADD_STOCK_REQUEST_FAILED: "Something went wrong while add new stock",
+  ADD_STOCK_REQUEST_SUCCESSED: "Successfully add new stock",
+  UPDATE_STOCK_REQUEST_FAILED:
+    "Something went wrong while update stock quantity",
+  DELETE_STOCK_REQUEST_FAILED: "Something went wrong while delete stock",
+  SEARCH_STOCK_REQUEST_FAILED: "Something went wrong while search stocks",
+  GET_STOCK_DETAILS_REQUEST_FAILED:
+    "Something went wrong while get stock details",
+  GET_HISTORICAL_PORTFOLIO_REQUEST_FAILED:
+    "Something went wrong while get portfolio data",
 };
 
 export default MESSAGE;
