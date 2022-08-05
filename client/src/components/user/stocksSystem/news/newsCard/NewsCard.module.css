@@ -5,13 +5,11 @@
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   min-height: 60px;
-  align-items: center;
   transition: 0.3s;
   text-decoration: none;
   color: black;
-  text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 0.35em 0.5em;
+  padding: 0.45em 0.7em;
   margin-bottom: 0.6em;
 }
 
@@ -30,12 +28,13 @@
   font-size: 16px;
   font-weight: 600;
 }
+
 .description {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 500;
 }
 .footer {
   display: flex;
   justify-content: space-between;
-  gap: 7rem;
+  gap: 1.5em;
 }
