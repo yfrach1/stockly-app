@@ -12,6 +12,7 @@ import PortfolioDetails from "./PortfolioDetails";
 const mapStateToProps = (state, ownProps) => {
   const portfolioId = getPortfolioId(state);
   const myStockAmount = getMyStocksAmount(state);
+
   // const stocksStatus = getStocksStatus(state);
   // const stocksStatus = "1";
   return { portfolioId, myStockAmount };

@@ -11,7 +11,7 @@ export const addStock = async (stock) => {
   return response;
 };
 
-export const deleteStock = async (stockId) => {
+export const deleteStock = async (stockId, portfolioId) => {
   const response = await axios.delete(`${url}/stock`, {
     params: { id: stockId },
   });
@@ -30,7 +30,6 @@ export const updateStockQuantity = async (id, quantity) => {
 };
 
 export const searchStock = async (stockSearchKey, portfolioId) => {
-  console.log("stockSearchKey: ", stockSearchKey);
   const body = {
     stockSearchKey,
     portfolioId,

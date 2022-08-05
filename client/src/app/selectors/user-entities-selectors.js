@@ -41,11 +41,11 @@ export const getStocks = createSelector(
 
 ////
 
-export const getAllStocks = (state) => {
-  const stockObj = getUserEntities(state).myStocks;
-  const stocksArray = Object.keys(stockObj).map((key) => stockObj[key]);
-  return stocksArray;
-};
+// export const getMyStocks = (state) => {
+//   const stockObj = getUserEntities(state).myStocks;
+//   const stocksArray = Object.keys(stockObj).map((key) => stockObj[key]);
+//   return stocksArray;
+// };
 
 export const getStock = (state) => getUserEntities(state).stock;
 export const getStockDetails = (state) =>
@@ -60,9 +60,19 @@ export const getMyStocksAmount = createSelector([getMyStocks], (stockArray) => {
   return myStocksAmount;
 });
 
-export const getStocksAmount = createSelector([getStocksObj], (stocksObj) => {
-  return Object.keys(stocksObj).length;
-});
+export const getStocksAmount = createSelector(
+  [getMyStocks, getSerachedStocks],
+  (myStocks, searchedStocks) => {
+    return myStocks.length + searchedStocks.length;
+  }
+);
+
+// export const getAllStocksAmount = createSelector(
+//   [getStocksObj],
+//   (stocksObj) => {
+//     return Object.keys(stocksObj).length;
+//   }
+// );
 
 export const getPortfolioValue = createSelector([getMyStocks], (stocks) => {
   let portfolioValue = 0;

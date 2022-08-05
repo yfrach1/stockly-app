@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useState, useCallback, useRef } from "react";
 import StockHeaderCardConnector from "../../stocks/stockHeaderCard/stockHeaderCardConnector";
-import ListNews from "../news/ListNews";
+import ListNews from "../../stocksSystem/news/ListNews";
 import styles from "./StockDetails.module.css";
 import StockGraphConnector from "../stockGraph/StockGraphConnector";
 import OpacityLoader from "../../../loading/fetchStockLoader/OpacityLoader";
@@ -14,6 +14,7 @@ const StockDetails = ({
   stockNews,
   updateStockQuantityAction,
   detailsLoading,
+  portfolioId,
 }) => {
   const [quantity, setQuantity] = useState(0);
   const [inputValid, setInputValid] = useState(true);
@@ -89,7 +90,11 @@ const StockDetails = ({
               {stock.isMine ? (
                 <button
                   onClick={() => {
-                    deleteStockAction(stock.ticker, stock.stock_id);
+                    deleteStockAction(
+                      stock.ticker,
+                      stock.stock_id,
+                      portfolioId
+                    );
                     setQuantity(0);
                     inputElement.current.value = "";
                   }}

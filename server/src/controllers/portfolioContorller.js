@@ -15,9 +15,9 @@ async function getPortfolioPerformanceData(req, res) {
       portfolioData;
     res
       .status(200)
-      .json({ summedPortfolioData, portfolioRevenue, portfolioDiffPercent });
+      .send({ summedPortfolioData, portfolioRevenue, portfolioDiffPercent });
   } else {
-    res.status(500).json({ error: "Could not get data" });
+    res.status(200).send(null);
   }
 }
 

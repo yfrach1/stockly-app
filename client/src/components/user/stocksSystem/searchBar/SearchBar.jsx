@@ -6,14 +6,12 @@ import debounce from "lodash.debounce";
 const SearchBar = ({ searchStockAction, portfolioId, setSearchKeyAction }) => {
   const handleChange = useCallback(
     (e) => {
-      console.log("inside debounce");
       searchStockAction(e.target.value, portfolioId);
     },
     [searchStockAction, portfolioId]
   );
 
   const debouncedResults = useMemo(() => {
-    console.log("in use memo");
     return debounce(handleChange, 1000);
   }, [handleChange]);
 
