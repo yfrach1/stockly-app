@@ -5,10 +5,16 @@ const initialState = {
   firstName: "",
   lastName: "",
   portfolio: {}, //will change to [] later when we will have more then one
-  stocks: {},
+  myStocks: {},
+  searchedStocks: {},
   stock: {},
-  stockDetails: { stockInfo: [], stockRevenue: {}, stockDiffPercent: {} },
+  stockDetails: {
+    stockInfo: [],
+    stockRevenue: { All: 0 },
+    stockDiffPercent: { All: 0 },
+  },
   stockNews: [],
+  searchKey: "",
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
@@ -24,25 +30,27 @@ const userEntitiesReducer = (state = initialState, action) => {
     }
     case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
       const stocksDict = {};
-      action.userData.stocks.forEach(
-        (stock) => (stocksDict[stock.ticker] = stock)
-      );
+      action.userData.stocks.forEach((stock) => {
+        stock.isChecked = true;
+        return (stocksDict[stock.ticker] = stock);
+      });
       return {
         ...state,
         userAuth: true,
         lastName: action.userData.lastName,
         firstName: action.userData.firstName,
         portfolio: action.userData.portfolio,
-        stocks: stocksDict,
+        myStocks: stocksDict,
         stock: action.userData.stocks.length ? action.userData.stocks[0] : {},
       };
     }
     //check if need to stay with 2 same cases
     case actionTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED: {
       const stocksDict = {};
-      action.userData.stocks.forEach(
-        (stock) => (stocksDict[stock.ticker] = stock)
-      );
+      action.userData.stocks.forEach((stock) => {
+        stock.isChecked = true;
+        return (stocksDict[stock.ticker] = stock);
+      });
 
       return {
         ...state,
@@ -50,37 +58,43 @@ const userEntitiesReducer = (state = initialState, action) => {
         lastName: action.userData.lastName,
         firstName: action.userData.firstName,
         portfolio: action.userData.portfolio,
-        stocks: stocksDict,
+        myStocks: stocksDict,
         stock: action.userData.stocks.length ? action.userData.stocks[0] : {},
       };
     }
 
     case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
-      const updatedStocks = { ...state.stocks };
-
-      updatedStocks[action.stockTicker] = action.newStock;
-
+      const updatedMyStocks = { ...state.myStocks };
+      const updatedSearchedStocks = { ...state.searchedStocks };
+      updatedMyStocks[action.stockTicker] = action.newStock;
+      updatedMyStocks[action.stockTicker].isChecked = true;
+      updatedSearchedStocks[action.stockTicker].isMine = true;
       return {
         ...state,
-        stocks: updatedStocks,
-        stock: { ...updatedStocks[action.stockTicker] },
+        myStocks: updatedMyStocks,
+        searchedStocks: updatedSearchedStocks,
+        stock: { ...updatedMyStocks[action.stockTicker] },
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
-      const updatedStocks = { ...state.stocks };
+      const updatedStocks = { ...state.myStocks };
+      const updatedSearchedStocks = { ...state.searchedStocks };
       delete updatedStocks[action.stockTicker];
+      updatedSearchedStocks[action.stockTicker].isMine = false;
       return {
         ...state,
-        stocks: updatedStocks,
-        stock: { ...state.stock, isMine: false, quantity: 0 },
+        myStocks: updatedStocks,
+        stock: updatedSearchedStocks[action.stockTicker],
       };
     }
     case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
       const stocksDict = {};
       action.stocks.forEach((stock) => (stocksDict[stock.ticker] = stock));
+
       return {
         ...state,
-        stocks: stocksDict,
+        myStocks: action.searchKey.length ? state.myStocks : stocksDict,
+        searchedStocks: action.searchKey.length ? stocksDict : {},
       };
     }
     case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
@@ -108,17 +122,19 @@ const userEntitiesReducer = (state = initialState, action) => {
           stockDiffPercent: state.stockDetails.stockDiffPercent,
           stockRevenue: state.stockDetails.stockRevenue,
         },
-        stock: state.stocks[action.ticker],
+        stock: state.searchKey.length
+          ? state.searchedStocks[action.ticker]
+          : state.myStocks[action.ticker],
       };
     }
 
     case actionTypes.UPDATE_STOCK_REQUEST_SUCCESSED: {
-      const updatedStocks = { ...state.stocks };
+      const updatedStocks = { ...state.myStocks };
       updatedStocks[action.ticker].quantity = action.quantity;
       const updatedStock = { ...updatedStocks[action.ticker] };
       return {
         ...state,
-        stocks: updatedStocks,
+        myStocks: updatedStocks,
         stock: updatedStock,
       };
     }
@@ -147,7 +163,12 @@ const userEntitiesReducer = (state = initialState, action) => {
         stockNews: action.payload.stockNews.data,
       };
     }
-
+    case actionTypes.SET_SEARCH_KEY: {
+      return {
+        ...state,
+        searchKey: action.searchKey,
+      };
+    }
     default:
       return state;
   }

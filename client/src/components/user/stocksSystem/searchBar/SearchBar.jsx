@@ -3,15 +3,17 @@ import search_icon from "../../../../assets/images/search_icon.svg";
 import styles from "./SearchBar.module.css";
 import debounce from "lodash.debounce";
 
-const SearchBar = ({ searchStockAction, portfolioId }) => {
+const SearchBar = ({ searchStockAction, portfolioId, setSearchKeyAction }) => {
   const handleChange = useCallback(
     (e) => {
+      console.log("inside debounce");
       searchStockAction(e.target.value, portfolioId);
     },
     [searchStockAction, portfolioId]
   );
 
   const debouncedResults = useMemo(() => {
+    console.log("in use memo");
     return debounce(handleChange, 1000);
   }, [handleChange]);
 
@@ -28,7 +30,11 @@ const SearchBar = ({ searchStockAction, portfolioId }) => {
         className={styles.searchBarTextBox}
         type="text"
         placeholder="Search.."
-        onChange={debouncedResults}
+        onChange={(e) => {
+          console.log(e.target.value);
+          setSearchKeyAction(e.target.value);
+          debouncedResults(e);
+        }}
       />
     </div>
   );

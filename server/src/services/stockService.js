@@ -144,6 +144,7 @@ class StockManager {
     if (!stockSearchKey.length) {
       return stocksDetailsFromDB;
     }
+
     const myTickers = stocksDetailsFromDB.map((stock) => stock.ticker);
 
     const stocksDetailsFromApi = await stockClient.searchStock(

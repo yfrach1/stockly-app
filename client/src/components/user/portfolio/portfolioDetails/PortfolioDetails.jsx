@@ -1,13 +1,21 @@
 import styles from "./PortfolioDetails.module.css";
-import PortfolioHeaderCardConnector from "../../stocksSystem/portfolioHeaderCard/PortfolioHeaderCardConnector";
-import StockGraphConnector from "../../stocksSystem/stockGraph/StockGraphConnector";
+import PortfolioHeaderCardConnector from "../portfolioHeaderCard /PortfolioHeaderCardConnector";
+import StockGraphConnector from "../../stocks/stockGraph/StockGraphConnector";
+import { useEffect } from "react";
 
-const PortfolioDetails = ({ setPortfolioData, portfolioId }) => {
-  setPortfolioData(portfolioId);
+
+const PortfolioDetails = ({ setPortfolioData, portfolioId, myStockAmount }) => {
+  useEffect(() => {
+    setPortfolioData(portfolioId);
+  }, [setPortfolioData]);
   return (
-    <div className={styles.stockDetailsContainer}>
-      <PortfolioHeaderCardConnector />
-      <StockGraphConnector />
+    <div>
+      {myStockAmount ? (
+        <div className={styles.stockDetailsContainer}>
+          <PortfolioHeaderCardConnector />
+          <StockGraphConnector />
+        </div>
+      ) : null}
     </div>
   );
 };

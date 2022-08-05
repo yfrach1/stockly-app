@@ -1,0 +1,147 @@
+.stockCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(253, 253, 253);
+  border-radius: 5px;
+  border: 1px solid rgba(181, 181, 181, 0.674);
+  width: 95%;
+  align-items: center;
+  transition: 0.4s;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-left: 17px;
+  color: black;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+.newsCard:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.alignContent {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.alignPortfolioData {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 0px;
+  padding-right: 10px;
+}
+
+.alginPortfolioName {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.portfolioCardGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+}
+
+.stockCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(1.04);
+  cursor: pointer;
+}
+
+.name {
+  font-size: 30px;
+  font-weight: 500;
+  padding-left: 10px;
+  text-align: center;
+}
+
+.stockName {
+  margin: 0;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* /////// */
+
+.percentGreen,
+.percentRed {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.container {
+  height: 7%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  border: 2px solid red;
+}
+
+.button {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  flex: 1;
+  transition: all 0.4s;
+  cursor: pointer;
+  margin: 0.2rem;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 700;
+  color: #ffffff;
+  border: none;
+  background-color: #008cba;
+  text-decoration: none;
+}
+
+.button:hover {
+  transform: scale(1.02);
+  background-color: #00b4f0;
+}
+
+.portfolioValue {
+  font-weight: 500;
+}
+
+.disabled {
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  flex: 1;
+  transition: all 0.4s;
+  cursor: pointer;
+  margin: 0.2rem;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 700;
+  color: #ffffff;
+  border: none;
+  background-color: #008cba;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+.wrapper {
+  cursor: not-allowed;
+}
+
+.price {
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+
+.percentage {
+  font-size: 1.5rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}

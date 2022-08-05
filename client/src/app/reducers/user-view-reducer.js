@@ -9,6 +9,7 @@ const initialState = {
   dateFilter: "All",
   showToast: false,
   toastParam: { toastType: null, message: null, autoHideDuration: null },
+  // searchKey: "",
 };
 
 const userViewReducer = (state = initialState, action) => {
@@ -233,6 +234,13 @@ const userViewReducer = (state = initialState, action) => {
           message: message.GET_HISTORICAL_PORTFOLIO_REQUEST_FAILED,
           autoHideDuration: null,
         },
+      };
+    }
+
+    case actionTypes.SET_SEARCH_KEY: {
+      return {
+        ...state,
+        fetchLoading: true,
       };
     }
 

@@ -1,0 +1,49 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 5em;
+  gap: 2em;
+  justify-content: space-between;
+  width: 60%;
+  background-color: white;
+  padding: 0.8em 2em;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.companyDetailsContainer,
+.companyRevContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.companyRevContainer {
+  width: 15em;
+}
+
+.ticker {
+  margin: 0;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.stockName {
+  margin: 0;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.price {
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.percentage {
+  font-size: 1.5rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
