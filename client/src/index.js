@@ -6,6 +6,7 @@ import "monday-ui-react-core/dist/main.css";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import AppConnector from "./App-connector";
+import "./assets/fonts/Product-Sans-Regular.ttf";
 
 import { BrowserRouter } from "react-router-dom";
 
