@@ -1,6 +1,7 @@
 import styles from "./ListStocks.module.css";
 import StockCardConnector from "../stockCard/StockCardConnector";
 import emptyStateImage from "../../../../assets/images/emptyState.png";
+import { motion } from "framer-motion";
 
 const ListStocks = ({ stocks }) => {
   const notMyStocksArray = stocks
@@ -21,15 +22,29 @@ const ListStocks = ({ stocks }) => {
       <div className={styles.addText}>Add your first stock up here!</div>
     </>
   );
+
+  const container = {
+    show: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
   return (
-    <div className={styles.grid}>
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className={styles.grid}
+    >
       {!stocks.length ? emptyState : <></>}
       {stocks.map((stock, index) =>
         stock.isMine ? <StockCardConnector key={index} stock={stock} /> : null
       )}
       {notMyStocksArray.length ? seperatingLine : null}
       {notMyStocksArray}
-    </div>
+    </motion.div>
   );
 };
 

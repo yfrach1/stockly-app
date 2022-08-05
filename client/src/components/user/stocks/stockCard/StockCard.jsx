@@ -9,14 +9,9 @@ const StockCard = ({
   getStockNewsAction,
   portfolioId,
 }) => {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
+  const item = {
+    hidden: { x: -300, opacity: 0, scale: 0.9 },
+    show: { x: 0, opacity: 1, scale: 1 },
   };
 
   return (
@@ -28,12 +23,10 @@ const StockCard = ({
       }}
       to={`/stocks/${portfolioId}/${stock.ticker}`}
     >
-      <motion.li
+      <motion.div
+        transition={{ duration: 0.3 }}
         className={styles.stockCard}
-        whileHover={{ scale: 1.01, transition: { duration: 0.05 } }}
-        initial={{ x: -150, opacity: 0.3, scale: 0.9 }}
-        animate={{ x: 0, opacity: 1, scale: 1 }}
-        transition={{ ease: "easeIn" }}
+        variants={item}
       >
         <div className={styles.alignStockRow}>
           <div className={styles.ticker}>{stock.ticker}</div>
@@ -57,7 +50,7 @@ const StockCard = ({
             {`${stock.change_percent}%`}
           </div>
         </div>
-      </motion.li>
+      </motion.div>
     </Link>
   );
 };
