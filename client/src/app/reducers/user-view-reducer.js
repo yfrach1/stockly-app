@@ -50,7 +50,6 @@ const userViewReducer = (state = initialState, action) => {
         ...state,
         redirectLoading: false,
         showToast: false,
-        toastParam: { toastType: null, message: null, autoHideDuration: null },
       };
     }
 
@@ -84,7 +83,6 @@ const userViewReducer = (state = initialState, action) => {
         ...state,
         redirectLoading: false,
         showToast: false,
-        toastParam: { toastType: null, message: null, autoHideDuration: null },
       };
     }
     case actionTypes.SIGN_IN_REQUEST_FAILED: {
@@ -121,7 +119,6 @@ const userViewReducer = (state = initialState, action) => {
       return {
         ...state,
         showToast: false,
-        toastParam: { toastType: null, message: null, autoHideDuration: null },
       };
     }
 
@@ -186,6 +183,18 @@ const userViewReducer = (state = initialState, action) => {
         },
       };
     }
+    case actionTypes.UPDATE_STOCK_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        detailsLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.POSITIVE,
+          message: message.UPDATE_STOCK_REQUEST_SUCCESSED,
+          autoHideDuration: 5000,
+        },
+      };
+    }
     case actionTypes.UPDATE_STOCK_REQUEST_FAILED: {
       return {
         ...state,
@@ -241,6 +250,31 @@ const userViewReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchLoading: true,
+      };
+    }
+
+    case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        fetchLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.POSITIVE,
+          message: message.DELETE_STOCK_REQUEST_SUCCESSED,
+          autoHideDuration: 5000,
+        },
+      };
+    }
+    case actionTypes.DELETE_STOCK_REQUEST_FAILED: {
+      return {
+        ...state,
+        fetchLoading: false,
+        showToast: true,
+        toastParam: {
+          toastType: toastTypes.NEGATIVE,
+          message: message.DELETE_STOCK_REQUEST_FAILED,
+          autoHideDuration: null,
+        },
       };
     }
 

@@ -68,7 +68,6 @@ class PortfolioManager {
   }
 
   async getPortfolioPerformanceData(portfolioId) {
-    console.log("in portfolio performance");
     const portfolioStocks = await this._getStocksByPortfolioId(portfolioId);
     if (!portfolioStocks.length) {
       return null;

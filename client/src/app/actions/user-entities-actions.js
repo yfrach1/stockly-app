@@ -204,11 +204,11 @@ export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
     }
   };
 };
-export const deleteStockAction = (stockTicker, stockId) => {
+export const deleteStockAction = (stockTicker, stockId, portfolioId) => {
   return async (dispatch) => {
     try {
-      await deleteStock(stockId);
-      dispatch(deleteStockSuccessed(stockTicker));
+      const portfolioData = await deleteStock(stockId, portfolioId);
+      dispatch(deleteStockSuccessed(stockTicker, portfolioData));
     } catch (error) {
       dispatch(deleteStockFailed());
     }
@@ -235,7 +235,6 @@ export const getStockDetailsAction = (ticker) => {
       const res = await getStockDetails(ticker);
       dispatch(getStockDetailsSuccessed(res.data, ticker));
     } catch (error) {
-      console.log(error);
       dispatch(getStockDetailsFailed());
     }
   };

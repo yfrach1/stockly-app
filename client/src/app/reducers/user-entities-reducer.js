@@ -80,11 +80,17 @@ const userEntitiesReducer = (state = initialState, action) => {
       const updatedStocks = { ...state.myStocks };
       const updatedSearchedStocks = { ...state.searchedStocks };
       delete updatedStocks[action.stockTicker];
-      updatedSearchedStocks[action.stockTicker].isMine = false;
+      if (state.searchKey.length) {
+        updatedSearchedStocks[action.stockTicker].isMine = false;
+      }
+      const updatedStock = { ...state.stock };
+
+      updatedStock.isMine = false;
       return {
         ...state,
         myStocks: updatedStocks,
-        stock: updatedSearchedStocks[action.stockTicker],
+        searchedStocks: state.searchKey.length ? updatedSearchedStocks : {},
+        stock: updatedStock,
       };
     }
     case actionTypes.SEARCH_STOCK_REQUEST_SUCCESSED: {
@@ -146,9 +152,9 @@ const userEntitiesReducer = (state = initialState, action) => {
       return {
         ...state,
         stockDetails: {
-          stockInfo: summedPortfolioData,
-          stockRevenue: portfolioRevenue,
-          stockDiffPercent: portfolioDiffPercent,
+          stockInfo: summedPortfolioData ? summedPortfolioData : null,
+          stockRevenue: portfolioRevenue ? portfolioRevenue : null,
+          stockDiffPercent: portfolioDiffPercent ? portfolioDiffPercent : null,
         },
         stock: {
           ticker: state.portfolio.name,
