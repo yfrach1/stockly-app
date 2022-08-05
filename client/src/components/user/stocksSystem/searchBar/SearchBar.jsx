@@ -7,6 +7,7 @@ const SearchBar = ({ searchStockAction, portfolioId, setSearchKeyAction }) => {
   const handleChange = useCallback(
     (e) => {
       searchStockAction(e.target.value, portfolioId);
+      setSearchKeyAction(e.target.value);
     },
     [searchStockAction, portfolioId]
   );
@@ -28,11 +29,7 @@ const SearchBar = ({ searchStockAction, portfolioId, setSearchKeyAction }) => {
         className={styles.searchBarTextBox}
         type="text"
         placeholder="Search.."
-        onChange={(e) => {
-          console.log(e.target.value);
-          setSearchKeyAction(e.target.value);
-          debouncedResults(e);
-        }}
+        onChange={debouncedResults}
       />
     </div>
   );
