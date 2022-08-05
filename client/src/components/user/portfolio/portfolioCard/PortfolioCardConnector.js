@@ -14,8 +14,8 @@ import PortfolioCard from "./PortfolioCard";
 const mapStateToProps = (state, ownProps) => {
   const portfolioId = getPortfolioId(state);
   const myStocksAmount = getMyStocksAmount(state);
-  // const price = getRevenue(state);
-  const price = 100;
+  const price = getRevenue(state);
+
   const percent = getDiffPercent(state);
   const portfolioName = getPortfolioName(state);
   return { portfolioId, myStocksAmount, price, percent, portfolioName };

@@ -189,6 +189,7 @@ export const addStockAction = (stock, quantity) => {
       const res = await addStock(stock);
       dispatch(addStockSuccessed(res.data, stock.ticker));
     } catch (error) {
+      console.log(error);
       dispatch(addStockFailed());
     }
   };
