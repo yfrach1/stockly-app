@@ -1,49 +1,41 @@
 .newsCard {
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   background-color: rgb(255, 255, 255);
-   border-radius: 5px;
-   min-height: 60px;
-   align-items: center;
-   transition: 0.3s;
-   text-decoration: none;
-   color: black;
-   text-align: center;
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-   margin: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  min-height: 60px;
+  align-items: center;
+  transition: 0.3s;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 0.35em 0.5em;
+  margin-bottom: 0.6em;
 }
 
 .newsCard:visited {
-   text-decoration: none;
-   color: black;
+  text-decoration: none;
+  color: black;
 }
 
 .newsCard:hover {
-   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-   transform: scale(1.01);
-   cursor: pointer;
-}
-
-.column {
-   width: 90%;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   padding: 10px 0;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(1.01);
+  cursor: pointer;
 }
 
 .title {
-   font-size: 16px;
-   font-weight: 600;
+  font-size: 16px;
+  font-weight: 600;
 }
 .description {
-   font-size: 10px;
-   font-weight: 500;
+  font-size: 10px;
+  font-weight: 500;
 }
 .footer {
-   display: flex;
-   justify-content: space-between;
-   gap: 7rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 7rem;
 }
