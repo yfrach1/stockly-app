@@ -42,10 +42,10 @@
 
 .detailsAndAddContainer {
   display: flex;
-  gap: 1.5em;
   align-items: stretch;
   height: 4rem;
   width: 100%;
+  gap: 0.6rem;
   margin: 0.7em 0;
 }
 
@@ -54,7 +54,7 @@
   background-color: white;
   align-items: center;
   font-size: 1em;
-  width: 100%;
+  width: 50%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 0.85em 1.5em;
   border-radius: 5px;
@@ -71,6 +71,7 @@
   justify-content: center;
   align-items: center;
   gap: 2.5rem;
+  width: 50%;
   padding: 0.85em 2em;
   border-radius: 5px;
   background-color: white;
