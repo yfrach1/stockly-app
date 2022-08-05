@@ -63,9 +63,10 @@ const searchStockRequest = (stocks) => ({
   stocks,
 });
 
-const searchStockSuccessed = (stocks) => ({
+const searchStockSuccessed = (stocks, searchKey) => ({
   type: actionsTypes.SEARCH_STOCK_REQUEST_SUCCESSED,
   stocks,
+  searchKey,
 });
 
 const searchStockFailed = () => ({
@@ -122,6 +123,11 @@ const getHistoricalPortfolioDataFailed = () => ({
 
 const detailsRequest = () => ({
   type: actionsTypes.DETAILS_REQUEST,
+});
+
+const setSearchKey = (searchKey) => ({
+  type: actionsTypes.SET_SEARCH_KEY,
+  searchKey,
 });
 
 export const signUpAction = (newUserData) => {
@@ -214,7 +220,8 @@ export const searchStockAction = (stockSearchKey, portfolioId) => {
     dispatch(searchStockRequest());
     try {
       const res = await searchStock(stockSearchKey, portfolioId);
-      dispatch(searchStockSuccessed(res.data));
+
+      dispatch(searchStockSuccessed(res.data, stockSearchKey));
     } catch (error) {
       dispatch(searchStockFailed());
     }
@@ -228,6 +235,7 @@ export const getStockDetailsAction = (ticker) => {
       const res = await getStockDetails(ticker);
       dispatch(getStockDetailsSuccessed(res.data, ticker));
     } catch (error) {
+      console.log(error);
       dispatch(getStockDetailsFailed());
     }
   };
@@ -252,5 +260,12 @@ export const setPortfolioData = (portfolioId) => {
     } catch (error) {
       dispatch(getHistoricalPortfolioDataFailed());
     }
+  };
+};
+
+export const setSearchKeyAction = (searchKey) => {
+  return async (dispatch) => {
+    // dispatch(whileType());
+    dispatch(setSearchKey(searchKey));
   };
 };

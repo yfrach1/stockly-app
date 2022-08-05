@@ -1,11 +1,10 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getMyStocks } from "../../../../app/selectors/user-entities-selectors";
-
+import { getStocks } from "../../../../app/selectors/user-entities-selectors";
 import ListStocks from "./ListStocks";
 
 const mapStateToProps = (state, ownProps) => {
-  const stocks = getMyStocks(state);
+  const stocks = getStocks(state);
 
   return { stocks };
 };

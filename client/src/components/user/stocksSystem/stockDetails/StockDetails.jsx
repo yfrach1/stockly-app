@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { useState, useCallback, useRef } from "react";
-import StockHeaderCardConnector from "../stockHeaderCard/stockHeaderCardConnector";
+import StockHeaderCardConnector from "../../stocks/stockHeaderCard/stockHeaderCardConnector";
 import ListNews from "../news/ListNews";
 import styles from "./StockDetails.module.css";
 import StockGraphConnector from "../stockGraph/StockGraphConnector";
@@ -50,6 +50,7 @@ const StockDetails = ({
       ) : Object.keys(stock).length ? (
         <Fragment>
           <StockHeaderCardConnector />
+
           <StockGraphConnector />
           <div className={styles.detailsAndAddContainer}>
             <div className={styles.details}>
@@ -101,7 +102,6 @@ const StockDetails = ({
               )}
             </div>
           </div>
-
           <ListNews stockNews={stockNews} />
         </Fragment>
       ) : null}

@@ -24,7 +24,7 @@ const stocks = [
   },
 ];
 
-describe("ListContainer", () => {
+describe("ListStocksContainer", () => {
   test("should render both items (one isMine and one not)", () => {
     render(
       <BrowserRouter>
@@ -33,7 +33,5 @@ describe("ListContainer", () => {
         </Provider>
       </BrowserRouter>
     );
-
-    // TODO: test that both items are rendered at the list
   });
 });

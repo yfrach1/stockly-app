@@ -6,7 +6,6 @@ import StockGraph from "./StockGraph";
 
 const mapStateToProps = (state, ownProps) => {
   const stockInfo = getStockDetails(state);
-  console.log("INSIDE StockGraph CONNECTOR");
   return { stockInfo };
 };
 
