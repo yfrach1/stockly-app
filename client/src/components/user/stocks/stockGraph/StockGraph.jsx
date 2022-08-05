@@ -63,7 +63,7 @@ const StockGraph = ({ stockInfo, setDateFilterAction }) => {
             mode: "lines",
             marker: { color: "red" },
             opacity: 0.7,
-            line: { color: "#17BECF" },
+            line: { color: "rgba(255,130, 20, 1)" },
           },
         ]}
         layout={{
