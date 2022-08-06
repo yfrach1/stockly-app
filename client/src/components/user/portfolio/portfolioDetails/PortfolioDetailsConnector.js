@@ -2,8 +2,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   getPortfolioId,
-  getStocksStatus,
-  getStocksAmount,
   getMyStocksAmount,
 } from "../../../../app/selectors/user-entities-selectors";
 import { setPortfolioData } from "../../../../app/actions/user-entities-actions";
@@ -13,8 +11,6 @@ const mapStateToProps = (state, ownProps) => {
   const portfolioId = getPortfolioId(state);
   const myStockAmount = getMyStocksAmount(state);
 
-  // const stocksStatus = getStocksStatus(state);
-  // const stocksStatus = "1";
   return { portfolioId, myStockAmount };
 };
 
