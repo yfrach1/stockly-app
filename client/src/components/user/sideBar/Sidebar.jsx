@@ -6,6 +6,7 @@ import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
 import { FaDollarSign, FaBitcoin, FaSignOutAlt } from "react-icons/fa";
 import logo from "../../../assets/images/newlogo.png";
 import { Fragment, useState } from "react";
+import { useEffect } from "react";
 function Sidebar({
   firstName,
   lastName,
@@ -52,10 +53,6 @@ function Sidebar({
           >
             {portfolio.name}
           </Link>
-          {/* <NavLink id={styles.option} to={"/stocks/myportfolio"}>
-               {portfolio.name}
-             </NavLink> */}
-          {/* <div id={styles.option}>add protfolio</div> */}
         </Fragment>
       ) : null}
 

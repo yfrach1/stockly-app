@@ -9,15 +9,15 @@ const UserSwitch = () => {
       <Route path="/" exact>
         <div>this is an empty page</div>
       </Route>
-      <Route path="/sign-up">
+      {/* <Route path="/sign-up">
         <PortfolioConnector />
-      </Route>
+      </Route> */}
       <Route path="/stocks/:potfolioId">
         <PortfolioConnector />
       </Route>
-      <Route path="/crypto">
+      {/* <Route path="/crypto">
         <CryptoPage />
-      </Route>
+      </Route> */}
       <Route path="/signout"></Route>
     </Switch>
   );
