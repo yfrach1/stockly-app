@@ -53,3 +53,12 @@
   width: 70%;
   overflow-y: hidden;
 }
+
+.loaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4em;
+  overflow: hidden;
+  padding: 10em;
+}

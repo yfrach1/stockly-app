@@ -1,31 +1,21 @@
 import React from "react";
-import styled from "styled-components";
 import styles from "./OpacityLoader.module.css";
-import spinner from "../../../assets/dynamicSvg/spinner_loader.svg";
-const AnimationContainer = styled.div`
-  height: 100%;
-  max-height: 100vh;
-  display: flex;
-  top: 0;
-  left: 0;
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  align-items: center;
-  justify-content: center;
-  background: ${(props) =>
-    props.background ? props.background : "rgba(0,0,0,0.35)"};
-`;
+import spinner from "../../../assets/images/newlogo.png";
+import { motion } from "framer-motion";
 
-const OpacityLoader = ({ background }) => {
+const OpacityLoader = () => {
   return (
     <div className={styles.opacityLoaderContainer}>
-      <img className={styles.opacityLoaderSize} src={spinner} />
+      <motion.img
+        className={styles.opacityLoaderSize}
+        src={spinner}
+        animate={{
+          scale: [0.5, 2, 2, 0.5, 0.5],
+          rotate: [0, 0, 360, 360, 0],
+        }}
+        transition={{ ease: "easeInOut", duration: 2.5, repeat: Infinity }}
+      />
     </div>
-
-    // <AnimationContainer background={background}>
-    //   <img src={spinner} width="350" alt="spinner" />
-    // </AnimationContainer>
   );
 };
 
