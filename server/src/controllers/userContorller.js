@@ -1,5 +1,5 @@
 const userService = require("../services/userService");
-
+const portfolioService = require("../services/portfolioService");
 async function createUser(req, res) {
   const { accessToken, userData } = await userService.createUser(req.body);
 
@@ -31,8 +31,11 @@ async function logoutUser(req, res) {
 
 async function getUserData(req, res) {
   const userData = await userService.getUserData(req.user.id);
+  const portfolioDetails = await portfolioService.getPortfolioPerformanceData(
+    req.user.id
+  );
   userData
-    ? res.status(200).json(userData)
+    ? res.status(200).json({ userData, portfolioDetails })
     : res.status(401).json({ error: "Authorization denied" });
 }
 

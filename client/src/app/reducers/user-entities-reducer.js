@@ -62,19 +62,27 @@ const userEntitiesReducer = (state = initialState, action) => {
     }
     case actionTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED: {
       const stocksDict = {};
-      action.userData.stocks.forEach((stock) => {
+      action.userData.userData.stocks.forEach((stock) => {
         stock.isChecked = true;
         return (stocksDict[stock.ticker] = stock);
       });
 
+      const portfolioDetails = action.userData.portfolioDetails;
       return {
         ...state,
         userAuth: true,
-        lastName: action.userData.lastName,
-        firstName: action.userData.firstName,
-        portfolio: action.userData.portfolio,
+        lastName: action.userData.userData.lastName,
+        firstName: action.userData.userData.firstName,
+        portfolio: action.userData.userData.portfolio,
         myStocks: stocksDict,
-        stock: action.userData.stocks.length ? action.userData.stocks[0] : {},
+        stock: action.userData.userData.stocks.length
+          ? action.userData.userData.stocks[0]
+          : {},
+        portfolioDetails: {
+          ...portfolioDetails,
+          dayGain: portfolioDetails ? portfolioDetails.dayGain : 0,
+          dayPercent: portfolioDetails ? portfolioDetails.dayPercent : 0,
+        },
       };
     }
 
