@@ -5,7 +5,6 @@ import ListStocksConnector from "../stocks/listStocks/ListStocksConnector";
 import OpacityLoader from "../../loading/fetchStockLoader/OpacityLoader";
 import DetailsSwitchConnector from "../../../navigation/DetailsSwitchConnector";
 import PortfolioCardConnector from "./portfolioCard/PortfolioCardConnector";
-import { motion } from "framer-motion";
 
 const Portfolio = ({ fetchLoading, portfolioId }) => {
   return (

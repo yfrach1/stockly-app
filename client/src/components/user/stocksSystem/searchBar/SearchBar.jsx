@@ -9,7 +9,7 @@ const SearchBar = ({ searchStockAction, portfolioId, setSearchKeyAction }) => {
       searchStockAction(e.target.value, portfolioId);
       setSearchKeyAction(e.target.value);
     },
-    [searchStockAction, portfolioId]
+    [searchStockAction, portfolioId, setSearchKeyAction]
   );
 
   const debouncedResults = useMemo(() => {

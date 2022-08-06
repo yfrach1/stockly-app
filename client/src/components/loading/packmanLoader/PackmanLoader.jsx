@@ -4,7 +4,11 @@ const PackmanLoader = () => {
   return (
     <div className={styles.packmanLoaderContainer}>
       <div className={styles.text}>Redirect in few second</div>
-      <img className={styles.packmanLoaderSize} src={packmanLoader} />
+      <img
+        className={styles.packmanLoaderSize}
+        src={packmanLoader}
+        alt="pacman loader"
+      />
     </div>
   );
 };
