@@ -217,6 +217,7 @@ export const deleteStockAction = (stockTicker, stockId, portfolioId) => {
       const histPortfolioData = await getHistoricalPortfolioData();
       dispatch(getHistoricalPortfolioDataSuccessed(histPortfolioData));
     } catch (error) {
+      console.log(error);
       dispatch(deleteStockFailed());
     }
   };
@@ -242,6 +243,7 @@ export const getStockDetailsAction = (ticker) => {
       const res = await getStockDetails(ticker);
       dispatch(getStockDetailsSuccessed(res.data, ticker));
     } catch (error) {
+      console.log(error);
       dispatch(getStockDetailsFailed());
     }
   };
