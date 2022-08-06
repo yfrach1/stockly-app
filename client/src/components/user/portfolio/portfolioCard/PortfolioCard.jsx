@@ -12,7 +12,10 @@ const PortfolioCard = ({ portfolioId, portfolioDetails }) => {
       >
         <div className={styles.alignContent}>
           <div className={styles.alginPortfolioName}>
-            <div className={styles.name}> {portfolioDetails.name}</div>
+            <div className={styles.name}>
+              {" "}
+              {portfolioDetails.name ? portfolioDetails.name : "My portfolio"}
+            </div>
           </div>
           <div className={styles.alignPortfolioData}>
             <div className={styles.price}>
