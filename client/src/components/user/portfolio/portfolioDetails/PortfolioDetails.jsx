@@ -1,5 +1,5 @@
 import styles from "./PortfolioDetails.module.css";
-import PortfolioHeaderCardConnector from "../portfolioHeaderCard /PortfolioHeaderCardConnector";
+import PortfolioHeaderCardConnector from "../portfolioHeaderCard/PortfolioHeaderCardConnector";
 import StockGraphConnector from "../../stocks/stockGraph/StockGraphConnector";
 import { useEffect } from "react";
 
