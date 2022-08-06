@@ -19,15 +19,16 @@ export const getToastParam = (state) => getUserView(state).toastParam;
 export const getPortfolioId = (state) => getUserView(state).portfolioId;
 export const getDateFilter = (state) => getUserView(state).dateFilter;
 
-export const getDiffPercent = createSelector(
-  [getStockDiffPercent],
-  (DiffPercent) => DiffPercent["All"]
-);
+// export const getDiffPercent = createSelector(
+//   [getStockDiffPercent],
+//   (DiffPercent) => DiffPercent["All"]
+// );
 
-export const getRevenue = createSelector(
-  [getStockRevenue],
-  (revenue) => revenue["All"]
-);
+// export const getRevenue = createSelector(
+//   [getStockRevenue],
+//   (revenue) => revenue["All"]
+// );
+
 export const getFilteredRevenue = createSelector(
   [getStockRevenue, getDateFilter],
   (revenue, filter) => revenue[filter]
@@ -39,3 +40,19 @@ export const getFilteredDiffPercent = createSelector(
 );
 
 export const getDetailsLoading = (state) => getUserView(state).detailsLoading;
+
+export const getRevenue = (state) => {
+  let dateFilter = getUserView(state).dateFilter;
+
+  const revenueObj = getUserEntities(state).stockDetails.stockRevenue;
+
+  return revenueObj[dateFilter];
+};
+
+export const getDiffPercent = (state) => {
+  let dateFilter = getUserView(state).dateFilter;
+
+  const diffPercentObj = getUserEntities(state).stockDetails.stockDiffPercent;
+
+  return diffPercentObj[dateFilter];
+};
