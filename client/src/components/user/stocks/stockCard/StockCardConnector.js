@@ -10,7 +10,6 @@ import StockCard from "./StockCard";
 
 const mapStateToProps = (state, ownProps) => {
   const portfolioId = getPortfolioId(state);
-  console.log(portfolioId);
   return { portfolioId };
 };
 

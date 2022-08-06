@@ -165,7 +165,6 @@ const userEntitiesReducer = (state = initialState, action) => {
 
     case actionTypes.GET_HISTORICAL_PORTFOLIO_REQUEST_SUCCESSED: {
       const portfolioDetails = action.payload.portfolioData.data;
-      console.log("portfolioDetails", portfolioDetails);
       return {
         ...state,
         portfolioDetails: {
