@@ -38,18 +38,29 @@ const userEntitiesReducer = (state = initialState, action) => {
     }
     case actionTypes.SIGN_IN_REQUEST_SUCCESSED: {
       const stocksDict = {};
-      action.userData.stocks.forEach((stock) => {
+      action.userData.userData.stocks.forEach((stock) => {
         stock.isChecked = true;
         return (stocksDict[stock.ticker] = stock);
       });
+      const portfolioDetails = action.userData.portfolioDetails;
+
       return {
         ...state,
         userAuth: true,
-        lastName: action.userData.lastName,
-        firstName: action.userData.firstName,
-        portfolio: action.userData.portfolio,
+        lastName: action.userData.userData.lastName,
+        firstName: action.userData.userData.firstName,
+        portfolio: action.userData.userData.portfolio,
         myStocks: stocksDict,
-        stock: action.userData.stocks.length ? action.userData.stocks[0] : {},
+        stock: action.userData.userData.stocks.length
+          ? action.userData.userData.stocks[0]
+          : {},
+        portfolioDetails: {
+          ...portfolioDetails,
+          dayGain: portfolioDetails.dayGain ? portfolioDetails.dayGain : 0,
+          dayPercent: portfolioDetails.dayPercent
+            ? portfolioDetails.dayPercent
+            : 0,
+        },
       };
     }
     //check if need to stay with 2 same cases
@@ -112,30 +123,7 @@ const userEntitiesReducer = (state = initialState, action) => {
       };
     }
     case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
-      return {
-        userAuth: false,
-        firstName: "",
-        lastName: "",
-        portfolio: {},
-        myStocks: {},
-        searchedStocks: {},
-        stock: {},
-        stockDetails: {
-          stockInfo: [],
-          stockRevenue: { All: 0 },
-          stockDiffPercent: { All: 0 },
-        },
-        stockNews: [],
-        searchKey: "",
-        portfolioDetails: {
-          name: "",
-          dayGain: 0,
-          dayPercent: 0,
-          portfolioInfo: [],
-          portfolioRevenue: {},
-          portfolioDiffPercent: {},
-        },
-      };
+      return initialState;
     }
     //matabe need to add loader before this action
     case actionTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED: {

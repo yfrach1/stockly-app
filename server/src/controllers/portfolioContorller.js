@@ -8,7 +8,7 @@ async function createPortfolio(req, res) {
 async function getPortfolioPerformanceData(req, res) {
   // portfolioId = req.body.portfolioId;
   portfolioDetails = await portfolioService.getPortfolioPerformanceData(
-    req.user
+    req.user.id
   );
   portfolioDetails
     ? res.status(200).send(portfolioDetails)
