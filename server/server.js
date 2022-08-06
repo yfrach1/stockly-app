@@ -20,6 +20,9 @@ app.use("/user", userRouter);
 app.use("/portfolio", portfolioRouter);
 app.use("/stock", stockRouter);
 app.use(express.static(path.join(__dirname, "/server/public")));
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./server/public/index.html"));
+});
 
 const port = process.env.PORT || "8080";
 app.listen(port, function () {

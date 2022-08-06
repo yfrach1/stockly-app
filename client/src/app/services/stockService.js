@@ -1,5 +1,5 @@
 const axios = require("axios");
-const url = "http://localhost:8080";
+const url = "https://stockly-app.herokuapp.com";
 axios.defaults.withCredentials = true;
 
 export const addStock = async (stock) => {

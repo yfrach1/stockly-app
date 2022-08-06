@@ -1,5 +1,5 @@
 const axios = require("axios");
-const url = "https://stockly-app.herokuapp.com";
+const url = "https://stockly-app.herokuapp.com/user";
 axios.defaults.withCredentials = true;
 
 export const addNewUser = async (userData) => {

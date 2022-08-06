@@ -2,7 +2,10 @@ const userService = require("../services/userService");
 const portfolioService = require("../services/portfolioService");
 
 async function createUser(req, res) {
+  console.log("inside createuser controller before: ", req.body);
   const { accessToken, userData } = await userService.createUser(req.body);
+  console.log("inside createuser controller after: ", userData);
+
   accessToken
     ? res
         .status(200)

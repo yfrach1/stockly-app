@@ -7,13 +7,12 @@
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd ../client && npm install && npm run build",
-    "start:dev": "nodemone server.js"
+    "start:dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "alphavantage": "^2.3.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
@@ -29,6 +28,7 @@
     "node-fetch": "^3.2.9",
     "node-schedule": "^2.1.0",
     "npm": "^8.15.0",
+    "pg": "^8.7.3",
     "sequelize": "^6.21.0"
   },
   "devDependencies": {
