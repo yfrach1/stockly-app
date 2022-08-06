@@ -15,7 +15,6 @@ const StockDetails = ({
   updateStockQuantityAction,
   detailsLoading,
   portfolioId,
-  setPortfolioData,
 }) => {
   const [quantity, setQuantity] = useState(0);
   const [inputValid, setInputValid] = useState(true);
@@ -36,10 +35,8 @@ const StockDetails = ({
     setInputValid(true);
     stock.quantity = quantity;
     addStockAction(stock);
-    setPortfolioData(portfolioId);
-
     inputElement.current.value = "";
-  }, [quantity, addStockAction, stock, portfolioId, setPortfolioData]);
+  }, [quantity, addStockAction, stock, portfolioId]);
 
   const updateStockQuantity = useCallback(() => {
     stock.quantity = quantity;

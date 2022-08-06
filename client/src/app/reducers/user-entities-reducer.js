@@ -150,8 +150,6 @@ const userEntitiesReducer = (state = initialState, action) => {
       const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = {
         ...action.payload.portfolioData.data,
       };
-      console.log(summedPortfolioData.at(-1));
-      console.log(summedPortfolioData.at(-2));
 
       return {
         ...state,

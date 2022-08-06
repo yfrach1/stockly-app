@@ -188,6 +188,8 @@ export const addStockAction = (stock, quantity) => {
     try {
       const res = await addStock(stock);
       dispatch(addStockSuccessed(res.data, stock.ticker));
+      const portfolioData = await getHistoricalPortfolioData();
+      dispatch(getHistoricalPortfolioDataSuccessed(portfolioData));
     } catch (error) {
       dispatch(addStockFailed());
     }
@@ -199,6 +201,8 @@ export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
       //maybe need loader in the input text field
       await updateStockQuantity(stockId, quantity);
       dispatch(updateStockQuantitySuccessed(stockTicker, quantity));
+      const histPortfolioData = await getHistoricalPortfolioData();
+      dispatch(getHistoricalPortfolioDataSuccessed(histPortfolioData));
     } catch (error) {
       dispatch(updateStockQuantityFailed());
     }
@@ -209,6 +213,8 @@ export const deleteStockAction = (stockTicker, stockId, portfolioId) => {
     try {
       const portfolioData = await deleteStock(stockId, portfolioId);
       dispatch(deleteStockSuccessed(stockTicker, portfolioData));
+      const histPortfolioData = await getHistoricalPortfolioData();
+      dispatch(getHistoricalPortfolioDataSuccessed(histPortfolioData));
     } catch (error) {
       dispatch(deleteStockFailed());
     }

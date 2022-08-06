@@ -14,7 +14,6 @@ import {
   deleteStockAction,
   addStockAction,
   updateStockQuantityAction,
-  setPortfolioData,
 } from "../../../../app/actions/user-entities-actions";
 
 import StockDetails from "./StockDetails";
@@ -34,7 +33,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       deleteStockAction,
       addStockAction,
       updateStockQuantityAction,
-      setPortfolioData,
     },
     dispatch
   );

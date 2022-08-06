@@ -15,9 +15,8 @@ const PortfolioCard = ({ portfolioId, portfolioDetails }) => {
             <div className={styles.name}> {portfolioDetails.name}</div>
           </div>
           <div className={styles.alignPortfolioData}>
-            1 week:
             <div className={styles.price}>
-              $ {portfolioDetails.dayGain.toFixed(2)}
+              Weekly gain: ${portfolioDetails.dayGain.toFixed(2)}
             </div>
             <div
               className={styles.percentage}

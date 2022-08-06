@@ -67,7 +67,11 @@ class PortfolioManager {
     return portfolioStocks;
   }
 
-  async getPortfolioPerformanceData(portfolioId) {
+  async getPortfolioPerformanceData(user) {
+    const UserPortfolio = await Portfolio.findOne({
+      where: { user_id: user.id },
+    });
+    const portfolioId = UserPortfolio.portfolio_id;
     const portfolioStocks = await this._getStocksByPortfolioId(portfolioId);
     if (!portfolioStocks.length) {
       return null;
