@@ -5,11 +5,12 @@ import {
   getStockNewsAction,
 } from "../../../../app/actions/user-entities-actions";
 
-import { getPortfolioId } from "../../../../app/selectors/user-view-selectors";
+import { getPortfolioId } from "../../../../app/selectors/user-entities-selectors";
 import StockCard from "./StockCard";
 
 const mapStateToProps = (state, ownProps) => {
   const portfolioId = getPortfolioId(state);
+  console.log(portfolioId);
   return { portfolioId };
 };
 

@@ -1,9 +1,9 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import PortfolioDetailsConnector from "../components/user/portfolio/portfolioDetails/PortfolioDetailsConnector";
 import StockDetailsConnector from "../components/user/stocks/stockDetails/StockDetailsConnector";
 
-const DetailsSwitch = ({ allStocksAmount, myStocksAmount, stock }) => {
+const DetailsSwitch = ({ portfolioId, stock }) => {
   return (
     <Switch>
       <Route path="/" exact>
@@ -16,6 +16,7 @@ const DetailsSwitch = ({ allStocksAmount, myStocksAmount, stock }) => {
         {/* <PortfolioPerformance /> */}
         {stock ? <StockDetailsConnector /> : null}
       </Route>
+      <Redirect from="/" to={`/stocks/${portfolioId}/dashboard`} />
 
       {/* <Route path="/stocks/1/dashboard" exact={true}>
         <PortfolioPerformance />
