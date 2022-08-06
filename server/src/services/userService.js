@@ -34,9 +34,8 @@ class UserManager {
   async loginUser(loginUserData) {
     let accessToken = null;
     let userData = null;
-
+    let portfolioDetails = null;
     const userId = await this._isUserValid(loginUserData);
-
     if (userId) {
       accessToken = await this._createAccessToken(userId);
       userData = await this.getUserData(userId);
@@ -81,7 +80,6 @@ class UserManager {
   }
 
   async _updateStocksDataOnDb(stocks) {
-    // let formatedStocks = [];
     let stockQuery = {
       ticker: "",
       startDate: "",
@@ -89,7 +87,6 @@ class UserManager {
       resampleFreq: "",
     };
 
-    // const tickers = stocks.map((stock) => stock.dataValues.ticker);
     const formatedStocks = await Promise.all(
       stocks.map(async (stock) => {
         let StockData = { ...stock };
@@ -108,28 +105,6 @@ class UserManager {
         return StockData;
       })
     );
-
-    // const tickers = stocks.map((stock) => stock.dataValues.ticker);
-    // for (let i = 0; i < tickers.length; i++) {
-    //   //get the riggth format of stocks
-    //   let formatStockData = stockService._formatStocks(stocks[i]);
-
-    //   //fetch new data
-    //   stockQuery.ticker = tickers[i];
-    //   const result = await stockClient.getStockData(stockQuery);
-    //   const { price, open, close } =
-    //     this._extractDataFromFetchStockResult(result);
-    //   formatStockData.price = price;
-    //   formatStockData.change_percent = ((close / open) * 100 - 100).toFixed(2);
-    //   //update the data to be most upsated
-    //   await stockService.updateStock(
-    //     formatStockData.stock_id,
-    //     formatStockData.price,
-    //     formatStockData.change_percent
-    //   );
-
-    //   formatedStocks.push(formatStockData);
-    // }
 
     return formatedStocks;
   }

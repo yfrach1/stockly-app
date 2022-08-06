@@ -43,7 +43,6 @@ const userEntitiesReducer = (state = initialState, action) => {
         return (stocksDict[stock.ticker] = stock);
       });
       const portfolioDetails = action.userData.portfolioDetails;
-
       return {
         ...state,
         userAuth: true,
@@ -56,14 +55,11 @@ const userEntitiesReducer = (state = initialState, action) => {
           : {},
         portfolioDetails: {
           ...portfolioDetails,
-          dayGain: portfolioDetails.dayGain ? portfolioDetails.dayGain : 0,
-          dayPercent: portfolioDetails.dayPercent
-            ? portfolioDetails.dayPercent
-            : 0,
+          dayGain: portfolioDetails ? portfolioDetails.dayGain : 0,
+          dayPercent: portfolioDetails ? portfolioDetails.dayPercent : 0,
         },
       };
     }
-    //check if need to stay with 2 same cases
     case actionTypes.CHECK_USER_TOKEN_REQUEST_SUCCESSED: {
       const stocksDict = {};
       action.userData.stocks.forEach((stock) => {
@@ -87,12 +83,20 @@ const userEntitiesReducer = (state = initialState, action) => {
       const updatedSearchedStocks = { ...state.searchedStocks };
       updatedMyStocks[action.stockTicker] = action.newStock;
       updatedMyStocks[action.stockTicker].isChecked = true;
-      updatedSearchedStocks[action.stockTicker].isMine = true;
+      let updatedStock = { ...state.stock };
+      if (state.searchKey.length) {
+        updatedSearchedStocks[action.stockTicker].isMine = true;
+      } else {
+        updatedStock.isMine = true;
+      }
+
       return {
         ...state,
         myStocks: updatedMyStocks,
         searchedStocks: updatedSearchedStocks,
-        stock: { ...updatedMyStocks[action.stockTicker] },
+        stock: state.searchKey.length
+          ? { ...updatedMyStocks[action.stockTicker] }
+          : updatedStock,
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {

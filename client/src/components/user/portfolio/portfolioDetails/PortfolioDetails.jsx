@@ -4,9 +4,6 @@ import PortfolioGraphConnector from "../portfolioGraph/PortfolioGraphConnector";
 import { useEffect } from "react";
 
 const PortfolioDetails = ({ setPortfolioData, myStockAmount }) => {
-  useEffect(() => {
-    setPortfolioData();
-  }, [setPortfolioData]);
   return (
     <div>
       {myStockAmount ? (
