@@ -15,6 +15,14 @@ const initialState = {
   },
   stockNews: [],
   searchKey: "",
+  portfolioDetails: {
+    name: "",
+    dayGain: 0,
+    dayPercent: 0,
+    portfolioInfo: [],
+    portfolioRevenue: {},
+    portfolioDiffPercent: {},
+  },
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
@@ -136,7 +144,7 @@ const userEntitiesReducer = (state = initialState, action) => {
 
     case actionTypes.UPDATE_STOCK_REQUEST_SUCCESSED: {
       const updatedStocks = { ...state.myStocks };
-      updatedStocks[action.ticker].quantity = action.quantity;
+      updatedStocks[action.ticker].stockInfotity = action.quantity;
       const updatedStock = { ...updatedStocks[action.ticker] };
       return {
         ...state,
@@ -149,16 +157,24 @@ const userEntitiesReducer = (state = initialState, action) => {
       const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = {
         ...action.payload.portfolioData.data,
       };
+
       return {
         ...state,
-        stockDetails: {
-          stockInfo: summedPortfolioData ? summedPortfolioData : null,
-          stockRevenue: portfolioRevenue ? portfolioRevenue : null,
-          stockDiffPercent: portfolioDiffPercent ? portfolioDiffPercent : null,
-        },
-        stock: {
-          ticker: state.portfolio.name,
-          name: `${state.firstName} ${state.lastName}`,
+        portfolioDetails: {
+          name: state.portfolio.name,
+          dayGain:
+            summedPortfolioData.at(-1).close - summedPortfolioData.at(-5).close,
+          dayPercent: (
+            (summedPortfolioData.at(-1).close /
+              summedPortfolioData.at(-5).close -
+              1) *
+            100
+          ).toFixed(2),
+          portfolioInfo: summedPortfolioData ? summedPortfolioData : null,
+          portfolioRevenue: portfolioRevenue ? portfolioRevenue : null,
+          portfolioDiffPercent: portfolioDiffPercent
+            ? portfolioDiffPercent
+            : null,
         },
       };
     }

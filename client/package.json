@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "cors": "^2.8.5",
+    "framer-motion": "^7.0.0",
     "lodash.debounce": "^4.0.8",
     "monday-ui-react-core": "^1.38.1",
     "plotly.js": "^2.13.3",

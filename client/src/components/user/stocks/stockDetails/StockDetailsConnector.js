@@ -29,7 +29,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return bindActionCreators(
-    { deleteStockAction, addStockAction, updateStockQuantityAction },
+    {
+      deleteStockAction,
+      addStockAction,
+      updateStockQuantityAction,
+    },
     dispatch
   );
 };

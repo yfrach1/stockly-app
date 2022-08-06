@@ -6,10 +6,8 @@ async function createPortfolio(req, res) {
 }
 
 async function getPortfolioPerformanceData(req, res) {
-  portfolioId = req.body.portfolioId;
-  portfolioData = await portfolioService.getPortfolioPerformanceData(
-    portfolioId
-  );
+  // portfolioId = req.body.portfolioId;
+  portfolioData = await portfolioService.getPortfolioPerformanceData(req.user);
   if (portfolioData) {
     const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } =
       portfolioData;

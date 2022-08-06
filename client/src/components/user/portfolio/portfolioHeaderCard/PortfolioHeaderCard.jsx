@@ -8,16 +8,16 @@ const PortfolioHeaderCard = ({
   percent,
   setDateFilterAction,
   timePeriodFilter,
+  portfolioDetails,
 }) => {
   useEffect(() => {
     setDateFilterAction("All");
   }, [setDateFilterAction]);
-
+  console.log(portfolioDetails);
   return (
     <div className={styles.header}>
       <div className={styles.companyDetailsContainer}>
-        <h1 className={styles.ticker}>{stock.ticker}</h1>
-        <h2 className={styles.stockName}>{stock.name}</h2>
+        <h1 className={styles.ticker}>{portfolioDetails.name}</h1>
       </div>
       <div className={styles.companyRevContainer}>
         <div className={styles.price}>
