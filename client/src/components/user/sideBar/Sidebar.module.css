@@ -40,6 +40,7 @@
   font-size: 18px;
   text-align: center;
   margin-bottom: 1em;
+  margin-left: 50px;
   color: black;
 }
 
@@ -68,4 +69,11 @@
 .arrowIcon {
   height: 20px;
   width: 20px;
+}
+
+.contentHeadLine {
+  margin-left: 45px;
+  margin-bottom: 14px;
+  opacity: 70%;
+  color: gray;
 }
