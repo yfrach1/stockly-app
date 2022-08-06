@@ -191,6 +191,7 @@ export const addStockAction = (stock, quantity) => {
       const portfolioData = await getHistoricalPortfolioData();
       dispatch(getHistoricalPortfolioDataSuccessed(portfolioData));
     } catch (error) {
+      console.log(error);
       dispatch(addStockFailed());
     }
   };

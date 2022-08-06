@@ -151,21 +151,34 @@ class PortfolioManager {
       All: -1,
     };
     const portfolioDiffPercent = { ...portfolioRevenue };
-
     for (let key in portfolioRevenue) {
-      portfolioRevenue[key] = (
-        summedPortfolioData.at(-1).close -
-        summedPortfolioData.at(-portfolioRevenue[key]).close
-      ).toFixed(2);
+      if (summedPortfolioData.length < portfolioDiffPercent[key]) {
+        portfolioRevenue[key] = (
+          summedPortfolioData.at(-1).close -
+          summedPortfolioData.at(-(summedPortfolioData.length - 1)).close
+        ).toFixed(2);
+      } else {
+        portfolioRevenue[key] = (
+          summedPortfolioData.at(-1).close -
+          summedPortfolioData.at(-portfolioRevenue[key]).close
+        ).toFixed(2);
+      }
     }
 
     for (let key in portfolioDiffPercent) {
-      portfolioDiffPercent[key] = (
-        (summedPortfolioData.at(-1).close /
-          summedPortfolioData.at(-portfolioDiffPercent[key]).close -
-          1) *
-        100
-      ).toFixed(2);
+      if (summedPortfolioData.length < portfolioDiffPercent[key]) {
+        portfolioDiffPercent[key] = (
+          summedPortfolioData.at(-1).close -
+          summedPortfolioData.at(-(summedPortfolioData.length - 1)).close
+        ).toFixed(2);
+      } else {
+        portfolioDiffPercent[key] = (
+          (summedPortfolioData.at(-1).close /
+            summedPortfolioData.at(-portfolioDiffPercent[key]).close -
+            1) *
+          100
+        ).toFixed(2);
+      }
     }
 
     return { portfolioRevenue, portfolioDiffPercent };

@@ -28,6 +28,7 @@ const mapStateToProps = (state, ownProps) => {
     // portfolioName,
     portfolioDetails,
   };
+
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
