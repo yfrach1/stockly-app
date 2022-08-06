@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const PortfolioDetails = ({ setPortfolioData, myStockAmount }) => {
   return (
-    <div>
+    <div className="animate__animated animate__fadeIn">
       {myStockAmount ? (
         <div className={styles.stockDetailsContainer}>
           <PortfolioHeaderCardConnector />
