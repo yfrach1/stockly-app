@@ -91,11 +91,21 @@ class PortfolioManager {
     const { portfolioRevenue, portfolioDiffPercent } =
       this._calcRevAndDiff(summedPortfolioData);
 
-    console.log(summedPortfolioData.at(-1));
-    console.log(summedPortfolioData.at(-2));
-    console.log(summedPortfolioData.at(-3));
-    console.log(summedPortfolioData.at(-4));
-    return { summedPortfolioData, portfolioRevenue, portfolioDiffPercent };
+    const portfolioDetails = {
+      name: UserPortfolio.name,
+      dayGain:
+        summedPortfolioData.at(-1).close - summedPortfolioData.at(-5).close,
+      dayPercent: (
+        (summedPortfolioData.at(-1).close / summedPortfolioData.at(-5).close -
+          1) *
+        100
+      ).toFixed(2),
+      portfolioInfo: summedPortfolioData,
+      portfolioRevenue: portfolioRevenue,
+      portfolioDiffPercent: portfolioDiffPercent,
+    };
+
+    return portfolioDetails;
   }
 
   async _getDBHistoricalDataByTicker(portfolioStocks) {

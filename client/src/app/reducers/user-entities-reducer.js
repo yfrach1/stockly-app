@@ -112,20 +112,7 @@ const userEntitiesReducer = (state = initialState, action) => {
       };
     }
     case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
-      return {
-        ...state,
-        userAuth: false,
-        firstName: "",
-        lastName: "",
-        portfolio: {},
-        stocks: {},
-        stock: {},
-        stockDetails: {
-          stockInfo: [],
-          stockRevenue: {},
-          stockDiffPercent: {},
-        },
-      };
+      return { initialState };
     }
     //matabe need to add loader before this action
     case actionTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED: {
@@ -154,28 +141,11 @@ const userEntitiesReducer = (state = initialState, action) => {
     }
 
     case actionTypes.GET_HISTORICAL_PORTFOLIO_REQUEST_SUCCESSED: {
-      const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = {
-        ...action.payload.portfolioData.data,
-      };
+      const portfolioDetails = action.payload.portfolioData.data;
 
       return {
         ...state,
-        portfolioDetails: {
-          name: state.portfolio.name,
-          dayGain:
-            summedPortfolioData.at(-1).close - summedPortfolioData.at(-5).close,
-          dayPercent: (
-            (summedPortfolioData.at(-1).close /
-              summedPortfolioData.at(-5).close -
-              1) *
-            100
-          ).toFixed(2),
-          portfolioInfo: summedPortfolioData ? summedPortfolioData : null,
-          portfolioRevenue: portfolioRevenue ? portfolioRevenue : null,
-          portfolioDiffPercent: portfolioDiffPercent
-            ? portfolioDiffPercent
-            : null,
-        },
+        portfolioDetails: portfolioDetails,
       };
     }
 
