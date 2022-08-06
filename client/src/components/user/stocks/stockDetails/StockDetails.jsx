@@ -5,6 +5,7 @@ import ListNews from "../../stocksSystem/news/ListNews";
 import styles from "./StockDetails.module.css";
 import StockGraphConnector from "../stockGraph/StockGraphConnector";
 import OpacityLoader from "../../../loading/fetchStockLoader/OpacityLoader";
+import { motion } from "framer-motion";
 
 const StockDetails = ({
   stock,
@@ -51,7 +52,11 @@ const StockDetails = ({
           <OpacityLoader />
         </div>
       ) : (
-        <div className="animate__animated animate__fadeIn">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className={styles.stockDetailsContainer}>
             {Object.keys(stock).length ? (
               <Fragment>
@@ -120,7 +125,7 @@ const StockDetails = ({
               </Fragment>
             ) : null}
           </div>
-        </div>
+        </motion.div>
       )}
     </>
   );
