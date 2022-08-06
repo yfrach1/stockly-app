@@ -1,18 +1,22 @@
 import styles from "./PortfolioDetails.module.css";
 import PortfolioHeaderCardConnector from "../portfolioHeaderCard/PortfolioHeaderCardConnector";
 import PortfolioGraphConnector from "../portfolioGraph/PortfolioGraphConnector";
-import { useEffect } from "react";
+import { motion } from "framer-motion";
 
-const PortfolioDetails = ({ setPortfolioData, myStockAmount }) => {
+const PortfolioDetails = ({ myStockAmount }) => {
   return (
-    <div className="animate__animated animate__fadeIn">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       {myStockAmount ? (
         <div className={styles.stockDetailsContainer}>
           <PortfolioHeaderCardConnector />
           <PortfolioGraphConnector />
         </div>
       ) : null}
-    </div>
+    </motion.div>
   );
 };
 
