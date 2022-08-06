@@ -10,7 +10,10 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(express.json(), cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  express.json(),
+  cors({ origin: "http://localhost:3000", credentials: true })
+);
 app.use(cookieParser());
 
 app.use("/user", userRouter);
@@ -20,5 +23,5 @@ app.use("/stock", stockRouter);
 
 const port = process.env.PORT || "8080";
 app.listen(port, function () {
-   console.log("Running on " + port);
+  console.log("Running on " + port);
 });
