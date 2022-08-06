@@ -4,7 +4,7 @@ const initialState = {
   userAuth: false,
   firstName: "",
   lastName: "",
-  portfolio: {}, //will change to [] later when we will have more then one
+  portfolio: {},
   myStocks: {},
   searchedStocks: {},
   stock: {},
@@ -112,7 +112,30 @@ const userEntitiesReducer = (state = initialState, action) => {
       };
     }
     case actionTypes.SIGN_OUT_REQUEST_SUCCESSED: {
-      return { initialState };
+      return {
+        userAuth: false,
+        firstName: "",
+        lastName: "",
+        portfolio: {},
+        myStocks: {},
+        searchedStocks: {},
+        stock: {},
+        stockDetails: {
+          stockInfo: [],
+          stockRevenue: { All: 0 },
+          stockDiffPercent: { All: 0 },
+        },
+        stockNews: [],
+        searchKey: "",
+        portfolioDetails: {
+          name: "",
+          dayGain: 0,
+          dayPercent: 0,
+          portfolioInfo: [],
+          portfolioRevenue: {},
+          portfolioDiffPercent: {},
+        },
+      };
     }
     //matabe need to add loader before this action
     case actionTypes.GET_STOCK_DETAILS_REQUEST_SUCCESSED: {

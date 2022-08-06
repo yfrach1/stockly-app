@@ -260,10 +260,10 @@ export const getStockNewsAction = (stock) => {
   };
 };
 
-export const setPortfolioData = (portfolioId) => {
+export const setPortfolioData = () => {
   return async (dispatch) => {
     try {
-      const portfolioData = await getHistoricalPortfolioData(portfolioId);
+      const portfolioData = await getHistoricalPortfolioData();
       dispatch(getHistoricalPortfolioDataSuccessed(portfolioData));
     } catch (error) {
       dispatch(getHistoricalPortfolioDataFailed());

@@ -3,10 +3,10 @@ import PortfolioHeaderCardConnector from "../portfolioHeaderCard/PortfolioHeader
 import PortfolioGraphConnector from "../portfolioGraph/PortfolioGraphConnector";
 import { useEffect } from "react";
 
-const PortfolioDetails = ({ setPortfolioData, portfolioId, myStockAmount }) => {
+const PortfolioDetails = ({ setPortfolioData, myStockAmount }) => {
   useEffect(() => {
-    setPortfolioData(portfolioId);
-  }, [setPortfolioData, portfolioId]);
+    setPortfolioData();
+  }, [setPortfolioData]);
   return (
     <div>
       {myStockAmount ? (
