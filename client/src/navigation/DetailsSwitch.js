@@ -13,7 +13,6 @@ const DetailsSwitch = ({ portfolioId, stock }) => {
         <PortfolioDetailsConnector />
       </Route>
       <Route path="/stocks/:portfolioId/:stockTicker" exact={true}>
-        {/* <PortfolioPerformance /> */}
         {stock ? <StockDetailsConnector /> : null}
       </Route>
       <Redirect from="/" to={`/stocks/${portfolioId}/dashboard`} />
