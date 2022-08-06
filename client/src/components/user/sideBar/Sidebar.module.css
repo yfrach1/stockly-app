@@ -27,7 +27,7 @@
 
 .userGreeting {
   color: rgb(49, 49, 49);
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: 600;
   margin: -1.5em 0 3em 0;
   text-align: center;
@@ -72,8 +72,11 @@
 }
 
 .contentHeadLine {
-  margin-left: 45px;
+  text-align: center;
+  font-size: 1em;
   margin-bottom: 14px;
-  opacity: 70%;
+  opacity: 50%;
   color: gray;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.731);
+  border-top: 1px solid rgba(128, 128, 128, 0.731);
 }
