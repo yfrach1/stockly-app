@@ -30,6 +30,7 @@ function Sidebar({
       <div className={styles.userGreeting}>
         Welcome {firstName} {lastName}!
       </div>
+      <div className={styles.contentHeadLine}>content</div>
 
       <div
         className={styles.alignCategory}
