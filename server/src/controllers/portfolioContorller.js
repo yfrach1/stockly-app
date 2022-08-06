@@ -6,7 +6,6 @@ async function createPortfolio(req, res) {
 }
 
 async function getPortfolioPerformanceData(req, res) {
-  // portfolioId = req.body.portfolioId;
   portfolioDetails = await portfolioService.getPortfolioPerformanceData(
     req.user.id
   );

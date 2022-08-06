@@ -96,7 +96,7 @@ class UserManager {
           this._extractDataFromFetchStockResult(fetchResult);
         StockData.price = price;
         StockData.change_percent = ((close / open) * 100 - 100).toFixed(2);
-        //update the data to be most upsated
+
         await stockService.updateStock(
           StockData.stock_id,
           StockData.price,

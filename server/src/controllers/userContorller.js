@@ -1,8 +1,8 @@
 const userService = require("../services/userService");
 const portfolioService = require("../services/portfolioService");
+
 async function createUser(req, res) {
   const { accessToken, userData } = await userService.createUser(req.body);
-
   accessToken
     ? res
         .status(200)
