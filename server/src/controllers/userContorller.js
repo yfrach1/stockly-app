@@ -12,12 +12,13 @@ async function createUser(req, res) {
 }
 
 async function loginUser(req, res) {
-  const { accessToken, userData } = await userService.loginUser(req.body);
+  const { accessToken, userData, portfolioDetails } =
+    await userService.loginUser(req.body);
   accessToken
     ? res
         .status(200)
         .cookie("token", accessToken, { httpOnly: true })
-        .json(userData)
+        .json({ userData, portfolioDetails })
     : res.status(409).send();
 }
 

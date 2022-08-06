@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { use } = require("bcrypt/promises");
 const stockService = require("../services/stockService");
 const stockClient = require("../clients/stockClient");
+const portfolioService = require("../services/portfolioService");
 
 class UserManager {
   async createUser(newUserData) {
@@ -39,9 +40,12 @@ class UserManager {
     if (userId) {
       accessToken = await this._createAccessToken(userId);
       userData = await this.getUserData(userId);
+      portfolioDetails = await portfolioService.getPortfolioPerformanceData(
+        userId
+      );
     }
 
-    return { accessToken, userData };
+    return { accessToken, userData, portfolioDetails };
   }
 
   _compareStockLastUpdatedDay(date1, date2) {
