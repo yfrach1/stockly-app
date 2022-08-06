@@ -7,16 +7,12 @@ async function createPortfolio(req, res) {
 
 async function getPortfolioPerformanceData(req, res) {
   // portfolioId = req.body.portfolioId;
-  portfolioData = await portfolioService.getPortfolioPerformanceData(req.user);
-  if (portfolioData) {
-    const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } =
-      portfolioData;
-    res
-      .status(200)
-      .send({ summedPortfolioData, portfolioRevenue, portfolioDiffPercent });
-  } else {
-    res.status(200).send(null);
-  }
+  portfolioDetails = await portfolioService.getPortfolioPerformanceData(
+    req.user
+  );
+  portfolioDetails
+    ? res.status(200).send(portfolioDetails)
+    : res.status(200).send(null);
 }
 
 module.exports = {
