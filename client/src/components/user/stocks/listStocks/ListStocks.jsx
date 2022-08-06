@@ -3,7 +3,7 @@ import StockCardConnector from "../stockCard/StockCardConnector";
 import emptyStateImage from "../../../../assets/images/emptyState.png";
 import { motion } from "framer-motion";
 
-const ListStocks = ({ stocks }) => {
+const ListStocks = ({ stocks, searchKey }) => {
   const notMyStocksArray = stocks
     .map((stock, index) => {
       return stock.isMine ? null : (
@@ -38,7 +38,15 @@ const ListStocks = ({ stocks }) => {
       animate="show"
       className={styles.grid}
     >
-      {!stocks.length ? emptyState : <></>}
+      {!stocks.length ? (
+        searchKey.length ? (
+          <div>something</div>
+        ) : (
+          emptyState
+        )
+      ) : (
+        <></>
+      )}
       {stocks.map((stock, index) =>
         stock.isMine ? <StockCardConnector key={index} stock={stock} /> : null
       )}
