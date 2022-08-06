@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import styles from "./PortfolioHeaderCard.module.css";
 
 const PortfolioHeaderCard = ({
-  stock,
   price,
   percent,
   setDateFilterAction,
@@ -13,7 +12,6 @@ const PortfolioHeaderCard = ({
   useEffect(() => {
     setDateFilterAction("All");
   }, [setDateFilterAction]);
-  console.log(portfolioDetails);
   return (
     <div className={styles.header}>
       <div className={styles.companyDetailsContainer}>

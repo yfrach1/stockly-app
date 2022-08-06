@@ -6,7 +6,6 @@ module.exports = function authenticateToken(req, res, next) {
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     if (err) return res.sendStatus(403);
-    //change to only id
     req.user = user;
     next();
   });

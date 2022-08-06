@@ -5,8 +5,6 @@ import GuestSwitch from "../../../navigation/GuestSwitch";
 function Main() {
   return (
     <div className={styles.homePageBackground}>
-      {/* <NavigationBarForPhone />
-      <NavigationBarForMac /> */}
       <NavigationBar />
       <div className={styles.contentPosition}>
         <GuestSwitch />
