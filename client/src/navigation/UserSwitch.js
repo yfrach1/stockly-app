@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import PortfolioConnector from "../components/user/portfolio/PortfolioConnector";
 import CryptoPage from "../components/user/crypto/CryptoPage";
 
@@ -15,10 +15,7 @@ const UserSwitch = () => {
       <Route path="/stocks/:potfolioId">
         <PortfolioConnector />
       </Route>
-      {/* <Route path="/crypto">
-        <CryptoPage />
-      </Route> */}
-      <Route path="/signout"></Route>
+      <Redirect from="/" to="/stocks/dashboard" />
     </Switch>
   );
 };
