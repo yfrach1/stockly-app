@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd ../client && npm install && npm run build"
+    "build": "cd ../client && npm install && npm run build",
+    "start:dev": "nodemone server.js"
   },
   "keywords": [],
   "author": "",
@@ -27,11 +28,11 @@
     "mysql2": "^2.3.3",
     "node-fetch": "^3.2.9",
     "node-schedule": "^2.1.0",
-    "nodemon": "^2.0.16",
     "npm": "^8.15.0",
     "sequelize": "^6.21.0"
   },
   "devDependencies": {
+    "nodemon": "^2.0.19",
     "sequelize-cli": "^6.4.1"
   }
 }

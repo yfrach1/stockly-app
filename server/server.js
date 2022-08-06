@@ -1,11 +1,11 @@
 const express = require("express");
-// const path = require("path");
+const path = require("path");
 require("express-async-errors");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
-const userRouter = require("./src/routes/userRouter");
-const portfolioRouter = require("./src/routes/portfolioRouter");
-const stockRouter = require("./src/routes/stockRouter");
+const userRouter = require("./server/src/routes/userRouter");
+const portfolioRouter = require("./server/src/routes/portfolioRouter");
+const stockRouter = require("./server/src/routes/stockRouter");
 const cors = require("cors");
 
 const app = express();
@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use("/user", userRouter);
 app.use("/portfolio", portfolioRouter);
 app.use("/stock", stockRouter);
-// app.use(express.static(path.resolve(__dirname, "../client/build")));
+app.use(express.static(path.join(__dirname, "/server/public")));
 
 const port = process.env.PORT || "8080";
 app.listen(port, function () {
