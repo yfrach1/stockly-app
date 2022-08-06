@@ -24,6 +24,9 @@ export const getMyStocks = (state) => {
   return stocksArray;
 };
 
+export const getPortfolioDetails = (state) =>
+  getUserEntities(state).portfolioDetails;
+
 export const getSerachedStocks = (state) => {
   const stockObj = getUserEntities(state).searchedStocks;
   const stocksArray = Object.keys(stockObj).map((key) => stockObj[key]);

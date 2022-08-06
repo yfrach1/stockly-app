@@ -72,6 +72,7 @@ class PortfolioManager {
     if (!portfolioStocks.length) {
       return null;
     }
+
     const historicalDataByTicker = await this._getDBHistoricalDataByTicker(
       portfolioStocks
     );
@@ -86,6 +87,10 @@ class PortfolioManager {
     const { portfolioRevenue, portfolioDiffPercent } =
       this._calcRevAndDiff(summedPortfolioData);
 
+    console.log(summedPortfolioData.at(-1));
+    console.log(summedPortfolioData.at(-2));
+    console.log(summedPortfolioData.at(-3));
+    console.log(summedPortfolioData.at(-4));
     return { summedPortfolioData, portfolioRevenue, portfolioDiffPercent };
   }
 

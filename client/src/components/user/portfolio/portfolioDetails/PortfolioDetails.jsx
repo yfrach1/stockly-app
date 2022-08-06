@@ -6,7 +6,7 @@ import { useEffect } from "react";
 const PortfolioDetails = ({ setPortfolioData, portfolioId, myStockAmount }) => {
   useEffect(() => {
     setPortfolioData(portfolioId);
-  }, [setPortfolioData]);
+  }, [setPortfolioData, portfolioId]);
   return (
     <div>
       {myStockAmount ? (

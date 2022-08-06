@@ -15,6 +15,7 @@ const initialState = {
   },
   stockNews: [],
   searchKey: "",
+  portfolioDetails: { name: "", dayGain: 0, dayPercent: 0 },
 };
 
 const userEntitiesReducer = (state = initialState, action) => {
@@ -149,6 +150,9 @@ const userEntitiesReducer = (state = initialState, action) => {
       const { summedPortfolioData, portfolioRevenue, portfolioDiffPercent } = {
         ...action.payload.portfolioData.data,
       };
+      console.log(summedPortfolioData.at(-1));
+      console.log(summedPortfolioData.at(-2));
+
       return {
         ...state,
         stockDetails: {
@@ -156,9 +160,16 @@ const userEntitiesReducer = (state = initialState, action) => {
           stockRevenue: portfolioRevenue ? portfolioRevenue : null,
           stockDiffPercent: portfolioDiffPercent ? portfolioDiffPercent : null,
         },
-        stock: {
-          ticker: state.portfolio.name,
-          name: `${state.firstName} ${state.lastName}`,
+        portfolioDetails: {
+          name: state.portfolio.name,
+          dayGain:
+            summedPortfolioData.at(-1).close - summedPortfolioData.at(-5).close,
+          dayPercent: (
+            (summedPortfolioData.at(-1).close /
+              summedPortfolioData.at(-5).close -
+              1) *
+            100
+          ).toFixed(2),
         },
       };
     }

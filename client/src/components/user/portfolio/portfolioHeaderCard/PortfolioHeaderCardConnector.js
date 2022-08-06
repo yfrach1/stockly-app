@@ -1,6 +1,9 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getStock } from "../../../../app/selectors/user-entities-selectors";
+import {
+  getStock,
+  getPortfolioDetails,
+} from "../../../../app/selectors/user-entities-selectors";
 import {
   getRevenue,
   getDiffPercent,
@@ -14,7 +17,8 @@ const mapStateToProps = (state, ownProps) => {
   const price = getRevenue(state);
   const percent = getDiffPercent(state);
   const timePeriodFilter = getDateFilter(state);
-  return { stock, price, percent, timePeriodFilter };
+  const portfolioDetails = getPortfolioDetails(state);
+  return { stock, price, percent, timePeriodFilter, portfolioDetails };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

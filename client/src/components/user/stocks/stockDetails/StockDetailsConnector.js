@@ -14,6 +14,7 @@ import {
   deleteStockAction,
   addStockAction,
   updateStockQuantityAction,
+  setPortfolioData,
 } from "../../../../app/actions/user-entities-actions";
 
 import StockDetails from "./StockDetails";
@@ -29,7 +30,12 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return bindActionCreators(
-    { deleteStockAction, addStockAction, updateStockQuantityAction },
+    {
+      deleteStockAction,
+      addStockAction,
+      updateStockQuantityAction,
+      setPortfolioData,
+    },
     dispatch
   );
 };
