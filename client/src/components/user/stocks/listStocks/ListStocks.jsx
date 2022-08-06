@@ -12,14 +12,25 @@ const ListStocks = ({ stocks, searchKey }) => {
     })
     .filter((stock) => stock !== null);
   const seperatingLine = <span className={styles.seperatingLine}></span>;
+  const emptyStateImageElement = (
+    <img
+      src={emptyStateImage}
+      alt="Empty state"
+      className={styles.emptyState}
+    />
+  );
   const emptyState = (
     <>
-      <img
-        src={emptyStateImage}
-        alt="Empty state"
-        className={styles.emptyState}
-      />
+      {emptyStateImageElement}
       <div className={styles.addText}>Add your first stock up here!</div>
+    </>
+  );
+  const emptySearch = (
+    <>
+      {emptyStateImageElement}
+      <div className={styles.emptySearchResult}>
+        No results for: "{searchKey}"
+      </div>
     </>
   );
 
@@ -38,15 +49,7 @@ const ListStocks = ({ stocks, searchKey }) => {
       animate="show"
       className={styles.grid}
     >
-      {!stocks.length ? (
-        searchKey.length ? (
-          <div>something</div>
-        ) : (
-          emptyState
-        )
-      ) : (
-        <></>
-      )}
+      {!stocks.length ? searchKey.length ? emptySearch : emptyState : <></>}
       {stocks.map((stock, index) =>
         stock.isMine ? <StockCardConnector key={index} stock={stock} /> : null
       )}

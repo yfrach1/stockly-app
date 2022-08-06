@@ -21,7 +21,7 @@
 }
 
 .sidebarLogo {
-  width: 14em;
+  width: 15em;
   height: auto;
 }
 
@@ -60,7 +60,7 @@
   align-items: center;
   text-align: center;
   /* border: 2px solid green; */
-  margin-left: 8%;
+  margin-left: 22%;
   bottom: 0;
   margin-bottom: 20px;
   cursor: pointer;
@@ -74,8 +74,10 @@
 .contentHeadLine {
   text-align: center;
   font-size: 1em;
-  margin-bottom: 14px;
-  opacity: 50%;
+  margin-bottom: 18px;
+  opacity: 60%;
+  font-weight: 600;
+  padding: 0.5em 0;
   color: gray;
   border-bottom: 1px solid rgba(128, 128, 128, 0.731);
   border-top: 1px solid rgba(128, 128, 128, 0.731);

@@ -25,7 +25,11 @@ const PortfolioCard = ({ portfolioId, portfolioDetails }) => {
               className={styles.percentage}
               style={{
                 backgroundColor:
-                  portfolioDetails.dayPercent > 0 ? "#38ef7d" : "#F00000",
+                  portfolioDetails.dayPercent > 0
+                    ? "#38ef7d"
+                    : portfolioDetails.dayPercent < 0
+                    ? "#F00000"
+                    : "#FFA500",
               }}
             >
               {portfolioDetails.dayPercent}%
