@@ -43,16 +43,30 @@ export const getDetailsLoading = (state) => getUserView(state).detailsLoading;
 
 export const getRevenue = (state) => {
   let dateFilter = getUserView(state).dateFilter;
-
   const revenueObj = getUserEntities(state).stockDetails.stockRevenue;
+
+  return revenueObj[dateFilter];
+};
+
+export const getPortfiolioRevenue = (state) => {
+  let dateFilter = getUserView(state).dateFilter;
+  const revenueObj = getUserEntities(state).portfolioDetails.portfolioRevenue;
+  console.log(revenueObj);
 
   return revenueObj[dateFilter];
 };
 
 export const getDiffPercent = (state) => {
   let dateFilter = getUserView(state).dateFilter;
+  const diffPercentObj = getUserEntities(state).stockDetails.DiffPercent;
 
-  const diffPercentObj = getUserEntities(state).stockDetails.stockDiffPercent;
+  return diffPercentObj[dateFilter];
+};
+
+export const getPortfolioDiffPercent = (state) => {
+  let dateFilter = getUserView(state).dateFilter;
+  const diffPercentObj =
+    getUserEntities(state).portfolioDetails.portfolioDiffPercent;
 
   return diffPercentObj[dateFilter];
 };

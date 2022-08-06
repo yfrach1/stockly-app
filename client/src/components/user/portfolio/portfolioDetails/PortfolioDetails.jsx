@@ -1,6 +1,6 @@
 import styles from "./PortfolioDetails.module.css";
 import PortfolioHeaderCardConnector from "../portfolioHeaderCard/PortfolioHeaderCardConnector";
-import StockGraphConnector from "../../stocks/stockGraph/StockGraphConnector";
+import PortfolioGraphConnector from "../portfolioGraph/PortfolioGraphConnector";
 import { useEffect } from "react";
 
 const PortfolioDetails = ({ setPortfolioData, portfolioId, myStockAmount }) => {
@@ -12,7 +12,7 @@ const PortfolioDetails = ({ setPortfolioData, portfolioId, myStockAmount }) => {
       {myStockAmount ? (
         <div className={styles.stockDetailsContainer}>
           <PortfolioHeaderCardConnector />
-          <StockGraphConnector />
+          <PortfolioGraphConnector />
         </div>
       ) : null}
     </div>
