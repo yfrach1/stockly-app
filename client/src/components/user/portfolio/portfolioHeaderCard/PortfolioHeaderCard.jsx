@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import styles from "./PortfolioHeaderCard.module.css";
 
 const PortfolioHeaderCard = ({
-  stock,
   price,
   percent,
   setDateFilterAction,

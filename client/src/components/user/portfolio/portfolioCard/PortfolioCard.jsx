@@ -7,7 +7,6 @@ const PortfolioCard = ({ portfolioId, portfolioDetails }) => {
     <div className={styles.portfolioCardGrid}>
       <Link
         className={styles.stockCard}
-        // className={myStocksAmount ? styles.button : styles.disabled}
         to={`/stocks/${portfolioId}/dashboard`}
       >
         <div className={styles.alignContent}>
