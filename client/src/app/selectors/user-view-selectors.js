@@ -13,6 +13,7 @@ export const getShowToast = (state) => getUserView(state).showToast;
 export const getToastParam = (state) => getUserView(state).toastParam;
 export const getPortfolioId = (state) => getUserView(state).portfolioId;
 export const getDateFilter = (state) => getUserView(state).dateFilter;
+export const getEditItemLoading = (state) => getUserView(state).editItemLoading;
 
 export const getFilteredRevenue = createSelector(
   [getStockRevenue, getDateFilter],
