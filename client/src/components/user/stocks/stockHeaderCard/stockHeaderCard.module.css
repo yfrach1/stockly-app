@@ -11,12 +11,17 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.companyDetailsContainer,
-.companyRevContainer {
+.companyDetailsContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.4em;
+}
+
+.companyRevContainer {
+  display: flex;
+  align-items: center;
+  gap: 3em;
 }
 
 .ticker {
@@ -30,7 +35,11 @@
 }
 
 .price {
-  font-size: 2rem;
+  font-size: 1.1rem;
+}
+
+.buyPrice {
+  font-size: 1.1rem;
 }
 
 .percentage {
@@ -38,4 +47,34 @@
   padding: 0.2rem 0.8rem;
   border-radius: 5px;
   color: white;
+}
+
+.percentageTotal {
+  display: flex;
+  gap: 0.4em;
+  align-items: center;
+}
+
+.stockProfit,
+.stockPercent {
+  font-size: 1.1em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 5px;
+  color: white;
+}
+
+.dateDescription {
+  font-size: 1.2rem;
+  font-weight: 650;
+}
+
+.profitContainer,
+.todayContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  align-items: center;
+}
+.profitContainer {
+  gap: 0.4em;
 }

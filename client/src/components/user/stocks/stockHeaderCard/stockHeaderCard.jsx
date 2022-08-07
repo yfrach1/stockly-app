@@ -9,14 +9,43 @@ const stockHeaderCard = ({ stock }) => {
         <h2 className={styles.stockName}>{stock.name}</h2>
       </div>
       <div className={styles.companyRevContainer}>
-        <div className={styles.price}> {stock.price}</div>
-        <div
-          className={styles.percentage}
-          style={{
-            backgroundColor: stock.change_percent > 0 ? "#38ef7d" : "#F00000",
-          }}
-        >
-          {stock.change_percent}%
+        <div className={styles.profitContainer}>
+          <div className={styles.dateDescription}>Your total stock profit</div>
+          <div className={styles.buyPrice}>Buy price: {stock.price}</div>
+          <div className={styles.percentageTotal}>
+            Profit:
+            <span
+              style={{
+                backgroundColor:
+                  stock.change_percent > 0 ? "#38ef7d" : "#F00000",
+              }}
+              className={styles.stockProfit}
+            >
+              {stock.price}
+            </span>
+            <span
+              style={{
+                backgroundColor:
+                  stock.change_percent > 0 ? "#38ef7d" : "#F00000",
+              }}
+              className={styles.stockPercent}
+            >
+              {" "}
+              {stock.change_percent}%
+            </span>
+          </div>
+        </div>
+        <div className={styles.todayContainer}>
+          <div className={styles.dateDescription}>Today</div>
+          <div className={styles.price}> {stock.price}</div>
+          <div
+            className={styles.percentage}
+            style={{
+              backgroundColor: stock.change_percent > 0 ? "#38ef7d" : "#F00000",
+            }}
+          >
+            {stock.change_percent}%
+          </div>
         </div>
       </div>
     </div>
