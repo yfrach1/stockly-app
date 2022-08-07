@@ -9,7 +9,7 @@ const stockHeaderCard = ({ stock }) => {
         <h2 className={styles.stockName}>{stock.name}</h2>
       </div>
       <div className={styles.companyRevContainer}>
-        <div className={styles.price}>{stock.price}</div>
+        <div className={styles.price}> {stock.price}</div>
         <div
           className={styles.percentage}
           style={{
