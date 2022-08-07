@@ -53,7 +53,7 @@ class StockManager {
       change_percent: stock.change_percent,
     });
 
-    this._addHistoricalDataToDB(stock);
+    await this._addHistoricalDataToDB(stock);
 
     return this.formatStocks(newStock);
   }
