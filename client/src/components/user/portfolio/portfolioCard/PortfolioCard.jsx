@@ -2,7 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./PortfolioCard.module.css";
 
-const PortfolioCard = ({ portfolioId, portfolioDetails }) => {
+const PortfolioCard = ({
+  portfolioId,
+  portfolioDetails,
+  currentValue,
+  currentChangePercent,
+}) => {
   return (
     <div className={styles.portfolioCardGrid}>
       <Link
@@ -17,21 +22,19 @@ const PortfolioCard = ({ portfolioId, portfolioDetails }) => {
             </div>
           </div>
           <div className={styles.alignPortfolioData}>
-            <div className={styles.price}>
-              Weekly gain: ${portfolioDetails.dayGain.toFixed(2)}
-            </div>
+            <div className={styles.price}>Total profit: ${currentValue}</div>
             <div
               className={styles.percentage}
               style={{
                 backgroundColor:
-                  portfolioDetails.dayPercent > 0
+                  currentChangePercent > 0
                     ? "#38ef7d"
-                    : portfolioDetails.dayPercent < 0
+                    : currentChangePercent < 0
                     ? "#F00000"
                     : "#FFA500",
               }}
             >
-              {portfolioDetails.dayPercent}%
+              {currentChangePercent}%
             </div>
           </div>
         </div>

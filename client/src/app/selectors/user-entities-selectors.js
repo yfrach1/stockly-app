@@ -62,13 +62,35 @@ export const getStocksAmount = createSelector(
   }
 );
 
-// export const getAllStocksAmount = createSelector(
-//   [getStocksObj],
-//   (stocksObj) => {
-//     return Object.keys(stocksObj).length;
-//   }
-// );
+///
 
+export const getPortfolioCurrentValue = createSelector(
+  [getMyStocks],
+  (stocks) => {
+    let value = 0;
+    stocks.forEach((stock) => {
+      value += stock.quantity * (stock.price - stock.buy_price);
+    });
+    return value.toFixed(2);
+  }
+);
+export const getPortfolioCurrentChangePercent = createSelector(
+  [getMyStocks],
+  (stocks) => {
+    let totalBuyPrice = 0;
+    let totalCurrentPrice = 0;
+    stocks.forEach((stock) => {
+      totalBuyPrice += stock.buy_price * stock.quantity;
+      totalCurrentPrice += stock.price * stock.quantity;
+    });
+
+    const changePercent =
+      ((totalCurrentPrice - totalBuyPrice) / totalBuyPrice) * 100;
+    return changePercent.toFixed(2);
+  }
+);
+
+///
 export const getPortfolioValue = createSelector([getMyStocks], (stocks) => {
   let portfolioValue = 0;
   stocks.forEach((stock) => {

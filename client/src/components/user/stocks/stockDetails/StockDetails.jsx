@@ -158,7 +158,6 @@ const StockDetails = ({
                       </div>
                     </form>
 
-                    {/* {!inputValid ? "please enter number >= 0" : null} */}
                     <button
                       onClick={() =>
                         stock.isMine ? updateStockQuantity() : addStock()
