@@ -15,7 +15,7 @@ const Portfolio = ({ fetchLoading, portfolioId }) => {
         <div className={styles.listStocksPreview}>
           {fetchLoading ? (
             <div className={styles.loaderContainer}>
-              <OpacityLoader />{" "}
+              <OpacityLoader />
             </div>
           ) : (
             <ListStocksConnector />
