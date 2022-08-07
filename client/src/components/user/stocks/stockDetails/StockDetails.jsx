@@ -17,17 +17,26 @@ const StockDetails = ({
   detailsLoading,
   portfolioId,
 }) => {
+  console.log("stock.buy_price: ", stock.buy_price);
+  console.log("stock: ", stock);
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
   const [quantityInputValid, setQuantityInputValid] = useState(true);
   const [priceInputValid, setPriceInputValid] = useState(true);
   const quantityInputRef = useRef(null);
   const priceInputRef = useRef(null);
-  const handleChange = useCallback(
+  const handleQuantityChange = useCallback(
     (e) => {
       setQuantity(e.target.value);
     },
     [setQuantity]
+  );
+
+  const handlePriceChange = useCallback(
+    (e) => {
+      setPrice(e.target.value);
+    },
+    [setPrice]
   );
 
   const addStock = useCallback(() => {
@@ -47,9 +56,11 @@ const StockDetails = ({
       return;
     }
     setPriceInputValid(true);
+    console.log("stock: ", stock);
 
     stock.quantity = quantity;
-    stock.price = price;
+    stock.buy_price = price;
+    console.log("stock: ", stock);
     addStockAction(stock);
     quantityInputRef.current.value = "";
     priceInputRef.current.value = "";
@@ -81,25 +92,25 @@ const StockDetails = ({
                 <StockGraphConnector />
                 <div className={styles.detailsAndAddContainer}>
                   <div className={styles.details}>
-                    <div class={styles.aligValuenDisplay}>
+                    <div className={styles.aligValuenDisplay}>
                       <div> Open:</div>
                       <div>
                         {stockInfo.length ? `${stockInfo.at(-1).open}` : ""}
                       </div>
                     </div>
-                    <div class={styles.alignValueDisplay}>
+                    <div className={styles.alignValueDisplay}>
                       <div> High:</div>
                       <div>
                         {stockInfo.length ? `${stockInfo.at(-1).high}` : ""}
                       </div>
                     </div>
-                    <div class={styles.alignValueDisplay}>
+                    <div className={styles.alignValueDisplay}>
                       <div> Low:</div>
                       <div>
                         {stockInfo.length ? `${stockInfo.at(-1).low}` : ""}
                       </div>
                     </div>
-                    <div class={styles.alignValueDisplay}>
+                    <div className={styles.alignValueDisplay}>
                       <div> Volume:</div>
                       <div>
                         {stockInfo.length
@@ -127,7 +138,7 @@ const StockDetails = ({
                           step="0.01"
                           min="0"
                           placeholder={stock.isMine ? stock.quantity : 0}
-                          onChange={handleChange}
+                          onChange={handleQuantityChange}
                           ref={quantityInputRef}
                         />
                         Price:
@@ -140,8 +151,8 @@ const StockDetails = ({
                           type="number"
                           min="0.000001"
                           step="0.000001"
-                          placeholder={stock.isMine ? stock.quantity : 0}
-                          onChange={handleChange}
+                          placeholder={stock.isMine ? stock.buy_price : 0}
+                          onChange={handlePriceChange}
                           ref={priceInputRef}
                         />
                       </div>
