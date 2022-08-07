@@ -35,7 +35,7 @@ const stockHeaderCard = ({ stock }) => {
           ) : (
             <div></div>
           )}
-          <div className={styles.price}> {`price: $${stock.price}`}</div>
+          <div className={styles.price}> {`Price: $${stock.price}`}</div>
         </div>
 
         <div className={styles.percentPosition}>

@@ -157,14 +157,9 @@ class StockManager {
   }
 
   async updateStockQuantity(stock_id, quantity) {
-    console.log("stock_id: ", stock_id);
     const stockToUpdate = await Stock.findOne({
       where: { stock_id },
     });
-    console.log("stockToUpdate,", stockToUpdate);
-    console.log("quantity: ", quantity);
-
-    console.log("inside");
 
     const res = await stockToUpdate.update({
       quantity,
