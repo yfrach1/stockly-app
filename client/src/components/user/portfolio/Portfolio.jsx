@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Portfolio.module.css";
 import SearchBarConnector from "../stocksSystem/searchBar/SearchBar-connector";
 import ListStocksConnector from "../stocks/listStocks/ListStocksConnector";
-import OpacityLoader from "../../loading/fetchStockLoader/OpacityLoader";
+import OpacityLoader from "../../loading/fetchStockLoader/FetchStockLoader";
 import DetailsSwitchConnector from "../../../navigation/DetailsSwitchConnector";
 import PortfolioCardConnector from "./portfolioCard/PortfolioCardConnector";
 

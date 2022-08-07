@@ -1,13 +1,13 @@
 import React from "react";
-import styles from "./OpacityLoader.module.css";
+import styles from "./FetchStockLoader.module.css";
 import spinner from "../../../assets/images/newlogoCropped.png";
 import { motion } from "framer-motion";
 
-const OpacityLoader = () => {
+const FetchStockLoader = () => {
   return (
-    <div className={styles.opacityLoaderContainer}>
+    <div className={styles.fetchLoaderContainer}>
       <motion.img
-        className={styles.opacityLoaderSize}
+        className={styles.fetchLoaderSize}
         src={spinner}
         animate={{
           scale: [0.5, 2.5, 2.5, 0.5, 0.5],
@@ -19,4 +19,4 @@ const OpacityLoader = () => {
   );
 };
 
-export default OpacityLoader;
+export default FetchStockLoader;

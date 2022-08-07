@@ -73,6 +73,9 @@ const searchStockFailed = () => ({
   type: actionsTypes.SEARCH_STOCK_REQUEST_FAILED,
 });
 
+const addStockRequest = () => ({
+  type: actionsTypes.ADD_STOCK_REQUEST,
+});
 const addStockSuccessed = (newStock, stockTicker) => ({
   type: actionsTypes.ADD_STOCK_REQUEST_SUCCESSED,
   stockTicker,
@@ -80,6 +83,10 @@ const addStockSuccessed = (newStock, stockTicker) => ({
 });
 const addStockFailed = () => ({
   type: actionsTypes.ADD_STOCK_REQUEST_FAILED,
+});
+
+const updateStockRequest = () => ({
+  type: actionsTypes.UPDATE_STOCK_REQUEST,
 });
 const updateStockQuantitySuccessed = (ticker, quantity) => ({
   type: actionsTypes.UPDATE_STOCK_REQUEST_SUCCESSED,
@@ -91,6 +98,9 @@ const updateStockQuantityFailed = () => ({
   type: actionsTypes.UPDATE_STOCK_REQUEST_FAILED,
 });
 
+const removeStockRequest = () => ({
+  type: actionsTypes.REMOVE_STOCK_REQUEST,
+});
 const deleteStockSuccessed = (stockTicker) => ({
   type: actionsTypes.DELETE_STOCK_REQUEST_SUCCESSED,
   stockTicker,
@@ -185,6 +195,7 @@ export const checkUserTokenAction = () => {
 
 export const addStockAction = (stock) => {
   return async (dispatch) => {
+    dispatch(addStockRequest());
     try {
       const res = await addStock(stock);
       dispatch(addStockSuccessed(res.data, stock.ticker));
@@ -199,6 +210,7 @@ export const addStockAction = (stock) => {
 };
 export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
   return async (dispatch) => {
+    dispatch(updateStockRequest());
     try {
       await updateStockQuantity(stockId, quantity);
       dispatch(updateStockQuantitySuccessed(stockTicker, quantity));
@@ -211,6 +223,7 @@ export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
 };
 export const deleteStockAction = (stockTicker, stockId, portfolioId) => {
   return async (dispatch) => {
+    dispatch(removeStockRequest());
     try {
       const portfolioData = await deleteStock(stockId, portfolioId);
       dispatch(deleteStockSuccessed(stockTicker, portfolioData));

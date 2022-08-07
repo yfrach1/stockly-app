@@ -9,6 +9,7 @@ import {
 import {
   getDetailsLoading,
   getPortfolioId,
+  getEditItemLoading,
 } from "../../../../app/selectors/user-view-selectors";
 import {
   deleteStockAction,
@@ -24,7 +25,15 @@ const mapStateToProps = (state, ownProps) => {
   const stock = getStock(state);
   const detailsLoading = getDetailsLoading(state);
   const portfolioId = getPortfolioId(state);
-  return { stock, stockInfo, stockNews, detailsLoading, portfolioId };
+  const editItemLoading = getEditItemLoading(state);
+  return {
+    stock,
+    stockInfo,
+    stockNews,
+    detailsLoading,
+    portfolioId,
+    editItemLoading,
+  };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

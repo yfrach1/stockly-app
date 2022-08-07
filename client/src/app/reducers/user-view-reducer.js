@@ -6,6 +6,7 @@ const initialState = {
   portfolioId: null,
   fetchLoading: false,
   detailsLoading: false,
+  editItemLoading: false,
   dateFilter: "All",
   showToast: false,
   toastParam: { toastType: null, message: null, autoHideDuration: null },
@@ -159,11 +160,31 @@ const userViewReducer = (state = initialState, action) => {
       };
     }
 
+    case actionTypes.ADD_STOCK_REQUEST: {
+      return {
+        ...state,
+        editItemLoading: true,
+      };
+    }
+    case actionTypes.UPDATE_STOCK_REQUEST: {
+      return {
+        ...state,
+        editItemLoading: true,
+      };
+    }
+    case actionTypes.DELETE_STOCK_REQUEST: {
+      return {
+        ...state,
+        editItemLoading: true,
+      };
+    }
+
     case actionTypes.ADD_STOCK_REQUEST_SUCCESSED: {
       return {
         ...state,
         detailsLoading: false,
         showToast: true,
+        editItemLoading: false,
         toastParam: {
           toastType: toastTypes.POSITIVE,
           message: message.ADD_STOCK_REQUEST_SUCCESSED,
@@ -200,6 +221,7 @@ const userViewReducer = (state = initialState, action) => {
         ...state,
         detailsLoading: false,
         showToast: true,
+        editItemLoading: false,
         toastParam: {
           toastType: toastTypes.NEGATIVE,
           message: message.UPDATE_STOCK_REQUEST_FAILED,
@@ -230,6 +252,13 @@ const userViewReducer = (state = initialState, action) => {
           message: message.GET_STOCK_DETAILS_REQUEST_FAILED,
           autoHideDuration: null,
         },
+      };
+    }
+
+    case actionTypes.GET_HISTORICAL_PORTFOLIO_REQUEST_SUCCESSED: {
+      return {
+        ...state,
+        editItemLoading: false,
       };
     }
 
@@ -270,6 +299,7 @@ const userViewReducer = (state = initialState, action) => {
         ...state,
         fetchLoading: false,
         showToast: true,
+        editItemLoading: false,
         toastParam: {
           toastType: toastTypes.NEGATIVE,
           message: message.DELETE_STOCK_REQUEST_FAILED,
