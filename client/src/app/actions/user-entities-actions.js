@@ -187,6 +187,7 @@ export const addStockAction = (stock) => {
   return async (dispatch) => {
     try {
       const res = await addStock(stock);
+      console.log("stock: ", res.data);
       dispatch(addStockSuccessed(res.data, stock.ticker));
       const portfolioData = await getHistoricalPortfolioData();
       dispatch(getHistoricalPortfolioDataSuccessed(portfolioData));
@@ -199,10 +200,8 @@ export const addStockAction = (stock) => {
 export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
   return async (dispatch) => {
     try {
-      //maybe need loader in the input text field
-      console.log("in update action");
+      console.log("stockId: in update ", stockId);
       await updateStockQuantity(stockId, quantity);
-      console.log("after update");
       dispatch(updateStockQuantitySuccessed(stockTicker, quantity));
       const histPortfolioData = await getHistoricalPortfolioData();
       dispatch(getHistoricalPortfolioDataSuccessed(histPortfolioData));
@@ -214,6 +213,7 @@ export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
 export const deleteStockAction = (stockTicker, stockId, portfolioId) => {
   return async (dispatch) => {
     try {
+      console.log("stockId: in delete ", stockId);
       const portfolioData = await deleteStock(stockId, portfolioId);
       dispatch(deleteStockSuccessed(stockTicker, portfolioData));
       const histPortfolioData = await getHistoricalPortfolioData();

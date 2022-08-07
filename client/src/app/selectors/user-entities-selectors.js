@@ -86,7 +86,7 @@ export const getPortfolioCurrentChangePercent = createSelector(
 
     const changePercent =
       ((totalCurrentPrice - totalBuyPrice) / totalBuyPrice) * 100;
-    return changePercent.toFixed(2);
+    return isNaN(changePercent) ? "0.00" : changePercent.toFixed(2);
   }
 );
 

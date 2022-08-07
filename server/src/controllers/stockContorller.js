@@ -65,6 +65,7 @@ async function updateStockQuantity(req, res) {
   const quantity = req.body.quantity;
 
   const stockData = await stockService.updateStockQuantity(id, quantity);
+
   stockData
     ? res.status(200).json(stockData)
     : res.status(200).json({ error: "Could not add stock" });

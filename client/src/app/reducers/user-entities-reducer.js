@@ -66,7 +66,6 @@ const userEntitiesReducer = (state = initialState, action) => {
         stock.isChecked = true;
         return (stocksDict[stock.ticker] = stock);
       });
-      console.log("stocksDict;", stocksDict);
       const portfolioDetails = action.userData.portfolioDetails;
       return {
         ...state,
