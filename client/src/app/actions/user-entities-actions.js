@@ -183,13 +183,13 @@ export const checkUserTokenAction = () => {
   };
 };
 
-export const addStockAction = (stock, quantity) => {
+export const addStockAction = (stock) => {
   return async (dispatch) => {
     try {
       const res = await addStock(stock);
       dispatch(addStockSuccessed(res.data, stock.ticker));
-      const portfolioData = await getHistoricalPortfolioData();
-      dispatch(getHistoricalPortfolioDataSuccessed(portfolioData));
+      // const portfolioData = await getHistoricalPortfolioData();
+      // dispatch(getHistoricalPortfolioDataSuccessed(portfolioData));
     } catch (error) {
       console.log(error);
       dispatch(addStockFailed());

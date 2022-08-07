@@ -17,8 +17,6 @@ const StockDetails = ({
   detailsLoading,
   portfolioId,
 }) => {
-  console.log("stock.buy_price: ", stock.buy_price);
-  console.log("stock: ", stock);
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
   const [quantityInputValid, setQuantityInputValid] = useState(true);
@@ -56,11 +54,9 @@ const StockDetails = ({
       return;
     }
     setPriceInputValid(true);
-    console.log("stock: ", stock);
 
     stock.quantity = quantity;
     stock.buy_price = price;
-    console.log("stock: ", stock);
     addStockAction(stock);
     quantityInputRef.current.value = "";
     priceInputRef.current.value = "";
