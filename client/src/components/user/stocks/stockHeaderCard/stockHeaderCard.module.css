@@ -11,12 +11,18 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.companyDetailsContainer,
-.companyRevContainer {
+.companyDetailsContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.4em;
+}
+
+.companyRevContainer {
+  height: 100%;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 .ticker {
@@ -30,7 +36,11 @@
 }
 
 .price {
-  font-size: 2rem;
+  font-size: 1.1rem;
+}
+
+.buyPrice {
+  font-size: 1.1rem;
 }
 
 .percentage {
@@ -38,4 +48,52 @@
   padding: 0.2rem 0.8rem;
   border-radius: 5px;
   color: white;
+}
+
+.percentageTotal {
+  display: flex;
+  gap: 0.4em;
+  align-items: center;
+}
+
+.stockProfit,
+.stockPercent {
+  font-size: 1.1em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 5px;
+  color: white;
+}
+
+.headLineText {
+  font-size: 1.2rem;
+  font-weight: 650;
+}
+
+.pricePosition {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.percentPosition {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.headLinePosition {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  text-decoration: rgb(113, 114, 114) underline;
+  /* border: 2px solid red; */
 }

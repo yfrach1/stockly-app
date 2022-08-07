@@ -14,6 +14,7 @@ class StockManager {
       ticker: stock.dataValues.ticker,
       name: stock.dataValues.name,
       price: stock.dataValues.price,
+      buy_price: stock.dataValues.buy_price,
       change_percent: stock.dataValues.change_percent,
       quantity: stock.dataValues.quantity,
       isMine: true,
@@ -42,13 +43,13 @@ class StockManager {
     const UserPortfolio = await Portfolio.findOne({
       where: { user_id: user.id },
     });
-
     const newStock = await Stock.create({
       portfolio_id: UserPortfolio.portfolio_id,
       name: stock.name,
       ticker: stock.ticker,
       quantity: stock.quantity,
       price: stock.price,
+      buy_price: stock.buy_price,
       change_percent: stock.change_percent,
     });
 
@@ -168,6 +169,7 @@ class StockManager {
     const stockToUpdate = await Stock.findOne({
       where: { stock_id },
     });
+
     const res = await stockToUpdate.update({
       quantity,
     });

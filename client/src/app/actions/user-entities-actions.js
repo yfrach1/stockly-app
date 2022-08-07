@@ -183,7 +183,7 @@ export const checkUserTokenAction = () => {
   };
 };
 
-export const addStockAction = (stock, quantity) => {
+export const addStockAction = (stock) => {
   return async (dispatch) => {
     try {
       const res = await addStock(stock);
@@ -199,10 +199,7 @@ export const addStockAction = (stock, quantity) => {
 export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
   return async (dispatch) => {
     try {
-      //maybe need loader in the input text field
-      console.log("in update action");
       await updateStockQuantity(stockId, quantity);
-      console.log("after update");
       dispatch(updateStockQuantitySuccessed(stockTicker, quantity));
       const histPortfolioData = await getHistoricalPortfolioData();
       dispatch(getHistoricalPortfolioDataSuccessed(histPortfolioData));

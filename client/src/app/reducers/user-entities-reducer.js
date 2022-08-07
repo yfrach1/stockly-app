@@ -66,7 +66,6 @@ const userEntitiesReducer = (state = initialState, action) => {
         stock.isChecked = true;
         return (stocksDict[stock.ticker] = stock);
       });
-
       const portfolioDetails = action.userData.portfolioDetails;
       return {
         ...state,
@@ -104,7 +103,7 @@ const userEntitiesReducer = (state = initialState, action) => {
         searchedStocks: updatedSearchedStocks,
         stock: state.searchKey.length
           ? { ...updatedMyStocks[action.stockTicker] }
-          : updatedStock,
+          : { ...updatedMyStocks[action.stockTicker] },
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
@@ -146,6 +145,7 @@ const userEntitiesReducer = (state = initialState, action) => {
           stockDiffPercent: state.stockDetails.stockDiffPercent,
           stockRevenue: state.stockDetails.stockRevenue,
         },
+
         stock: state.searchKey.length
           ? state.searchedStocks[action.ticker]
           : state.myStocks[action.ticker],

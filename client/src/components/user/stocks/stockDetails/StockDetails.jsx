@@ -18,31 +18,54 @@ const StockDetails = ({
   portfolioId,
 }) => {
   const [quantity, setQuantity] = useState(0);
-  const [inputValid, setInputValid] = useState(true);
-  const inputElement = useRef(null);
-
-  const handleChange = useCallback(
+  const [price, setPrice] = useState(0);
+  const [quantityInputValid, setQuantityInputValid] = useState(true);
+  const [priceInputValid, setPriceInputValid] = useState(true);
+  const quantityInputRef = useRef(null);
+  const priceInputRef = useRef(null);
+  const handleQuantityChange = useCallback(
     (e) => {
       setQuantity(e.target.value);
     },
     [setQuantity]
   );
 
+  const handlePriceChange = useCallback(
+    (e) => {
+      setPrice(e.target.value);
+    },
+    [setPrice]
+  );
+
   const addStock = useCallback(() => {
-    if (!inputElement.current.value.length) {
-      setInputValid(false);
+    if (
+      !quantityInputRef.current.value.length ||
+      quantityInputRef.current.value < 0
+    ) {
+      setQuantityInputValid(false);
       return;
     }
-    setInputValid(true);
+    setQuantityInputValid(true);
+    if (
+      !priceInputRef.current.value.length ||
+      priceInputRef.current.value <= 0
+    ) {
+      setPriceInputValid(false);
+      return;
+    }
+    setPriceInputValid(true);
+
     stock.quantity = quantity;
+    stock.buy_price = price;
     addStockAction(stock);
-    inputElement.current.value = "";
-  }, [quantity, addStockAction, stock]);
+    quantityInputRef.current.value = "";
+    priceInputRef.current.value = "";
+  }, [quantity, addStockAction, stock, price]);
 
   const updateStockQuantity = useCallback(() => {
     stock.quantity = quantity;
     updateStockQuantityAction(stock.stock_id, stock.ticker, quantity);
-    inputElement.current.value = "";
+    quantityInputRef.current.value = "";
   }, [quantity, stock, updateStockQuantityAction]);
 
   return (
@@ -65,25 +88,25 @@ const StockDetails = ({
                 <StockGraphConnector />
                 <div className={styles.detailsAndAddContainer}>
                   <div className={styles.details}>
-                    <div class={styles.aligValuenDisplay}>
+                    <div className={styles.aligValuenDisplay}>
                       <div> Open:</div>
                       <div>
                         {stockInfo.length ? `${stockInfo.at(-1).open}` : ""}
                       </div>
                     </div>
-                    <div class={styles.alignValueDisplay}>
+                    <div className={styles.alignValueDisplay}>
                       <div> High:</div>
                       <div>
                         {stockInfo.length ? `${stockInfo.at(-1).high}` : ""}
                       </div>
                     </div>
-                    <div class={styles.alignValueDisplay}>
+                    <div className={styles.alignValueDisplay}>
                       <div> Low:</div>
                       <div>
                         {stockInfo.length ? `${stockInfo.at(-1).low}` : ""}
                       </div>
                     </div>
-                    <div class={styles.alignValueDisplay}>
+                    <div className={styles.alignValueDisplay}>
                       <div> Volume:</div>
                       <div>
                         {stockInfo.length
@@ -93,17 +116,48 @@ const StockDetails = ({
                     </div>
                   </div>
                   <div className={styles.quantityContainer}>
-                    Quantity:
-                    <input
-                      className={
-                        inputValid ? styles.input : styles.inputNotValid
-                      }
-                      type="text"
-                      placeholder={stock.isMine ? stock.quantity : 0}
-                      onChange={handleChange}
-                      ref={inputElement}
-                    />
-                    {!inputValid ? "please enter number >= 0" : null}
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        stock.isMine ? updateStockQuantity() : addStock();
+                      }}
+                    >
+                      <div className={styles.alignTextInput}>
+                        Quantity:
+                        <input
+                          className={
+                            quantityInputValid
+                              ? styles.input
+                              : styles.inputNotValid
+                          }
+                          type="number"
+                          step="0.01"
+                          min="0"
+                          placeholder={stock.isMine ? stock.quantity : 0}
+                          onChange={handleQuantityChange}
+                          ref={quantityInputRef}
+                        />
+                        {!stock.isMine ? (
+                          <div className={styles.alignPriceInput}>
+                            Cost:
+                            <input
+                              className={
+                                priceInputValid
+                                  ? styles.input
+                                  : styles.inputNotValid
+                              }
+                              type="number"
+                              min="0.000001"
+                              step="0.000001"
+                              placeholder={stock.isMine ? stock.buy_price : 0}
+                              onChange={handlePriceChange}
+                              ref={priceInputRef}
+                            />
+                          </div>
+                        ) : null}
+                      </div>
+                    </form>
+
                     <button
                       onClick={() =>
                         stock.isMine ? updateStockQuantity() : addStock()
@@ -121,7 +175,7 @@ const StockDetails = ({
                             portfolioId
                           );
                           setQuantity(0);
-                          inputElement.current.value = "";
+                          quantityInputRef.current.value = "";
                         }}
                         className={styles.buttonDelete}
                       >
