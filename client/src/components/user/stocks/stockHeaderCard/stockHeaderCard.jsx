@@ -2,6 +2,11 @@ import React from "react";
 import styles from "./stockHeaderCard.module.css";
 
 const stockHeaderCard = ({ stock }) => {
+  const funds = (stock.price - stock.buy_price).toFixed(2);
+  const changePercent = (
+    ((stock.price - stock.buy_price) / stock.buy_price) *
+    100
+  ).toFixed(2);
   return (
     <div className={styles.header}>
       <div className={styles.companyDetailsContainer}>

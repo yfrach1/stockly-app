@@ -69,6 +69,7 @@ class UserManager {
       portfolio,
       stocks,
     };
+
     return userData;
   }
 
