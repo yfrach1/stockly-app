@@ -137,20 +137,24 @@ const StockDetails = ({
                           onChange={handleQuantityChange}
                           ref={quantityInputRef}
                         />
-                        Price:
-                        <input
-                          className={
-                            priceInputValid
-                              ? styles.input
-                              : styles.inputNotValid
-                          }
-                          type="number"
-                          min="0.000001"
-                          step="0.000001"
-                          placeholder={stock.isMine ? stock.buy_price : 0}
-                          onChange={handlePriceChange}
-                          ref={priceInputRef}
-                        />
+                        {!stock.isMine ? (
+                          <div className={styles.alignPriceInput}>
+                            Price:
+                            <input
+                              className={
+                                priceInputValid
+                                  ? styles.input
+                                  : styles.inputNotValid
+                              }
+                              type="number"
+                              min="0.000001"
+                              step="0.000001"
+                              placeholder={stock.isMine ? stock.buy_price : 0}
+                              onChange={handlePriceChange}
+                              ref={priceInputRef}
+                            />
+                          </div>
+                        ) : null}
                       </div>
                     </form>
 

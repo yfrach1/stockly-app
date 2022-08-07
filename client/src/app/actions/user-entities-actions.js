@@ -188,8 +188,8 @@ export const addStockAction = (stock) => {
     try {
       const res = await addStock(stock);
       dispatch(addStockSuccessed(res.data, stock.ticker));
-      // const portfolioData = await getHistoricalPortfolioData();
-      // dispatch(getHistoricalPortfolioDataSuccessed(portfolioData));
+      const portfolioData = await getHistoricalPortfolioData();
+      dispatch(getHistoricalPortfolioDataSuccessed(portfolioData));
     } catch (error) {
       console.log(error);
       dispatch(addStockFailed());
