@@ -7,7 +7,6 @@ export const addStock = async (stock) => {
     stock,
   };
   const response = await axios.post(`${url}/stock`, body);
-  console.log(response);
 
   return response;
 };

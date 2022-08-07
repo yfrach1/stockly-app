@@ -139,7 +139,7 @@ const StockDetails = ({
                         />
                         {!stock.isMine ? (
                           <div className={styles.alignPriceInput}>
-                            Price:
+                            Cost:
                             <input
                               className={
                                 priceInputValid
