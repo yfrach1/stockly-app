@@ -26,12 +26,14 @@ class StockManager {
       where: {
         portfolio_id: portfolioId,
         [Op.or]: [
-          { ticker: { [Op.substring]: searchKey } },
-          { name: { [Op.substring]: searchKey } },
+          { ticker: { [Op.iLike]: `%${searchKey}%` } },
+          { name: { [Op.iLike]: `%${searchKey}%` } },
         ],
       },
     });
+    console.log("inside searchindb, stocks:", stocks);
     const formateStockData = stocks.map((stock) => this.formatStocks(stock));
+    console.log("inside searchindb, formateStockData:", formateStockData);
 
     return formateStockData;
   }
@@ -123,21 +125,28 @@ class StockManager {
   }
 
   async searchStock(stockSearchKey, portfolioId) {
+    console.log(
+      "inside searchStock, stockSearchKey:",
+      stockSearchKey,
+      "portfolioId:",
+      portfolioId
+    );
     const stocksDetailsFromDB = await this._searchStockInDB(
       portfolioId,
       stockSearchKey
     );
+    console.log("stocksDetailsFromDB: ", stocksDetailsFromDB);
     if (!stockSearchKey.length) {
       return stocksDetailsFromDB;
     }
 
     const myTickers = stocksDetailsFromDB.map((stock) => stock.ticker);
-
+    console.log("myTickers: ", myTickers);
     const stocksDetailsFromApi = await stockClient.searchStock(
       stockSearchKey,
       myTickers
     );
-
+    console.log("stocksDetailsFromApi:", stocksDetailsFromApi);
     return [...stocksDetailsFromApi, ...stocksDetailsFromDB];
   }
 

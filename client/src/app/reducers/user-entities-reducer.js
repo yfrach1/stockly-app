@@ -153,12 +153,19 @@ const userEntitiesReducer = (state = initialState, action) => {
     }
 
     case actionTypes.UPDATE_STOCK_REQUEST_SUCCESSED: {
+      const updatedSearchedStocks = { ...state.searchedStocks };
+      const searchKeyLength = state.searchKey.length;
       const updatedStocks = { ...state.myStocks };
-      updatedStocks[action.ticker].stockInfotity = action.quantity;
+      updatedStocks[action.ticker].quantity = action.quantity;
       const updatedStock = { ...updatedStocks[action.ticker] };
+      if (searchKeyLength) {
+        updatedSearchedStocks[action.ticker].quantity = action.quantity;
+      }
+
       return {
         ...state,
         myStocks: updatedStocks,
+        searchedStocks: updatedSearchedStocks,
         stock: updatedStock,
       };
     }
