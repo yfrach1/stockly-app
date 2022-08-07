@@ -19,9 +19,10 @@
 }
 
 .companyRevContainer {
+  height: 100%;
+  width: 400px;
   display: flex;
-  align-items: center;
-  gap: 3em;
+  flex-direction: column;
 }
 
 .ticker {
@@ -63,18 +64,36 @@
   color: white;
 }
 
-.dateDescription {
+.headLineText {
   font-size: 1.2rem;
   font-weight: 650;
 }
 
-.profitContainer,
-.todayContainer {
+.pricePosition {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  gap: 0.3em;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 5px;
 }
-.profitContainer {
-  gap: 0.4em;
+
+.percentPosition {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.headLinePosition {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  text-decoration: rgb(113, 114, 114) underline;
+  /* border: 2px solid red; */
 }
