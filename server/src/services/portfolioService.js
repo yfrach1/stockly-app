@@ -80,12 +80,13 @@ class PortfolioManager {
     const historicalDataByTicker = await this._getDBHistoricalDataByTicker(
       portfolioStocks
     );
-
     let summedPortfolioData = this._calcPortfolioSum(
       portfolioStocks,
       historicalDataByTicker
     );
-
+    if (!summedPortfolioData.length) {
+      return null;
+    }
     summedPortfolioData.sort((a, b) => new Date(a.date) - new Date(b.date));
 
     const { portfolioRevenue, portfolioDiffPercent } =
@@ -149,7 +150,6 @@ class PortfolioManager {
 
   _calcRevAndDiff(summedPortfolioData) {
     const daysOfTradeEachMonth = 21;
-
     const portfolioRevenue = {
       "1W": 5,
       "1M": daysOfTradeEachMonth,
