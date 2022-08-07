@@ -10,7 +10,7 @@ const OpacityLoader = () => {
         className={styles.opacityLoaderSize}
         src={spinner}
         animate={{
-          scale: [0.5, 2.5, 2.5, 0.5, 0.5],
+          scale: [0.7, 2.8, 2.8, 0.7, 0.7],
           rotate: [0, 0, 360, 360, 0],
         }}
         transition={{ ease: "easeInOut", duration: 2.5, repeat: Infinity }}
