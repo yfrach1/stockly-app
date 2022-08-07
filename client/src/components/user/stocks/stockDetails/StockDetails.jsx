@@ -65,21 +65,32 @@ const StockDetails = ({
                 <StockGraphConnector />
                 <div className={styles.detailsAndAddContainer}>
                   <div className={styles.details}>
-                    <span>
-                      Open: {stockInfo.length ? `${stockInfo.at(-1).open}` : ""}
-                    </span>
-                    <span>
-                      High: {stockInfo.length ? `${stockInfo.at(-1).high}` : ""}
-                    </span>
-                    <span>
-                      Low: {stockInfo.length ? `${stockInfo.at(-1).low}` : ""}
-                    </span>
-                    <span style={{ width: "max-content" }}>
-                      Volume:
-                      {stockInfo.length
-                        ? `\n${stockInfo.at(-1).volume / 1000} K`
-                        : ""}
-                    </span>
+                    <div class={styles.aligValuenDisplay}>
+                      <div> Open:</div>
+                      <div>
+                        {stockInfo.length ? `${stockInfo.at(-1).open}` : ""}
+                      </div>
+                    </div>
+                    <div class={styles.alignValueDisplay}>
+                      <div> High:</div>
+                      <div>
+                        {stockInfo.length ? `${stockInfo.at(-1).high}` : ""}
+                      </div>
+                    </div>
+                    <div class={styles.alignValueDisplay}>
+                      <div> Low:</div>
+                      <div>
+                        {stockInfo.length ? `${stockInfo.at(-1).low}` : ""}
+                      </div>
+                    </div>
+                    <div class={styles.alignValueDisplay}>
+                      <div> Volume:</div>
+                      <div>
+                        {stockInfo.length
+                          ? `${stockInfo.at(-1).volume / 1000} K`
+                          : ""}
+                      </div>
+                    </div>
                   </div>
                   <div className={styles.quantityContainer}>
                     Quantity:

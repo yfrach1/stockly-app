@@ -200,7 +200,9 @@ export const updateStockQuantityAction = (stockId, stockTicker, quantity) => {
   return async (dispatch) => {
     try {
       //maybe need loader in the input text field
+      console.log("in update action");
       await updateStockQuantity(stockId, quantity);
+      console.log("after update");
       dispatch(updateStockQuantitySuccessed(stockTicker, quantity));
       const histPortfolioData = await getHistoricalPortfolioData();
       dispatch(getHistoricalPortfolioDataSuccessed(histPortfolioData));
