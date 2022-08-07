@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./stockHeaderCard.module.css";
 
 const stockHeaderCard = ({ stock }) => {
-  const funds = (stock.price - stock.buy_price).toFixed(2);
+  const funds = stock.quantity * (stock.price - stock.buy_price).toFixed(2);
   const changePercent = (
     ((stock.price - stock.buy_price) / stock.buy_price) *
     100
@@ -29,7 +29,7 @@ const stockHeaderCard = ({ stock }) => {
                 }}
                 className={styles.stockProfit}
               >
-                {funds}
+                ${funds}
               </span>
               <span
                 style={{
