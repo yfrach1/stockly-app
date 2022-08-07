@@ -18,9 +18,11 @@ const StockDetails = ({
   portfolioId,
 }) => {
   const [quantity, setQuantity] = useState(0);
-  const [inputValid, setInputValid] = useState(true);
-  const inputElement = useRef(null);
-
+  const [price, setPrice] = useState(0);
+  const [quantityInputValid, setQuantityInputValid] = useState(true);
+  const [priceInputValid, setPriceInputValid] = useState(true);
+  const quantityInputRef = useRef(null);
+  const priceInputRef = useRef(null);
   const handleChange = useCallback(
     (e) => {
       setQuantity(e.target.value);
@@ -29,20 +31,34 @@ const StockDetails = ({
   );
 
   const addStock = useCallback(() => {
-    if (!inputElement.current.value.length) {
-      setInputValid(false);
+    if (
+      !quantityInputRef.current.value.length ||
+      quantityInputRef.current.value < 0
+    ) {
+      setQuantityInputValid(false);
       return;
     }
-    setInputValid(true);
+    setQuantityInputValid(true);
+    if (
+      !priceInputRef.current.value.length ||
+      priceInputRef.current.value <= 0
+    ) {
+      setPriceInputValid(false);
+      return;
+    }
+    setPriceInputValid(true);
+
     stock.quantity = quantity;
+    stock.price = price;
     addStockAction(stock);
-    inputElement.current.value = "";
-  }, [quantity, addStockAction, stock]);
+    quantityInputRef.current.value = "";
+    priceInputRef.current.value = "";
+  }, [quantity, addStockAction, stock, price]);
 
   const updateStockQuantity = useCallback(() => {
     stock.quantity = quantity;
     updateStockQuantityAction(stock.stock_id, stock.ticker, quantity);
-    inputElement.current.value = "";
+    quantityInputRef.current.value = "";
   }, [quantity, stock, updateStockQuantityAction]);
 
   return (
@@ -93,17 +109,45 @@ const StockDetails = ({
                     </div>
                   </div>
                   <div className={styles.quantityContainer}>
-                    Quantity:
-                    <input
-                      className={
-                        inputValid ? styles.input : styles.inputNotValid
-                      }
-                      type="text"
-                      placeholder={stock.isMine ? stock.quantity : 0}
-                      onChange={handleChange}
-                      ref={inputElement}
-                    />
-                    {!inputValid ? "please enter number >= 0" : null}
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        stock.isMine ? updateStockQuantity() : addStock();
+                      }}
+                    >
+                      <div className={styles.alignTextInput}>
+                        Quantity:
+                        <input
+                          className={
+                            quantityInputValid
+                              ? styles.input
+                              : styles.inputNotValid
+                          }
+                          type="number"
+                          step="0.01"
+                          min="0"
+                          placeholder={stock.isMine ? stock.quantity : 0}
+                          onChange={handleChange}
+                          ref={quantityInputRef}
+                        />
+                        Price:
+                        <input
+                          className={
+                            priceInputValid
+                              ? styles.input
+                              : styles.inputNotValid
+                          }
+                          type="number"
+                          min="0.000001"
+                          step="0.000001"
+                          placeholder={stock.isMine ? stock.quantity : 0}
+                          onChange={handleChange}
+                          ref={priceInputRef}
+                        />
+                      </div>
+                    </form>
+
+                    {/* {!inputValid ? "please enter number >= 0" : null} */}
                     <button
                       onClick={() =>
                         stock.isMine ? updateStockQuantity() : addStock()
@@ -121,7 +165,7 @@ const StockDetails = ({
                             portfolioId
                           );
                           setQuantity(0);
-                          inputElement.current.value = "";
+                          quantityInputRef.current.value = "";
                         }}
                         className={styles.buttonDelete}
                       >
