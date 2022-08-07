@@ -103,7 +103,7 @@ const userEntitiesReducer = (state = initialState, action) => {
         searchedStocks: updatedSearchedStocks,
         stock: state.searchKey.length
           ? { ...updatedMyStocks[action.stockTicker] }
-          : updatedStock,
+          : { ...updatedMyStocks[action.stockTicker] },
       };
     }
     case actionTypes.DELETE_STOCK_REQUEST_SUCCESSED: {
