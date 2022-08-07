@@ -134,3 +134,9 @@
   overflow: hidden;
   padding: 15em;
 }
+
+.alignVolumeDisplay {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+}
