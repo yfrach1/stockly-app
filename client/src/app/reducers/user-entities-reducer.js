@@ -66,7 +66,7 @@ const userEntitiesReducer = (state = initialState, action) => {
         stock.isChecked = true;
         return (stocksDict[stock.ticker] = stock);
       });
-
+      console.log("stocksDict;", stocksDict);
       const portfolioDetails = action.userData.portfolioDetails;
       return {
         ...state,
@@ -146,6 +146,7 @@ const userEntitiesReducer = (state = initialState, action) => {
           stockDiffPercent: state.stockDetails.stockDiffPercent,
           stockRevenue: state.stockDetails.stockRevenue,
         },
+
         stock: state.searchKey.length
           ? state.searchedStocks[action.ticker]
           : state.myStocks[action.ticker],
