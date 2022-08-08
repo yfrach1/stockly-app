@@ -4,8 +4,10 @@ import StockHeaderCardConnector from "../../stocks/stockHeaderCard/stockHeaderCa
 import ListNews from "../../stocksSystem/news/ListNews";
 import styles from "./StockDetails.module.css";
 import StockGraphConnector from "../stockGraph/StockGraphConnector";
-import OpacityLoader from "../../../loading/fetchStockLoader/OpacityLoader";
+import OpacityLoader from "../../../loading/opacityLoader/OpacityLoading";
 import { motion } from "framer-motion";
+import OpacityLoading from "../../../loading/opacityLoader/OpacityLoading";
+import FetchStockLoader from "../../../loading/fetchStockLoader/FetchStockLoader";
 
 const StockDetails = ({
   stock,
@@ -16,6 +18,7 @@ const StockDetails = ({
   updateStockQuantityAction,
   detailsLoading,
   portfolioId,
+  editItemLoading,
 }) => {
   const [quantity, setQuantity] = useState(0);
   const [price, setPrice] = useState(0);
@@ -72,7 +75,7 @@ const StockDetails = ({
     <>
       {detailsLoading ? (
         <div className={styles.loaderContainer}>
-          <OpacityLoader />
+          <FetchStockLoader />
         </div>
       ) : (
         <motion.div
@@ -115,74 +118,83 @@ const StockDetails = ({
                       </div>
                     </div>
                   </div>
-                  <div className={styles.quantityContainer}>
-                    <form
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        stock.isMine ? updateStockQuantity() : addStock();
-                      }}
-                    >
-                      <div className={styles.alignTextInput}>
-                        Quantity:
-                        <input
-                          className={
-                            quantityInputValid
-                              ? styles.input
-                              : styles.inputNotValid
-                          }
-                          type="number"
-                          step="0.01"
-                          min="0"
-                          placeholder={stock.isMine ? stock.quantity : 0}
-                          onChange={handleQuantityChange}
-                          ref={quantityInputRef}
-                        />
-                        {!stock.isMine ? (
-                          <div className={styles.alignPriceInput}>
-                            Cost:
+
+                  <div className={styles.buttonContainer}>
+                    {editItemLoading ? (
+                      <OpacityLoader />
+                    ) : (
+                      <>
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            stock.isMine ? updateStockQuantity() : addStock();
+                          }}
+                        >
+                          <div className={styles.alignTextInput}>
+                            Quantity:
                             <input
                               className={
-                                priceInputValid
+                                quantityInputValid
                                   ? styles.input
                                   : styles.inputNotValid
                               }
                               type="number"
-                              min="0.000001"
-                              step="0.000001"
-                              placeholder={stock.isMine ? stock.buy_price : 0}
-                              onChange={handlePriceChange}
-                              ref={priceInputRef}
+                              step="0.01"
+                              min="0"
+                              placeholder={stock.isMine ? stock.quantity : 0}
+                              onChange={handleQuantityChange}
+                              ref={quantityInputRef}
                             />
+                            {!stock.isMine ? (
+                              <div className={styles.alignPriceInput}>
+                                Cost:
+                                <input
+                                  className={
+                                    priceInputValid
+                                      ? styles.input
+                                      : styles.inputNotValid
+                                  }
+                                  type="number"
+                                  min="0.000001"
+                                  step="0.000001"
+                                  placeholder={
+                                    stock.isMine ? stock.buy_price : 0
+                                  }
+                                  onChange={handlePriceChange}
+                                  ref={priceInputRef}
+                                />
+                              </div>
+                            ) : null}
                           </div>
-                        ) : null}
-                      </div>
-                    </form>
+                        </form>
 
-                    <button
-                      onClick={() =>
-                        stock.isMine ? updateStockQuantity() : addStock()
-                      }
-                      className={styles.buttonAdd}
-                    >
-                      {stock.isMine ? "Update" : "Add"}
-                    </button>
-                    {stock.isMine ? (
-                      <button
-                        onClick={() => {
-                          deleteStockAction(
-                            stock.ticker,
-                            stock.stock_id,
-                            portfolioId
-                          );
-                          setQuantity(0);
-                          quantityInputRef.current.value = "";
-                        }}
-                        className={styles.buttonDelete}
-                      >
-                        Delete Stock
-                      </button>
-                    ) : (
-                      <></>
+                        <button
+                          onClick={() =>
+                            stock.isMine ? updateStockQuantity() : addStock()
+                          }
+                          className={styles.buttonAdd}
+                        >
+                          {stock.isMine ? "Update" : "Add"}
+                        </button>
+                        {stock.isMine ? (
+                          <button
+                            onClick={() => {
+                              deleteStockAction(
+                                stock.ticker,
+                                stock.stock_id,
+                                portfolioId
+                              );
+                              setQuantity(0);
+                              quantityInputRef.current.value = "";
+                            }}
+                            className={styles.buttonDelete}
+                          >
+                            Delete Stock
+                          </button>
+                        ) : (
+                          <></>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
