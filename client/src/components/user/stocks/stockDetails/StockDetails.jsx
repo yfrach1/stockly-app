@@ -87,7 +87,6 @@ const StockDetails = ({
             {Object.keys(stock).length ? (
               <Fragment>
                 <StockHeaderCardConnector />
-
                 <StockGraphConnector />
                 <div className={styles.detailsAndAddContainer}>
                   <div className={styles.details}>
@@ -198,7 +197,8 @@ const StockDetails = ({
                     )}
                   </div>
                 </div>
-                <ListNews stockNews={stockNews} />
+                {/* <ListNews stockNews={stockNews} /> Not active because
+                the API cost money, and I canceled it */}
               </Fragment>
             ) : null}
           </div>
